@@ -39,12 +39,13 @@ public partial class FixedTimestampGame : Game
 
     protected override void Initialize() {
 
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+        
         base.Initialize();
     } // End of Initialize method
 
     protected override void LoadContent() {
 
-        spriteBatch = new SpriteBatch(GraphicsDevice);
     } // End of LoadContent method
 
     #region Update

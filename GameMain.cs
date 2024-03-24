@@ -26,6 +26,8 @@ public class GameMain : FixedTimestampGame {
 
     protected override void Initialize() {
 
+        base.Initialize();                                                                                  // IMPORTANT: Keep this at the top as it initializes the spriteBatch
+
         DeviceState.Initialize();                                                                           // Initialize the input device state to get the initial state of the devices
         FLib.Initialize(Content);                                                                           // Initialize the fonts library
         RLib.Initialize();                                                                                  // Initialize the rumble library

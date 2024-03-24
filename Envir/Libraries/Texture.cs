@@ -19,6 +19,12 @@ public class Texture {
 
     public static Texture2D CameraCutout;
 
+    /***********************************************************************
+     *** GameGraphics ******************************************************
+     ***********************************************************************/
+
+     public static Texture2D Background;
+
     /// <summary>
     /// Load all the textures
     /// </summary>
@@ -29,5 +35,7 @@ public class Texture {
         Pixel.SetData(new[] { Color.White });
 
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
+
+        Background = content.Load<Texture2D>("Graphics/map");
     }
 }

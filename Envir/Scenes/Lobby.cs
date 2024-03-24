@@ -1,29 +1,32 @@
-﻿using GU1.Engine.Models;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Envir.Scenes;
 
-public class Lobby : Scene {
+public class Lobby : IScene {
 
-    public override void Initialize(GraphicsDevice device) {
-        
+    public void Initialize(GraphicsDevice device) {
+
     }
 
-    public override void LoadContent(ContentManager content) {
-        
+    public void LoadContent(ContentManager content) {
+
     }
 
-    public override void Update(GameTime gameTime) {
+    public void UnloadContent() {
+
+    }
+
+    public void Update(GameTime gameTime) {
+
+    }
+
+    public void FixedUpdate(GameTime gameTime) {
         
     }
     
-    public override void FixedUpdate(GameTime gameTime) {
-        
-    }
-
-    public override void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch) {
         
     }
 }

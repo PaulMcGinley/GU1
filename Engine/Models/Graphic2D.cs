@@ -12,7 +12,7 @@ public struct Graphic2D {
     /// <summary>
     /// The texture of the graphic
     /// </summary>
-    readonly Texture2D texture;
+    Texture2D texture;
 
     /// <summary>
     /// The position of the graphic in the game world
@@ -36,8 +36,10 @@ public struct Graphic2D {
         this.position = position;
     }
 
-    public readonly void Draw(SpriteBatch spriteBatch) {
-
-        spriteBatch.Draw(texture, position, null, Color.White, 0, Origin, 1, SpriteEffects.None, 0);
-    }
+    /// <summary>
+    /// Draw the graphic to the screen
+    /// </summary>
+    /// <param name="spriteBatch"></param>
+    public readonly void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(texture, position, null, Color.White, 0, Origin, 1, SpriteEffects.None, 0);
+    
 }

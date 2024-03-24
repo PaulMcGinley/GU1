@@ -9,32 +9,39 @@ public class Rumble
     int Index {
         get => index;
         set {
-            if (value < 0) {
+            if (value < 0)
+                index = Steps.Count - 1;
+            else if (value >= Steps.Count)
                 index = 0;
-            } else if (value >= Beats.Count) {
-                index = Beats.Count - 1;
-            } else {
+            else
                 index = value;
-            }
         }
     }
 
-    public bool IsPlaying { get; set; }
-    public bool IsPaused { get; set; }
-    public bool IsLooping { get; set; }
-    public bool IsReversed { get; set; }
-    public bool IsRandom { get; set; }
+    bool IsPlaying { get; set; } = false;
+    bool IsPaused { get; set; }  = false;
+    bool IsLooping { get; set; } = false;
+    bool IsReversed { get; set; } = false;
+    bool IsRandom { get; set; } = false;
 
-    public float previousTime = 0;
+    float previousTime = 0;
 
-    public List<Frame> Beats = new();
+    public float PlaySpeed { get; set; } = 1f;                                                              // 1f = normal speed, 0.5f = half speed, 2f = double speed
 
+    #region Controls
+
+    /// <summary>
+    /// Start playing the rumble sequence
+    /// </summary>
     public void Play() {
 
         IsPlaying = true;
         IsPaused = false;
     }
 
+    /// <summary>
+    /// Stop playing the rumble sequence and reset the index
+    /// </summary>
     public void Stop() {
 
         IsPlaying = false;
@@ -42,59 +49,85 @@ public class Rumble
         Index = 0;
     }
 
-    public void Pause() {
+    /// <summary>
+    /// Pause the rumble sequence at the current index
+    /// </summary>
+    public void Pause() => IsPaused = true;
 
-        IsPaused = true;
-    }
+    /// <summary>
+    /// Resume the rumble sequence from the current index
+    /// </summary>
+    public void Resume() => IsPaused = false;    
 
-    public void Resume() {
-
-        IsPaused = false;
-    }
-
-    public void Next() {
+    /// <summary>
+    /// Progress to the next step in the sequence
+    /// </summary>
+    void Next() {
 
         if (IsRandom)
-            Index = RandomInteger(Beats.Count);        
+            Index = RandomInteger(Steps.Count - 1);        
         else if (IsReversed)
             Index--;
         else
             Index++;
     }
 
-    public void Previous() {
+    /// <summary>
+    /// Go back to the previous step in the sequence
+    /// </summary>
+    void Previous() {
 
+        if (IsRandom)
+            Index = RandomInteger(Steps.Count - 1);
+        else if (IsReversed)
+            Index++;
+        else
+            Index--;
     }
 
-    public void Update(GameTime gameTime) {
+    #endregion
+ 
 
+    public void Update(GameTime gameTime) {
+        
         if (previousTime == 0)
             previousTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
 
         float now = (float)gameTime.TotalGameTime.TotalMilliseconds;
         float frameTime = now - previousTime;
 
-        if (frameTime > Beats[Index].Duration)
-            frameTime = Beats[Index].Duration;
+        if (frameTime > Steps[Index].Duration)
+            frameTime = Steps[Index].Duration;
 
         previousTime = now;
 
         if (IsPlaying && !IsPaused)
-           Rumble(0, Beats[Index].LeftMotor, Beats[Index].RightMotor);
+           Rumble(0, Steps[Index].LeftMotor, Steps[Index].RightMotor);
 
-        if (IsPlaying && !IsPaused && frameTime >= Beats[Index].Duration) {
-            if (IsReversed) {
-                Index--;
-            } else {
-                Index++;
-            }
+        if (IsPlaying && !IsPaused && frameTime >= Steps[Index].Duration) {
+            if (IsReversed)
+                Previous();
+            else
+                Next();
         }
     }
 
-    public class Frame {
+    #region Sequence sections
 
-        public float LeftMotor { get; set; }
-        public float RightMotor { get; set; }
-        public int Duration { get; set; } // time in milliseconds
+    /// <summary>
+    /// Add a single step within the sequence
+    /// </summary>
+    public class Step {
+
+        public float LeftMotor { get; set; } = 0f;
+        public float RightMotor { get; set; } = 0f;
+        public int Duration { get; set; } = 1; // time in milliseconds
     }
+
+    /// <summary>
+    /// List of rumble steps
+    /// </summary>
+    public List<Step> Steps = new();
+
+    #endregion
 }

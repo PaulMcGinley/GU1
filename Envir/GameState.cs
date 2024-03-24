@@ -1,7 +1,11 @@
-﻿namespace GU1;
+﻿using System.Collections.Generic;
 
-public class GameState {
+namespace GU1;
 
-    public GameScene CurrentScene { get; set; }
+public static class GameState {
+
+    public static GameScene CurrentScene { get; set; } = GameScene.Playing;
+
+    public static List<Player> Players { get; set; } = new List<Player>();
 
 }

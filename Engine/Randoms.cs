@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace GU1.Engine;
@@ -111,7 +113,7 @@ public static class Randoms {
 
     #endregion
 
-    #region Miscelaneous
+    #region Miscellaneous
 
     /// <summary>
     /// Returns a random boolean
@@ -127,15 +129,47 @@ public static class Randoms {
     /// <returns></returns>
     public static T RandomEnumerator<T>() where T : Enum => (T)Enum.GetValues(typeof(T)).GetValue(random.Next(Enum.GetValues(typeof(T)).Length));
 
-    #endregion
+    /// <summary>
+    /// Returns a random element from the array
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="array"></param>
+    /// <returns></returns>
+    public static T RandomElement<T>(T[] array) => array[random.Next(array.Length)];
 
-    #region Color
+    /// <summary>
+    /// Returns a random element from the list
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    public static T RandomElement<T>(List<T> list) => list[random.Next(list.Count)];
+
+    /// <summary>
+    /// Returns a random key value pair from the dictionary
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="dictionary"></param>
+    /// <returns></returns>
+    public static KeyValuePair<TKey, TValue> RandomElement<TKey, TValue>(Dictionary<TKey, TValue> dictionary) => dictionary.ElementAt(random.Next(dictionary.Count));
+
+    /// <summary>
+    /// Returns a random string of the given length
+    /// </summary>
+    /// <param name="length"></param>
+    /// <returns></returns>
+    public static string RandomString(int length) => new(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", length).Select(s => s[random.Next(s.Length)]).ToArray());
 
     /// <summary>
     /// Returns a random color
     /// </summary>
     /// <returns></returns>
     public static Color RandomColor() => new(RandomByte(), RandomByte(), RandomByte());
+
+    #endregion
+
+    #region Vector2
 
     /// <summary>
     /// Returns a random vector2
@@ -157,6 +191,31 @@ public static class Randoms {
     /// <param name="max"></param>
     /// <returns></returns>
     public static Vector2 RandomVector2(float min, float max) => new(RandomFloat(min, max), RandomFloat(min, max));
+
+    /// <summary>
+    /// Returns a random vector2 within the given ranges
+    /// </summary>
+    /// <param name="minX"></param>
+    /// <param name="maxX"></param>
+    /// <param name="minY"></param>
+    /// <param name="maxY"></param>
+    /// <returns></returns>
+    public static Vector2 RandomVector2(float minX, float maxX, float minY, float maxY) => new(RandomFloat(minX, maxX), RandomFloat(minY, maxY));
+
+    /// <summary>
+    /// Returns a random vector2 within the given ranges
+    /// </summary>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <returns></returns>
+    public static Vector2 RandomVector2(Vector2 min, Vector2 max) => new(RandomFloat(min.X, max.X), RandomFloat(min.Y, max.Y));
+
+    /// <summary>
+    /// Returns a random vector2 from 0 to max
+    /// </summary>
+    /// <param name="max"></param>
+    /// <returns></returns>
+    public static Vector2 RandomVector2(Vector2 max) => new(RandomFloat(max.X), RandomFloat(max.Y));
 
     #endregion
 

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Xna.Framework;
 
 namespace GU1.Engine.Extensions;
 
-public static class ColorExtensions
-{
+public static class ColorExtensions {
+    
     /// <summary>
     /// Lighten a color by a given factor
     /// </summary>
@@ -24,7 +23,7 @@ public static class ColorExtensions
 
         byte a = color.A;
 
-        return new Color(r, g, b, a);
+        return new Color(r, g, b, a);        
     }
 
     /// <summary>
@@ -32,15 +31,17 @@ public static class ColorExtensions
     /// </summary>
     /// <param name="hex"></param>
     /// <returns></returns>
-    public static Color FromHex(string hex) {
+    public static Color FromHex(ref this Color c, string hex) {
 
         hex = hex.Replace("#", "");
+
         byte r = Convert.ToByte(hex.Substring(0, 2), 16);
         byte g = Convert.ToByte(hex.Substring(2, 2), 16);
         byte b = Convert.ToByte(hex.Substring(4, 2), 16);
         byte a = hex.Length == 8 ? Convert.ToByte(hex.Substring(6, 2), 16) : (byte)255;
 
-        return new Color(r, g, b, a);
+        return c = new Color(r, g, b, a);
+        // Yeah I know, but it works...
     }
 
     /// <summary>

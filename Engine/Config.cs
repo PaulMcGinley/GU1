@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GU1.Engine;
+﻿namespace GU1.Engine;
 
 public static class Config {
     

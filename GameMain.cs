@@ -10,7 +10,7 @@ public class GameMain : FixedTimestampGame {
 
     #region Scenes
 
-    // Create an instance of each scene
+    // Create a new instance of each scene
     readonly Envir.Scenes.MainMenu mainMenu = new();
     readonly Envir.Scenes.Lobby lobby = new();
     readonly Envir.Scenes.Playing playing = new();
@@ -26,7 +26,7 @@ public class GameMain : FixedTimestampGame {
 
     protected override void Initialize() {
 
-        base.Initialize();                                                                                  // IMPORTANT: Keep this at the top as it initializes the spriteBatch
+        base.Initialize();                                                                                  // IMPORTANT: Keep this here
 
         DeviceState.Initialize();                                                                           // Initialize the input device state to get the initial state of the devices
         FLib.Initialize(Content);                                                                           // Initialize the fonts library
@@ -41,17 +41,15 @@ public class GameMain : FixedTimestampGame {
         
         // Set the window title based on the build configuration
 #if DEBUG
-        Window.Title = $"Graded Unit 1 - Albert, Alexander, Correy, Kieran, Paul";                           // Debug title, names of the team members in alphabetical order
+        Window.Title = $"Graded Unit 1 - Albert, Alexander, Corey, Kieran, Paul";                           // Debug title, names of the team members in alphabetical order
 #elif !DEBUG
-        Window.Title = $"<GAME NAME HERE>";                                                                  // Release title
+        Window.Title = $"Sightings";                                                                        // Release title
 #endif
 
     } // End of Initialize method
 
 
     protected override void Update(GameTime gameTime) {
-
-        base.Update(gameTime);                                                                              // IMPORTANT: Keep this at the top to allow the FixedUpdate to work correctly
 
         DeviceState.Update();                                                                               // Update the state of the input devices
 
@@ -79,12 +77,13 @@ public class GameMain : FixedTimestampGame {
                 photoBook.Update(gameTime);
                 break;
         }
+
+        base.Update(gameTime);                                                                              // IMPORTANT: Keep this here
     } // End of Update method
 
 
     protected override void FixedUpdate(GameTime gameTime) {
 
-        base.FixedUpdate(gameTime);                                                                         // IMPORTANT: Keep this at the top as we need to calculate the time between fixed updates
 
         // Only update the current scene
         switch (GameState.CurrentScene) {
@@ -103,8 +102,9 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
-    } // End of FixedUpdate method
+        base.FixedUpdate(gameTime);                                                                         // IMPORTANT: Keep this here
 
+    } // End of FixedUpdate method
 
     protected override void Draw(GameTime gameTime) {
 
@@ -127,6 +127,7 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
+        base.Draw(gameTime);                                                                                 // IMPORTANT: Keep this here
         
         // -------------------------------------------------------------------------------------------------
         // --- DEBUG / DIAGNOSTIC CODE ---------------------------------------------------------------------
@@ -148,14 +149,14 @@ public class GameMain : FixedTimestampGame {
             spriteBatch.DrawString(FLib.DebugFont, $"Frames: {DrawTracker.AverageEPS:0.00} / {DrawTracker.Counter}", new Vector2(10, 50), Color.White);
 
             // ----- Operating System Info -----
-            spriteBatch.DrawString(FLib.DebugFont, $"OS: {RuntimeInformation.OSDescription}", new Vector2(10, 71), Color.Black);
+            spriteBatch.DrawString(FLib.DebugFont, $"OS: {RuntimeInformation.OSDescription}", new Vector2(11, 71), Color.Black);
             spriteBatch.DrawString(FLib.DebugFont, $"OS: {RuntimeInformation.OSDescription}", new Vector2(10, 70), Color.White);
 
             // ----- Garbage Collection Info -----
-            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(10, 91), Color.Black);
+            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(11, 91), Color.Black);
             spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(10, 90), Color.White);
 
-            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.CollectionCount(0)} / {GC.CollectionCount(1)} / {GC.CollectionCount(2)}", new Vector2(10, 111), Color.Black);
+            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.CollectionCount(0)} / {GC.CollectionCount(1)} / {GC.CollectionCount(2)}", new Vector2(11, 111), Color.Black);
             spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.CollectionCount(0)} / {GC.CollectionCount(1)} / {GC.CollectionCount(2)}", new Vector2(10, 110), Color.White);
             
             spriteBatch.End();

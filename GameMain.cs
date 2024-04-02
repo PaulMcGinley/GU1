@@ -18,11 +18,9 @@ public class GameMain : FixedTimestampGame {
 
     #endregion
 
-
     public GameMain() {
 
     } // End of GameMain constructor
-
 
     protected override void Initialize() {
 
@@ -48,13 +46,12 @@ public class GameMain : FixedTimestampGame {
 
     } // End of Initialize method
 
-
     protected override void Update(GameTime gameTime) {
 
         DeviceState.Update();                                                                               // Update the state of the input devices
 
 #if DEBUG // Debug only controls
-        if (IsKeyPressed(Keys.P))
+        if (IsKeyPressed(Keys.F1))
             E.Config.ShowDebugInfo = !E.Config.ShowDebugInfo;                                               // Toggle the debug info
             
         if(IsAnyInputDown(Keys.Escape, Buttons.Back))                                                       // Check if the escape key or any controller back button is pressed
@@ -81,9 +78,7 @@ public class GameMain : FixedTimestampGame {
         base.Update(gameTime);                                                                              // IMPORTANT: Keep this here
     } // End of Update method
 
-
     protected override void FixedUpdate(GameTime gameTime) {
-
 
         // Only update the current scene
         switch (GameState.CurrentScene) {
@@ -103,7 +98,6 @@ public class GameMain : FixedTimestampGame {
         }
 
         base.FixedUpdate(gameTime);                                                                         // IMPORTANT: Keep this here
-
     } // End of FixedUpdate method
 
     protected override void Draw(GameTime gameTime) {
@@ -149,19 +143,18 @@ public class GameMain : FixedTimestampGame {
             spriteBatch.DrawString(FLib.DebugFont, $"Frames: {DrawTracker.AverageEPS:0.00} / {DrawTracker.Counter}", new Vector2(10, 50), Color.White);
 
             // ----- Operating System Info -----
-            spriteBatch.DrawString(FLib.DebugFont, $"OS: {RuntimeInformation.OSDescription}", new Vector2(11, 71), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"OS: {RuntimeInformation.OSDescription}", new Vector2(10, 70), Color.White);
+            spriteBatch.DrawString(FLib.DebugFont, $"OS Description: {RuntimeInformation.OSDescription}", new Vector2(11, 71), Color.Black);
+            spriteBatch.DrawString(FLib.DebugFont, $"OS Description: {RuntimeInformation.OSDescription}", new Vector2(10, 70), Color.White);
 
             // ----- Garbage Collection Info -----
-            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(11, 91), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(10, 90), Color.White);
+            spriteBatch.DrawString(FLib.DebugFont, $"GC Total Memory: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(11, 91), Color.Black);
+            spriteBatch.DrawString(FLib.DebugFont, $"GC Total Memory: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(10, 90), Color.White);
 
-            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.CollectionCount(0)} / {GC.CollectionCount(1)} / {GC.CollectionCount(2)}", new Vector2(11, 111), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"GC: {GC.CollectionCount(0)} / {GC.CollectionCount(1)} / {GC.CollectionCount(2)}", new Vector2(10, 110), Color.White);
+            spriteBatch.DrawString(FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(11, 111), Color.Black);
+            spriteBatch.DrawString(FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(10, 110), Color.White);
             
             spriteBatch.End();
         }
 #endif
-
     } // End of Draw method
 } // End of GameMain class

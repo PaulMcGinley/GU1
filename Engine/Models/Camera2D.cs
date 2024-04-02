@@ -9,7 +9,7 @@ public class Camera2D {
     public Vector2 Position { get; private set; }
     public float Rotation { get; private set; }
     public float Zoom { get; private set; }
-    public Viewport Boundries { get; private set; }
+    public Viewport Boundaries { get; private set; }
 
     public Camera2D(Viewport viewport) {
 
@@ -24,7 +24,7 @@ public class Camera2D {
         TransformMatrix = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
                           Matrix.CreateRotationZ(Rotation) *
                           Matrix.CreateScale(Zoom) *
-                          Matrix.CreateTranslation(new Vector3(Boundries.Width * 0.5f, Boundries.Height * 0.5f, 0));
+                          Matrix.CreateTranslation(new Vector3(Boundaries.Width * 0.5f, Boundaries.Height * 0.5f, 0));
     }
 
     /// <summary>

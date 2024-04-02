@@ -8,18 +8,18 @@ public partial class FixedTimestampGame : Game
     public GraphicsDeviceManager graphics;
     public SpriteBatch spriteBatch;
 
-    //public int TargetFrameRate { get; set; } = 120;                                                         // The target frame rate of the game
+    //public int TargetFrameRate { get; set; } = 120;                                                         // The target frame rate of the game // TODO: Add this
     public float fixedUpdateDelta = (int)(1000 / (float)30);                                                // The fixed update delta time of the game ( 30 fps )
 
     // helper variables for the fixed update
     private float previousTime = 0;
     private float accumulator = 0.0f;
-    private float maxFrameTime = 250;
+    private readonly float maxFrameTime = 250;
     public float AlphaTime => accumulator / fixedUpdateDelta;
 
-    public E.Trackers.EventsPerSecond UpdateTracker = new();
-    public E.Trackers.EventsPerSecond FixedUpdateTracker = new();
-    public E.Trackers.EventsPerSecond DrawTracker = new();
+    public Trackers.EventsPerSecond UpdateTracker = new();
+    public Trackers.EventsPerSecond FixedUpdateTracker = new();
+    public Trackers.EventsPerSecond DrawTracker = new();
 
     public FixedTimestampGame() {
 

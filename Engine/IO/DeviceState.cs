@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GU1.Engine.IO;
@@ -82,6 +83,11 @@ public static class DeviceState {
     /// Returns true if the right mouse button has been pressed
     /// </summary>
     public static bool IsRightMouseButtonPressed => MouseState.RightButton == ButtonState.Pressed && PreviousMouseState.RightButton == ButtonState.Released;
+
+    /// <summary>
+    /// Returns the current mouse position
+    /// </summary>
+    public static Vector2 MousePosition => new(MouseState.X, MouseState.Y);
 
     #endregion
 

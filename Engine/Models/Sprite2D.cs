@@ -124,16 +124,16 @@ public struct Sprite2D {
 
     #region Getters
 
-    public Texture2D GetTexture() => Texture;
-    public Vector2 GetPosition() => Position;
-    public Vector2 GetOrigin() => Origin;
-    public float GetRotation() => Rotation;
-    public float GetScale() => Scale;
-    public float GetLayerDepth() => LayerDepth;
-    public Color GetColour() => Colour;
-    public SpriteEffects GetEffects() => Effects;
-    public Rectangle GetSourceRectangle() => SourceRectangle;
-    public Rectangle GetDestinationRectangle() => DestinationRectangle;
+    public readonly Texture2D GetTexture() => Texture;
+    public readonly Vector2 GetPosition() => Position;
+    public readonly Vector2 GetOrigin() => Origin;
+    public readonly float GetRotation() => Rotation;
+    public readonly float GetScale() => Scale;
+    public readonly float GetLayerDepth() => LayerDepth;
+    public readonly Color GetColour() => Colour;
+    public readonly SpriteEffects GetEffects() => Effects;
+    public readonly Rectangle GetSourceRectangle() => SourceRectangle;
+    public readonly Rectangle GetDestinationRectangle() => DestinationRectangle;
 
     #endregion
 

@@ -28,7 +28,7 @@ public class Base {
     public Rectangle Bounds => new(                                                                         // Bounds of the control
         (int)Position.X,                                                                                    // X position
         (int)Position.Y,                                                                                    // Y position
-        (int)Size.X,                                                                                         // Width
+        (int)Size.X,                                                                                        // Width
         (int)Size.Y);                                                                                       // Height
     
     // Is the mouse over the control?   

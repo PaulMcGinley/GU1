@@ -66,12 +66,8 @@ public class MonoSlider : Base {
 
         // Calculate the percentage value of the slider
         return (int)Math.Round((SliderPosition.X - Position.X + SliderLeftBound + (SliderBounds.Width / 2)) / (float)(SliderLeftBound + SliderRightBound) * (Maximum - Minimum) + Minimum);
-    } // End of the CalculateValue method
+    }
 
-    /// <summary>
-    /// Update method
-    /// </summary>
-    /// <param name="mouseState"></param>
     public override void Update() {
 
         if (!Visible) return;                                                                               // If the control is not visible, return
@@ -85,12 +81,8 @@ public class MonoSlider : Base {
             SliderIsMouseDown = false;                                                                      // Set SliderIsMouseDown to false
 
         base.Update();                                                                                      // Call the base update method
-    } // End of the Update method
+    }
 
-    /// <summary>
-    /// Draw method
-    /// </summary>
-    /// <param name="spriteBatch"></param>
     public override void Draw(SpriteBatch spriteBatch) {
 
         spriteBatch.Draw(Background, Position, Color.White);                                                // Draw the background

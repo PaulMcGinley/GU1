@@ -92,7 +92,7 @@ public static class Draw {
     public static void DrawCircle(Vector2 center, float radius, SpriteBatch spriteBatch, Color color = default) => DrawArc(center, radius, 0, 360, spriteBatch, color);
 
     /// <summary>
-    /// NOTE: WORK IN PROGRESS
+    /// TODO: WORK IN PROGRESS
     /// </summary>
     /// <param name="start"></param>
     /// <param name="end"></param>
@@ -101,33 +101,33 @@ public static class Draw {
     /// <param name="color"></param>
     public static void DrawCurvedLine(Vector2 start, Vector2 end, float curvature, SpriteBatch spriteBatch, Color color = default) {
 
-        Vector2 mid = new((start.X + end.X) / 2, (start.Y + end.Y) / 2);
-        Vector2 control = new(mid.X, mid.Y + curvature);
+        Vector2 midPoint = new((start.X + end.X) / 2, (start.Y + end.Y) / 2);
+        Vector2 controlPoint = new(midPoint.X, midPoint.Y + curvature);
 
         Vector2 lastPoint = start;
         for (float i = 0; i < 1f; i += 0.01f) {
 
-            Vector2 p1 = Vector2.Lerp(start, control, i);
-            Vector2 p2 = Vector2.Lerp(control, end, i);
-            Vector2 p3 = Vector2.Lerp(p1, p2, i);
+            Vector2 point1 = Vector2.Lerp(start, controlPoint, i);
+            Vector2 point2 = Vector2.Lerp(controlPoint, end, i);
+            Vector2 point3 = Vector2.Lerp(point1, point2, i);
 
             // If this is the first point, assign the lastPoint and skip drawing the line
             if (i == 0) {
-                lastPoint = p3;
+                lastPoint = point3;
                 continue;
             }
 
             //spriteBatch.Draw(TLib.Pixel, p3, color);
-            DrawLine(lastPoint, p3, spriteBatch, color);
+            DrawLine(lastPoint, point3, spriteBatch, color);
 
-            lastPoint = p3; // Update the last point to the current point for the next iteration
+            lastPoint = point3; // Update the last point to the current point for the next iteration
         }
     }
 
     /// <summary>
-    /// NOTE: WORK IN PROGRESS
+    /// TODO: WORK IN PROGRESS
     /// </summary>
-    /// <param name="points">Range: 100 - 10000000</param>
+    /// <param name="points">The amount of points to compose the line with</param>
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <param name="curvature"></param>
@@ -151,7 +151,7 @@ public static class Draw {
     }
 
     /// <summary>
-    /// NOTE: WORK IN PROGRESS
+    /// TODO: WORK IN PROGRESS
     /// </summary>
     /// <param name="start"></param>
     /// <param name="end"></param>

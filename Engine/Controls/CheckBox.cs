@@ -13,27 +13,16 @@ public class CheckBox : Base {
     public Texture2D CheckedOver { get; set; }                                                              // Checked highlight texture
     public Texture2D CheckedPressed { get; set; }                                                           // Checked pressed texture
 
-    /// <summary>
-    ///
-    /// </summary>
     public CheckBox() {
 
         MouseClick += MonoCheckBox_MouseClick;                                                              // Subscribe to the MouseClick event
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="mouseState"></param>
     public override void Update() {
 
         base.Update();                                                                                      // Call the base Update method
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="spriteBatch"></param>
     public override void Draw(SpriteBatch spriteBatch) {
 
         if (!Visible) return;                                                                               // If the control is not visible, return

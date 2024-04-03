@@ -28,10 +28,6 @@ public class MonoButton : Base {
         base.Draw(spriteBatch);                                                                             // Call the base Draw method
     } // End of the Draw method
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="mouseState"></param>
     public override void Update() {
 
         base.Update();                                                                                      // Call the base Update method

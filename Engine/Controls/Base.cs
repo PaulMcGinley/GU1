@@ -19,6 +19,7 @@ public class Base {
 
     #endregion
 
+
     #region Properties
 
     public Vector2 Size { get; set; }                                                                       // Size of the control
@@ -92,7 +93,7 @@ public class Base {
     public bool Enabled { get; set; } = true;                                                               // Is the control enabled? (Default is true)
 
     // Is the control selected?
-    bool selectedState { get; set; } = false;                                                               // Is the control selected?
+    bool selectedState = false;                                                                             // Is the control selected?
     public bool SelectedState {                                                                             // Property for selectedState
 
         get => selectedState;                                                                               // Return the value of selectedState
@@ -107,6 +108,7 @@ public class Base {
     } // End of the SelectedState property
 
     #endregion Properties
+
 
     #region virtual Functions
 

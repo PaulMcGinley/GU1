@@ -7,7 +7,7 @@ namespace GU1.Engine.Audio;
 public static class Music
 {
     // Music Queue
-    public static Queue<Song> musicQueue = new();
+    private static readonly Queue<Song> musicQueue = new();
 
     // Tracker Variables
     private static double songLength = 0;
@@ -36,8 +36,14 @@ public static class Music
             PlayNextSong();
     }
 
-    // Play Music
-    private static void Play(Song song) {
+    #region Music Controls
+
+    /// <summary>
+    /// Plays a song
+    /// </summary>
+    /// <param name="song"></param>
+    /// <param name="loop">Loop song until overridden</param>
+    private static void Play(Song song, bool loop = false) {
 
         // Reset the tracker variables
         startTime = 0;
@@ -45,9 +51,12 @@ public static class Music
 
         // Play Song
         MediaPlayer.Play(song);
-
+        MediaPlayer.IsRepeating = loop;
     }
 
+    /// <summary>
+    /// Play the next song in the queue
+    /// </summary>
     public static void PlayNextSong() {
 
         if (musicQueue.Count <= 0)
@@ -70,5 +79,45 @@ public static class Music
     /// Stops the current song from playing
     /// </summary>
     public static void StopMusic() => MediaPlayer.Stop();
+
+    #endregion
+
+
+    #region Queue Controls
+
+    /// <summary>
+    /// Adds a song to the music queue
+    /// </summary>
+    /// <param name="song"></param>
+    public static void AddToQueue(Song song) => musicQueue.Enqueue(song);
+
+    /// <summary>
+    /// Clear the music queue of all songs
+    /// </summary>
+    public static void ClearQueue() => musicQueue.Clear();
+
+    #endregion
+
+
+    #region Volume Controls
+
+    public static float Volume {
+        get => MediaPlayer.Volume;
+        set => MediaPlayer.Volume = MathHelper.Clamp(value, 0, 1);
+    }
+
+    /// <summary>
+    /// Increases the volume by the specified amount
+    /// </summary>
+    /// <param name="amount"></param>
+    public static void IncreaseVolume(float amount) => Volume += amount;
+
+    /// <summary>
+    /// Decreases the volume by the specified amount
+    /// </summary>
+    /// <param name="amount"></param>
+    public static void DecreaseVolume(float amount) => Volume -= amount;
+
+    #endregion
 
 }

@@ -4,7 +4,7 @@ using System.Numerics;
 namespace GU1.Engine.Interfaces;
 
 public interface IMove {
-    
+
     public Vector2 Velocity { get; set; }
     public float Acceleration { get; set; }
     public float Friction { get; set; }

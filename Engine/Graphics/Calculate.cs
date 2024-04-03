@@ -11,7 +11,7 @@ public class Calculate {
     /// <param name="cameraView"></param>
     /// <returns></returns>
     public static int SpriteInRectanglePercentage(Rectangle sprite, Rectangle cameraView) {
-        
+
         Rectangle intersection = Rectangle.Intersect(sprite, cameraView);                                   // Get the intersection between the sprite and the camera view
 
         int totalArea = sprite.Width * sprite.Height;                                                       // Calculate the total area of the sprite

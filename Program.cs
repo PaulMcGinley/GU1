@@ -17,6 +17,6 @@ internal class Program {
     private static void Main() {
 
         using var game = new GU1.GameMain();
-        game.Run();       
+        game.Run();
     }
 }

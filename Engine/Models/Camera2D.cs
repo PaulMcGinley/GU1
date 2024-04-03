@@ -28,45 +28,45 @@ public class Camera2D {
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="position"></param>
     public void LookAt(Vector2 position) => Position = position;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="amount"></param>
     public void Move(Vector2 amount) => Position += amount;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="angle"></param>
     public void Rotate(float angle) => Rotation += angle;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="angle"></param>
     public void SetRotation(float angle) => Rotation = angle;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="amount"></param>
     public void ZoomIn(float amount) => Zoom += amount;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="amount"></param>
     public void ZoomOut(float amount) => Zoom -= amount;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="amount"></param>
     public void SetZoomLevel(float amount) => Zoom = amount;
-    
+
 }

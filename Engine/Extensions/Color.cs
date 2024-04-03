@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace GU1.Engine.Extensions;
 
 public static class ColorExtensions {
-    
+
     /// <summary>
     /// Lighten a color by a given factor
     /// </summary>
@@ -23,7 +23,7 @@ public static class ColorExtensions {
 
         byte a = color.A;
 
-        return new Color(r, g, b, a);        
+        return new Color(r, g, b, a);
     }
 
     /// <summary>
@@ -51,5 +51,5 @@ public static class ColorExtensions {
     /// <param name="includeAlpha"></param>
     /// <returns></returns>
     public static string ToHex(this Color color, bool includeAlpha = false) => includeAlpha ? $"#{color.R:X2}{color.G:X2}{color.B:X2}{color.A:X2}" : $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-    
+
 }

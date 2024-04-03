@@ -57,7 +57,7 @@ public class Rumble
     /// <summary>
     /// Resume the rumble sequence from the current index
     /// </summary>
-    public void Resume() => IsPaused = false;    
+    public void Resume() => IsPaused = false;
 
     /// <summary>
     /// Progress to the next step in the sequence
@@ -65,7 +65,7 @@ public class Rumble
     void Next() {
 
         if (IsRandom)
-            Index = RandomInteger(Steps.Count - 1);        
+            Index = RandomInteger(Steps.Count - 1);
         else if (IsReversed)
             Index--;
         else
@@ -86,10 +86,10 @@ public class Rumble
     }
 
     #endregion
- 
+
 
     public void Update(GameTime gameTime) {
-        
+
         if (previousTime == 0)
             previousTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
 

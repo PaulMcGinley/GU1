@@ -15,7 +15,7 @@ public class IRotate {
     public float RotationTargetSpeed { get; set; }
 
     public void Rotate(float direction) {
-        
-        
+
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace GU1.Engine;
 
 public static class Config {
-    
+
     /// <summary>
     /// Track the Update, FixedUpdate and Draw rates
     /// </summary>

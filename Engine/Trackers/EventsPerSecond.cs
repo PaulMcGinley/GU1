@@ -15,7 +15,7 @@ public class EventsPerSecond {
     /// </summary>
     /// <param name="interval">Default: 1f (1 second)</param>
     public EventsPerSecond(float interval = 1f) {
-            
+
             this.interval = interval;                                                                       // Set the interval
     } // End of EventsPerSecond constructor
 

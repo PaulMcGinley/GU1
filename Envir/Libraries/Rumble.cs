@@ -17,9 +17,6 @@ public static class Rumble
                 new() { LeftMotor = 0f, RightMotor = 0f, Duration = 250 },
                 new() { LeftMotor = 0f, RightMotor = 0.1f, Duration = 250 },
                 new() { LeftMotor = 0f, RightMotor = 0f, Duration = 750 },
-
-
-                
             }
         };
     }

@@ -33,13 +33,13 @@ public class MonoSlider : Base {
 
 
         get { return percent; }                                                                             // Return the value
-        set {   
+        set {
 
             if (value < Minimum) value = Minimum;                                                           // If the value is less than the minimum, set it to the minimum
             if (value > Maximum) value = Maximum;                                                           // If the value is greater than the maximum, set it to the maximum
             percent = value;                                                                                // Set the value
             ValueChanged?.Invoke(this, EventArgs.Empty);                                                    // Invoke the value changed event
-        }   
+        }
     } // End of the Value property
 
     /// <summary>
@@ -92,7 +92,7 @@ public class MonoSlider : Base {
     /// </summary>
     /// <param name="spriteBatch"></param>
     public override void Draw(SpriteBatch spriteBatch) {
-        
+
         spriteBatch.Draw(Background, Position, Color.White);                                                // Draw the background
 
         double fillWidth = (double)Fill.Width / 100 * Value;                                                // Calculate the fill width

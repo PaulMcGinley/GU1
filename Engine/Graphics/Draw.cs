@@ -29,7 +29,6 @@ public static class Draw {
     /// <param name="spriteBatch"></param>
     /// <param name="color"></param>
     public static void DrawFilledRectangle(Rectangle rectangle, SpriteBatch spriteBatch, Color color = default) => spriteBatch.Draw(TLib.Pixel, rectangle, color);
-    
 
     /// <summary>
     /// Draw a rectangle outline
@@ -59,7 +58,7 @@ public static class Draw {
         DrawLine(point1, point2, spriteBatch, color);
         DrawLine(point2, point3, spriteBatch, color);
         DrawLine(point3, point1, spriteBatch, color);
-    }    
+    }
 
     /// <summary>
     /// Draw an arc outline

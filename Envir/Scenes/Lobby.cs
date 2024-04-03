@@ -23,10 +23,10 @@ public class Lobby : IScene {
     }
 
     public void FixedUpdate(GameTime gameTime) {
-        
+
     }
-    
+
     public void Draw(SpriteBatch spriteBatch) {
-        
+
     }
 }

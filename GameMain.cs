@@ -36,7 +36,7 @@ public class GameMain : FixedTimestampGame {
         lobby.Initialize(GraphicsDevice);
         playing.Initialize(GraphicsDevice);
         photoBook.Initialize(GraphicsDevice);
-        
+
         // Set the window title based on the build configuration
 #if DEBUG
         Window.Title = $"Graded Unit 1 - Albert, Alexander, Corey, Kieran, Paul";                           // Debug title, names of the team members in alphabetical order
@@ -53,7 +53,7 @@ public class GameMain : FixedTimestampGame {
 #if DEBUG // Debug only controls
         if (IsKeyPressed(Keys.F1))
             E.Config.ShowDebugInfo = !E.Config.ShowDebugInfo;                                               // Toggle the debug info
-            
+
         if(IsAnyInputDown(Keys.Escape, Buttons.Back))                                                       // Check if the escape key or any controller back button is pressed
             Exit();                                                                                         // Exit the game
 #endif
@@ -122,7 +122,7 @@ public class GameMain : FixedTimestampGame {
         }
 
         base.Draw(gameTime);                                                                                 // IMPORTANT: Keep this here
-        
+
         // -------------------------------------------------------------------------------------------------
         // --- DEBUG / DIAGNOSTIC CODE ---------------------------------------------------------------------
         // -------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ public class GameMain : FixedTimestampGame {
             // ----- Update Trackers -----
             spriteBatch.DrawString(FLib.DebugFont, $"Update: {UpdateTracker.AverageEPS:0.00} / {UpdateTracker.Counter}", new Vector2(11, 11), Color.Black);
             spriteBatch.DrawString(FLib.DebugFont, $"Update: {UpdateTracker.AverageEPS:0.00} / {UpdateTracker.Counter}", new Vector2(10, 10), Color.White);
-            
+
             spriteBatch.DrawString(FLib.DebugFont, $"FixedUpdates: {FixedUpdateTracker.AverageEPS:0.00} / {FixedUpdateTracker.Counter}", new Vector2(11, 31), Color.Black);
             spriteBatch.DrawString(FLib.DebugFont, $"FixedUpdates: {FixedUpdateTracker.AverageEPS:0.00} / {FixedUpdateTracker.Counter}", new Vector2(10, 30), Color.White);
 
@@ -152,7 +152,7 @@ public class GameMain : FixedTimestampGame {
 
             spriteBatch.DrawString(FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(11, 111), Color.Black);
             spriteBatch.DrawString(FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(10, 110), Color.White);
-            
+
             spriteBatch.End();
         }
 #endif

@@ -28,10 +28,10 @@ public partial class FixedTimestampGame : Game
             SynchronizeWithVerticalRetrace = false,                                                         // Disable V-Sync, this will allow the game to run as fast as the hardware allows
             PreferMultiSampling = E.Config.AntiAliasing,                                                    // Enable anti-aliasing (smoothing of the edges of the sprites), this comes at an additional fps cost
             PreferredBackBufferWidth = 1920,                                                                // Set the preferred back buffer width
-            PreferredBackBufferHeight = 1080,                                                               // Set the preferred back buffer height          
-            IsFullScreen = false,                                                                            // Set the game to run in full screen mode  
+            PreferredBackBufferHeight = 1080,                                                               // Set the preferred back buffer height
+            IsFullScreen = false,                                                                            // Set the game to run in full screen mode
         };
-        
+
         IsFixedTimeStep = false;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
@@ -40,7 +40,7 @@ public partial class FixedTimestampGame : Game
     protected override void Initialize() {
 
         spriteBatch = new SpriteBatch(GraphicsDevice);
-        
+
         base.Initialize();
     } // End of Initialize method
 
@@ -60,11 +60,11 @@ public partial class FixedTimestampGame : Game
 
         if (frameTime > maxFrameTime)
             frameTime = maxFrameTime;
-         
+
         previousTime = now;
- 
+
         accumulator += frameTime;
- 
+
         while (accumulator >= fixedUpdateDelta) {
 
             FixedUpdate(gameTime);
@@ -80,7 +80,7 @@ public partial class FixedTimestampGame : Game
 
         if (E.Config.TrackUpdateRate)
             UpdateTracker.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-        
+
     } // End of Update method
 
     #endregion
@@ -112,7 +112,7 @@ public partial class FixedTimestampGame : Game
 
         if(E.Config.TrackUpdateRate)
             DrawTracker.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            
+
     } // End of Draw method
 
     #endregion

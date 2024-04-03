@@ -1,7 +1,7 @@
 ﻿namespace GU1;
 
 public enum GameScene {
-    
+
     MainMenu,
     Lobby,
     Playing,
@@ -9,7 +9,7 @@ public enum GameScene {
 }
 
 public enum Anchor {
-    
+
     TopLeft,
     TopCenter,
     TopRight,

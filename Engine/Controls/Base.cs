@@ -14,43 +14,43 @@ public class Base {
     public event EventHandler MouseClick;                                                                   // MouseClick event
     public event EventHandler MouseDown;                                                                    // MouseDown event
     public event EventHandler MouseUp;                                                                      // MouseUp event
-    
+
     public event EventHandler StateChanged;                                                                 // StateChanged event
-    
-    #endregion  
-    
-    #region Properties  
-    
+
+    #endregion
+
+    #region Properties
+
     public Vector2 Size { get; set; }                                                                       // Size of the control
-    
+
     public Vector2 Position { get; set; }                                                                   // Location of the control
-    
+
     public Rectangle Bounds => new(                                                                         // Bounds of the control
         (int)Position.X,                                                                                    // X position
         (int)Position.Y,                                                                                    // Y position
         (int)Size.X,                                                                                        // Width
         (int)Size.Y);                                                                                       // Height
-    
-    // Is the mouse over the control?   
+
+    // Is the mouse over the control?
     bool isMouseOver = false;                                                                               // Is the mouse over the control?
     public bool IsMouseOver {                                                                               // Property for isMouseOver
 
         get => isMouseOver;                                                                                 // Return the value of isMouseOver
-        set { 
+        set {
 
             if (value != isMouseOver) {                                                                     // If the value is different from isMouseOver
 
                 isMouseOver = value;                                                                        // Set isMouseOver to the value
-    
+
                 if (isMouseOver)                                                                            // If isMouseOver is true
                     MouseEnter?.Invoke(this, EventArgs.Empty);                                              // Call MouseEnter()
                 else                                                                                        // If isMouseOver is false
                     MouseLeave?.Invoke(this, EventArgs.Empty);                                              // Call MouseLeave()
-            }   
-        }   
-    } // End of the IsMouseOver property    
-    
-    // Is the mouse down on the control?    
+            }
+        }
+    } // End of the IsMouseOver property
+
+    // Is the mouse down on the control?
     bool isMouseDown = false;                                                                               // Is the mouse down on the control?
     public bool IsMouseDown {                                                                               // Property for isMouseDown
 
@@ -58,21 +58,21 @@ public class Base {
         set {
 
             if (value != isMouseDown) {                                                                     // If the value is different from isMouseDown
-  
+
                 isMouseDown = value;                                                                        // Set isMouseDown to the value
-    
+
                 if (isMouseDown)                                                                            // If isMouseDown is true
                     MouseDown?.Invoke(this, EventArgs.Empty);                                               // Call OnMouseDown()
                 else                                                                                        // If isMouseDown is false
                     MouseUp?.Invoke(this, EventArgs.Empty);                                                 // Call OnMouseUp()
-            }   
-        }   
-    } // End of the IsMouseDown property    
-    
-    // Is the control checked?  
+            }
+        }
+    } // End of the IsMouseDown property
+
+    // Is the control checked?
     bool isChecked = false;                                                                                 // Is the control checked?
     public bool IsChecked {                                                                                 // Property for isChecked
-   
+
         get => isChecked;                                                                                   // Return the value of isChecked
         set {
 
@@ -91,7 +91,7 @@ public class Base {
 
     public bool Enabled { get; set; } = true;                                                               // Is the control enabled? (Default is true)
 
-    // Is the control selected? 
+    // Is the control selected?
     bool selectedState { get; set; } = false;                                                               // Is the control selected?
     public bool SelectedState {                                                                             // Property for selectedState
 
@@ -102,13 +102,13 @@ public class Base {
 
                 selectedState = value;                                                                      // Set selectedState to the value
                 StateChanged?.Invoke(this, EventArgs.Empty);                                                // Call StateChanged()
-            }   
-        }   
-    } // End of the SelectedState property  
+            }
+        }
+    } // End of the SelectedState property
 
-    #endregion Properties   
+    #endregion Properties
 
-    #region virtual Functions   
+    #region virtual Functions
 
     public virtual void LoadContent() { }                                                                   // Load the content for the control
     public virtual void UnloadContent() { }                                                                 // Unload the content for the control
@@ -122,10 +122,10 @@ public class Base {
         if (!Visible) return;                                                                               // If the control is not visible, return
         if (!Enabled) return;                                                                               // If the control is not enabled, return
 
-        // Mouse is over control    
+        // Mouse is over control
         if (Bounds.Contains(MousePosition) && !IsMouseOver)                                                 // If the mouse is within the bounds of the control
             IsMouseOver = true;                                                                             // Set IsMouseOver to true
-        // Mouse is not over control    
+        // Mouse is not over control
         else if (!Bounds.Contains(MousePosition) && IsMouseOver) {                                          // If the mouse is not within the bounds of the control
 
             IsMouseOver = false;                                                                            // Set IsMouseOver to false

@@ -14,7 +14,7 @@ public class CheckBox : Base {
     public Texture2D CheckedPressed { get; set; }                                                           // Checked pressed texture
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public CheckBox() {
 
@@ -22,7 +22,7 @@ public class CheckBox : Base {
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="mouseState"></param>
     public override void Update() {
@@ -31,7 +31,7 @@ public class CheckBox : Base {
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="spriteBatch"></param>
     public override void Draw(SpriteBatch spriteBatch) {

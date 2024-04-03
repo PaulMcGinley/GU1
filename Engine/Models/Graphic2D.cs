@@ -31,7 +31,7 @@ public struct Graphic2D {
     /// <param name="texture"></param>
     /// <param name="position"></param>
     public Graphic2D(Texture2D texture, Vector2 position) {
-        
+
         this.texture = texture;
         this.position = position;
     }
@@ -41,5 +41,5 @@ public struct Graphic2D {
     /// </summary>
     /// <param name="spriteBatch"></param>
     public readonly void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(texture, position, null, Color.White, 0, Origin, 1, SpriteEffects.None, 0);
-    
+
 }

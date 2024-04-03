@@ -124,7 +124,7 @@ public static class DeviceState {
         foreach (Keys key in keys)
             if (KeyboardState.IsKeyDown(key))
                 return true;
-        
+
         return false;
     }
 
@@ -138,7 +138,7 @@ public static class DeviceState {
         foreach (Keys key in keys)
             if (KeyboardState.IsKeyDown(key) && PreviousKeyboardState.IsKeyUp(key))
                 return true;
-        
+
         return false;
     }
 
@@ -148,11 +148,11 @@ public static class DeviceState {
     /// <param name="keys"></param>
     /// <returns></returns>
     public static bool IsAnyOfKeysReleased(params Keys[] keys) {
-        
+
         foreach (Keys key in keys)
             if (KeyboardState.IsKeyUp(key) && PreviousKeyboardState.IsKeyDown(key))
                 return true;
-        
+
         return false;
     }
 
@@ -165,7 +165,7 @@ public static class DeviceState {
     /// </summary>
     /// <param name="index">Player controller index number</param>
     /// <returns></returns>
-    public static bool IsGamePadConnected(int index) => GamePadsState[index].IsConnected; 
+    public static bool IsGamePadConnected(int index) => GamePadsState[index].IsConnected;
 
     /// <summary>
     /// Returns true if the gamepad of the given index has a specific button down
@@ -197,7 +197,7 @@ public static class DeviceState {
     /// <param name="index"></param>
     /// <param name="leftMotor"></param>
     /// <param name="rightMotor"></param>
-    public static void Rumble(int index, float leftMotor, float rightMotor) => GamePad.SetVibration(index, leftMotor, rightMotor);    
+    public static void Rumble(int index, float leftMotor, float rightMotor) => GamePad.SetVibration(index, leftMotor, rightMotor);
 
     #endregion
 
@@ -217,12 +217,12 @@ public static class DeviceState {
         foreach (Keys key in keys.Select(v => (Keys)v))
             if (IsKeyDown(key))
                 return true;
-        
+
         foreach (Buttons button in keys.Select(v => (Buttons)v))
             for (int i = 0; i < GamePadsState.Length; i++)
                 if (IsGamePadConnected(i) && IsGamePadButtonDown(i, button))
                     return true;
-        
+
         return false;
     }
 

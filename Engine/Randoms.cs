@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace GU1.Engine;
 
 public static class Randoms {
-    
+
     private static readonly Random random = new();
 
     #region  Integer
@@ -37,7 +37,7 @@ public static class Randoms {
     #endregion
 
     #region Float
-    
+
     /// <summary>
     /// Returns a random float between 0 and 1
     /// </summary>

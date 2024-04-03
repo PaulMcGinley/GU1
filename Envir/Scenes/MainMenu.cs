@@ -7,11 +7,11 @@ namespace GU1.Envir.Scenes;
 public class MainMenu : IScene {
 
     public void Initialize(GraphicsDevice device) {
-        
+
     }
 
     public void LoadContent(ContentManager content) {
-        
+
     }
 
     public void UnloadContent() {
@@ -19,14 +19,14 @@ public class MainMenu : IScene {
     }
 
     public void Update(GameTime gameTime) {
-        
+
     }
-    
+
     public void FixedUpdate(GameTime gameTime) {
-        
+
     }
 
     public void Draw(SpriteBatch spriteBatch) {
-        
+
     }
 }

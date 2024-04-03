@@ -141,7 +141,7 @@ public struct Sprite2D {
     #region Constructors
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="texture"></param>
     /// <param name="position"></param>
@@ -160,7 +160,7 @@ public struct Sprite2D {
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="texture"></param>
     /// <param name="position"></param>
@@ -196,7 +196,7 @@ public struct Sprite2D {
     /// </summary>
     /// <param name="spriteBatch"></param>
     public readonly void DrawToPosition(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, Position, SourceRectangle, Colour, Rotation, Origin, Scale, Effects, LayerDepth);
-    
+
     /// <summary>
     /// Draw the sprite on the screen at the specified rectangle.
     /// </summary>

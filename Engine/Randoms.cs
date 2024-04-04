@@ -36,6 +36,7 @@ public static class Randoms {
 
     #endregion
 
+
     #region Float
 
     /// <summary>
@@ -61,6 +62,7 @@ public static class Randoms {
 
     #endregion
 
+
     #region Double
 
     /// <summary>
@@ -85,6 +87,7 @@ public static class Randoms {
     public static double RandomDouble(double min, double max) => random.NextDouble() * (max - min) + min;
 
     #endregion
+
 
     #region Byte
 
@@ -112,6 +115,7 @@ public static class Randoms {
     public static byte RandomByte(byte min, byte max) => (byte)random.Next(min, max + 1);
 
     #endregion
+
 
     #region Miscellaneous
 
@@ -168,6 +172,7 @@ public static class Randoms {
     public static Color RandomColor() => new(RandomByte(), RandomByte(), RandomByte());
 
     #endregion
+
 
     #region Vector2
 

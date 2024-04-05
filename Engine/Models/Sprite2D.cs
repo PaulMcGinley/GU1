@@ -29,7 +29,7 @@ public struct Sprite2D {
 
     #region Position
 
-    private Vector2 Position;
+    public Vector2 Position;
 
     /// <summary>
     /// Returns the left bound of the sprite.

@@ -132,21 +132,21 @@ public class Base {
 
             IsMouseOver = false;                                                                            // Set IsMouseOver to false
 
-            if (!IsLeftMouseButtonDown && isMouseDown)                                                      // If the left mouse button is released
+            if (!MouseLeftMouseButtonDown && isMouseDown)                                                      // If the left mouse button is released
                 IsMouseDown = false;                                                                        // Set IsMouseDown to false
         }
 
         // Mouse pressed inside of control
-        if (Bounds.Contains(MousePosition) && IsLeftMouseButtonDown && !isMouseDown)                        // If the left mouse button is pressed
+        if (Bounds.Contains(MousePosition) && MouseLeftMouseButtonDown && !isMouseDown)                        // If the left mouse button is pressed
             IsMouseDown = true;                                                                             // Set IsMouseDown to true
         // Mouse released inside of control
-        else if (Bounds.Contains(MousePosition) && !IsLeftMouseButtonDown && isMouseDown) {                 // If the left mouse button is released
+        else if (Bounds.Contains(MousePosition) && !MouseLeftMouseButtonDown && isMouseDown) {                 // If the left mouse button is released
 
             IsMouseDown = false;                                                                            // Set IsMouseDown to false
             MouseClick?.Invoke(this, EventArgs.Empty);                                                      // Call OnMouseClick()
         }
         // Mouse released outside of control
-        else if (!IsLeftMouseButtonDown && isMouseDown)                                                     // If the left mouse button is released
+        else if (!MouseLeftMouseButtonDown && isMouseDown)                                                     // If the left mouse button is released
             IsMouseDown = false;
 
     } // End of the Update method

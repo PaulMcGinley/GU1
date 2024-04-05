@@ -73,10 +73,10 @@ public class MonoSlider : Base {
         if (!Visible) return;                                                                               // If the control is not visible, return
         if (!Enabled) return;                                                                               // If the control is not enabled, return
 
-        if ((IsLeftMouseButtonDown && SliderBounds.Contains(MousePosition)) ||                              // If the mouse is down and the slider is being hovered over
-            (IsLeftMouseButtonDown && SliderIsMouseDown))                                                   // Or if the mouse is down and the slider is being dragged
+        if ((MouseLeftMouseButtonDown && SliderBounds.Contains(MousePosition)) ||                              // If the mouse is down and the slider is being hovered over
+            (MouseLeftMouseButtonDown && SliderIsMouseDown))                                                   // Or if the mouse is down and the slider is being dragged
             Value = CalculateValue();                                                                       // Calculate the value of the slider
-        else if (IsLeftMouseButtonDown &&                                                                   // If mouse in not down
+        else if (MouseLeftMouseButtonDown &&                                                                   // If mouse in not down
             SliderIsMouseDown)                                                                              // And SliderIsMouseDown is true
             SliderIsMouseDown = false;                                                                      // Set SliderIsMouseDown to false
 

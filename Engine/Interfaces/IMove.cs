@@ -1,24 +1,37 @@
-﻿using System;
-using System.Numerics;
+﻿using Microsoft.Xna.Framework;
 
 namespace GU1.Engine.Interfaces;
 
 public interface IMove {
 
+    /// <summary>
+    /// The velocity of the object
+    /// </summary>
     public Vector2 Velocity { get; set; }
-    public float Acceleration { get; set; }
-    public float Friction { get; set; }
-    public float MaxSpeed { get; set; }
-    public float MinSpeed { get; set; }
-    public float RotationSpeed { get; set; }
-    public float Rotation { get; set; }
-    public float RotationAcceleration { get; set; }
-    public float RotationFriction { get; set; }
-    public float RotationMaxSpeed { get; set; }
-    public float RotationMinSpeed { get; set; }
-    public float RotationDirection { get; set; }
-    public float RotationTarget { get; set; }
-    public float RotationTargetSpeed { get; set; }
 
+    /// <summary>
+    /// The acceleration of the object
+    /// </summary>
+    public float Acceleration { get; set; }
+
+    /// <summary>
+    /// The friction of the object
+    /// </summary>
+    public float Friction { get; set; }
+
+    /// <summary>
+    /// The maximum speed of the object
+    /// </summary>
+    public float MaxSpeed { get; set; }
+
+    /// <summary>
+    /// The minimum speed of the object
+    /// </summary>
+    public float MinSpeed { get; set; }
+
+    /// <summary>
+    /// Move the object in a direction based on the input
+    /// </summary>
+    /// <param name="direction"></param>
     public void Move(Vector2 direction);
 }

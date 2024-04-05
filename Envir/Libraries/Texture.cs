@@ -7,6 +7,17 @@ namespace GU1.Envir.Libraries;
 
 public class Texture {
 
+    /// <summary>
+    /// Private constructor to prevent instantiation
+    /// </summary>
+    private Texture() { }
+
+    /***********************************************************************
+     *** Sprites ***********************************************************
+     ***********************************************************************/
+
+    public static readonly Texture2D[] Flotsam = new Texture2D[8];
+
     /***********************************************************************
      *** Miscellaneous *****************************************************
      ***********************************************************************/
@@ -30,6 +41,9 @@ public class Texture {
     /// </summary>
     /// <param name="graphicsDevice"></param>
     public static void Initialize(GraphicsDevice graphicsDevice, ContentManager content) {
+
+        for (int i = 0; i < Flotsam.Length; i++)
+            Flotsam[i] = content.Load<Texture2D>($"Graphics/Flotsam/FlotsamJetsam{i+1}");
 
         Pixel = new Texture2D(graphicsDevice, 1, 1);
         Pixel.SetData(new[] { Color.White });

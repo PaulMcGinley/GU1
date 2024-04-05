@@ -57,32 +57,32 @@ public static class DeviceState {
     /// <summary>
     /// Returns true if the mouse wheel is scrolling up
     /// </summary>
-    public static bool IsScrollingUp => MouseState.ScrollWheelValue > PreviousMouseState.ScrollWheelValue;
+    public static bool MouseIsScrollingUp => MouseState.ScrollWheelValue > PreviousMouseState.ScrollWheelValue;
 
     /// <summary>
     /// Returns true if the mouse wheel is scrolling down
     /// </summary>
-    public static bool IsScrollingDown => MouseState.ScrollWheelValue < PreviousMouseState.ScrollWheelValue;
+    public static bool MouseIsScrollingDown => MouseState.ScrollWheelValue < PreviousMouseState.ScrollWheelValue;
 
     /// <summary>
     /// Returns true if the left mouse button is down
     /// </summary>
-    public static bool IsLeftMouseButtonDown => MouseState.LeftButton == ButtonState.Pressed;
+    public static bool MouseLeftMouseButtonDown => MouseState.LeftButton == ButtonState.Pressed;
 
     /// <summary>
     /// Returns true if the right mouse button is down
     /// </summary>
-    public static bool IsRightMouseButtonDown => MouseState.RightButton == ButtonState.Pressed;
+    public static bool MouseRightMouseButtonDown => MouseState.RightButton == ButtonState.Pressed;
 
     /// <summary>
     /// Returns true if the left mouse button has been pressed
     /// </summary>
-    public static bool IsLeftMouseButtonPressed => MouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released;
+    public static bool MouseLeftMouseButtonPressed => MouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released;
 
     /// <summary>
     /// Returns true if the right mouse button has been pressed
     /// </summary>
-    public static bool IsRightMouseButtonPressed => MouseState.RightButton == ButtonState.Pressed && PreviousMouseState.RightButton == ButtonState.Released;
+    public static bool MouseRightMouseButtonPressed => MouseState.RightButton == ButtonState.Pressed && PreviousMouseState.RightButton == ButtonState.Released;
 
     /// <summary>
     /// Returns the current mouse position

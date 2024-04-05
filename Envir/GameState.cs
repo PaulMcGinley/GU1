@@ -2,8 +2,12 @@
 
 namespace GU1;
 
-public static class GameState {
+public class GameState {
 
-    public static GameScene CurrentScene { get; set; } = GameScene.Playing;
+    public static GameScene CurrentScene = GameScene.Playing;                                              // The current scene of the game
+    // Players
+
+    // Flotsam and Jetsam
+    public List<Models.Floatsam> Flotsam = new();
 
 }

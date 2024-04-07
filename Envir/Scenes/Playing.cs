@@ -20,7 +20,7 @@ public class Playing : IScene {
         gameState = new GameState();
 
         for (int i = 0; i < 101; i++) {
-            gameState.Flotsam.Add(new Models.Floatsam(new Sprite2D(TLib.Flotsam[RandomInteger(0, 7)], RandomVector2(100,1820,100,980))));
+            gameState.Flotsam.Add(new Models.Flotsam(new Sprite2D(TLib.Flotsam[RandomInteger(0, 7)], RandomVector2(100,1820,100,980))));
 
             if(RandomBoolean())
                 gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);

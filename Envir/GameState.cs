@@ -8,6 +8,6 @@ public class GameState {
     // Players
 
     // Flotsam and Jetsam
-    public List<Models.Floatsam> Flotsam = new();
+    public List<Models.Flotsam> Flotsam = new();
 
 }

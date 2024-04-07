@@ -46,6 +46,7 @@ public partial class FixedTimestampGame : Game
 
     protected override void LoadContent() {
 
+        // Method intentionally left empty.
     } // End of LoadContent method
 
     #region Update

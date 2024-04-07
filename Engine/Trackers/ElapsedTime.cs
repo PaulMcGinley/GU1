@@ -65,7 +65,7 @@ public class ElapsedTime {
     /// <summary>
     /// Get the result of the time tracking
     /// </summary>
-    public string Result => string.Format($"[Elapsed Time Tracker - {Name}] Time elapsed: {{0:{Precision}}}ms", Time);
+    public string Result => string.Format($"[Elapsed Time Tracker - {Name}] Time elapsed: {{0:{Precision}}}ms | HighResolution Performance Counter: {Stopwatch.IsHighResolution}", Time);
 
     /// <summary>
     /// Override the ToString method to return the result
@@ -76,7 +76,7 @@ public class ElapsedTime {
     /// <summary>
     /// Print the result to the debug console
     /// </summary>
-    public void PrintToDebug() => System.Diagnostics.Debug.WriteLine(Result);
+    public void PrintToDebug() => Debug.WriteLine(Result);
 
     /// <summary>
     /// Print the result to the console
@@ -113,9 +113,9 @@ public class ElapsedTime {
     public int CompareTo(ElapsedTime other) => Time.CompareTo(other.Time);
 
     /// <summary>
-    /// Check if the object is equal to another ElapsedTime object
+    /// Check if the object is equal to another ElapsedTime objects Time property
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="obj">ElapsedTime Object</param>
     /// <returns></returns>
     public override bool Equals(object obj) => obj is ElapsedTime time && Time.Equals(time.Time);
 

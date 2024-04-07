@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,6 +21,9 @@ public class Playing : IScene {
 
         for (int i = 0; i < 101; i++) {
             gameState.Flotsam.Add(new Models.Floatsam(new Sprite2D(TLib.Flotsam[RandomInteger(0, 7)], RandomVector2(100,1820,100,980))));
+
+            if(RandomBoolean())
+                gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
         }
     }
 
@@ -50,15 +54,9 @@ public class Playing : IScene {
             flotsam.Update(gameTime);
 
         // Sort the flotsam by their X and Y positions to ensure they are drawn in the correct order
-        gameState.Flotsam.Sort((a, b) =>
-        {
-            int result = a.Position.X.CompareTo(b.Position.X);
-            if (result == 0)
-            {
-                result = a.Position.Y.CompareTo(b.Position.Y);
-            }
-            return result;
-        });
+        gameState.Flotsam = gameState.Flotsam
+        .OrderBy(flotsam => flotsam.Position.Y)
+        .ThenBy(flotsam => flotsam.Position.X).ToList();
     }
 
     public void Draw(SpriteBatch spriteBatch) {

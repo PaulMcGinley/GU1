@@ -3,22 +3,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Models;
 
-public class Floatsam : IMove {
+public class Flotsam : IMove {
 
-    private Sprite2D sprite;
+    public bool PlayerControlled = false;
+    public int PlayerIndex = -1;
+
+    public Sprite2D sprite;
 
     public Vector2 Position { get => sprite.Position; set => sprite.Position = value; }
 
     private bool isAlive = true;
     private bool isCollected = false;
     private bool isFadingOut = false;
+
     /// <summary>
-    /// This property is used to determine if the floatsam is a phantom object that will disappear after the player inspects it
+    /// This property is used to determine if the flotsam is a phantom object that will disappear after the player inspects it
     /// </summary>
     //private bool isPhantom = false; // TODO: Implement this
     private float opacity = 1.0f;
 
-    public Floatsam(Sprite2D sprite)
+    public Flotsam(Sprite2D sprite)
     {
         this.sprite = sprite;
     }
@@ -92,7 +96,7 @@ public class Floatsam : IMove {
             }
         }
 
-        // TODO: Decide if the floatsam should find a new position
+        // TODO: Decide if the flotsam should find a new position
 
         // TODO: Move the floatsam
     }
@@ -102,6 +106,14 @@ public class Floatsam : IMove {
         if (!isAlive && isCollected && !isFadingOut)
             return;
 
-        spriteBatch.Draw(sprite.GetTexture(), sprite.Position, sprite.GetSourceRectangle(), sprite.GetColour() * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale()*0.7f, sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(sprite.GetTexture(), sprite.Position, sprite.GetSourceRectangle(), sprite.GetColour() * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+    }
+
+    public void DrawShadowOverlay(SpriteBatch spriteBatch) {
+
+        if (!isAlive && isCollected && !isFadingOut)
+            return;
+
+        spriteBatch.Draw(sprite.GetTexture(), sprite.Position, sprite.GetSourceRectangle(), (Color.Black * 0.7f ) * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
     }
 }

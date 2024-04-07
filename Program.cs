@@ -12,7 +12,9 @@ global using TLib = GU1.Envir.Libraries.Texture;
 global using RLib = GU1.Envir.Libraries.Rumble;
 global using SLib = GU1.Envir.Libraries.Sounds;
 
-internal class Program {
+namespace GU1;
+
+internal static class Program {
 
     private static void Main() {
 

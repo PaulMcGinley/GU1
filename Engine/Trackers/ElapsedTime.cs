@@ -1,29 +1,31 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace GU1.Engine.Trackers;
 
 public class ElapsedTime {
 
     #region Properties
+
     /// <summary>
     /// Assigning a name to the tracker will make the output more readable
     /// </summary>
     private string Name { get; set; }
 
     /// <summary>
-    /// Start time of the tracker in milliseconds
+    /// The precision of the time output
     /// </summary>
-    private double StartTime { get; set; }
+    private string Precision { get; set; }
 
     /// <summary>
-    /// End time of the tracker in milliseconds
+    /// The Stopwatch object that will be used to track the time
     /// </summary>
-    private double EndTime { get; set; }
+    private Stopwatch Stopwatch { get; set; }
 
     /// <summary>
     /// The time elapsed between the start and end times in milliseconds
     /// </summary>
-    private TimeSpan Time => TimeSpan.FromMilliseconds(EndTime - StartTime);
+    private double Time => Stopwatch.Elapsed.TotalMilliseconds;
 
     #endregion
 
@@ -31,33 +33,39 @@ public class ElapsedTime {
     /// Create a new ElapsedTime object
     /// </summary>
     /// <param name="name">Name of the tracker (for output purposes)</param>
-    public ElapsedTime(string name = "Undefined") {
+    public ElapsedTime(string name, string precision = "0.0000000000") {
 
         Name = name;
-        Reset();
+        Precision = precision;
+        Stopwatch = new Stopwatch();
     }
+
+    #region Stopwatch Control
 
     /// <summary>
     /// Start tracking the time
     /// </summary>
-    public void Start() => StartTime = DateTime.Now.TimeOfDay.TotalMilliseconds;
+    public void Start() => Stopwatch.Start();
 
     /// <summary>
     /// Stop tracking the time
     /// </summary>
-    public void Stop() => EndTime = DateTime.Now.TimeOfDay.TotalMilliseconds;
+    public void Stop() => Stopwatch.Stop();
 
     /// <summary>
     /// Reset the time tracker
     /// </summary>
-    public void Reset() => StartTime = EndTime = 0;
+    public void Reset() => Stopwatch.Reset();
+
+    #endregion
+
 
     #region Result Output
 
     /// <summary>
     /// Get the result of the time tracking
     /// </summary>
-    public string Result => $"[{Name}] Time elapsed: {Time}";
+    public string Result => string.Format($"[Elapsed Time Tracker - {Name}] Time elapsed: {{0:{Precision}}}ms", Time);
 
     /// <summary>
     /// Override the ToString method to return the result
@@ -77,6 +85,7 @@ public class ElapsedTime {
 
     #endregion
 
+
     #region Operators
 
     public static bool operator <(ElapsedTime a, ElapsedTime b) => a.Time < b.Time;
@@ -86,14 +95,15 @@ public class ElapsedTime {
     public static bool operator ==(ElapsedTime a, ElapsedTime b) => a.Time == b.Time;
     public static bool operator !=(ElapsedTime a, ElapsedTime b) => a.Time != b.Time;
 
-    // ? Maybe these should use resulting time instead of start and end times
-    public static ElapsedTime operator +(ElapsedTime a, ElapsedTime b) => new($"{a.Name} + {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator -(ElapsedTime a, ElapsedTime b) => new($"{a.Name} - {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator *(ElapsedTime a, ElapsedTime b) => new($"{a.Name} * {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator /(ElapsedTime a, ElapsedTime b) => new($"{a.Name} / {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator %(ElapsedTime a, ElapsedTime b) => new($"{a.Name} % {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
+    public static ElapsedTime operator +(ElapsedTime a, ElapsedTime b) => new($"Sum of Elapsed Times {a.Time + b.Time}");
+    public static ElapsedTime operator -(ElapsedTime a, ElapsedTime b) => new($"Difference of Elapsed Times {a.Time - b.Time}");
+    public static ElapsedTime operator *(ElapsedTime a, ElapsedTime b) => new($"Product of Elapsed Times {a.Time * b.Time}");
+    public static ElapsedTime operator /(ElapsedTime a, ElapsedTime b) => new($"Quotient of Elapsed Times {a.Time / b.Time}");
 
     #endregion
+
+
+    #region Comparators
 
     /// <summary>
     /// Compare the time of two ElapsedTime objects
@@ -108,6 +118,8 @@ public class ElapsedTime {
     /// <param name="obj"></param>
     /// <returns></returns>
     public override bool Equals(object obj) => obj is ElapsedTime time && Time.Equals(time.Time);
+
+    #endregion
 
     /// <summary>
     /// Get the hash code of the time

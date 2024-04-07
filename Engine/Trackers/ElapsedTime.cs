@@ -4,14 +4,28 @@ namespace GU1.Engine.Trackers;
 
 public class ElapsedTime {
 
+    #region Properties
     /// <summary>
     /// Assigning a name to the tracker will make the output more readable
     /// </summary>
     private string Name { get; set; }
 
+    /// <summary>
+    /// Start time of the tracker in milliseconds
+    /// </summary>
     private double StartTime { get; set; }
+
+    /// <summary>
+    /// End time of the tracker in milliseconds
+    /// </summary>
     private double EndTime { get; set; }
+
+    /// <summary>
+    /// The time elapsed between the start and end times in milliseconds
+    /// </summary>
     private TimeSpan Time => TimeSpan.FromMilliseconds(EndTime - StartTime);
+
+    #endregion
 
     /// <summary>
     ///
@@ -78,6 +92,7 @@ public class ElapsedTime {
     public static bool operator ==(ElapsedTime a, ElapsedTime b) => a.Time == b.Time;
     public static bool operator !=(ElapsedTime a, ElapsedTime b) => a.Time != b.Time;
 
+    // ? Maybe these should use resulting time instead of start and end times
     public static ElapsedTime operator +(ElapsedTime a, ElapsedTime b) => new($"{a.Name} + {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
     public static ElapsedTime operator -(ElapsedTime a, ElapsedTime b) => new($"{a.Name} - {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
     public static ElapsedTime operator *(ElapsedTime a, ElapsedTime b) => new($"{a.Name} * {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };

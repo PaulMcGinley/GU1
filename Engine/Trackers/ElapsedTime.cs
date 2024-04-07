@@ -28,9 +28,9 @@ public class ElapsedTime {
     #endregion
 
     /// <summary>
-    ///
+    /// Create a new ElapsedTime object
     /// </summary>
-    /// <param name="name"></param>
+    /// <param name="name">Name of the tracker (for output purposes)</param>
     public ElapsedTime(string name = "Undefined") {
 
         Name = name;
@@ -52,6 +52,8 @@ public class ElapsedTime {
     /// </summary>
     public void Reset() => StartTime = EndTime = 0;
 
+    #region Result Output
+
     /// <summary>
     /// Get the result of the time tracking
     /// </summary>
@@ -62,6 +64,36 @@ public class ElapsedTime {
     /// </summary>
     /// <returns></returns>
     public override string ToString() => Result;
+
+    /// <summary>
+    /// Print the result to the debug console
+    /// </summary>
+    public void PrintToDebug() => System.Diagnostics.Debug.WriteLine(Result);
+
+    /// <summary>
+    /// Print the result to the console
+    /// </summary>
+    public void PrintToConsole() => Console.WriteLine(Result);
+
+    #endregion
+
+    #region Operators
+
+    public static bool operator <(ElapsedTime a, ElapsedTime b) => a.Time < b.Time;
+    public static bool operator >(ElapsedTime a, ElapsedTime b) => a.Time > b.Time;
+    public static bool operator <=(ElapsedTime a, ElapsedTime b) => a.Time <= b.Time;
+    public static bool operator >=(ElapsedTime a, ElapsedTime b) => a.Time >= b.Time;
+    public static bool operator ==(ElapsedTime a, ElapsedTime b) => a.Time == b.Time;
+    public static bool operator !=(ElapsedTime a, ElapsedTime b) => a.Time != b.Time;
+
+    // ? Maybe these should use resulting time instead of start and end times
+    public static ElapsedTime operator +(ElapsedTime a, ElapsedTime b) => new($"{a.Name} + {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
+    public static ElapsedTime operator -(ElapsedTime a, ElapsedTime b) => new($"{a.Name} - {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
+    public static ElapsedTime operator *(ElapsedTime a, ElapsedTime b) => new($"{a.Name} * {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
+    public static ElapsedTime operator /(ElapsedTime a, ElapsedTime b) => new($"{a.Name} / {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
+    public static ElapsedTime operator %(ElapsedTime a, ElapsedTime b) => new($"{a.Name} % {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
+
+    #endregion
 
     /// <summary>
     /// Compare the time of two ElapsedTime objects
@@ -82,23 +114,4 @@ public class ElapsedTime {
     /// </summary>
     /// <returns></returns>
     public override int GetHashCode() => HashCode.Combine(Time);
-
-    #region Operators
-
-    public static bool operator <(ElapsedTime a, ElapsedTime b) => a.Time < b.Time;
-    public static bool operator >(ElapsedTime a, ElapsedTime b) => a.Time > b.Time;
-    public static bool operator <=(ElapsedTime a, ElapsedTime b) => a.Time <= b.Time;
-    public static bool operator >=(ElapsedTime a, ElapsedTime b) => a.Time >= b.Time;
-    public static bool operator ==(ElapsedTime a, ElapsedTime b) => a.Time == b.Time;
-    public static bool operator !=(ElapsedTime a, ElapsedTime b) => a.Time != b.Time;
-
-    // ? Maybe these should use resulting time instead of start and end times
-    public static ElapsedTime operator +(ElapsedTime a, ElapsedTime b) => new($"{a.Name} + {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator -(ElapsedTime a, ElapsedTime b) => new($"{a.Name} - {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator *(ElapsedTime a, ElapsedTime b) => new($"{a.Name} * {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator /(ElapsedTime a, ElapsedTime b) => new($"{a.Name} / {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-    public static ElapsedTime operator %(ElapsedTime a, ElapsedTime b) => new($"{a.Name} % {b.Name}") { StartTime = a.StartTime, EndTime = b.EndTime };
-
-    #endregion
-
 }

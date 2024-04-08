@@ -23,20 +23,7 @@ public class GameMain : FixedTimestampGame {
 
     } // End of GameMain constructor
 
-    LargeNumber number = new(0);
     protected override void Initialize() {
-
-        Debug.WriteLine(number);
-
-        number += 256;
-        Debug.WriteLine(number);
-
-        number *= 2;
-        Debug.WriteLine(number);
-
-        number /= 256;
-        Debug.WriteLine(number);
-
 
         base.Initialize();                                                                                  // IMPORTANT: Keep this here
 
@@ -61,10 +48,6 @@ public class GameMain : FixedTimestampGame {
     } // End of Initialize method
 
     protected override void Update(GameTime gameTime) {
-
-
-
-
 
         DeviceState.Update();                                                                               // Update the state of the input devices
 
@@ -97,7 +80,6 @@ public class GameMain : FixedTimestampGame {
     } // End of Update method
 
     protected override void FixedUpdate(GameTime gameTime) {
-
 
         // Only update the current scene
         switch (GameState.CurrentScene) {

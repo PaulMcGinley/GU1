@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GU1;
+﻿namespace GU1;
 
 public class LargeNumber {
 
@@ -555,13 +553,25 @@ public class LargeNumber {
 
     public override bool Equals(object obj) {
 
-        if (ReferenceEquals(this, obj))
-            return true;
-
-        if (ReferenceEquals(obj, null))
+        if (obj == null || GetType() != obj.GetType())
             return false;
 
-        // TODO: This:
-        throw new NotImplementedException();
+        LargeNumber other = (LargeNumber)obj;
+
+        for (int i = 0; i < 1024; i++)
+            if (number[i] != other.number[i])
+                return false;
+
+        return true;
+    }
+
+    public override int GetHashCode() {
+
+        int hash = 0;
+
+        for (int i = 0; i < 1024; i++)
+            hash ^= number[i].GetHashCode();
+
+        return hash;
     }
 }

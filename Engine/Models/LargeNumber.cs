@@ -6,36 +6,64 @@ public class LargeNumber {
 
     #region From methods
 
-    public static LargeNumber FromInt(int value)
-    {
+    public static LargeNumber FromInt(int value) {
+
         LargeNumber result = new();
-        for (int i = 0; i < 1024; i++)
-        {
-            result.number[i] = 0;
-        }
+
         int j = 0;
-        while (value > 0)
-        {
+        while (value > 0) {
+
             result.number[j] = (byte)(value % 10);
             value /= 10;
             j++;
         }
+
         return result;
     }
 
-    public static LargeNumber FromString(string value)
-    {
+    public static LargeNumber FromString(string value) {
+
         LargeNumber result = new();
-        for (int i = 0; i < 1024; i++)
-        {
-            result.number[i] = 0;
-        }
+
         int j = 0;
-        for (int i = value.Length - 1; i >= 0; i--)
-        {
+        for (int i = value.Length - 1; i >= 0; i--) {
+
             result.number[j] = (byte)(value[i] - '0');
             j++;
         }
+
+        return result;
+    }
+
+    #endregion
+
+    #region To Functions
+
+    public override string ToString() {
+
+        int i = 1023;
+        while (i > 0 && number[i] == 0)
+            i--;
+
+        char[] result = new char[i + 1];
+
+        for (int j = 0; j <= i; j++)
+            result[j] = (char)('0' + number[i - j]);
+
+        return new string(result);
+    }
+
+    public int ToInt() {
+
+        int result = 0;
+        int factor = 1;
+
+        for (int i = 0; i < 1024; i++) {
+
+            result += number[i] * factor;
+            factor *= 10;
+        }
+
         return result;
     }
 
@@ -95,9 +123,6 @@ public class LargeNumber {
 
         LargeNumber result = new();
 
-        for (int i = 0; i < 1024; i++)
-            result.number[i] = 0;
-
         byte carry = 0;
         for (int i = 0; i < 1024; i++) {
 
@@ -137,46 +162,40 @@ public class LargeNumber {
         }
     }
 
-    public static LargeNumber operator -(LargeNumber a, LargeNumber b)
-    {
+    public static LargeNumber operator -(LargeNumber a, LargeNumber b) {
+
         LargeNumber result = new();
-        for (int i = 0; i < 1024; i++)
-        {
-            result.number[i] = 0;
-        }
+
         byte borrow = 0;
-        for (int i = 0; i < 1024; i++)
-        {
+        for (int i = 0; i < 1024; i++) {
+
             int difference = a.number[i] - b.number[i] - borrow;
-            if (difference < 0)
-            {
+            if (difference < 0) {
+
                 difference += 10;
                 borrow = 1;
-            }
-            else
-            {
+            } else {
+
                 borrow = 0;
             }
             result.number[i] = (byte)difference;
         }
+
         return result;
     }
     public static LargeNumber operator -(LargeNumber a, int b) => a - FromInt(b);
     public static LargeNumber operator -(int a, LargeNumber b) => FromInt(a) - b;
     public static LargeNumber operator -(LargeNumber a, string b) => a - FromString(b);
     public static LargeNumber operator -(string a, LargeNumber b) => FromString(a) - b;
-    public static LargeNumber operator -(LargeNumber a)
-    {
+    public static LargeNumber operator -(LargeNumber a) {
+
         LargeNumber result = new();
+
         for (int i = 0; i < 1024; i++)
-        {
-            result.number[i] = 0;
-        }
-        for (int i = 0; i < 1024; i++)
-        {
-            result.number[i] = (byte)(9 - a.number[i]);
-        }
-        result++;
+            result.number[i] = (byte)(9 - a.number[i]);                                                     // 9 - a[i] is the complement of a[i]
+
+        result++;                                                                                           // Add 1 to the complement to get the negative
+
         return result;
     }
     public static LargeNumber operator --(LargeNumber a) => a - 1;
@@ -285,9 +304,6 @@ public class LargeNumber {
 
         LargeNumber result = new();
 
-        for (int i = 0; i < 1024; i++)
-            result.number[i] = 0;
-
         byte carry = 0;
         for (int i = 1023; i >= 0; i--) {
 
@@ -387,7 +403,7 @@ public class LargeNumber {
 
     #endregion
 
-    #region Bit shift
+    #region Bitwise shift operators
 
     public static LargeNumber operator <<(LargeNumber a, int b) {
 
@@ -411,7 +427,7 @@ public class LargeNumber {
 
     #endregion
 
-    #region Bitwise complement
+    #region Bitwise NOT operator
 
     public static LargeNumber operator ~(LargeNumber a) {
 
@@ -440,7 +456,6 @@ public class LargeNumber {
 
         return false;
     }
-
     public static bool operator <(LargeNumber a, LargeNumber b) {
 
         for (int i = 1023; i >= 0; i--) {
@@ -453,7 +468,6 @@ public class LargeNumber {
 
         return false;
     }
-
     public static bool operator >=(LargeNumber a, LargeNumber b) {
 
         for (int i = 1023; i >= 0; i--) {
@@ -466,7 +480,6 @@ public class LargeNumber {
 
         return true;
     }
-
     public static bool operator <=(LargeNumber a, LargeNumber b) {
 
         for (int i = 1023; i >= 0; i--) {
@@ -479,7 +492,6 @@ public class LargeNumber {
 
         return true;
     }
-
     public static bool operator ==(LargeNumber a, LargeNumber b) {
 
         for (int i = 1023; i >= 0; i--)
@@ -488,7 +500,6 @@ public class LargeNumber {
 
         return true;
     }
-
     public static bool operator !=(LargeNumber a, LargeNumber b) {
 
         for (int i = 1023; i >= 0; i--)
@@ -499,34 +510,6 @@ public class LargeNumber {
     }
 
     #endregion
-
-    public override string ToString() {
-
-        int i = 1023;
-        while (i > 0 && number[i] == 0)
-            i--;
-
-        char[] result = new char[i + 1];
-
-        for (int j = 0; j <= i; j++)
-            result[j] = (char)('0' + number[i - j]);
-
-        return new string(result);
-    }
-
-    public int ToInt() {
-
-        int result = 0;
-        int factor = 1;
-
-        for (int i = 0; i < 1024; i++) {
-
-            result += number[i] * factor;
-            factor *= 10;
-        }
-
-        return result;
-    }
 
     #region implicit operators
 

@@ -2,7 +2,7 @@
 
 namespace GU1.Engine.Graphics;
 
-public class Calculate {
+public static class Calculate {
 
     /// <summary>
     /// Calculate the percentage of the area of the sprite that is inside the camera view.

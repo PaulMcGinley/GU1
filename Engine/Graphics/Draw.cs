@@ -117,7 +117,6 @@ public static class Draw {
                 continue;
             }
 
-            //spriteBatch.Draw(TLib.Pixel, p3, color);
             DrawLine(lastPoint, point3, spriteBatch, color);
 
             lastPoint = point3; // Update the last point to the current point for the next iteration

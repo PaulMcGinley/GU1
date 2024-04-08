@@ -18,11 +18,6 @@ public class CheckBox : Base {
         MouseClick += MonoCheckBox_MouseClick;                                                              // Subscribe to the MouseClick event
     }
 
-    public override void Update() {
-
-        base.Update();                                                                                      // Call the base Update method
-    }
-
     public override void Draw(SpriteBatch spriteBatch) {
 
         if (!Visible) return;                                                                               // If the control is not visible, return

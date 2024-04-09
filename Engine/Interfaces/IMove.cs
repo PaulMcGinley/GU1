@@ -33,5 +33,5 @@ public interface IMove {
     /// Move the object in a direction based on the input
     /// </summary>
     /// <param name="direction"></param>
-    public void Move(Vector2 direction);
+    public void Move(GameTime gameTime);
 }

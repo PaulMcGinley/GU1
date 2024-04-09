@@ -12,6 +12,8 @@ public class Flotsam : IMove {
 
     public Vector2 Position { get => sprite.Position; set => sprite.Position = value; }
 
+    public Vector2 TargetPosition { get; set; }
+
     private bool isAlive = true;
     private bool isCollected = false;
     private bool isFadingOut = false;
@@ -27,6 +29,10 @@ public class Flotsam : IMove {
         this.sprite = sprite;
     }
 
+    public Flotsam()
+    {
+    }
+
     #region IMove
 
     public Vector2 Velocity { get; set; }
@@ -35,19 +41,12 @@ public class Flotsam : IMove {
     public float MaxSpeed { get; set; }
     public float MinSpeed { get; set; }
 
-    public void Move(Vector2 direction)
-    {
-        // Calculate the new velocity based on the direction and acceleration
-        Vector2 newVelocity = Velocity + direction * Acceleration;
+    public void Move(GameTime gameTime) {
 
-        // Apply friction to the velocity
-        newVelocity *= (1 - Friction);
+        // Lerp the position of the flotsam towards the target position over a period of 1 second
+        Position = Vector2.Lerp(Position, TargetPosition, 0.01f);
 
-        // Update the position based on the velocity
-        sprite.Position += newVelocity;
 
-        // Update the velocity
-        Velocity = newVelocity;
     }
 
     #endregion
@@ -96,9 +95,18 @@ public class Flotsam : IMove {
             }
         }
 
-        // TODO: Decide if the flotsam should find a new position
+        // TODO: Check of the flotsam is within a certain distance of the target position
+        if (Vector2.Distance(Position, TargetPosition) <= 1f)
+            TargetPosition = new Vector2(RandomFloat(1920, RandomFloat(1080)));
 
         // TODO: Move the floatsam
+            Move(gameTime);
+    }
+
+    public void FixedUpdate(GameTime gameTime) {
+
+        if (!isAlive)
+            return;
     }
 
     public void Draw(SpriteBatch spriteBatch) {

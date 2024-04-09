@@ -42,6 +42,9 @@ public class Playing : IScene {
     public void Update(GameTime gameTime) {
 
         camera.Update();
+
+      //  foreach (var flotsam in gameState.Flotsam)
+      //      flotsam.Update(gameTime);
     }
 
     /// <summary>

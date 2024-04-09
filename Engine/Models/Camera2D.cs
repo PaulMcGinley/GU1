@@ -13,6 +13,7 @@ public class Camera2D {
 
     public Camera2D(Viewport viewport) {
 
+        Boundaries = viewport;
         Position = Vector2.Zero;
         Rotation = 0f;
         Zoom = 1f;

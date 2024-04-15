@@ -26,7 +26,7 @@ public static class ColorExtensions {
     }
 
     /// <summary>
-    /// Invert
+    /// Invert a color
     /// </summary>
     /// <param name="colour"></param>
     public static void Invert(ref this Color colour) {

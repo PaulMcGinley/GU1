@@ -101,7 +101,7 @@ public static class Draw {
     /// <param name="color"></param>
     public static void DrawCurvedLine(Vector2 start, Vector2 end, float curvature, SpriteBatch spriteBatch, Color color = default) {
 
-        Vector2 midPoint = new((start.X + end.X) / 2, (start.Y + end.Y) / 2);
+        Vector2 midPoint = new((start.X + end.X)/2, (start.Y + end.Y)/2);
         Vector2 controlPoint = new(midPoint.X, midPoint.Y + curvature);
 
         Vector2 lastPoint = start;
@@ -113,6 +113,7 @@ public static class Draw {
 
             // If this is the first point, assign the lastPoint and skip drawing the line
             if (i == 0) {
+
                 lastPoint = point3;
                 continue;
             }
@@ -141,11 +142,11 @@ public static class Draw {
 
         for (float i = 0; i < pFloat; i += 0.01f) {
 
-            Vector2 p1 = Vector2.Lerp(start, control, i/pFloat);
-            Vector2 p2 = Vector2.Lerp(control, end, i/pFloat);
-            Vector2 p3 = Vector2.Lerp(p1, p2, i/pFloat);
+            Vector2 point1 = Vector2.Lerp(start, control, i/pFloat);
+            Vector2 point2 = Vector2.Lerp(control, end, i/pFloat);
+            Vector2 point3 = Vector2.Lerp(point1, point2, i/pFloat);
 
-            spriteBatch.Draw(TLib.Pixel, p3, color);
+            spriteBatch.Draw(TLib.Pixel, point3, color);
         }
     }
 

@@ -8,22 +8,35 @@ public static class ColorExtensions {
     /// <summary>
     /// Lighten a color by a given factor
     /// </summary>
-    /// <param name="color"></param>
+    /// <param name="colour"></param>
     /// <param name="factor"></param>
     /// <returns></returns>
-    public static Color Lighten(this Color color, float factor) {
+    public static void Lighten(ref this Color colour, float factor) {
 
         // Clamp factor to ensure it's not negative
         factor = Math.Max(factor, 0);
 
         // Multiply each component by the factor
-        int r = (int)Math.Min((1 + color.R) * factor, 255);
-        int g = (int)Math.Min((1 + color.G) * factor, 255);
-        int b = (int)Math.Min((1 + color.B) * factor, 255);
+        int r = (int)Math.Min((1 + colour.R) * factor, 255);
+        int g = (int)Math.Min((1 + colour.G) * factor, 255);
+        int b = (int)Math.Min((1 + colour.B) * factor, 255);
+        byte a = colour.A;
 
-        byte a = color.A;
+        colour = new Color(r, g, b, a);
+    }
 
-        return new Color(r, g, b, a);
+    /// <summary>
+    /// Invert
+    /// </summary>
+    /// <param name="colour"></param>
+    public static void Invert(ref this Color colour) {
+
+        byte r = (byte)(255 - colour.R);
+        byte g = (byte)(255 - colour.G);
+        byte b = (byte)(255 - colour.B);
+        byte a = colour.A;
+
+        colour = new Color(r, g, b, a);
     }
 
     /// <summary>
@@ -31,7 +44,7 @@ public static class ColorExtensions {
     /// </summary>
     /// <param name="hex"></param>
     /// <returns></returns>
-    public static Color FromHex(ref this Color c, string hex) {
+    public static void FromHex(ref this Color colour, string hex) {
 
         hex = hex.Replace("#", "");
 
@@ -40,8 +53,7 @@ public static class ColorExtensions {
         byte b = Convert.ToByte(hex.Substring(4, 2), 16);
         byte a = hex.Length == 8 ? Convert.ToByte(hex.Substring(6, 2), 16) : (byte)255;
 
-        return c = new Color(r, g, b, a);
-        // Yeah I know, but it works...
+        colour = new Color(r, g, b, a);
     }
 
     /// <summary>
@@ -50,6 +62,6 @@ public static class ColorExtensions {
     /// <param name="color"></param>
     /// <param name="includeAlpha"></param>
     /// <returns></returns>
-    public static string ToHex(this Color color, bool includeAlpha = false) => includeAlpha ? $"#{color.R:X2}{color.G:X2}{color.B:X2}{color.A:X2}" : $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+    public static string ToHex(this Color colour, bool includeAlpha = false) => includeAlpha ? $"#{colour.R:X2}{colour.G:X2}{colour.B:X2}{colour.A:X2}" : $"#{colour.R:X2}{colour.G:X2}{colour.B:X2}";
 
 }

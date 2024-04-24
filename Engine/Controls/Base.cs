@@ -110,7 +110,7 @@ public class Base {
     #endregion Properties
 
 
-    #region virtual Functions
+    #region Virtual Functions
 
     public virtual void LoadContent() { }                                                                   // Load the content for the control
     public virtual void UnloadContent() { }                                                                 // Unload the content for the control

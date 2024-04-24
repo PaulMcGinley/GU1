@@ -1,9 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Models;
 
 public class Flotsam : IMove {
+
+    public Random random = new();
 
     public bool PlayerControlled = false;
     public int PlayerIndex = -1;
@@ -27,10 +30,14 @@ public class Flotsam : IMove {
     public Flotsam(Sprite2D sprite)
     {
         this.sprite = sprite;
+
+        TargetPosition = new Vector2(random.RandomFloat(1920), random.RandomFloat(1080));
     }
 
     public Flotsam()
     {
+
+        TargetPosition = new Vector2(random.RandomFloat(1920), random.RandomFloat(1080));
     }
 
     #region IMove
@@ -44,8 +51,12 @@ public class Flotsam : IMove {
     public void Move(GameTime gameTime) {
 
         // Lerp the position of the flotsam towards the target position over a period of 1 second
-        Position = Vector2.Lerp(Position, TargetPosition, 0.01f);
+      //  Position = Vector2.Lerp(Position, TargetPosition, 0.005f);
 
+        // calculate the distance between the flotsam and the target position
+       // Vector2 direction = TargetPosition - Position;
+
+Position += Velocity * 5000f;
 
     }
 
@@ -96,8 +107,11 @@ public class Flotsam : IMove {
         }
 
         // TODO: Check of the flotsam is within a certain distance of the target position
-        if (Vector2.Distance(Position, TargetPosition) <= 1f)
-            TargetPosition = new Vector2(RandomFloat(1920, RandomFloat(1080)));
+        if (Vector2.Distance(Position, TargetPosition) <= 1f) {
+            TargetPosition = new Vector2(random.RandomFloat(1920), random.RandomFloat(1080));
+            Velocity = TargetPosition - Position;
+            Velocity.Normalize( );
+        }
 
         // TODO: Move the floatsam
             Move(gameTime);

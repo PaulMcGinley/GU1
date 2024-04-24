@@ -10,5 +10,6 @@
         "Lerp",
         "Nessie",
         "songlength"
-    ]
+    ],
+    "FSharp.suggestGitignore": false
 }

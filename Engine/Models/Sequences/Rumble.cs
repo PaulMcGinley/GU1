@@ -90,7 +90,7 @@ public class Rumble
 
     public void Update(GameTime gameTime) {
 
-        if (previousTime == 0)
+        if ((int)previousTime == 0) // Cast to int to avoid floating point errors
             previousTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
 
         float now = (float)gameTime.TotalGameTime.TotalMilliseconds;

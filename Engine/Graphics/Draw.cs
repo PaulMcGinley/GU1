@@ -112,7 +112,8 @@ public static class Draw {
             Vector2 point3 = Vector2.Lerp(point1, point2, i);
 
             // If this is the first point, assign the lastPoint and skip drawing the line
-            if (i == 0) {
+            // Cast to int to avoid floating point errors
+            if ((int)i == 0) {
 
                 lastPoint = point3;
                 continue;

@@ -27,17 +27,15 @@ public class Flotsam : IMove {
     //private bool isPhantom = false; // TODO: Implement this
     private float opacity = 1.0f;
 
-    public Flotsam(Sprite2D sprite)
-    {
-        this.sprite = sprite;
+    public Flotsam(Sprite2D sprite) {
 
-        TargetPosition = new Vector2(random.RandomFloat(1920), random.RandomFloat(1080));
+        this.sprite = sprite;
+        TargetPosition = new Vector2(RandomFloat(1920), RandomFloat(1080));
     }
 
-    public Flotsam()
-    {
+    public Flotsam() {
 
-        TargetPosition = new Vector2(random.RandomFloat(1920), random.RandomFloat(1080));
+        TargetPosition = new Vector2(RandomFloat(1920), RandomFloat(1080));
     }
 
     #region IMove
@@ -50,14 +48,7 @@ public class Flotsam : IMove {
 
     public void Move(GameTime gameTime) {
 
-        // Lerp the position of the flotsam towards the target position over a period of 1 second
-      //  Position = Vector2.Lerp(Position, TargetPosition, 0.005f);
-
-        // calculate the distance between the flotsam and the target position
-       // Vector2 direction = TargetPosition - Position;
-
-Position += Velocity * 5000f;
-
+        Position = Vector2.Lerp(Position, TargetPosition, 0.005f);
     }
 
     #endregion
@@ -107,8 +98,8 @@ Position += Velocity * 5000f;
         }
 
         // TODO: Check of the flotsam is within a certain distance of the target position
-        if (Vector2.Distance(Position, TargetPosition) <= 1f) {
-            TargetPosition = new Vector2(random.RandomFloat(1920), random.RandomFloat(1080));
+        if (Vector2.Distance(Position, TargetPosition) <= 10f) {
+            TargetPosition = new Vector2(RandomFloat(1920), RandomFloat(1080));
             Velocity = TargetPosition - Position;
             Velocity.Normalize( );
         }

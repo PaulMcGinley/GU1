@@ -1,10 +1,17 @@
-﻿using System;
+﻿/*
+ * 25/04/2024 - Class deprecated and will be removed in the future
+ * Replaced this with extension methods for System.Random
+ * - Paul F. McGinley
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace GU1.Engine;
 
+[Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
 public static class Randoms {
 
     private static readonly Random random = new();
@@ -15,6 +22,7 @@ public static class Randoms {
     /// Returns a random integer between 0 and int.MaxValue
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static int RandomInteger() => random.Next();
 
     /// <summary>
@@ -23,6 +31,7 @@ public static class Randoms {
     /// </summary>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static int RandomInteger(int max) => random.Next(max + 1);
 
     /// <summary>
@@ -32,6 +41,7 @@ public static class Randoms {
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static int RandomInteger(int min, int max) => random.Next(min, max + 1);
 
     #endregion
@@ -43,6 +53,7 @@ public static class Randoms {
     /// Returns a random float between 0 and 1
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static float RandomFloat() => (float)random.NextDouble();
 
     /// <summary>
@@ -50,6 +61,7 @@ public static class Randoms {
     /// </summary>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static float RandomFloat(float max) => (float)random.NextDouble() * max;
 
     /// <summary>
@@ -58,6 +70,7 @@ public static class Randoms {
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static float RandomFloat(float min, float max) => (float)random.NextDouble() * (max - min) + min;
 
     #endregion
@@ -69,6 +82,7 @@ public static class Randoms {
     /// Returns a random double between 0 and 1
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static double RandomDouble() => random.NextDouble();
 
     /// <summary>
@@ -76,6 +90,7 @@ public static class Randoms {
     /// </summary>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static double RandomDouble(double max) => random.NextDouble() * max;
 
     /// <summary>
@@ -84,6 +99,7 @@ public static class Randoms {
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static double RandomDouble(double min, double max) => random.NextDouble() * (max - min) + min;
 
     #endregion
@@ -95,6 +111,7 @@ public static class Randoms {
     /// Returns a random byte between 0 and 255
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static byte RandomByte() => (byte)random.Next(0, 256);
 
     /// <summary>
@@ -103,6 +120,7 @@ public static class Randoms {
     /// </summary>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static byte RandomByte(byte max) => (byte)random.Next(0, max + 1);
 
     /// <summary>
@@ -112,6 +130,7 @@ public static class Randoms {
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static byte RandomByte(byte min, byte max) => (byte)random.Next(min, max + 1);
 
     #endregion
@@ -123,6 +142,7 @@ public static class Randoms {
     /// Returns a random boolean
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static bool RandomBoolean() => random.Next(0, 2) == 0;
 
     /// <summary>
@@ -131,6 +151,7 @@ public static class Randoms {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static T RandomEnumerator<T>() where T : Enum => (T)Enum.GetValues(typeof(T)).GetValue(random.Next(Enum.GetValues(typeof(T)).Length));
 
     /// <summary>
@@ -139,6 +160,7 @@ public static class Randoms {
     /// <typeparam name="T"></typeparam>
     /// <param name="array"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static T RandomElement<T>(T[] array) => array[random.Next(array.Length)];
 
     /// <summary>
@@ -147,6 +169,7 @@ public static class Randoms {
     /// <typeparam name="T"></typeparam>
     /// <param name="list"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static T RandomElement<T>(List<T> list) => list[random.Next(list.Count)];
 
     /// <summary>
@@ -156,6 +179,7 @@ public static class Randoms {
     /// <typeparam name="TValue"></typeparam>
     /// <param name="dictionary"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static KeyValuePair<TKey, TValue> RandomElement<TKey, TValue>(Dictionary<TKey, TValue> dictionary) => dictionary.ElementAt(random.Next(dictionary.Count));
 
     /// <summary>
@@ -163,12 +187,14 @@ public static class Randoms {
     /// </summary>
     /// <param name="length"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static string RandomString(int length) => new(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", length).Select(s => s[random.Next(s.Length)]).ToArray());
 
     /// <summary>
     /// Returns a random color
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Color RandomColor() => new(RandomByte(), RandomByte(), RandomByte());
 
     #endregion
@@ -180,6 +206,7 @@ public static class Randoms {
     /// Returns a random vector2
     /// </summary>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Vector2 RandomVector2() => new (RandomFloat(), RandomFloat());
 
     /// <summary>
@@ -187,6 +214,7 @@ public static class Randoms {
     /// </summary>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Vector2 RandomVector2(float max) => new (RandomFloat(max), RandomFloat(max));
 
     /// <summary>
@@ -195,6 +223,7 @@ public static class Randoms {
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Vector2 RandomVector2(float min, float max) => new(RandomFloat(min, max), RandomFloat(min, max));
 
     /// <summary>
@@ -205,6 +234,7 @@ public static class Randoms {
     /// <param name="minY"></param>
     /// <param name="maxY"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Vector2 RandomVector2(float minX, float maxX, float minY, float maxY) => new(RandomFloat(minX, maxX), RandomFloat(minY, maxY));
 
     /// <summary>
@@ -213,6 +243,7 @@ public static class Randoms {
     /// <param name="min"></param>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Vector2 RandomVector2(Vector2 min, Vector2 max) => new(RandomFloat(min.X, max.X), RandomFloat(min.Y, max.Y));
 
     /// <summary>
@@ -220,6 +251,7 @@ public static class Randoms {
     /// </summary>
     /// <param name="max"></param>
     /// <returns></returns>
+    [Obsolete("Define a System.Random instance in your class instead and use the extension methods provided.")]
     public static Vector2 RandomVector2(Vector2 max) => new(RandomFloat(max.X), RandomFloat(max.Y));
 
     #endregion

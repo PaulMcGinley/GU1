@@ -34,7 +34,14 @@ public class Texture {
      *** GameGraphics ******************************************************
      ***********************************************************************/
 
-     public static Texture2D Background;
+    public static Texture2D mainMenuBackground;
+    public static Texture2D Background;
+
+    /***********************************************************************
+     *** UI Elements *******************************************************
+     ***********************************************************************/
+
+     public static Texture2D Arrow;
 
     /// <summary>
     /// Load all the textures
@@ -50,6 +57,10 @@ public class Texture {
 
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
 
+        mainMenuBackground = content.Load<Texture2D>("Graphics/menuBG");
         Background = content.Load<Texture2D>("Graphics/map");
+
+        // UI Elements
+        Arrow = content.Load<Texture2D>("Graphics/UI/arrow");
     }
 }

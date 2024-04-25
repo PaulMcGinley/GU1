@@ -89,24 +89,29 @@ public class MainMenu : IScene {
     public void Draw(SpriteBatch spriteBatch) {
 
         spriteBatch.Begin( );
+
+        // Draw the background
         background.Draw(spriteBatch);
 
+        // Draw the menu items
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)-300, 400, 100), Color.White);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)-180, 400, 100), Color.White);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)-60, 400, 100), Color.White);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)+60, 400, 100), Color.White);
 
-        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-300 + (SelectedMenuIndex * 120)), Color.White);
-
+        // Draw the text
         spriteBatch.DrawString(FLib.DebugFont, "Play", new Vector2((1920/2)-200, (1080/2)-300), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "Settings", new Vector2((1920/2)-200, (1080/2)-180), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "Credits", new Vector2((1920/2)-200, (1080/2)-60), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "Exit", new Vector2((1920/2)-200, (1080/2)+60), Color.Black);
 
+        // Draw the arrow
+        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-300 + (SelectedMenuIndex * 120)), Color.White);
+
         spriteBatch.End( );
     }
 
-    enum MenuItems : int {
+    enum MenuItems {
 
         Play = 0,
         Settings = 1,

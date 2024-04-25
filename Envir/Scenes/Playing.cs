@@ -1,11 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GU1.Envir.Scenes;
 
 public class Playing : IScene {
+
+    Random random = new();
 
     private Graphic2D background;                                                                           // The background image or 'map' of the game
     Camera2D camera;
@@ -24,7 +28,7 @@ public class Playing : IScene {
             gameState.Flotsam.Add(
                 new Models.Flotsam(
                     new Sprite2D(
-                        TLib.Flotsam[RandomInteger(0, 7)],
+                        TLib.Flotsam[random.Int(0, 7)],
                         RandomVector2(100, 1820, 100, 980))));
 
             if(RandomBoolean())
@@ -46,10 +50,13 @@ public class Playing : IScene {
     /// <param name="gameTime"></param>
     public void Update(GameTime gameTime) {
 
-        camera.Update();
+        camera.Update(gameTime);
 
-      //  foreach (var flotsam in gameState.Flotsam)
-      //      flotsam.Update(gameTime);
+#if DEBUG
+        if (IsKeyDown(Keys.S))
+            camera.Shake(10, 0.5f);
+#endif
+
     }
 
     /// <summary>

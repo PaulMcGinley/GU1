@@ -30,6 +30,15 @@ public static class RandomExtensions {
     #endregion
 
 
+    #region Vector2
+
+    public static Microsoft.Xna.Framework.Vector2 RandomVector2(this Random random) => new(random.Int(), random.Int());
+    public static Microsoft.Xna.Framework.Vector2 RandomVector2(this Random random, float max) => new(random.Float(max), random.Float(max));
+    public static Microsoft.Xna.Framework.Vector2 RandomVector2(this Random random, float minX, float maxX, float minY, float maxY) => new(random.Float(minX, maxX), random.Float(minY, maxY));
+
+    #endregion
+
+
     #region Enum
 
     public static T Enumerator<T>(this Random random) where T : Enum => (T)Enum.GetValues(typeof(T)).GetValue(random.Next(Enum.GetValues(typeof(T)).Length));

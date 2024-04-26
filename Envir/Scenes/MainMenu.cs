@@ -41,10 +41,10 @@ public class MainMenu : IScene {
 
         #region Gamepad Input
 
-        if (IsGamePadButtonPressed(0, Microsoft.Xna.Framework.Input.Buttons.DPadDown))
+        if (IsGamePadButtonPressed(0, Buttons.DPadDown))
             SelectedMenuIndex++;
 
-        if (IsGamePadButtonPressed(0, Microsoft.Xna.Framework.Input.Buttons.DPadUp))
+        if (IsGamePadButtonPressed(0, Buttons.DPadUp))
             SelectedMenuIndex--;
 
         if (IsAnyInputDown(Keys.Enter, Buttons.A, Buttons.Start)) {
@@ -73,10 +73,10 @@ public class MainMenu : IScene {
 
         #region Keyboard Input
 
-        if (IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
+        if (IsKeyPressed(Keys.Down))
             SelectedMenuIndex++;
 
-        if (IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
+        if (IsKeyPressed(Keys.Up))
             SelectedMenuIndex--;
 
         #endregion

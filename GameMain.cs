@@ -24,7 +24,7 @@ public class GameMain : FixedTimestampGame {
 
     protected override void Initialize() {
 
-        base.Initialize();                                                                                  // IMPORTANT: Keep this here
+        base.Initialize();                                                                                  // ! IMPORTANT: Keep this here
 
         DeviceState.Initialize();                                                                           // Initialize the input device state to get the initial state of the devices
         FLib.Initialize(Content);                                                                           // Initialize the fonts library
@@ -40,7 +40,7 @@ public class GameMain : FixedTimestampGame {
         // Set the window title based on the build configuration
 #if DEBUG
         Window.Title = $"Graded Unit 1 - Albert, Alexander, Corey, Kieran, Paul";                           // Debug title, names of the team members in alphabetical order
-#elif !DEBUG
+#elif RELEASE
         Window.Title = $"Sightings";                                                                        // Release title
 #endif
 
@@ -75,7 +75,7 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
-        base.Update(gameTime);                                                                              // IMPORTANT: Keep this here
+        base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
     } // End of Update method
 
     protected override void FixedUpdate(GameTime gameTime) {
@@ -97,7 +97,7 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
-        base.FixedUpdate(gameTime);                                                                         // IMPORTANT: Keep this here
+        base.FixedUpdate(gameTime);                                                                         // ! IMPORTANT: Keep this here
     } // End of FixedUpdate method
 
     protected override void Draw(GameTime gameTime) {
@@ -121,7 +121,7 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
-        base.Draw(gameTime);                                                                                 // IMPORTANT: Keep this here
+        base.Draw(gameTime);                                                                                 // ! IMPORTANT: Keep this here
 
         // -------------------------------------------------------------------------------------------------
         // --- DEBUG / DIAGNOSTIC CODE ---------------------------------------------------------------------

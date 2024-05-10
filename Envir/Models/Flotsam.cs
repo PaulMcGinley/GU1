@@ -1,10 +1,12 @@
-﻿using System;
+﻿// ! TODO: Refactor this class it's an absolute mess
+
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GU1.Models;
+namespace GU1.Envir.Models;
 
-public class Flotsam : IMove {
+public class Flotsam : Actor {
 
     public Random random = new();
 
@@ -98,10 +100,19 @@ public class Flotsam : IMove {
         }
 
         // TODO: Check of the flotsam is within a certain distance of the target position
+        // ? Why am I not using the IMove interface here?
         if (Vector2.Distance(Position, TargetPosition) <= 10f) {
             TargetPosition = new Vector2(RandomFloat(1920), RandomFloat(1080));
             Velocity = TargetPosition - Position;
-            Velocity.Normalize( );
+           // Velocity.Normalize( );
+
+
+            // ? Is this feature actually good?
+            // ? It flips the sprite horizontally when it changes direction
+            if (Velocity.X < 0)
+                sprite.SetEffects(SpriteEffects.FlipHorizontally);
+            else
+                sprite.SetEffects(SpriteEffects.None);
         }
 
         // TODO: Move the floatsam
@@ -119,6 +130,7 @@ public class Flotsam : IMove {
         if (!isAlive && isCollected && !isFadingOut)
             return;
 
+        // ? Why is sprite not drawing itself?
         spriteBatch.Draw(sprite.GetTexture(), sprite.Position, sprite.GetSourceRectangle(), sprite.GetColour() * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
     }
 

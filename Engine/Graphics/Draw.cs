@@ -92,6 +92,27 @@ public static class Draw {
     public static void DrawCircle(Vector2 center, float radius, SpriteBatch spriteBatch, Color color = default) => DrawArc(center, radius, 0, 360, spriteBatch, color);
 
     /// <summary>
+    /// Draw an oval outline
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="radiusX"></param>
+    /// <param name="radiusY"></param>
+    /// <param name="spriteBatch"></param>
+    /// <param name="color"></param>
+    public static void DrawOval(Vector2 center, float radiusX, float radiusY, SpriteBatch spriteBatch, Color color = default) {
+
+        for (int i = 0; i < 360; i++) {
+
+            float x1 = center.X + (float)Math.Cos(MathHelper.ToRadians(i)) * radiusX;
+            float y1 = center.Y + (float)Math.Sin(MathHelper.ToRadians(i)) * radiusY;
+            float x2 = center.X + (float)Math.Cos(MathHelper.ToRadians(i + 1)) * radiusX;
+            float y2 = center.Y + (float)Math.Sin(MathHelper.ToRadians(i + 1)) * radiusY;
+
+            DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), spriteBatch, color);
+        }
+    }
+
+    /// <summary>
     /// TODO: WORK IN PROGRESS
     /// </summary>
     /// <param name="start"></param>

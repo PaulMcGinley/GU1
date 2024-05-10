@@ -23,16 +23,17 @@ public class Playing : IScene {
         camera.LookAt(new Vector2(1920/2, 1080/2));
         gameState = new GameState();
 
-        for (int i = 0; i < 101; i++) {
+        // Create a new flotsam object for each of the 100 flotsam objects
+        for (int i = 0; i <= 100; i++) {
 
             gameState.Flotsam.Add(
-                new Models.Flotsam(
+                new Flotsam(
                     new Sprite2D(
                         TLib.Flotsam[random.Int(0, 7)],
-                        RandomVector2(100, 1820, 100, 980))));
+                        random.RandomVector2(0, 1920, 0, 1080))));
 
-            if(RandomBoolean())
-                gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
+           if(RandomBoolean())
+               gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
         }
     }
 

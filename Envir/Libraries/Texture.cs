@@ -16,7 +16,7 @@ public class Texture {
      *** Sprites ***********************************************************
      ***********************************************************************/
 
-    public static readonly Texture2D[] Flotsam = new Texture2D[8];
+    public static readonly Texture2D[] Flotsam = new Texture2D[14];
 
     /***********************************************************************
      *** Miscellaneous *****************************************************
@@ -50,7 +50,7 @@ public class Texture {
     public static void Initialize(GraphicsDevice graphicsDevice, ContentManager content) {
 
         for (int i = 0; i < Flotsam.Length; i++)
-            Flotsam[i] = content.Load<Texture2D>($"Graphics/Flotsam/FlotsamJetsam{i+1}");
+            Flotsam[i] = content.Load<Texture2D>($"Graphics/Flotsam/sprite{i}");
 
         Pixel = new Texture2D(graphicsDevice, 1, 1);
         Pixel.SetData(new[] { Color.White });

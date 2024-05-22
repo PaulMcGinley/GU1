@@ -9,19 +9,21 @@ namespace GU1.Envir.Scenes;
 
 public class Playing : IScene {
 
-    Random random = new();
+    private Random random = new();
 
     private Graphic2D background;                                                                           // The background image or 'map' of the game
-    Camera2D camera;
+    private Camera2D camera;                                                                                // The camera object used to control the view of the game
 
-    GameState gameState;
+    private GameState gameState;
 
     public void Initialize(GraphicsDevice device) {
 
         background = new Graphic2D(TLib.Background, new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
-        camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));
-        camera.LookAt(new Vector2(1920/2, 1080/2));
-        gameState = new GameState();
+
+        camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera
+        camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
+
+        gameState = new GameState();                                                                        // Create a new game state object
 
         // Create a new flotsam object for each of the 100 flotsam objects
         for (int i = 0; i <= 100; i++) {
@@ -29,21 +31,18 @@ public class Playing : IScene {
             gameState.Flotsam.Add(
                 new Flotsam(
                     new Sprite2D(
-                        TLib.Flotsam[random.Int(0, 7)],
-                        random.RandomVector2(0, 1920, 0, 1080))));
+                        TLib.Flotsam[random.Int(0, TLib.Flotsam.Length)],                                                     // Randomly select a flotsam sprite
+                        random.RandomVector2(0, 1920, 0, 1080))));                                          // Randomly position the flotsam object on the screen
 
-           if(RandomBoolean())
+            // Randomly flip the sprite horizontally
+            if(RandomBoolean())
                gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
         }
     }
 
-    public void LoadContent(ContentManager content) {
+    public void LoadContent(ContentManager content) { }
 
-    }
-
-    public void UnloadContent() {
-
-    }
+    public void UnloadContent() { }
 
     /// <summary>
     /// Uncapped update method, run every frame and used for checking collisions
@@ -66,6 +65,8 @@ public class Playing : IScene {
     /// <param name="gameTime"></param>
     public void FixedUpdate(GameTime gameTime) {
 
+        System.Diagnostics.Debug.WriteLine("Fixed Update");
+
         foreach (var flotsam in gameState.Flotsam)
             flotsam.Update(gameTime);
 
@@ -80,6 +81,17 @@ public class Playing : IScene {
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         background.Draw(spriteBatch);
+
+        foreach (var flotsam in gameState.Flotsam) {
+
+            flotsam.DrawRipples(spriteBatch);
+          //  flotsam.Draw(spriteBatch);
+        }
+
+        spriteBatch.End();
+
+
+        spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         foreach (var flotsam in gameState.Flotsam)
             flotsam.Draw(spriteBatch);

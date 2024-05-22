@@ -12,16 +12,20 @@ public class Playing : IScene {
     private Random random = new();
 
     private Graphic2D background;                                                                           // The background image or 'map' of the game
+    private Sprite2D background2;
     private Camera2D camera;                                                                                // The camera object used to control the view of the game
 
     private GameState gameState;
 
     public void Initialize(GraphicsDevice device) {
 
-        background = new Graphic2D(TLib.Background, new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
+        background = new Graphic2D(TLib.Background[0], new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
+        background2 = new Sprite2D(TLib.Background[1], new Vector2(1920/2, 1080/2));
+        background2.SetEffects(SpriteEffects.FlipHorizontally);
 
         camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
+        camera.SetZoomLevel(1f);                                                                                 // Set the camera zoom level
 
         gameState = new GameState();                                                                        // Create a new game state object
 
@@ -31,13 +35,16 @@ public class Playing : IScene {
             gameState.Flotsam.Add(
                 new Flotsam(
                     new Sprite2D(
-                        TLib.Flotsam[random.Int(0, TLib.Flotsam.Length)],                                                     // Randomly select a flotsam sprite
+                        TLib.Flotsam[random.Int(0, TLib.Flotsam.Length)],                                   // Randomly select a flotsam sprite
                         random.RandomVector2(0, 1920, 0, 1080))));                                          // Randomly position the flotsam object on the screen
 
             // Randomly flip the sprite horizontally
             if(RandomBoolean())
                gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
         }
+
+        foreach (var flotsam in gameState.Flotsam)
+            flotsam.Initialize(device);
     }
 
     public void LoadContent(ContentManager content) { }
@@ -52,7 +59,7 @@ public class Playing : IScene {
 
         camera.Update(gameTime);
 
-#if DEBUG
+#if DEBUG // This is just a test feature and probably wont be included in the final game
         if (IsKeyDown(Keys.S))
             camera.Shake(10, 0.5f);
 #endif
@@ -68,6 +75,8 @@ public class Playing : IScene {
         foreach (var flotsam in gameState.Flotsam)
             flotsam.Update(gameTime);
 
+        background2.SetOpacity( (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) / 2 + 0.5f);
+
         // Sort the flotsam by their X and Y positions to ensure they are drawn in the correct order
         gameState.Flotsam = gameState.Flotsam
                                 .OrderBy(flotsam => flotsam.Position.Y)
@@ -79,6 +88,7 @@ public class Playing : IScene {
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         background.Draw(spriteBatch);
+        background2.Draw(spriteBatch);
 
         foreach (var flotsam in gameState.Flotsam)
             flotsam.DrawRipples(spriteBatch);

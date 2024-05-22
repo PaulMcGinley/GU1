@@ -102,6 +102,7 @@ public struct Sprite2D {
     private float Scale;
     private float LayerDepth;
     private Color Colour;
+    private float Opacity = 1f;
     private SpriteEffects Effects;
     private Rectangle SourceRectangle;
     private Rectangle DestinationRectangle;
@@ -115,6 +116,7 @@ public struct Sprite2D {
     public void SetScale(float scale) => Scale = scale;
     public void SetLayerDepth(float layerDepth) => LayerDepth = layerDepth;
     public void SetColour(Color colour) => Colour = colour;
+    public void SetOpacity(float opacity) => Opacity = opacity;
     public void SetEffects(SpriteEffects effects) => Effects = effects;
     public void SetSourceRectangle(Rectangle sourceRectangle) => SourceRectangle = sourceRectangle;
     public void SetDestinationRectangle(Rectangle destinationRectangle) => DestinationRectangle = destinationRectangle;
@@ -131,6 +133,7 @@ public struct Sprite2D {
     public readonly float GetScale() => Scale;
     public readonly float GetLayerDepth() => LayerDepth;
     public readonly Color GetColour() => Colour;
+    public readonly float GetOpacity() => Opacity;
     public readonly SpriteEffects GetEffects() => Effects;
     public readonly Rectangle GetSourceRectangle() => SourceRectangle;
     public readonly Rectangle GetDestinationRectangle() => DestinationRectangle;
@@ -195,13 +198,13 @@ public struct Sprite2D {
     /// Draw the sprite on the screen at the specified position.
     /// </summary>
     /// <param name="spriteBatch"></param>
-    public readonly void DrawToPosition(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, Position, SourceRectangle, Colour, Rotation, Origin, Scale, Effects, LayerDepth);
+    public readonly void DrawToPosition(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, Position, SourceRectangle, Colour * Opacity, Rotation, Origin, Scale, Effects, LayerDepth);
 
     /// <summary>
     /// Draw the sprite on the screen at the specified rectangle.
     /// </summary>
     /// <param name="spriteBatch"></param>
-    public readonly void DrawToRectangle(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, DestinationRectangle, SourceRectangle, Colour, Rotation, Origin, Effects, LayerDepth);
+    public readonly void DrawToRectangle(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, DestinationRectangle, SourceRectangle, Colour * Opacity, Rotation, Origin, Effects, LayerDepth);
 
     /// <summary>
     /// Draw the sprite.

@@ -35,7 +35,7 @@ public class Texture {
      ***********************************************************************/
 
     public static Texture2D mainMenuBackground;
-    public static Texture2D Background;
+    public static Texture2D[] Background;
 
     /***********************************************************************
      *** UI Elements *******************************************************
@@ -58,7 +58,9 @@ public class Texture {
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
 
         mainMenuBackground = content.Load<Texture2D>("Graphics/menuBG");
-        Background = content.Load<Texture2D>("Graphics/map");
+        Background = new Texture2D[2];
+        Background[0] = content.Load<Texture2D>("Graphics/bg1");
+        Background[1] = content.Load<Texture2D>("Graphics/bg2");
 
         // UI Elements
         Arrow = content.Load<Texture2D>("Graphics/UI/arrow");

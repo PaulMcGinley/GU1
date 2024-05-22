@@ -65,8 +65,6 @@ public class Playing : IScene {
     /// <param name="gameTime"></param>
     public void FixedUpdate(GameTime gameTime) {
 
-        System.Diagnostics.Debug.WriteLine("Fixed Update");
-
         foreach (var flotsam in gameState.Flotsam)
             flotsam.Update(gameTime);
 
@@ -82,15 +80,13 @@ public class Playing : IScene {
 
         background.Draw(spriteBatch);
 
-        foreach (var flotsam in gameState.Flotsam) {
-
+        foreach (var flotsam in gameState.Flotsam)
             flotsam.DrawRipples(spriteBatch);
-          //  flotsam.Draw(spriteBatch);
-        }
 
         spriteBatch.End();
 
 
+        // Need to start a new batch to draw the flotsam sprites, as they are drawn on top of the ripples
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         foreach (var flotsam in gameState.Flotsam)

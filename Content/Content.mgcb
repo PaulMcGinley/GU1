@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/camera1.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/camera1.mp3
+
+#begin Audio/camera2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/camera2.mp3
+
 #begin Fonts/Debug.spritefont
 /importer:FontDescriptionImporter
 /processor:LocalizedFontProcessor

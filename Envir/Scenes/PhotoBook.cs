@@ -29,4 +29,14 @@ public class PhotoBook : IScene {
     public void Draw(SpriteBatch spriteBatch) {
 
     }
+
+    public void OnSceneStart() {
+
+        System.Diagnostics.Debug.WriteLine("PhotoBook scene started");
+    }
+
+    public void OnSceneEnd() {
+
+        System.Diagnostics.Debug.WriteLine("PhotoBook scene ended");
+    }
 }

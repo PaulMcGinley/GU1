@@ -52,7 +52,7 @@ public class MainMenu : IScene {
                 switch ((MenuItems)SelectedMenuIndex) {
 
                     case MenuItems.Play:
-                        GameState.CurrentScene = GameScene.Playing;
+                        GameState.CurrentScene = GameScene.Lobby;
                         break;
 
                     case MenuItems.Settings:
@@ -64,7 +64,7 @@ public class MainMenu : IScene {
                         break;
 
                     case MenuItems.Exit:
-                        Environment.Exit(0);
+                        Environment.Exit(0); // Exit code 0 = success, no errors
                         break;
                 }
             }
@@ -109,6 +109,16 @@ public class MainMenu : IScene {
         spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-300 + (SelectedMenuIndex * 120)), Color.White);
 
         spriteBatch.End( );
+    }
+
+    public void OnSceneStart() {
+
+        System.Diagnostics.Debug.WriteLine("MainMenu scene started");
+    }
+
+    public void OnSceneEnd() {
+
+        System.Diagnostics.Debug.WriteLine("MainMenu scene ended");
     }
 
     enum MenuItems {

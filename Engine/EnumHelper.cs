@@ -2,6 +2,7 @@
 
 public enum GameScene {
 
+    None,
     MainMenu,
     Lobby,
     Playing,

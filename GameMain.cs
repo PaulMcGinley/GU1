@@ -58,6 +58,46 @@ public class GameMain : FixedTimestampGame {
             Exit();                                                                                         // Exit the game
 #endif
 
+        // Check if the scene has changed
+        if (GameState.CurrentScene != GameState.PreviousScene) {
+
+            // Call the end methods of the scenes
+            switch(GameState.PreviousScene) {
+
+                case GameScene.MainMenu:
+                    mainMenu.OnSceneEnd();
+                    break;
+                case GameScene.Lobby:
+                    lobby.OnSceneEnd();
+                    break;
+                case GameScene.Playing:
+                    playing.OnSceneEnd();
+                    break;
+                case GameScene.PhotoBook:
+                    photoBook.OnSceneEnd();
+                    break;
+            }
+
+            // Call the start methods of the scenes
+            switch (GameState.CurrentScene) {
+
+                case GameScene.MainMenu:
+                    mainMenu.OnSceneStart();
+                    break;
+                case GameScene.Lobby:
+                    lobby.OnSceneStart();
+                    break;
+                case GameScene.Playing:
+                    playing.OnSceneStart();
+                    break;
+                case GameScene.PhotoBook:
+                    photoBook.OnSceneStart();
+                    break;
+            }
+        }
+
+        GameState.PreviousScene = GameState.CurrentScene;                                                    // Set the previous scene to the current scene
+
         // Only update the current scene
         switch (GameState.CurrentScene) {
 
@@ -74,6 +114,8 @@ public class GameMain : FixedTimestampGame {
                 photoBook.Update(gameTime);
                 break;
         }
+
+
 
         base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
     } // End of Update method

@@ -10,6 +10,7 @@ namespace GU1.Envir.Models;
 public class Flotsam : Actor {
 
     public Random random = new();
+    Vector2 randomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
     /// <summary>
     /// This seed which with be used for starting offsets / random values so all flotsam objects are unique
@@ -61,7 +62,7 @@ public class Flotsam : Actor {
 
     public void Construction() {
 
-        TargetPosition = random.RandomVector2(0, 1920, 0, 1080);
+        TargetPosition = randomScreenPosition;
         Velocity = TargetPosition - Position;
 
         colour = new Color(random.Int(0, 255), random.Int(0, 255), random.Int(0, 255));
@@ -71,8 +72,6 @@ public class Flotsam : Actor {
     }
 
     public void Initialize(GraphicsDevice device) {
-
-        System.Diagnostics.Debug.WriteLine("Flotsam.Initialize()");
 
         renderTarget = new RenderTarget2D(device, 64, 64);
     }
@@ -93,7 +92,7 @@ public class Flotsam : Actor {
         // TODO: Implement a better way to move the flotsam
         if (Vector2.Distance(Position, TargetPosition) <= 10f || random.Next(0, 500) == 0) {
 
-            TargetPosition = new Vector2(RandomFloat(1920), RandomFloat(1080));
+            TargetPosition = randomScreenPosition;
             Velocity = TargetPosition - Position;
 
             if (Velocity.X < 0)
@@ -152,18 +151,18 @@ public class Flotsam : Actor {
             return;
 
         // TODO: Optimize this or remove it
-        // for (int i = ripples.Count-1; i == 0; i++)
-        //     if (ripples[i].Expired)
-        //         ripples.RemoveAt(i);
+        for (int i = ripples.Count-1; i == 0; i++)
+            if (ripples[i].Expired)
+                ripples.RemoveAt(i);
 
-        // if (gameTime.TotalGameTime.TotalMilliseconds > nextRippleTime && gameTime.TotalGameTime.TotalMilliseconds > nextMoveTime) {
+        if (gameTime.TotalGameTime.TotalMilliseconds > nextRippleTime && gameTime.TotalGameTime.TotalMilliseconds > nextMoveTime) {
 
-        //     ripples.Add(new Ripple(Position, 10, gameTime.TotalGameTime.TotalMilliseconds + 2000));
-        //     nextRippleTime = gameTime.TotalGameTime.TotalMilliseconds + (200 * MoveSpeed);
-        // }
+            ripples.Add(new Ripple(Position, 10, gameTime.TotalGameTime.TotalMilliseconds + 2000));
+            nextRippleTime = gameTime.TotalGameTime.TotalMilliseconds + (200 * MoveSpeed);
+        }
 
-        // foreach (var ripple in ripples)
-        //     ripple.Update(gameTime);
+        foreach (var ripple in ripples)
+            ripple.Update(gameTime);
 
         if (isFadingOut && opacity > 0.0f)
             opacity -= 0.05f;

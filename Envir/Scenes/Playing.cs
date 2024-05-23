@@ -17,6 +17,8 @@ public class Playing : IScene {
 
     private GameState gameState;
 
+    Vector2 randomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
+
     public void Initialize(GraphicsDevice device) {
 
         background = new Graphic2D(TLib.Background[0], new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
@@ -25,18 +27,18 @@ public class Playing : IScene {
 
         camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
-        camera.SetZoomLevel(1f);                                                                                 // Set the camera zoom level
+        camera.SetZoomLevel(0.5f);                                                                                 // Set the camera zoom level
 
         gameState = new GameState();                                                                        // Create a new game state object
 
         // Create a new flotsam object for each of the 100 flotsam objects
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i <= 20; i++) {
 
             gameState.Flotsam.Add(
                 new Flotsam(
                     new Sprite2D(
                         TLib.Flotsam[random.Int(0, TLib.Flotsam.Length)],                                   // Randomly select a flotsam sprite
-                        random.RandomVector2(0, 1920, 0, 1080))));                                          // Randomly position the flotsam object on the screen
+                        randomScreenPosition)));                                          // Randomly position the flotsam object on the screen
 
             // Randomly flip the sprite horizontally
             if(RandomBoolean())
@@ -85,10 +87,15 @@ public class Playing : IScene {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
+        spriteBatch.Begin();
 
         background.Draw(spriteBatch);
         background2.Draw(spriteBatch);
+
+        spriteBatch.End();
+
+        spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
+
 
         foreach (var flotsam in gameState.Flotsam)
             flotsam.DrawRipples(spriteBatch);
@@ -103,5 +110,15 @@ public class Playing : IScene {
             flotsam.Draw(spriteBatch);
 
         spriteBatch.End();
+    }
+
+    public void OnSceneStart() {
+
+        System.Diagnostics.Debug.WriteLine("Playing scene started");
+    }
+
+    public void OnSceneEnd() {
+
+        System.Diagnostics.Debug.WriteLine("Playing scene ended");
     }
 }

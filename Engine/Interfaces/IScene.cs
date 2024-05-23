@@ -40,4 +40,14 @@ public interface IScene {
     /// </summary>
     /// <param name="spriteBatch"></param>
     public void Draw(SpriteBatch spriteBatch);
+
+    /// <summary>
+    /// Called when the scene is started
+    /// </summary>
+    public void OnSceneStart();
+
+    /// <summary>
+    /// Called when the scene is ended
+    /// </summary>
+    public void OnSceneEnd();
 }

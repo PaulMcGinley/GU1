@@ -38,14 +38,14 @@ public class MainMenu : IScene {
     }
 
     public void Update(GameTime gameTime) {
-
-        #region Gamepad Input
+        //imput by controller
+        #region Gamepad Input 
 
         if (IsGamePadButtonPressed(0, Buttons.DPadDown))
-            SelectedMenuIndex++;
+            SelectedMenuIndex++; //when the player moves down the Slected menu box value increases thus changing box
 
         if (IsGamePadButtonPressed(0, Buttons.DPadUp))
-            SelectedMenuIndex--;
+            SelectedMenuIndex--; //when the player moves up the Slected menu box value decreases thus changing box
 
         if (IsAnyInputDown(Keys.Enter, Buttons.A, Buttons.Start)) {
 
@@ -70,14 +70,14 @@ public class MainMenu : IScene {
             }
 
         #endregion
-
+        //imput by keyboard
         #region Keyboard Input
 
         if (IsKeyPressed(Keys.Down))
-            SelectedMenuIndex++;
+            SelectedMenuIndex++; //when the player moves down the Slected menu box value increases thus changing box
 
         if (IsKeyPressed(Keys.Up))
-            SelectedMenuIndex--;
+            SelectedMenuIndex--; //when the player moves up the Slected menu box value decreases thus changing box
 
         #endregion
     }
@@ -94,19 +94,43 @@ public class MainMenu : IScene {
         background.Draw(spriteBatch);
 
         // Draw the menu items
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)-300, 400, 100), Color.White);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)-180, 400, 100), Color.White);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)-60, 400, 100), Color.White);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920/2)-200, (1080/2)+60, 400, 100), Color.White);
-
+        //making the colour change to gray when each indivisual box is selected
+        if (selectedMenuIndex == 0) //when the first box is selected
+        {
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.Gray);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.White);
+        }
+        else if (selectedMenuIndex == 1) //when the second box is selected
+        {
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.Gray);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.White);
+        }
+        else if (selectedMenuIndex == 2) //when the Third box is selected
+        {
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.Gray);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.White);
+        }
+        else if (selectedMenuIndex == 3) //when the Fourth box is selected
+        {
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.White);
+            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.Gray);
+        }
         // Draw the text
-        spriteBatch.DrawString(FLib.DebugFont, "Play", new Vector2((1920/2)-200, (1080/2)-300), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "Settings", new Vector2((1920/2)-200, (1080/2)-180), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "Credits", new Vector2((1920/2)-200, (1080/2)-60), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "Exit", new Vector2((1920/2)-200, (1080/2)+60), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "PLAY GAME", new Vector2((1920/2)-50, (1080/2)-260), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
 
         // Draw the arrow
-        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-300 + (SelectedMenuIndex * 120)), Color.White);
+        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-275 + (SelectedMenuIndex * 120)), Color.Gray);
 
         spriteBatch.End( );
     }
@@ -121,11 +145,11 @@ public class MainMenu : IScene {
         System.Diagnostics.Debug.WriteLine("MainMenu scene ended");
     }
 
-    enum MenuItems {
+    enum MenuItems { //declaring the menu items box values
 
-        Play = 0,
-        Settings = 1,
-        Credits = 2,
-        Exit = 3
+        Play = 0, //sets the value of the box Play Game to 0
+        Settings = 1, //Sets the value of the Settings Box to 1
+        Credits = 2, //Sets the value of the Credits box to 2
+        Exit = 3 //sets the value of Exit Game box to 3
     }
 }

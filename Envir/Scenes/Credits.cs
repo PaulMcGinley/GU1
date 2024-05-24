@@ -13,7 +13,7 @@ public class Credits : IScene {
     Vector2 screenDimensions => new(viewport.Width, viewport.Height);                                       // The dimensions of the screen from the viewport
 
     const int lineSpacing = 50;                                                                             // The space between each line of text
-    string[,] credits = new string[,] {
+    readonly string[,] credits = new string[,] {
 
         { "Game Concept / Design",      "Corey Connolly" },
         { "Project Manager",            "Kieran Bett" },
@@ -42,7 +42,7 @@ public class Credits : IScene {
 
         // Move camera
         camera.Update(gameTime);
-        camera.LookAt(new Vector2(camera.Boundaries.Width/2, camera.Position.Y + 1f));                    // Move the camera to scroll the credits
+        camera.LookAt(new Vector2(camera.Boundaries.Width/2, camera.Position.Y + 1f));                      // Move the camera to scroll the credits
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -58,7 +58,7 @@ public class Credits : IScene {
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // Draw the title
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", 100f, screenDimensions, Color.White);
+        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
 
         // Draw the credits
         for (int i = 0; i < credits.GetLength(0); i++)
@@ -66,7 +66,7 @@ public class Credits : IScene {
                             FLib.DebugFont,                                                                 // Font
                             credits[i, 0],                                                                  // What text
                             credits[i, 1],                                                                  // Who text
-                            200f + (i * lineSpacing),                                                       // Y position
+                            yPosition: 200f + (i * lineSpacing),                                            // Y position
                             screenDimensions,                                                               // Screen dimensions
                             Color.White);                                                                   // Colour
 

@@ -55,6 +55,7 @@ public class Lobby : IScene {
 
     public void FixedUpdate(GameTime gameTime) {
 
+
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -79,6 +80,9 @@ public class Lobby : IScene {
 
 
     void StartGame() {
+
+        if (controllerIndexs.Count < 2)
+            return;
 
         GameState.CurrentScene = GameScene.Playing;
     }

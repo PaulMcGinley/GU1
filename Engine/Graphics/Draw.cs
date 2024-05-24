@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Engine.Graphics;
 
-public static class Draw {
+public static partial class Draw {
 
     /// <summary>
     /// Draw a line between two points

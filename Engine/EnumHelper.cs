@@ -6,7 +6,8 @@ public enum GameScene {
     MainMenu,
     Lobby,
     Playing,
-    PhotoBook
+    PhotoBook,
+    Credits
 }
 
 public enum Anchor {

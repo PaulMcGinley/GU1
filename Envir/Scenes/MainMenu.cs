@@ -93,6 +93,12 @@ public class MainMenu : IScene {
         // Draw the background
         background.Draw(spriteBatch);
 
+        // @AlexanderTuffy good work ^_^ , however if you wish to optimize / minify your code, you should look at the ternary operator ?:
+        // That way you can do an inline if statement for each box, and only draw the box that is selected
+        // Here is an example of how you could do it:
+        // spriteBatch.Draw(TLib.Pixel, new Rectangle(x, y, w, h), selectedMenuIndex == 0 ? Color.Gray : Color.White);
+        // If you choose to do so, you couuld create variables for the colours =]
+        // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator
         // Draw the menu items
         //making the colour change to gray when each indivisual box is selected
         if (selectedMenuIndex == 0) //when the first box is selected

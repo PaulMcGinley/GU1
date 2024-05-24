@@ -73,6 +73,7 @@ public class Credits : IScene {
 
         // TODO: Draw random images around the scene to make it more interesting
         // Was thinking of like a sticker bomb effect or maybe the pictures taken in the game?
+        // The images should be drawn at pseudo-random positions around the screen and because the camera is moving, we do not need to update the positions of the images =]
 
         spriteBatch.End();
     }

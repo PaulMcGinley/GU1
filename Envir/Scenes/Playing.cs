@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,12 +34,12 @@ public class Playing : IScene {
         gameState = new GameState();                                                                        // Create a new game state object
 
         // Create a new flotsam object for each of the 100 flotsam objects
-        for (int i = 0; i <= 20; i++) {
-
+        for (int i = 0; i <= 100; i++) {
+            int idx = random.Int(0, TLib.Flotsam.Length);
             gameState.Flotsam.Add(
-                new Flotsam(
+                new Flotsam(idx,
                     new Sprite2D(
-                        TLib.Flotsam[random.Int(0, TLib.Flotsam.Length)],                                   // Randomly select a flotsam sprite
+                        TLib.Flotsam[idx],                                   // Randomly select a flotsam sprite
                         randomScreenPosition)));                                          // Randomly position the flotsam object on the screen
 
             // Randomly flip the sprite horizontally
@@ -62,10 +64,23 @@ public class Playing : IScene {
         camera.Update(gameTime);
 
 #if DEBUG // This is just a test feature and probably wont be included in the final game
-        if (IsKeyDown(Keys.S))
+        if (IsKeyPressed(Keys.S))
             camera.Shake(10, 0.5f);
-#endif
 
+        if (IsKeyPressed(Keys.F2))
+            XMLSerializer.Serialize<GameState>($"{DateTime.Now.ToBinary()}.xml", gameState);
+
+        if (IsKeyPressed(Keys.F3)) {
+
+          GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
+
+          gameState.Flotsam = _gameState.Flotsam;
+          gameState.Actors = _gameState.Actors;
+
+
+        }
+            //gameState = XMLSerializer.Deserialize<GameState>("-8584850269411123028.xml");
+#endif
     }
 
     /// <summary>

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -42,14 +43,17 @@ public class Flotsam : Actor {
     RenderTarget2D renderTarget;
     BlendState blendState = BlendState.AlphaBlend;
 
+    public int spriteIndex = 0;
+
     /// <summary>
     /// This property is used to determine if the flotsam is a phantom object that will disappear after the player inspects it
     /// </summary>
     //private bool isPhantom = false; // TODO: Implement this
     private float opacity = 1.0f;
 
-    public Flotsam(Sprite2D sprite) {
+    public Flotsam(int spriteID, Sprite2D sprite) {
 
+        this.spriteIndex = spriteID;
         this.sprite = sprite;
 
         Construction();
@@ -144,6 +148,9 @@ public class Flotsam : Actor {
 
     public void Update(GameTime gameTime) {
 
+        if (sprite.GetTexture() == null )
+            sprite.SetTexture(TLib.Flotsam[spriteIndex]);
+
         Bob(gameTime);
         Move(gameTime);
 
@@ -195,16 +202,18 @@ public class Flotsam : Actor {
 
     public void Draw(SpriteBatch spriteBatch) {
 
+    //    if (sprite.GetTexture() == null) return;
+
         // Guardian clause: if the flotsam is not alive, has been collected and is not fading out then don't draw it
         if (!isAlive && isCollected && !isFadingOut)
             return;
 
         // ? Why is sprite not drawing itself?
-        spriteBatch.Draw(sprite.GetTexture(), sprite.Position + cycloidYOffset, sprite.GetSourceRectangle(), sprite.GetColour() * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), sprite.GetColour() * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
 
         // #region Boundary Box
 
-        // DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
+        DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
 
         // #endregion
 
@@ -232,6 +241,6 @@ public class Flotsam : Actor {
         if (!isAlive && isCollected && !isFadingOut)
             return;
 
-        spriteBatch.Draw(sprite.GetTexture(), sprite.Position, sprite.GetSourceRectangle(), (Color.Black * 0.7f ) * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position, sprite.GetSourceRectangle(), (Color.Black * 0.7f ) * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
     }
 }

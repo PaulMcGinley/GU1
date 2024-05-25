@@ -12,7 +12,7 @@ public static class XMLSerializer {
     /// <param name="data"></param>
     public static void Serialize<T>(string path, T data) {
 
-       XmlSerializer serializer = new(typeof(T));                                                                        // Create a new serializer for the specified type
+       XmlSerializer serializer = new(typeof(T));                                                           // Create a new serializer for the specified type
 
         using System.IO.StreamWriter writer = new(path);                                                    // Create a new StreamWriter for the specified path
         serializer.Serialize(writer, data);                                                                 // Serialize the data to the specified path
@@ -26,7 +26,7 @@ public static class XMLSerializer {
     /// <returns></returns>
     public static T Deserialize<T>(string path) {
 
-        XmlSerializer serializer = new(typeof(T));                                                                        // Create a new serializer for the specified type
+        XmlSerializer serializer = new(typeof(T));                                                          // Create a new serializer for the specified type
 
         using System.IO.StreamReader reader = new(path);                                                    // Create a new StreamReader for the specified path
         return (T)serializer.Deserialize(reader);                                                           // Deserialize the data from the specified path

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +18,7 @@ public class Playing : IScene {
 
     private GameState gameState;
 
-    Vector2 randomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
+    Vector2 RandomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
     public void Initialize(GraphicsDevice device) {
 
@@ -40,11 +39,11 @@ public class Playing : IScene {
                 new Flotsam(idx,
                     new Sprite2D(
                         TLib.Flotsam[idx],                                   // Randomly select a flotsam sprite
-                        randomScreenPosition)));                                          // Randomly position the flotsam object on the screen
+                        RandomScreenPosition)));                                          // Randomly position the flotsam object on the screen
 
             // Randomly flip the sprite horizontally
-            if(RandomBoolean())
-               gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
+            // if(random.Bool())
+            //     gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
         }
 
         foreach (var flotsam in gameState.Flotsam)
@@ -63,7 +62,8 @@ public class Playing : IScene {
 
         camera.Update(gameTime);
 
-#if DEBUG // This is just a test feature and probably wont be included in the final game
+#if DEBUG
+
         if (IsKeyPressed(Keys.S))
             camera.Shake(10, 0.5f);
 
@@ -72,14 +72,12 @@ public class Playing : IScene {
 
         if (IsKeyPressed(Keys.F3)) {
 
-          GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
+            // TODO: This should have its own renderer
+            GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
 
-          gameState.Flotsam = _gameState.Flotsam;
-          gameState.Actors = _gameState.Actors;
-
-
+            gameState.Flotsam = _gameState.Flotsam;
+            gameState.Actors = _gameState.Actors;
         }
-            //gameState = XMLSerializer.Deserialize<GameState>("-8584850269411123028.xml");
 #endif
     }
 
@@ -97,7 +95,8 @@ public class Playing : IScene {
         // Sort the flotsam by their X and Y positions to ensure they are drawn in the correct order
         gameState.Flotsam = gameState.Flotsam
                                 .OrderBy(flotsam => flotsam.Position.Y)
-                                .ThenBy(flotsam => flotsam.Position.X).ToList();
+                                .ThenBy(flotsam => flotsam.Position.X)
+                                .ToList();
     }
 
     public void Draw(SpriteBatch spriteBatch) {

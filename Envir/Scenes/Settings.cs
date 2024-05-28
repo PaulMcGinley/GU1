@@ -16,16 +16,14 @@ public class Settings : IScene {
     readonly string[,] settings = new string[,] {
         //displaying controls
         //for Tourist
-        {"Tourist Controls~", " " },
+        {"Tourist Controls~", " " },                                            //text to be displayed
         { "Left Thumstick:", "Move Player" },
         { "Right Thumbstick:", "Move Camera" },
         { "Right trigger:", "take photo" },
         { "Left Trigger:" , "Hold Camera steady" },
         //for Nessie
         {"Nessie Controls~", " "},
-        { "Left Thumstick:", "Move Player" },
-
-              
+        { "Left Thumstick:", "Move Player" },         
     };
 
     public void Initialize(GraphicsDevice device) {
@@ -51,7 +49,7 @@ public class Settings : IScene {
 
         // Move camera
         camera.Update(gameTime);
-        camera.LookAt(new Vector2(camera.Boundaries.Width/2, camera.Position.Y + 1f));                      // Move the camera to scroll the Settings
+        
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -63,11 +61,12 @@ public class Settings : IScene {
 
         spriteBatch.End();
 
+        //blocked out as it doesn`t need to move
         // We use the cameras transform matrix to draw the scene to move the Settings based on the camera position
-        spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
+        //spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // Draw the title
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
+        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Player Controls", yPosition: 100f, screenDimensions, Color.White);
 
         //draw the bottom left text to get back to the menu
         DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
@@ -92,10 +91,6 @@ public class Settings : IScene {
     }
 
     public void OnSceneStart() {
-
-        // Reset the view
-        camera.LookAt(new Vector2(viewport.Width/2, 0));
-
         // TODO: Play the some music
     }
 

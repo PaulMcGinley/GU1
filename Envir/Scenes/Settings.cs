@@ -64,6 +64,7 @@ public class Settings : IScene {
 
         // Draw the Settings that will be displayed on screeen
         for (int i = 0; i < settings.GetLength(0); i++)
+        {
             DrawTextCredits(spriteBatch,                                                                    // SpriteBatch
                             FLib.DebugFont,                                                                 // Font
                             settings[i, 0],                                                                  // What text
@@ -71,7 +72,7 @@ public class Settings : IScene {
                             yPosition: 200f + (i * lineSpacing),                                            // Y position
                             screenDimensions,                                                               // Screen dimensions
                             Color.White);                                                                   // Colour
-
+        }
 
         // TODO: Draw random images around the scene to make it more interesting
         // Was thinking of like a sticker bomb effect or maybe the pictures taken in the game?

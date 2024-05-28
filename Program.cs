@@ -1,4 +1,5 @@
 ﻿global using E = GU1.Engine;
+global using GU1.Engine;
 global using GU1.Engine.Extensions;
 global using GU1.Engine.Interfaces;
 global using GU1.Engine.IO;
@@ -8,6 +9,7 @@ global using static GU1.Engine.IO.DeviceState;
 global using static GU1.Engine.Randoms;         // TODO: Remove this
 global using static GU1.Engine.Graphics.Draw;
 
+global using GU1.Envir;
 global using GU1.Envir.Models;
 
 global using FLib = GU1.Envir.Libraries.Fonts;

@@ -15,5 +15,5 @@ public class GameState {
     public List<Flotsam> Flotsam = new();
 
     [XmlElement(Order = 2)]
-    public List<Actor> Actors = new();
+    public List<Player> Players = new();
 }

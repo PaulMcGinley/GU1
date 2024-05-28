@@ -1,4 +1,4 @@
-﻿namespace GU1;
+﻿namespace GU1.Engine;
 
 public enum GameScene {
 

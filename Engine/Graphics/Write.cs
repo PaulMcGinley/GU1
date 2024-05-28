@@ -50,11 +50,10 @@ public static partial class Draw {
 
         DrawText(spriteBatch, font, text, drawPosition, colour);                                            // Draw the text
     }
-    public static void DrawTextBottomLeftScreen(SpriteBatch spriteBatch, SpriteFont font, string text, float yPosition, Vector2 screenDimensions, Color colour = default)
-    {
+    public static void DrawTextBottomLeftScreen(SpriteBatch spriteBatch, SpriteFont font, string text, float yPosition, Vector2 screenDimensions, Color colour = default) {
 
         Vector2 size = font.MeasureString(text);                                                            // Get the size of the text
-        Vector2 drawPosition = new(screenDimensions.X / 7 , 10* yPosition );                         // Calculate the position to draw the text
+        Vector2 drawPosition = new(screenDimensions.X / 7 , 10 * yPosition );                               // Calculate the position to draw the text
 
         DrawText(spriteBatch, font, text, drawPosition, colour);                                            // Draw the text
     }

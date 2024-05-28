@@ -13,17 +13,17 @@ public class Settings : IScene {
     Vector2 screenDimensions => new(viewport.Width, viewport.Height);                                       // The dimensions of the screen from the viewport
 
     const int lineSpacing = 50;                                                                             // The space between each line of text
-    readonly string[,] Settings = new string[,] {
+    readonly string[,] settings = new string[,] {
         //displaying controls
         //for Tourist
-        {"Tourist Controls~"},
-        { "Left Thumstick:","Move Player" },
-        { "Right Thumbstick:","Move Camera" },
-        { "Right trigger:","take photo" },
-        { "Left Trigger:" ,"Hold Camera steady" },
+        {"Tourist Controls~", " " },
+        { "Left Thumstick:", "Move Player" },
+        { "Right Thumbstick:", "Move Camera" },
+        { "Right trigger:", "take photo" },
+        { "Left Trigger:" , "Hold Camera steady" },
         //for Nessie
-        {"Nessie Controls~"},
-        { "Left Thumstick:","Move Player" },
+        {"Nessie Controls~", " "},
+        { "Left Thumstick:", "Move Player" },
 
               
     };
@@ -67,11 +67,11 @@ public class Settings : IScene {
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
 
         // Draw the Settings
-        for (int i = 0; i < Settings.GetLength(0); i++)
-            DrawTextSettings(spriteBatch,                                                                    // SpriteBatch
+        for (int i = 0; i < settings.GetLength(0); i++)
+            DrawTextCredits(spriteBatch,                                                                    // SpriteBatch
                             FLib.DebugFont,                                                                 // Font
-                            Settings[i, 0],                                                                  // What text
-                            Settings[i, 1],                                                                  // Who text
+                            settings[i, 0],                                                                  // What text
+                            settings[i, 1],                                                                  // Who text
                             yPosition: 200f + (i * lineSpacing),                                            // Y position
                             screenDimensions,                                                               // Screen dimensions
                             Color.White);                                                                   // Colour

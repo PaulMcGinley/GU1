@@ -55,7 +55,7 @@ public class MainMenu : IScene {
                         GameState.CurrentScene = GameScene.Lobby;
                         break;
 
-                    case MenuItems.Settings:
+                    case MenuItems.Controls:
                         GameState.CurrentScene = GameScene.Settings;
                         break;
 
@@ -134,7 +134,7 @@ public class MainMenu : IScene {
         spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "PRESS A ON CONTROLLER TO ENTER MENU", new Vector2((1920/2)-50, (1080/2)+150), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "PRESS A ON CONTROLLER TO ENTER MENU", new Vector2((1920/2)-175, (1080/2)+200), Color.GhostWhite);
 
         // Draw the arrow
         spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-275 + (SelectedMenuIndex * 120)), Color.Gray);
@@ -155,7 +155,7 @@ public class MainMenu : IScene {
     enum MenuItems { //declaring the menu items box values
 
         Play = 0, //sets the value of the box Play Game to 0
-        Settings = 1, //Sets the value of the Settings Box to 1
+        Controls = 1, //Sets the value of the Settings Box to 1
         Credits = 2, //Sets the value of the Credits box to 2
         Exit = 3 //sets the value of Exit Game box to 3
     }

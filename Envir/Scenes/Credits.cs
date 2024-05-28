@@ -14,12 +14,16 @@ public class Credits : IScene {
 
     const int lineSpacing = 50;                                                                             // The space between each line of text
     readonly string[,] credits = new string[,] {
-
+  //giving people their credit in the game
+        //JOB                            NAME
         { "Game Concept / Design",      "Corey Connolly" },
         { "Project Manager",            "Kieran Bett" },
-        { "Lead Programmer",            "..." },
-        { "Additional Programers" ,     "..." },
-        // ...
+        { "Lead Programmer",            "Paul Mcginely" },
+        { "Additional Programer" ,     "Alexander Tuffy" },
+        { "Audio Creator",            "Albert Bugheanu" },
+        { "Floatsam Art designer",      "Alexander Tuffy" },
+        { "Nessie Art Designer",            "Corey Connolly" },
+        
     };
 
     public void Initialize(GraphicsDevice device) {

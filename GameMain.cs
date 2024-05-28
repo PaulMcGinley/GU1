@@ -16,6 +16,7 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.Playing playing = new();
     readonly Envir.Scenes.PhotoBook photoBook = new();
     readonly Envir.Scenes.Credits credits = new();
+    readonly Envir.Scenes.Settings settings = new();
 
     #endregion
 
@@ -38,6 +39,7 @@ public class GameMain : FixedTimestampGame {
         playing.Initialize(GraphicsDevice);
         photoBook.Initialize(GraphicsDevice);
         credits.Initialize(GraphicsDevice);
+        settings.Initialize(GraphicsDevice);
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -81,6 +83,9 @@ public class GameMain : FixedTimestampGame {
                 case GameScene.Credits:
                     credits.OnSceneEnd();
                     break;
+                case GameScene.Settings:
+                    settings.OnSceneEnd();
+                    break;
             }
 
             // Call the start methods of the scenes
@@ -100,6 +105,9 @@ public class GameMain : FixedTimestampGame {
                     break;
                 case GameScene.Credits:
                     credits.OnSceneStart();
+                    break;
+                case GameScene.Settings:
+                    settings.OnSceneStart();
                     break;
             }
         }
@@ -123,6 +131,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.Credits:
                 credits.Update(gameTime);
+                break;
+            case GameScene.Settings:
+                settings.Update(gameTime);
                 break;
         }
 
@@ -151,6 +162,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.Credits:
                 credits.FixedUpdate(gameTime);
                 break;
+            case GameScene.Settings:
+                settings.FixedUpdate(gameTime);
+                break;
         }
 
         base.FixedUpdate(gameTime);                                                                         // ! IMPORTANT: Keep this here
@@ -177,6 +191,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.Credits:
                 credits.Draw(spriteBatch);
+                break;
+            case GameScene.Settings:
+                settings.Draw(spriteBatch);
                 break;
         }
 

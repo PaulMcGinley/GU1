@@ -23,7 +23,7 @@ public class Settings : IScene {
         { "Left Trigger:" , "Hold Camera steady" },
         //for Nessie
         {"Nessie Controls~", " "},
-        { "Left Thumstick:", "Move Player" },         
+        { "Left Thumstick:", "Move Player" },
     };
 
     public void Initialize(GraphicsDevice device) {

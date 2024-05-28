@@ -66,7 +66,7 @@ public class Settings : IScene {
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
 
-        // Draw the Settings
+        // Draw the Settings that will be displayed on screeen
         for (int i = 0; i < settings.GetLength(0); i++)
             DrawTextCredits(spriteBatch,                                                                    // SpriteBatch
                             FLib.DebugFont,                                                                 // Font

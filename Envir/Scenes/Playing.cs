@@ -32,8 +32,8 @@ public class Playing : IScene {
 
         gameState = new GameState();                                                                        // Create a new game state object
 
-        // Create a new flotsam object for each of the 100 flotsam objects
-        for (int i = 0; i <= 100; i++) {
+        // Create a new flotsam object for each of the 1000 flotsam objects
+        for (int i = 0; i <= 1000; i++) {
             int idx = random.Int(0, TLib.Flotsam.Length);
             gameState.Flotsam.Add(
                 new Flotsam(idx,

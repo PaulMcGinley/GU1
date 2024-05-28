@@ -38,11 +38,14 @@ public class Settings : IScene {
 
     public void UnloadContent() { }
 
-    public void Update(GameTime gameTime) {
+    public void Update(GameTime gameTime)
+    {
 
-        if (IsAnyInputDown(Buttons.Back, Keys.Space))
+        if (IsAnyInputDown(Keys.B, Buttons.B, Buttons.Start))
+
             GameState.CurrentScene = GameScene.MainMenu;
     }
+
 
     public void FixedUpdate(GameTime gameTime) {
 
@@ -65,6 +68,9 @@ public class Settings : IScene {
 
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
+
+        //draw the bottom left text to get back to the menu
+        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
 
         // Draw the Settings that will be displayed on screeen
         for (int i = 0; i < settings.GetLength(0); i++)

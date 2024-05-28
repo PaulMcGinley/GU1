@@ -54,7 +54,7 @@ public static partial class Draw {
     {
 
         Vector2 size = font.MeasureString(text);                                                            // Get the size of the text
-        Vector2 drawPosition = new(screenDimensions.X / 6 - size.X / 6, yPosition);                         // Calculate the position to draw the text
+        Vector2 drawPosition = new(screenDimensions.X / 7 , 10* yPosition );                         // Calculate the position to draw the text
 
         DrawText(spriteBatch, font, text, drawPosition, colour);                                            // Draw the text
     }

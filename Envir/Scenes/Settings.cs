@@ -53,18 +53,9 @@ public class Settings : IScene {
     }
 
     public void Draw(SpriteBatch spriteBatch) {
-
-        // There is no transform matrix for the background, it will always be drawn at the same position
+        //draw the settings
         spriteBatch.Begin();
-
-        // TODO: Draw the background
-
-        spriteBatch.End();
-
-        //blocked out as it doesn`t need to move
-        // We use the cameras transform matrix to draw the scene to move the Settings based on the camera position
-        //spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
-
+      
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Player Controls", yPosition: 100f, screenDimensions, Color.White);
 

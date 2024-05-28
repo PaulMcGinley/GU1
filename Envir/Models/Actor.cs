@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GU1;
 
 public class Actor : IMove, IGameObject {
-
+    
     #region IMove Interface
 
     public Vector2 Velocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

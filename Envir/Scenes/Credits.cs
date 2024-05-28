@@ -55,7 +55,8 @@ public class Credits : IScene {
 
         // There is no transform matrix for the background, it will always be drawn at the same position
         spriteBatch.Begin();
-
+        //draw the bottom left text to get back to the menu
+        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
         // TODO: Draw the background
 
         spriteBatch.End();
@@ -66,8 +67,7 @@ public class Credits : IScene {
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
 
-        //draw the bottom left text to get back to the menu
-        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
+
 
         // Draw the credits
         for (int i = 0; i < credits.GetLength(0); i++)

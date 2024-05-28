@@ -17,7 +17,7 @@ public class Settings : IScene {
         //displaying controls
         //for Tourist
         {"Tourist Controls~", " " },                                            //text to be displayed
-        { "Left Thumstick:", "Move Player" },
+        { "Left Thumstick:", "Move Player" },                                   //controls can be updated as we go along 
         { "Right Thumbstick:", "Move Camera" },
         { "Right trigger:", "take photo" },
         { "Left Trigger:" , "Hold Camera steady" },

@@ -19,7 +19,7 @@ public class Actor : IMove, IGameObject {
      //if (Camera[players].bSphere.Intersects(Nessie[player].bSphere) 
                 //{
                    //tourist[player].score + 1000
-                //} or whatever its going to work but this allows it to be set up
+                //} or whatever its going to work but this allows it to be set up 
     public int score { get => throw new NotImplementedException(); set => throw new NotImplementedException(); } // holds score counter for each tourist player
 
     public void Move(GameTime gameTime) { }

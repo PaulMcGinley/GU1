@@ -56,11 +56,11 @@ public class MainMenu : IScene {
                         break;
 
                     case MenuItems.Settings:
-                        // TODO: ...
+                        GameState.CurrentScene = GameScene.Settings;
                         break;
 
                     case MenuItems.Credits:
-                        // TODO: ...
+                        GameState.CurrentScene = GameScene.Credits;
                         break;
 
                     case MenuItems.Exit:
@@ -134,6 +134,7 @@ public class MainMenu : IScene {
         spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "PRESS A TO ENTER MENU ON CONTROLLER", new Vector2((1920/2)-50, (1080/2)+150), Color.Black);
 
         // Draw the arrow
         spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-275 + (SelectedMenuIndex * 120)), Color.Gray);

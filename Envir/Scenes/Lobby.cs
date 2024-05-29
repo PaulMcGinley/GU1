@@ -51,7 +51,7 @@ public class Lobby : IScene {
             GameState.CurrentScene = GameScene.MainMenu;
 
         if (IsAnyInputDown(Buttons.Start) && controllerIndexs.Count > 1)
-            StartGame();
+            StartGame(gameTime);
     }
 
     public void FixedUpdate(GameTime gameTime) {
@@ -77,7 +77,7 @@ public class Lobby : IScene {
     }
 
 
-    void StartGame() {
+    void StartGame(GameTime gameTime) {
 
         if (playerCount < 2)
             return;
@@ -95,9 +95,24 @@ public class Lobby : IScene {
 
         AssignRoles();
 
+        VibrateControllers(gameTime);
+
         GameState.CurrentScene = GameScene.Playing;
     }
 
+    private void VibrateControllers(GameTime gameTime) {
+
+        foreach (Player player in GameState.Players) {
+
+            if (player.Role == ActorType.Nessie)
+                RumbleQueue.AddRumble(player.ControllerIndex, 1000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
+            else
+                RumbleQueue.AddRumble(player.ControllerIndex, 1000, gameTime.ElapsedGameTime.TotalMilliseconds + 1500, 1f, 1f);
+        }
+
+    }
+
+    // ! There is a bug where sometimes not all roles are assigned correctly
     public void AssignRoles() {
 
         foreach (Player player in GameState.Players)

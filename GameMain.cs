@@ -53,6 +53,7 @@ public class GameMain : FixedTimestampGame {
     protected override void Update(GameTime gameTime) {
 
         DeviceState.Update();                                                                               // Update the state of the input devices
+        RumbleQueue.Update(gameTime);                                                                       // Update the rumble queue
 
 #if DEBUG // Debug only controls
         if (IsKeyPressed(Keys.F1))

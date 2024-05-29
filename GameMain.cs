@@ -112,7 +112,7 @@ public class GameMain : FixedTimestampGame {
             }
         }
 
-        GameState.PreviousScene = GameState.CurrentScene;                                                    // Set the previous scene to the current scene
+        GameState.PreviousScene = GameState.CurrentScene;                                                   // Set the previous scene to the current scene
 
         // Only update the current scene
         switch (GameState.CurrentScene) {
@@ -136,8 +136,6 @@ public class GameMain : FixedTimestampGame {
                 settings.Update(gameTime);
                 break;
         }
-
-
 
         base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
     } // End of Update method
@@ -197,7 +195,7 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
-        base.Draw(gameTime);                                                                                 // ! IMPORTANT: Keep this here
+        base.Draw(gameTime);                                                                                // ! IMPORTANT: Keep this here
 
         // -------------------------------------------------------------------------------------------------
         // --- DEBUG / DIAGNOSTIC CODE ---------------------------------------------------------------------
@@ -209,25 +207,14 @@ public class GameMain : FixedTimestampGame {
             spriteBatch.Begin();
 
             // ----- Update Trackers -----
-            spriteBatch.DrawString(FLib.DebugFont, $"Update: {UpdateTracker.AverageEPS:0.00} / {UpdateTracker.Counter}", new Vector2(11, 11), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"Update: {UpdateTracker.AverageEPS:0.00} / {UpdateTracker.Counter}", new Vector2(10, 10), Color.White);
-
-            spriteBatch.DrawString(FLib.DebugFont, $"FixedUpdates: {FixedUpdateTracker.AverageEPS:0.00} / {FixedUpdateTracker.Counter}", new Vector2(11, 31), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"FixedUpdates: {FixedUpdateTracker.AverageEPS:0.00} / {FixedUpdateTracker.Counter}", new Vector2(10, 30), Color.White);
-
-            spriteBatch.DrawString(FLib.DebugFont, $"Frames: {DrawTracker.AverageEPS:0.00} / {DrawTracker.Counter}", new Vector2(11, 51), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"Frames: {DrawTracker.AverageEPS:0.00} / {DrawTracker.Counter}", new Vector2(10, 50), Color.White);
+            DrawShadowedText(spriteBatch, FLib.DebugFont, $"FPS: {DrawTracker.AverageEPS:0.00} / {DrawTracker.Counter}", new Vector2(11, 11), Color.White, new Vector2(1, 1), Color.Black);
 
             // ----- Operating System Info -----
-            spriteBatch.DrawString(FLib.DebugFont, $"OS Description: {RuntimeInformation.OSDescription}", new Vector2(11, 71), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"OS Description: {RuntimeInformation.OSDescription}", new Vector2(10, 70), Color.White);
+            DrawShadowedText(spriteBatch, FLib.DebugFont, $"OS Description: {RuntimeInformation.OSDescription}", new Vector2(11, 71), Color.White, new Vector2(1, 1), Color.Black);
 
             // ----- Garbage Collection Info -----
-            spriteBatch.DrawString(FLib.DebugFont, $"GC Total Memory: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(11, 91), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"GC Total Memory: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(10, 90), Color.White);
-
-            spriteBatch.DrawString(FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(11, 111), Color.Black);
-            spriteBatch.DrawString(FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(10, 110), Color.White);
+            DrawShadowedText(spriteBatch, FLib.DebugFont, $"GC Total Memory: {GC.GetTotalMemory(false) / 1024 / 1024} MB", new Vector2(11, 91), Color.White, new Vector2(1, 1), Color.Black);
+            DrawShadowedText(spriteBatch, FLib.DebugFont, $"GC Collection Count: Gen1({GC.CollectionCount(0)}) / Gen2({GC.CollectionCount(1)}) / Gen3({GC.CollectionCount(2)})", new Vector2(11, 111), Color.White, new Vector2(1, 1), Color.Black);
 
             spriteBatch.End();
         }

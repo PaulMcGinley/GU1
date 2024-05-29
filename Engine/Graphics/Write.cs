@@ -18,6 +18,12 @@ public static partial class Draw {
         spriteBatch.DrawString(font, text, position, colour);                                               // Draw the text
     }
 
+    public static void DrawShadowedText(SpriteBatch spriteBatch, SpriteFont font, string text, Vector2 position, Color colour = default, Vector2 shadowOffset = default, Color shadowColour = default) {
+
+        spriteBatch.DrawString(font, text, position + shadowOffset, shadowColour);                          // Draw the shadow
+        spriteBatch.DrawString(font, text, position, colour);                                               // Draw the text
+    }
+
     /// <summary>
     /// Draw text on screen centered at a given position
     /// </summary>

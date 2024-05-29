@@ -76,7 +76,7 @@ public class Playing : IScene {
             GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
 
             gameState.Flotsam = _gameState.Flotsam;
-            gameState.Actors = _gameState.Actors;
+            gameState.Players = _gameState.Players;
         }
 #endif
     }

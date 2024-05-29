@@ -7,7 +7,11 @@ namespace GU1;
 
 public class Actor : IMove, IGameObject {
 
+    #region Properties
+
     virtual public ActorType Type { get; set; } = ActorType.AI;
+
+    #endregion
 
     #region IMove Interface
 

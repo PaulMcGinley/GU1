@@ -12,7 +12,7 @@ public class Player : Actor {
     /// <summary>
     /// The index of the controller that the player is using.
     /// </summary>
-    public int ControllerIndex { get; set; }
+    public int ControllerIndex { get; set; } = -1;
 
     public int Score { get; set; } = 0;
 

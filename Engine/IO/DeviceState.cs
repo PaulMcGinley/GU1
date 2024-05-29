@@ -203,7 +203,7 @@ public static class DeviceState {
 
     public static float GamePadLeftStickY(int index) => GamePadsState[index].ThumbSticks.Left.Y;
 
-    public static Vector2 GamePadLeftStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Left.X, GamePadsState[index].ThumbSticks.Left.Y);
+    public static Vector2 GamePadLeftStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Left.X, -GamePadsState[index].ThumbSticks.Left.Y);
 
     #endregion
 

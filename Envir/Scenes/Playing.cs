@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -78,6 +76,8 @@ public class Playing : IScene {
         foreach (var flotsam in GameState.Flotsam)
             flotsam.Update(gameTime);
 
+        GameState.Boat.Update(gameTime);
+
         background2.SetOpacity( (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) / 2 + 0.5f);
 
         // Sort the flotsam by their X and Y positions to ensure they are drawn in the correct order
@@ -111,6 +111,8 @@ public class Playing : IScene {
         foreach (var flotsam in GameState.Flotsam)
             flotsam.Draw(spriteBatch);
 
+        GameState.Boat.Draw(spriteBatch);
+
         spriteBatch.End();
     }
 
@@ -126,18 +128,22 @@ public class Playing : IScene {
         GameState.Flotsam.Clear();
 
         for (int i = 0; i <= 100; i++) {
-            int idx = random.Int(0, TLib.Flotsam.Length);
+
+            int idx = random.Int(0, TLib.Flotsam.Length);                                                   // Randomly select a flotsam sprite
+
             GameState.Flotsam.Add(
-                new Flotsam(idx,
+                new Flotsam(
+                    idx,                                                                                    // Set the sprite index
                     new Sprite2D(
-                        TLib.Flotsam[idx],                                   // Randomly select a flotsam sprite
-                        RandomScreenPosition)));                                          // Randomly position the flotsam object on the screen
+                        TLib.Flotsam[idx],                                                                  // Set the sprite texture
+                        RandomScreenPosition)));                                                            // Randomly position the flotsam object on the screen
         }
 
         foreach (var flotsam in GameState.Flotsam)
-            flotsam.Initialize(device);
+            flotsam.Initialize(device);                                                                     // Initialize the flotsam object
 
-        foreach (Player player in GameState.Players)
-            GameState.Flotsam[player.ControllerIndex].PlayerIndex = player.ControllerIndex;
+        foreach (Player player in GameState.Players)                                                        // Loop through all players
+            if (player.Role == ActorType.Nessie)                                                            // If the player is Nessie
+                GameState.Flotsam[player.ControllerIndex].PlayerIndex = player.ControllerIndex;             // Set the flotsam object's player index to the player's controller index
     }
 }

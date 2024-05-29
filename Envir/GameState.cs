@@ -17,4 +17,7 @@ public static class GameState {
     [XmlElement(Order = 2)]
     public static List<Player> Players = new();
 
+    [XmlElement(Order = 3)]
+    public static Boat Boat = new(-1);
+
 }

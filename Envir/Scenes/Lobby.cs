@@ -90,22 +90,8 @@ public class Lobby : IScene {
                 GameState.Players.Add(new Player(controllerIndexs[i]));
         }
 
-        // assign players to nessie or tourist
 
-        bool endGame = true;                            // Default to true and set to false if any player has not played both roles
 
-        foreach (var player in GameState.Players)       // Loop through all players
-            if (player.playedBothRoles == false) {        // If any player has not played both roles
-                endGame = false;                        // Set endGame to false
-                break;                                // Exit the loop
-            }
-
-        if (endGame) {
-
-            // Do something
-            // GameState.CurrentScene = GameScene.EndGame;
-            //return;
-        }
 
         AssignRoles();
 
@@ -114,45 +100,40 @@ public class Lobby : IScene {
 
     public void AssignRoles() {
 
-        List<Player> wantsToBeNessie = GameState.Players.FindAll(player => player.PreferredRole() == ActorType.Nessie);
-        List<Player> wantsToBeTourist = GameState.Players.FindAll(player => player.PreferredRole() == ActorType.Tourist);
+        foreach (Player player in GameState.Players)
+            player.Role = ActorType.Tourist;
 
-        int _nessieCount = wantsToBeNessie.Count;
-        int _touristCount = wantsToBeTourist.Count;
+        int remainingNessies = (int)nessieCount.Value;
 
-        // Assign preferred roles
-        for (int i = 0; i < _nessieCount; i++)
-            wantsToBeNessie[i].Role = ActorType.Nessie;
+        foreach (Player player in GameState.Players) {
 
-        for (int i = 0; i < _touristCount; i++)
-            wantsToBeTourist[i].Role = ActorType.Tourist;
+            if (player.PreferredRole() == ActorType.Nessie) {
 
-        // Get the remaining players
-        List<Player> remainingPlayers = GameState.Players.Except(wantsToBeNessie).Except(wantsToBeTourist).ToList();
-
-        // Assign remaining roles
-        foreach (Player player in remainingPlayers) {
-
-            if (_nessieCount < nessieCount.Value)
-            {
                 player.Role = ActorType.Nessie;
-                _nessieCount++;
+                remainingNessies--;
             }
-            else if (_touristCount < touristCount.Value)
-            {
-                player.Role = ActorType.Tourist;
-                _touristCount++;
-            }
-            else
-            {
-                // If there are no more preferred roles, assign a role randomly
-                player.Role = rand.Next(2) == 0 ? ActorType.Nessie : ActorType.Tourist;
-            }
+
+            if (remainingNessies == 0)
+                break;
         }
     }
 
     public void OnSceneStart() {
 
+        bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
+
+        foreach (Player player in GameState.Players)                                                        // Loop through all players
+            if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
+                endGame = false;                                                                            // Set endGame to false
+                break;                                                                                      // Exit the loop
+            }
+
+        if (endGame) {
+
+            // Do something
+            // GameState.CurrentScene = GameScene.EndGame;
+            //return;
+        }
     }
 
     public void OnSceneEnd() {

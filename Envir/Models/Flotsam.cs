@@ -98,6 +98,19 @@ public class Flotsam : Actor {
         Velocity.Normalize();
 
         Position += (Velocity/500) * MoveSpeed;
+
+        if (Position.X < -(1920/2))
+            Position = new(1920*1.5f, Position.Y);
+
+        if (Position.X > 1920*1.5f)
+            Position = new(-(1920/2), Position.Y);
+
+        if (Position.Y < -(1080/2))
+            Position = new(Position.X, 1080*1.5f);
+
+        if (Position.Y > 1080*1.5f)
+            Position = new(Position.X, -(1080/2));
+
     }
 
     void Player_Move(GameTime gameTime) {
@@ -231,7 +244,7 @@ public class Flotsam : Actor {
             return;
 
         // ? Why is sprite not drawing itself?
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), sprite.GetColour() * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), (PlayerControlled ? Color.Black : sprite.GetColour()) * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
 
         // #region Boundary Box
 

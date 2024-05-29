@@ -60,7 +60,7 @@ public class Boat : Player {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        spriteBatch.Draw(TLib.Boat, position + cycloidYOffset, null, Color.White, rotation, new Vector2(TLib.Boat.Width/2, TLib.Boat.Height/2), 1, spriteEffect, 0);
+        spriteBatch.Draw((spriteEffect == SpriteEffects.None ? TLib.Boat[0] : TLib.Boat[1]), position + cycloidYOffset, null, Color.White, rotation, new Vector2(TLib.Boat[0].Width/2, TLib.Boat[0].Height/2), 1, SpriteEffects.None, 0);
     }
 
         private void Bob(GameTime gameTime) {

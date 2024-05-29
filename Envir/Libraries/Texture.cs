@@ -17,7 +17,7 @@ public class Texture {
      ***********************************************************************/
 
     public static readonly Texture2D[] Flotsam = new Texture2D[14];
-    public static Texture2D Boat;
+    public static Texture2D[] Boat;
 
     /***********************************************************************
      *** Miscellaneous *****************************************************
@@ -56,7 +56,9 @@ public class Texture {
         for (int i = 0; i < Flotsam.Length; i++)
             Flotsam[i] = content.Load<Texture2D>($"Graphics/Flotsam/sprite{i}");
 
-        Boat = content.Load<Texture2D>("Graphics/boat");
+        Boat = new Texture2D[2];
+        Boat[0] = content.Load<Texture2D>("Graphics/boat");
+        Boat[1] = content.Load<Texture2D>("Graphics/boat2");
 
         Pixel = new Texture2D(graphicsDevice, 1, 1);
         Pixel.SetData(new[] { Color.White });

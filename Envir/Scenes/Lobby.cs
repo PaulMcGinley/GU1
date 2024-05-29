@@ -9,14 +9,14 @@ namespace GU1.Envir.Scenes;
 
 public class Lobby : IScene {
 
-    List<int> controllerIndexs = new();
-    // nessies should be 33% of the players rounded up
-    float nessies => controllerIndexs.Count / 3.3f;
-    float tourists => controllerIndexs.Count - nessies;
+    List<int> controllerIndexs = new();                                                                     // List of controller indexes that have joined the lobby
 
-    FancyNumber playerCount = new(1);
-    FancyNumber nessieCount = new(5);
-    FancyNumber touristCount = new(11);
+    float nessies => controllerIndexs.Count / 3.3f;                                                         // Nessies should be 33% of the players
+    float tourists => controllerIndexs.Count - nessies;                                                     // Tourists should be the remaining players
+
+    FancyNumber playerCount = new();
+    FancyNumber nessieCount = new();
+    FancyNumber touristCount = new();
 
     public void Initialize(GraphicsDevice device) {
 
@@ -69,7 +69,7 @@ public class Lobby : IScene {
         //spriteBatch.DrawString(FLib.DebugFont, $"Players in queue: {controllerIndexs.Count} (Split:    Nessie: {Math.Round( nessies )}    |   Tourist: {Math.Round( tourists )})", new(10, 500), Color.White);
         //spriteBatch.DrawString(FLib.DebugFont, $"{string.Join(", ", controllerIndexs.ToArray())}", new(11, 520), Color.White);
 
-        playerCount.Draw(spriteBatch, new Vector2(1920/2, 1080/2), playerCount.Value < 2 ? Color.Red : Color.White);
+        playerCount.Draw(spriteBatch, new Vector2(1920/2, 1080/2), playerCount < 2 ? Color.Red : Color.White);
         nessieCount.Draw(spriteBatch, new Vector2(1920/4, 1080/3), Color.White);
         touristCount.Draw(spriteBatch, new Vector2(1920/4*3, 1080/3), Color.White);
 
@@ -80,7 +80,7 @@ public class Lobby : IScene {
 
     void StartGame() {
 
-        if (controllerIndexs.Count < 2)
+        if (playerCount < 2)
             return;
 
         GameState.CurrentScene = GameScene.Playing;
@@ -88,11 +88,9 @@ public class Lobby : IScene {
 
     public void OnSceneStart() {
 
-        System.Console.WriteLine("Lobby Scene Started");
     }
 
     public void OnSceneEnd() {
 
-        System.Console.WriteLine("Lobby Scene Ended");
     }
 }

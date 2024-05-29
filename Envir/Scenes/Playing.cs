@@ -24,8 +24,8 @@ public class Playing : IScene {
 
         this.device = device;
 
-        background = new Graphic2D(TLib.Background[0], new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
-        background2 = new Sprite2D(TLib.Background[1], new Vector2(1920/2, 1080/2));
+        background = new Graphic2D(TLib.PlayingBackground[0], new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
+        background2 = new Sprite2D(TLib.PlayingBackground[1], new Vector2(1920/2, 1080/2));
         background2.SetEffects(SpriteEffects.FlipHorizontally);
 
         camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera

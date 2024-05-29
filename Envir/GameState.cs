@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace GU1;
+namespace GU1.Envir;
 
-public class GameState {
+public static class GameState {
 
     [XmlIgnore] // Ignore this property when serializing
     public static GameScene CurrentScene = GameScene.MainMenu; //intialised back to main menu  // The current scene of the game
@@ -12,8 +12,9 @@ public class GameState {
     public static GameScene PreviousScene = GameScene.None;                                             // The previous scene of the game
 
     [XmlElement(Order = 1)]
-    public List<Flotsam> Flotsam = new();
+    public static List<Flotsam> Flotsam = new();
 
     [XmlElement(Order = 2)]
-    public List<Player> Players = new();
+    public static List<Player> Players = new();
+
 }

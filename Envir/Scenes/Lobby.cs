@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,6 +9,8 @@ using Microsoft.Xna.Framework.Input;
 namespace GU1.Envir.Scenes;
 
 public class Lobby : IScene {
+
+    Random rand = new();
 
     List<int> controllerIndexs = new();                                                                     // List of controller indexes that have joined the lobby
 
@@ -66,15 +69,11 @@ public class Lobby : IScene {
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press A to join, B to leave. Press START to begin.", 1080-100, new Vector2(1920,1080), Color.Black);
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press BACK to go back to the main menu.", 1080-70, new Vector2(1920,1080), Color.Black);
 
-        //spriteBatch.DrawString(FLib.DebugFont, $"Players in queue: {controllerIndexs.Count} (Split:    Nessie: {Math.Round( nessies )}    |   Tourist: {Math.Round( tourists )})", new(10, 500), Color.White);
-        //spriteBatch.DrawString(FLib.DebugFont, $"{string.Join(", ", controllerIndexs.ToArray())}", new(11, 520), Color.White);
-
         playerCount.Draw(spriteBatch, new Vector2(1920/2, 1080/2), playerCount < 2 ? Color.Red : Color.White);
         nessieCount.Draw(spriteBatch, new Vector2(1920/4, 1080/3), Color.White);
         touristCount.Draw(spriteBatch, new Vector2(1920/4*3, 1080/3), Color.White);
 
         spriteBatch.End();
-
     }
 
 
@@ -83,7 +82,73 @@ public class Lobby : IScene {
         if (playerCount < 2)
             return;
 
+        if (GameState.Players.Count != playerCount.Value) {
+
+            GameState.Players.Clear();
+
+            for (int i = 0; i < playerCount.Value; i++)
+                GameState.Players.Add(new Player(controllerIndexs[i]));
+        }
+
+        // assign players to nessie or tourist
+
+        bool endGame = true;                            // Default to true and set to false if any player has not played both roles
+
+        foreach (var player in GameState.Players)       // Loop through all players
+            if (player.playedBothRoles == false) {        // If any player has not played both roles
+                endGame = false;                        // Set endGame to false
+                break;                                // Exit the loop
+            }
+
+        if (endGame) {
+
+            // Do something
+            // GameState.CurrentScene = GameScene.EndGame;
+            //return;
+        }
+
+        AssignRoles();
+
         GameState.CurrentScene = GameScene.Playing;
+    }
+
+    public void AssignRoles() {
+
+        List<Player> wantsToBeNessie = GameState.Players.FindAll(player => player.PreferredRole() == ActorType.Nessie);
+        List<Player> wantsToBeTourist = GameState.Players.FindAll(player => player.PreferredRole() == ActorType.Tourist);
+
+        int _nessieCount = wantsToBeNessie.Count;
+        int _touristCount = wantsToBeTourist.Count;
+
+        // Assign preferred roles
+        for (int i = 0; i < _nessieCount; i++)
+            wantsToBeNessie[i].Role = ActorType.Nessie;
+
+        for (int i = 0; i < _touristCount; i++)
+            wantsToBeTourist[i].Role = ActorType.Tourist;
+
+        // Get the remaining players
+        List<Player> remainingPlayers = GameState.Players.Except(wantsToBeNessie).Except(wantsToBeTourist).ToList();
+
+        // Assign remaining roles
+        foreach (Player player in remainingPlayers) {
+
+            if (_nessieCount < nessieCount.Value)
+            {
+                player.Role = ActorType.Nessie;
+                _nessieCount++;
+            }
+            else if (_touristCount < touristCount.Value)
+            {
+                player.Role = ActorType.Tourist;
+                _touristCount++;
+            }
+            else
+            {
+                // If there are no more preferred roles, assign a role randomly
+                player.Role = rand.Next(2) == 0 ? ActorType.Nessie : ActorType.Tourist;
+            }
+        }
     }
 
     public void OnSceneStart() {

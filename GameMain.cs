@@ -13,7 +13,7 @@ public class GameMain : FixedTimestampGame {
     // Create a new instance of each scene
     readonly Envir.Scenes.MainMenu mainMenu = new();
     readonly Envir.Scenes.Lobby lobby = new();
-    readonly Envir.Scenes.Playing playing = new();
+    public Envir.Scenes.Playing playing = new();
     readonly Envir.Scenes.PhotoBook photoBook = new();
     readonly Envir.Scenes.Credits credits = new();
     readonly Envir.Scenes.Settings settings = new();

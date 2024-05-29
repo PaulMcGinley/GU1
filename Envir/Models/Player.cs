@@ -9,6 +9,8 @@ public class Player : Actor {
     readonly Random rand = new();
 
     public Actor Object { get; set; }
+
+    public ActorType Role { get; set; }
     /// <summary>
     /// The index of the controller that the player is using.
     /// </summary>
@@ -18,6 +20,12 @@ public class Player : Actor {
 
     bool playedAsNessie = false;         // Track if the player has played as Nessie before
     bool playedAsTourist = false;        // Track if the player has played as Tourist before
+    public bool playedBothRoles => playedAsNessie && playedAsTourist;
+
+    public Player(int controllerIndex) {
+
+       ControllerIndex = controllerIndex;
+    }
 
     /// <summary>
     /// Player is responsible for choosing their preferred role.

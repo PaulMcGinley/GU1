@@ -199,6 +199,12 @@ public static class DeviceState {
     /// <param name="rightMotor"></param>
     public static void Rumble(int index, float leftMotor, float rightMotor) => GamePad.SetVibration(index, leftMotor, rightMotor);
 
+    public static float GamePadLeftStickX(int index) => GamePadsState[index].ThumbSticks.Left.X;
+
+    public static float GamePadLeftStickY(int index) => GamePadsState[index].ThumbSticks.Left.Y;
+
+    public static Vector2 GamePadLeftStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Left.X, GamePadsState[index].ThumbSticks.Left.Y);
+
     #endregion
 
     #region Any Input

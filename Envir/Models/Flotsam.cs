@@ -18,7 +18,7 @@ public class Flotsam : Actor {
     /// </summary>
     private int seed = 0;
 
-    public bool PlayerControlled = false;
+    public bool PlayerControlled => PlayerIndex > -1;
     public int PlayerIndex = -1;
 
     public Sprite2D sprite;
@@ -90,6 +90,23 @@ public class Flotsam : Actor {
 
     public void Move(GameTime gameTime) {
 
+        if (PlayerControlled)
+            Player_Move(gameTime);
+        else
+            AI_Move(gameTime);
+
+        Velocity.Normalize();
+
+        Position += (Velocity/500) * MoveSpeed;
+    }
+
+    void Player_Move(GameTime gameTime) {
+
+        Velocity = GamePadLeftStick(PlayerIndex) * 2500  ;
+    }
+
+    void AI_Move(GameTime gameTime) {
+
         if (gameTime.TotalGameTime.TotalMilliseconds < nextMoveTime)
             return;
 
@@ -107,10 +124,6 @@ public class Flotsam : Actor {
             nextMoveTime = gameTime.TotalGameTime.TotalMilliseconds + random.Next(0, 3000);
             MoveSpeed = random.Float(0.5f, 2.0f);
         }
-
-        Velocity.Normalize();
-
-        Position += (Velocity/500) * MoveSpeed;
     }
 
     #endregion
@@ -157,27 +170,36 @@ public class Flotsam : Actor {
         if (!isAlive)
             return;
 
-        // TODO: Optimize this or remove it
-        for (int i = ripples.Count-1; i == 0; i++)
-            if (ripples[i].Expired)
-                ripples.RemoveAt(i);
+        // // TODO: Optimize this or remove it
+        // for (int i = ripples.Count-1; i == 0; i++)
+        //     if (ripples[i].Expired)
+        //         ripples.RemoveAt(i);
 
-        if (gameTime.TotalGameTime.TotalMilliseconds > nextRippleTime && gameTime.TotalGameTime.TotalMilliseconds > nextMoveTime) {
+        // if (gameTime.TotalGameTime.TotalMilliseconds > nextRippleTime && gameTime.TotalGameTime.TotalMilliseconds > nextMoveTime) {
 
-            ripples.Add(new Ripple(Position, 10, gameTime.TotalGameTime.TotalMilliseconds + 2000));
-            nextRippleTime = gameTime.TotalGameTime.TotalMilliseconds + (200 * MoveSpeed);
-        }
+        //     ripples.Add(new Ripple(Position, 10, gameTime.TotalGameTime.TotalMilliseconds + 2000));
+        //     nextRippleTime = gameTime.TotalGameTime.TotalMilliseconds + (200 * MoveSpeed);
+        // }
 
-        foreach (var ripple in ripples)
-            ripple.Update(gameTime);
+        // foreach (var ripple in ripples)
+        //     ripple.Update(gameTime);
 
-        if (isFadingOut && opacity > 0.0f)
-            opacity -= 0.05f;
-        else {
+        // if (isFadingOut && opacity > 0.0f)
+        //     opacity -= 0.05f;
+        // else {
 
-            isFadingOut = false;
-            isAlive = false;
-        }
+        //     isFadingOut = false;
+        //     isAlive = false;
+        // }
+    }
+
+    void Player_Update(GameTime gameTime) {
+
+
+    }
+
+    void AI_Update(GameTime gameTime) {
+
     }
 
     /// <summary>
@@ -213,6 +235,7 @@ public class Flotsam : Actor {
 
         // #region Boundary Box
 
+if (PlayerControlled)
         DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
 
         // #endregion
@@ -241,6 +264,6 @@ public class Flotsam : Actor {
         if (!isAlive && isCollected && !isFadingOut)
             return;
 
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position, sprite.GetSourceRectangle(), (Color.Black * 0.7f ) * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position, sprite.GetSourceRectangle(), (Color.Black * 0.7f ) * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale() * (PlayerControlled ? 2f : 1f), sprite.GetEffects(), sprite.GetLayerDepth());
     }
 }

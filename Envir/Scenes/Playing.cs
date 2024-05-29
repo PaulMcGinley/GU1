@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -15,12 +16,15 @@ public class Playing : IScene {
     private Graphic2D background;                                                                           // The background image or 'map' of the game
     private Sprite2D background2;
     private Camera2D camera;                                                                                // The camera object used to control the view of the game
+    GraphicsDevice device;
 
-    private GameState gameState;
+    //private GameState gameState;
 
     Vector2 RandomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
     public void Initialize(GraphicsDevice device) {
+
+        this.device = device;
 
         background = new Graphic2D(TLib.Background[0], new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
         background2 = new Sprite2D(TLib.Background[1], new Vector2(1920/2, 1080/2));
@@ -30,24 +34,8 @@ public class Playing : IScene {
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
         camera.SetZoomLevel(0.5f);                                                                                 // Set the camera zoom level
 
-        gameState = new GameState();                                                                        // Create a new game state object
+        //gameState = new GameState();                                                                        // Create a new game state object
 
-        // Create a new flotsam object for each of the 1000 flotsam objects
-        for (int i = 0; i <= 1000; i++) {
-            int idx = random.Int(0, TLib.Flotsam.Length);
-            gameState.Flotsam.Add(
-                new Flotsam(idx,
-                    new Sprite2D(
-                        TLib.Flotsam[idx],                                   // Randomly select a flotsam sprite
-                        RandomScreenPosition)));                                          // Randomly position the flotsam object on the screen
-
-            // Randomly flip the sprite horizontally
-            // if(random.Bool())
-            //     gameState.Flotsam[i].sprite.SetEffects(SpriteEffects.FlipHorizontally);
-        }
-
-        foreach (var flotsam in gameState.Flotsam)
-            flotsam.Initialize(device);
     }
 
     public void LoadContent(ContentManager content) { }
@@ -67,16 +55,16 @@ public class Playing : IScene {
         if (IsKeyPressed(Keys.S))
             camera.Shake(10, 0.5f);
 
-        if (IsKeyPressed(Keys.F2))
-            XMLSerializer.Serialize<GameState>($"{DateTime.Now.ToBinary()}.xml", gameState);
+        // if (IsKeyPressed(Keys.F2))
+        //     XMLSerializer.Serialize<GameState>($"{DateTime.Now.ToBinary()}.xml", gameState);
 
         if (IsKeyPressed(Keys.F3)) {
 
             // TODO: This should have its own renderer
-            GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
+            // GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
 
-            gameState.Flotsam = _gameState.Flotsam;
-            gameState.Players = _gameState.Players;
+            // gameState.Flotsam = _gameState.Flotsam;
+            // gameState.Players = _gameState.Players;
         }
 #endif
     }
@@ -87,13 +75,13 @@ public class Playing : IScene {
     /// <param name="gameTime"></param>
     public void FixedUpdate(GameTime gameTime) {
 
-        foreach (var flotsam in gameState.Flotsam)
+        foreach (var flotsam in GameState.Flotsam)
             flotsam.Update(gameTime);
 
         background2.SetOpacity( (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) / 2 + 0.5f);
 
         // Sort the flotsam by their X and Y positions to ensure they are drawn in the correct order
-        gameState.Flotsam = gameState.Flotsam
+        GameState.Flotsam = GameState.Flotsam
                                 .OrderBy(flotsam => flotsam.Position.Y)
                                 .ThenBy(flotsam => flotsam.Position.X)
                                 .ToList();
@@ -111,7 +99,7 @@ public class Playing : IScene {
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
 
-        foreach (var flotsam in gameState.Flotsam)
+        foreach (var flotsam in GameState.Flotsam)
             flotsam.DrawRipples(spriteBatch);
 
         spriteBatch.End();
@@ -120,7 +108,7 @@ public class Playing : IScene {
         // Need to start a new batch to draw the flotsam sprites, as they are drawn on top of the ripples
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
-        foreach (var flotsam in gameState.Flotsam)
+        foreach (var flotsam in GameState.Flotsam)
             flotsam.Draw(spriteBatch);
 
         spriteBatch.End();
@@ -128,11 +116,28 @@ public class Playing : IScene {
 
     public void OnSceneStart() {
 
-        System.Diagnostics.Debug.WriteLine("Playing scene started");
+        StartNewRound();
     }
 
-    public void OnSceneEnd() {
+    public void OnSceneEnd() { }
 
-        System.Diagnostics.Debug.WriteLine("Playing scene ended");
+    public void StartNewRound() {
+
+        GameState.Flotsam.Clear();
+
+        for (int i = 0; i <= 100; i++) {
+            int idx = random.Int(0, TLib.Flotsam.Length);
+            GameState.Flotsam.Add(
+                new Flotsam(idx,
+                    new Sprite2D(
+                        TLib.Flotsam[idx],                                   // Randomly select a flotsam sprite
+                        RandomScreenPosition)));                                          // Randomly position the flotsam object on the screen
+        }
+
+        foreach (var flotsam in GameState.Flotsam)
+            flotsam.Initialize(device);
+
+        foreach (Player player in GameState.Players)
+            GameState.Flotsam[player.ControllerIndex].PlayerIndex = player.ControllerIndex;
     }
 }

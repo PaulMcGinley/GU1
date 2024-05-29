@@ -332,6 +332,18 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/Flotsam/sprite9.png
 
+#begin Graphics/LobbyScene-BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/LobbyScene-BG.png
+
 #begin Graphics/map.png
 /importer:TextureImporter
 /processor:TextureProcessor

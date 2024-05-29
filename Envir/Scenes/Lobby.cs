@@ -28,12 +28,6 @@ public class Lobby : IScene {
 
     public void Update(GameTime gameTime) {
 
-        if (IsKeyPressed(Keys.OemPlus))
-            controllerIndexs.Add(0);
-
-        if (IsKeyPressed(Keys.OemMinus))
-            controllerIndexs.Remove(0);
-
         for (int i = 0; i < 16; i++)
             if (IsGamePadConnected(i) && !controllerIndexs.Contains(i) && IsGamePadButtonPressed(i, Buttons.A))
                 controllerIndexs.Add(i);
@@ -41,10 +35,6 @@ public class Lobby : IScene {
         for (int i = 0; i < 16; i++)
             if (IsGamePadConnected(i) && controllerIndexs.Contains(i) && IsGamePadButtonPressed(i, Buttons.B))
                 controllerIndexs.Remove(i);
-
-        // for (int i = 0; i < 16; i++)
-        //     if (IsGamePadConnected(i) && controllerIndexs.Contains(i) && IsGamePadButtonPressed(i, Buttons.Start))
-        //         GameState.CurrentScene = GameScene.Playing;
 
         if (IsAnyInputDown(Keys.Back, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
@@ -62,6 +52,7 @@ public class Lobby : IScene {
 
         spriteBatch.Begin();
 
+        spriteBatch.Draw(TLib.LobbyBackground, new Vector2(0, 0), Color.White);
         spriteBatch.DrawString(FLib.DebugFont, "Lobby Scene", new(10, 10), Color.White);
 
         spriteBatch.DrawString(FLib.DebugFont, "Press A to join, B to unjoin. Press START to begin.", new(10, 30), Color.White);

@@ -14,6 +14,10 @@ public class Lobby : IScene {
     float nessies => controllerIndexs.Count / 3.3f;
     float tourists => controllerIndexs.Count - nessies;
 
+    FancyNumber playerCount = new(1);
+    FancyNumber nessieCount = new(5);
+    FancyNumber touristCount = new(11);
+
     public void Initialize(GraphicsDevice device) {
 
     }
@@ -36,6 +40,10 @@ public class Lobby : IScene {
             if (IsGamePadConnected(i) && controllerIndexs.Contains(i) && IsGamePadButtonPressed(i, Buttons.B))
                 controllerIndexs.Remove(i);
 
+        playerCount.Value = (uint)controllerIndexs.Count;
+        nessieCount.Value = (uint)Math.Round(nessies);
+        touristCount.Value = (uint)Math.Round(tourists);
+
         if (IsAnyInputDown(Keys.Back, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
 
@@ -53,17 +61,17 @@ public class Lobby : IScene {
         spriteBatch.Begin();
 
         spriteBatch.Draw(TLib.LobbyBackground, new Vector2(0, 0), Color.White);
-        spriteBatch.DrawString(FLib.DebugFont, "Lobby Scene", new(10, 10), Color.White);
 
-        spriteBatch.DrawString(FLib.DebugFont, "Press A to join, B to unjoin. Press START to begin.", new(10, 30), Color.White);
+        // TODO: Use TextStudio to generate a graphic to replace this text
+        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press A to join, B to leave. Press START to begin.", 1080-100, new Vector2(1920,1080), Color.Black);
+        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press BACK to go back to the main menu.", 1080-70, new Vector2(1920,1080), Color.Black);
 
-        spriteBatch.DrawString(FLib.DebugFont, "Press BACK to go back to the main menu.", new(10, 50), Color.White);
+        //spriteBatch.DrawString(FLib.DebugFont, $"Players in queue: {controllerIndexs.Count} (Split:    Nessie: {Math.Round( nessies )}    |   Tourist: {Math.Round( tourists )})", new(10, 500), Color.White);
+        //spriteBatch.DrawString(FLib.DebugFont, $"{string.Join(", ", controllerIndexs.ToArray())}", new(11, 520), Color.White);
 
-        // Nessie should be 25
-
-        spriteBatch.DrawString(FLib.DebugFont, $"Players in queue: {controllerIndexs.Count} (Split:    Nessie: {Math.Round( nessies )}    |   Tourist: {Math.Round( tourists )})", new(10, 500), Color.White);
-        spriteBatch.DrawString(FLib.DebugFont, $"{string.Join(", ", controllerIndexs.ToArray())}", new(11, 520), Color.White);
-
+        playerCount.Draw(spriteBatch, new Vector2(1920/2, 1080/2), playerCount.Value < 2 ? Color.Red : Color.White);
+        nessieCount.Draw(spriteBatch, new Vector2(1920/4, 1080/3), Color.White);
+        touristCount.Draw(spriteBatch, new Vector2(1920/4*3, 1080/3), Color.White);
 
         spriteBatch.End();
 

@@ -12,6 +12,8 @@ public class Boat : Player {
     float rotation = 0;
     Vector2 cycloidYOffset = Vector2.Zero;
 
+    SpriteEffects spriteEffect = SpriteEffects.None;
+
     public Boat(int controllerIndex) : base(controllerIndex)
     {
     }
@@ -30,16 +32,22 @@ public class Boat : Player {
 
         // combine all the gamepad left thumbstick values from all tourists in GameScene
 
-        Vector2 velocity = Vector2.Zero;
+        if (Velocity.X < 0)
+            spriteEffect = SpriteEffects.FlipHorizontally;
+        else
+            spriteEffect = SpriteEffects.None;
+
+        Velocity = Vector2.Zero;
 
         for (int i = 0; i < GameState.Players.Count; i++)
             if (GameState.Players[i].Role == ActorType.Tourist)
-                velocity += GamePadLeftStick(GameState.Players[i].ControllerIndex);
+                Velocity += GamePadLeftStick(GameState.Players[i].ControllerIndex);
 
-        position += (velocity) * 4;
+        position += (Velocity) * 4;
 
         position.X = Math.Clamp(position.X, -(1920/2), 1920*1.5f);
         position.Y = Math.Clamp(position.Y, -(1080/2), 1080*1.5f);
+
 
 
 
@@ -52,7 +60,7 @@ public class Boat : Player {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        spriteBatch.Draw(TLib.Boat, position + cycloidYOffset, null, Color.White, rotation, new Vector2(TLib.Boat.Width/2, TLib.Boat.Height/2), 1, SpriteEffects.None, 0);
+        spriteBatch.Draw(TLib.Boat, position + cycloidYOffset, null, Color.White, rotation, new Vector2(TLib.Boat.Width/2, TLib.Boat.Height/2), 1, spriteEffect, 0);
     }
 
         private void Bob(GameTime gameTime) {

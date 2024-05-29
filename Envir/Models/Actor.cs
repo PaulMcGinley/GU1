@@ -15,11 +15,11 @@ public class Actor : IMove, IGameObject {
 
     #region IMove Interface
 
-    public Vector2 Velocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float Acceleration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float Friction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float MaxSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float MinSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Vector2 Velocity { get; set; }
+    public float Acceleration { get; set; }
+    public float Friction { get; set; }
+    public float MaxSpeed { get; set; }
+    public float MinSpeed { get; set; }
 
     public void Move(GameTime gameTime) { }
 

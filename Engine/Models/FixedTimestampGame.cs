@@ -29,7 +29,7 @@ public partial class FixedTimestampGame : Game
             PreferMultiSampling = E.Config.AntiAliasing,                                                    // Enable anti-aliasing (smoothing of the edges of the sprites), this comes at an additional fps cost
             PreferredBackBufferWidth = 1920,                                                                // Set the preferred back buffer width
             PreferredBackBufferHeight = 1080,                                                               // Set the preferred back buffer height
-            IsFullScreen = true,                                                                            // Set the game to run in full screen mode
+            IsFullScreen = false,                                                                           // Set the game to run in full screen mode
         };
 
         IsFixedTimeStep = false;

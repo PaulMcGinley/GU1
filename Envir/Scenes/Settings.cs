@@ -49,13 +49,12 @@ public class Settings : IScene {
 
         // Move camera
         camera.Update(gameTime);
-        
     }
 
     public void Draw(SpriteBatch spriteBatch) {
         //draw the settings
         spriteBatch.Begin();
-      
+
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Player Controls", yPosition: 100f, screenDimensions, Color.White);
 

@@ -32,11 +32,9 @@ public class PhotoBook : IScene {
 
     public void OnSceneStart() {
 
-        System.Diagnostics.Debug.WriteLine("PhotoBook scene started");
     }
 
     public void OnSceneEnd() {
 
-        System.Diagnostics.Debug.WriteLine("PhotoBook scene ended");
     }
 }

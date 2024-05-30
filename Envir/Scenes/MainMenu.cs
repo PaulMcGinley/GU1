@@ -38,8 +38,8 @@ public class MainMenu : IScene {
     }
 
     public void Update(GameTime gameTime) {
-        //imput by controller
-        #region Gamepad Input 
+
+        #region Gamepad Input
 
         if (IsGamePadButtonPressed(0, Buttons.DPadDown))
             SelectedMenuIndex++; //when the player moves down the Slected menu box value increases thus changing box
@@ -70,7 +70,7 @@ public class MainMenu : IScene {
             }
 
         #endregion
-        //imput by keyboard
+
         #region Keyboard Input
 
         if (IsKeyPressed(Keys.Down))
@@ -142,15 +142,9 @@ public class MainMenu : IScene {
         spriteBatch.End( );
     }
 
-    public void OnSceneStart() {
+    public void OnSceneStart() { }
 
-        System.Diagnostics.Debug.WriteLine("MainMenu scene started");
-    }
-
-    public void OnSceneEnd() {
-
-        System.Diagnostics.Debug.WriteLine("MainMenu scene ended");
-    }
+    public void OnSceneEnd() { }
 
     enum MenuItems { //declaring the menu items box values
 

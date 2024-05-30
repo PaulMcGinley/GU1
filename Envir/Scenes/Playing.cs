@@ -81,7 +81,7 @@ public class Playing : IScene {
 
         GameState.Boat.Update(gameTime);
 
-        background2.SetOpacity( (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) / 2 + 0.5f);
+        background2.SetOpacity((float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) / 2 + 0.5f);
 
         // Sort the flotsam by their X and Y positions to ensure they are drawn in the correct order
         GameState.Flotsam = GameState.Flotsam
@@ -92,12 +92,19 @@ public class Playing : IScene {
 
     public void Draw(SpriteBatch spriteBatch) {
 
+        #region Background
+
         spriteBatch.Begin();
 
         background.Draw(spriteBatch);
         background2.Draw(spriteBatch);
 
         spriteBatch.End();
+
+        #endregion
+
+
+        #region Gameplay
 
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
@@ -120,6 +127,17 @@ public class Playing : IScene {
             player.Draw(spriteBatch);
 
         spriteBatch.End();
+
+        #endregion
+
+
+        #region UI
+
+        spriteBatch.Begin();
+
+        spriteBatch.End();
+
+        #endregion
     }
 
     public void OnSceneStart() {
@@ -131,6 +149,7 @@ public class Playing : IScene {
 
     public void StartNewRound() {
 
+        // ? Shouldn't need to clear the flotsam, just maybe a reset method
         GameState.Flotsam.Clear();
 
         for (int i = 0; i <= 100; i++) {

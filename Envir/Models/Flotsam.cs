@@ -4,20 +4,17 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace GU1.Envir.Models;
 
 public class Flotsam : Actor {
 
     Random rand = new();
-    /// <summary>
-    /// This seed which with be used for starting offsets / random values so all flotsam objects are unique
-    /// </summary>
     private int seed = 0;
 
     Vector2 RandomScreenPosition => new(rand.Next(0-(1920/2), 1920+(1920/2)), rand.Next(0-(1080/2), 1080+(1080/2)));
 
+    //public int Index = -1;
     public int PlayerIndex = -1;
     public bool PlayerControlled => PlayerIndex > -1;
 
@@ -115,7 +112,7 @@ public class Flotsam : Actor {
 
     void Player_Move(GameTime gameTime) {
 
-        Velocity = GamePadLeftStick(PlayerIndex) * 2500  ;
+        Velocity = (GamePadLeftStick(PlayerIndex) + GamePadRightStick(PlayerIndex)) * 2500  ;
     }
 
     void AI_Move(GameTime gameTime) {
@@ -153,7 +150,6 @@ public class Flotsam : Actor {
 
         if (isCollected) {
             isFadingOut = true;
-            System.Diagnostics.Debug.WriteLine("Flotsam inspected");
         }
     }
 
@@ -172,7 +168,6 @@ public class Flotsam : Actor {
         if (isCollected)
             return false;
 
-        System.Diagnostics.Debug.WriteLine("Flotsam collected");
         isCollected = true;
 
         // TODO: Play a sound effect
@@ -251,7 +246,7 @@ public class Flotsam : Actor {
             return;
 
         // ? Why is sprite not drawing itself?
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), (PlayerControlled ? Color.Black : sprite.GetColour()) * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), (PlayerControlled ? Color.Black : (isCollected ? Color.Red : Color.White)) * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
 
         // #region Boundary Box
 

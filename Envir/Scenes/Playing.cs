@@ -51,18 +51,9 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players)
             player.Update(gameTime);
 
-        // nessie collect flotsam
-        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))
-                foreach (Flotsam flotsam in GameState.Flotsam)
-                    if (flotsam.boundaryBox.Intersects(GameState.Flotsam[player.ControllerIndex].boundaryBox) && IsGamePadButtonPressed(player.ControllerIndex, Buttons.A))  // Check if the flotsam is colliding with the player
-                        if (flotsam.Collect())
-                            player.Score += 100;
+        CheckForCollection();
 
-        // tourist reveal flotsam
-        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
-            foreach (Flotsam flotsam in GameState.Flotsam)
-                if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))  // Check if the flotsam is colliding with the player
-                    flotsam.Inspect();
+        CheckForReveal();
 
 #if DEBUG
 
@@ -81,6 +72,45 @@ public class Playing : IScene {
             // gameState.Players = _gameState.Players;
         }
 #endif
+    }
+
+    /// <summary>
+    /// Check for nessie collecting flotsam
+    /// </summary>
+    void CheckForCollection() {
+
+        /* Note from Dev:
+         * For who ever is looking at the code below, I apologies.
+         * I had planned on implmenting player control differently, but ran out of time.
+         * This works, and is full of educational value... And a whole 'what not to do's' xD
+        */
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
+                foreach (Flotsam flotsam in GameState.Flotsam)                                              // Loop through all flotsam objects
+                    if(GameState.Flotsam                                                                    // If, from the list of flotsam
+                                        .Where(p=>p.PlayerIndex == player.ControllerIndex)                  // Get a list of flotsam that have the same player index as the player
+                                        .First()                                                            // Get the first flotsam object from the list, because we only need one and only have one xD
+                                        .boundaryBox.Intersects(flotsam.boundaryBox) &&                     // Check if the player is colliding with the flotsam
+                        IsGamePadButtonPressed(player.ControllerIndex, Buttons.A))                          // Check if the player is pressing the A button
+                        // We ask the flotsam to collect the object, if it returns true, the player has collected the flotsam, if false, the player has not collected the flotsam
+                        if (flotsam.Collect()) {
+
+                            player.Score += 100;                                                            // Add 100 to the player's score
+                            return;                                                                         // Exit the method to prevent the player from collecting multiple flotsam in one frame
+                        }
+    }
+
+    /// <summary>
+    /// Check for tourist revealing flotsam
+    /// </summary>
+    void CheckForReveal() {
+
+        // No complaints here, would ideally be optimized but it works without a major performance hit
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
+            foreach (Flotsam flotsam in GameState.Flotsam)
+                if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))  // Check if the flotsam is colliding with the player
+                    flotsam.Inspect();
     }
 
     /// <summary>

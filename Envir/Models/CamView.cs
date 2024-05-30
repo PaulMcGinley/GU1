@@ -6,6 +6,8 @@ namespace GU1.Envir.Models;
 
 public class CamView : IMove {
 
+    Random rand = new();
+
     public Vector2 position = Vector2.Zero;
     public Vector2 offset = Vector2.Zero;
     Color colour;
@@ -18,6 +20,7 @@ public class CamView : IMove {
         this.colour = colour;                                                                               // The players colour
         this.maxPhotos = maxPhotos;                                                                         // The maximum number of photos the player can take
         this.remainingPhotos = maxPhotos;                                                                   // The number of photos the player has left (set this to the max number of photos at the start of the game)
+        offset = new Vector2(rand.Next(-500,500), rand.Next(-500,500));                                                                    // Random offset for the camera view
     }
 
     #region IMove Interface

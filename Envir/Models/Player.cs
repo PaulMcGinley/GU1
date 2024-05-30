@@ -50,14 +50,14 @@ public class Player : Actor {
     /// Set the player's role.
     /// </summary>
     /// <param name="type"></param>
-    public void SetPlayedAs(ActorType type) {
+    public void SetPlayedAs(ActorType role) {
 
-        Type = type;
+        Role = role;
 
-        if (type == ActorType.Nessie)
+        if (role == ActorType.Nessie)
             playedAsNessie = true;
 
-        if (type == ActorType.Tourist)
+        if (role == ActorType.Tourist)
             playedAsTourist = true;
     }
 

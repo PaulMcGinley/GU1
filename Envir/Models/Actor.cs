@@ -8,7 +8,7 @@ public class Actor : IMove, IGameObject {
 
     #region Properties
 
-    virtual public ActorType Type { get; set; } = ActorType.AI;
+    //virtual public ActorType Type { get; set; } = ActorType.AI;
 
     #endregion
 

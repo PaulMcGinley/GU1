@@ -72,7 +72,7 @@ public class StartOfRound : IScene {
 
         // Default everyone to tourist
         foreach (Player player in GameState.Players)
-            player.Role = ActorType.Tourist;
+            player.Role = ActorType.Tourist; // Set the role direct to prevent it being counted as a played role
 
         // Track the number of nessies that need to be assigned
         int remainingNessies = (int)Math.Round(nessieCount);
@@ -82,7 +82,7 @@ public class StartOfRound : IScene {
 
             if (player.PreferredRole() == ActorType.Nessie) {
 
-                player.Role = ActorType.Nessie;
+                player.SetPlayedAs(ActorType.Nessie);
                 remainingNessies--;
             }
 
@@ -98,7 +98,7 @@ public class StartOfRound : IScene {
 
                 if (player.Role == ActorType.Tourist) {
 
-                    player.Role = ActorType.Nessie;
+                    player.SetPlayedAs(ActorType.Nessie);
                     remainingNessies--;
                 }
 
@@ -109,10 +109,6 @@ public class StartOfRound : IScene {
     }
 
     public void OnSceneStart() {
-
-        sceneStartTime = currentTime = 0;                                                                    // Reset the scene start and current times
-
-        AssignRoles();
 
         bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
 
@@ -125,10 +121,13 @@ public class StartOfRound : IScene {
         if (endGame) {
 
             // Do something
-            // GameState.CurrentScene = GameScene.EndGame;
+             GameState.CurrentScene = GameScene.MainMenu;
             //return;
         }
 
+        AssignRoles();
+
+        sceneStartTime = currentTime = 0;                                                                    // Reset the scene start and current times
     }
 
     public void OnSceneEnd() { }

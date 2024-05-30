@@ -55,6 +55,8 @@ public class Playing : IScene {
 
         CheckForReveal();
 
+        CheckForEndRound();
+
 #if DEBUG
 
         if (IsKeyPressed(Keys.S))
@@ -72,6 +74,21 @@ public class Playing : IScene {
             // gameState.Players = _gameState.Players;
         }
 #endif
+    }
+
+    private void CheckForEndRound() {
+
+        bool gameOver = true;
+
+        foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>!f.PlayerControlled))
+            if (!flotsam.isCollected) {
+
+                gameOver = false;
+                break;
+            }
+
+        if (gameOver)
+            GameState.CurrentScene = GameScene.Lobby;
     }
 
     /// <summary>
@@ -149,7 +166,7 @@ public class Playing : IScene {
 
         #region Gameplay
 
-        spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
+        spriteBatch.Begin(transformMatrix: camera.TransformMatrix, samplerState: SamplerState.PointClamp);
 
 
         foreach (var flotsam in GameState.Flotsam)
@@ -195,7 +212,7 @@ public class Playing : IScene {
         // ? Shouldn't need to clear the flotsam, just maybe a reset method
         GameState.Flotsam.Clear();
 
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i <= 5; i++) {
 
             int idx = random.Int(0, TLib.Flotsam.Length);                                                   // Randomly select a flotsam sprite
 

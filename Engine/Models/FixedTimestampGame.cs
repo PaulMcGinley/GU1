@@ -9,7 +9,7 @@ public partial class FixedTimestampGame : Game
     public SpriteBatch spriteBatch;
 
     //public int TargetFrameRate { get; set; } = 120;                                                         // The target frame rate of the game // TODO: Add this
-    public float fixedUpdateDelta = (int)(1000 / (float)30);                                                // The fixed update delta time of the game ( 30 fps )
+    public float fixedUpdateDelta = (int)(1000 / (float)60);                                                // The fixed update delta time of the game ( 30 fps )
 
     // helper variables for the fixed update
     private float previousTime = 0;
@@ -29,7 +29,7 @@ public partial class FixedTimestampGame : Game
             PreferMultiSampling = E.Config.AntiAliasing,                                                    // Enable anti-aliasing (smoothing of the edges of the sprites), this comes at an additional fps cost
             PreferredBackBufferWidth = 1920,                                                                // Set the preferred back buffer width
             PreferredBackBufferHeight = 1080,                                                               // Set the preferred back buffer height
-            IsFullScreen = false,                                                                            // Set the game to run in full screen mode
+            IsFullScreen = true,                                                                            // Set the game to run in full screen mode
         };
 
         IsFixedTimeStep = false;
@@ -53,7 +53,7 @@ public partial class FixedTimestampGame : Game
 
     protected override void Update(GameTime gameTime) {
 
-        if(previousTime == 0)
+        if (previousTime == 0)
             previousTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
 
         float now = (float)gameTime.TotalGameTime.TotalMilliseconds;
@@ -71,7 +71,6 @@ public partial class FixedTimestampGame : Game
             FixedUpdate(gameTime);
             accumulator -= fixedUpdateDelta;
         }
-
 
         base.Update(gameTime);
 

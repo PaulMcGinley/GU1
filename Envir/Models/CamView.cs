@@ -12,9 +12,6 @@ public class CamView : IMove {
     int maxPhotos;
     int remainingPhotos;
 
-    // Rectangle CameraFrame => new ((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
-    // Rectangle PNumberBox => new ((int)position.X - 20, (int)position.Y, 20, 20);
-
     public CamView(Color colour, int maxPhotos) {
 
         this.position = position;                                                                           // Position of the camera view within the game world
@@ -40,9 +37,8 @@ public class CamView : IMove {
 
     public void Update(GameTime gameTime) {
 
-         Math.Clamp(offset.X, -500, 500);
-         Math.Clamp(offset.Y, -500, 500);
-
+        offset.X = Math.Clamp(offset.X, -500, 500);
+        offset.Y =  Math.Clamp(offset.Y, -500, 500);
     }
 
     public void TakePhoto() {
@@ -59,16 +55,6 @@ public class CamView : IMove {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        // Draw the camera frame border
-        // DrawRectangle(CameraFrame, spriteBatch, colour, 1);
-
-        // // Draw the player number box
-        // DrawFilledRectangle(PNumberBox, spriteBatch, colour);
-        // spriteBatch.DrawString(FLib.DebugFont, remainingPhotos.ToString(), new Vector2(position.X +5, position.Y - 15), Color.White);
-
         spriteBatch.Draw(TLib.CameraView, position + offset, Color.White); // Draw the camera view (texture
     }
-
-    //public void DrawCutout(SpriteBatch spriteBatch) => DrawFilledRectangle(CameraFrame, spriteBatch, Color.Transparent);
-
 }

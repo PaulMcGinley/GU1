@@ -1,5 +1,4 @@
-﻿using System.Data.SqlTypes;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Envir.Models;
@@ -55,6 +54,8 @@ public class FancyNumber {
     /// <returns></returns>
     public static bool operator <(FancyNumber a, int b) => a.Value < b;
 
+    public static bool operator <(int a, FancyNumber b) => a < b.Value;
+
     /// <summary>
     ///
     /// </summary>
@@ -62,6 +63,8 @@ public class FancyNumber {
     /// <param name="b"></param>
     /// <returns></returns>
     public static bool operator >(FancyNumber a, int b) => a.Value > b;
+
+    public static bool operator >(int a, FancyNumber b) => a > b.Value;
 
     /// <summary>
     ///
@@ -71,6 +74,8 @@ public class FancyNumber {
     /// <returns></returns>
     public static bool operator ==(FancyNumber a, int b) => a.Value == b;
 
+    public static bool operator ==(int a, FancyNumber b) => a == b.Value;
+
     /// <summary>
     ///
     /// </summary>
@@ -78,6 +83,8 @@ public class FancyNumber {
     /// <param name="b"></param>
     /// <returns></returns>
     public static bool operator !=(FancyNumber a, int b) => a.Value != b;
+
+    public static bool operator !=(int a, FancyNumber b) => a != b.Value;
 
     #endregion
 }

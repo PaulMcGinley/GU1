@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,16 +9,16 @@ namespace GU1.Envir.Models;
 
 public class Flotsam : Actor {
 
-    public Random random = new();
-    Vector2 randomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
-
+    Random rand = new();
     /// <summary>
     /// This seed which with be used for starting offsets / random values so all flotsam objects are unique
     /// </summary>
     private int seed = 0;
 
-    public bool PlayerControlled => PlayerIndex > -1;
+    Vector2 RandomScreenPosition => new(rand.Next(0-(1920/2), 1920+(1920/2)), rand.Next(0-(1080/2), 1080+(1080/2)));
+
     public int PlayerIndex = -1;
+    public bool PlayerControlled => PlayerIndex > -1;
 
     public Sprite2D sprite;
     Vector2 cycloidYOffset = Vector2.Zero;
@@ -66,13 +65,12 @@ public class Flotsam : Actor {
 
     public void Construction() {
 
-        TargetPosition = randomScreenPosition;
+        TargetPosition = RandomScreenPosition;
         Velocity = TargetPosition - Position;
 
-        colour = new Color(random.Int(0, 255), random.Int(0, 255), random.Int(0, 255));
-        MoveSpeed = random.Float(0.5f, 2.0f);
-        seed = random.Next();
-
+        colour = new Color(rand.Int(0, 255), rand.Int(0, 255), rand.Int(0, 255));
+        MoveSpeed = rand.Float(0.5f, 2.0f);
+        seed = rand.Next();
     }
 
     public void Initialize(GraphicsDevice device) {
@@ -110,7 +108,6 @@ public class Flotsam : Actor {
 
         if (Position.Y > 1080*1.5f)
             Position = new(Position.X, -(1080/2));
-
     }
 
     void Player_Move(GameTime gameTime) {
@@ -124,9 +121,9 @@ public class Flotsam : Actor {
             return;
 
         // TODO: Implement a better way to move the flotsam
-        if (Vector2.Distance(Position, TargetPosition) <= 10f || random.Next(0, 500) == 0) {
+        if (Vector2.Distance(Position, TargetPosition) <= 10f || rand.Next(0, 500) == 0) {
 
-            TargetPosition = randomScreenPosition;
+            TargetPosition = RandomScreenPosition;
             Velocity = TargetPosition - Position;
 
             if (Velocity.X < 0)
@@ -134,8 +131,8 @@ public class Flotsam : Actor {
             else
                 sprite.SetEffects(SpriteEffects.None);
 
-            nextMoveTime = gameTime.TotalGameTime.TotalMilliseconds + random.Next(0, 3000);
-            MoveSpeed = random.Float(0.5f, 2.0f);
+            nextMoveTime = gameTime.TotalGameTime.TotalMilliseconds + rand.Next(0, 3000);
+            MoveSpeed = rand.Float(0.5f, 2.0f);
         }
     }
 
@@ -206,15 +203,6 @@ public class Flotsam : Actor {
         // }
     }
 
-    void Player_Update(GameTime gameTime) {
-
-
-    }
-
-    void AI_Update(GameTime gameTime) {
-
-    }
-
     /// <summary>
     /// This method is used to make the flotsam bob up and down with a slight rotation
     /// </summary>
@@ -237,8 +225,6 @@ public class Flotsam : Actor {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-    //    if (sprite.GetTexture() == null) return;
-
         // Guardian clause: if the flotsam is not alive, has been collected and is not fading out then don't draw it
         if (!isAlive && isCollected && !isFadingOut)
             return;
@@ -248,8 +234,9 @@ public class Flotsam : Actor {
 
         // #region Boundary Box
 
-if (PlayerControlled)
-        DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
+        // Draw a box around the flotsam if it is player controlled
+        if (PlayerControlled)
+            DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
 
         // #endregion
 

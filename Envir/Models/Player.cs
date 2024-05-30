@@ -8,7 +8,6 @@ public class Player : Actor {
 
     readonly Random rand = new();
 
-    //public Actor Object { get; set; }
     CamView CameraView { get; set; }
 
     public ActorType Role { get; set; }
@@ -62,6 +61,9 @@ public class Player : Actor {
             playedAsTourist = true;
     }
 
+    /// <summary>
+    /// Reset the player.
+    /// </summary>
     public void Reset() {
 
         playedAsNessie = false;
@@ -73,6 +75,7 @@ public class Player : Actor {
 
     public new void Update(GameTime gameTime) {
 
+        // Guardian clause: if the player is not a tourist then don't update the camera view
         if (Role != ActorType.Tourist) return;
 
         CameraView.offset += GamePadRightStick(ControllerIndex) * 5;
@@ -83,14 +86,13 @@ public class Player : Actor {
 
     public new void FixedTimestampUpdate(GameTime gameTime) {
 
-        //Object.FixedTimestampUpdate(gameTime);
     }
 
     public new void Draw(SpriteBatch spriteBatch) {
 
-        
-
+        // Guardian clause: if the player is not a tourist then don't draw the camera view
         if (Role != ActorType.Tourist) return;
+
         CameraView.Draw(spriteBatch);
     }
 }

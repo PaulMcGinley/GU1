@@ -13,17 +13,15 @@ public class Credits : IScene {
     Vector2 screenDimensions => new(viewport.Width, viewport.Height);                                       // The dimensions of the screen from the viewport
 
     const int lineSpacing = 50;                                                                             // The space between each line of text
-    readonly string[,] credits = new string[,] {
-  //giving people their credit in the game
-        //JOB                            NAME
+    readonly string[,] credits = new string[,] {                                                            // The list of credits, job and name
+        //JOB                           NAME
         { "Game Concept / Design",      "Corey Connolly" },
         { "Project Manager",            "Kieran Bett" },
         { "Lead Programmer",            "Paul Mcginely" },
-        { "Additional Programer" ,     "Alexander Tuffy" },
-        { "Audio Creator",            "Albert Bugheanu" },
+        { "Additional Programer" ,      "Alexander Tuffy" },
+        { "Audio Creator",              "Albert Bugheanu" },
         { "Floatsam Art designer",      "Alexander Tuffy" },
-        { "Nessie Art Designer",            "Corey Connolly" },
-        
+        { "Nessie Art Designer",        "Corey Connolly" },
     };
 
     public void Initialize(GraphicsDevice device) {
@@ -39,10 +37,8 @@ public class Credits : IScene {
     public void Update(GameTime gameTime) {
 
         if (IsAnyInputDown(Keys.B, Buttons.B, Buttons.Start))
- 
             GameState.CurrentScene = GameScene.MainMenu;
-        } 
-            
+    }
 
     public void FixedUpdate(GameTime gameTime) {
 
@@ -53,21 +49,19 @@ public class Credits : IScene {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        // There is no transform matrix for the background, it will always be drawn at the same position
-        spriteBatch.Begin();
-        //draw the bottom left text to get back to the menu
-        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
+        spriteBatch.Begin(); // There is no transform matrix for the background, it will always be drawn at the same position
+
         // TODO: Draw the background
+
+        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
 
         spriteBatch.End();
 
-        // We use the cameras transform matrix to draw the scene to move the credits based on the camera position
+
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
-
-
 
         // Draw the credits
         for (int i = 0; i < credits.GetLength(0); i++)

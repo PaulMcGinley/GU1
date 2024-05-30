@@ -20,8 +20,10 @@ public static class RumbleQueue {
     }
 
     public static void Update(GameTime gameTime) {
+
+        double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
         for (int i = 0; i < rumbles.Count; i++) {
-            if (gameTime.TotalGameTime.TotalMilliseconds - rumbles[i].StartTime >= rumbles[i].EndTime) {
+            if (currentTime >= rumbles[i].EndTime) {
                 GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
                 rumbles.RemoveAt(i);
                 i--;

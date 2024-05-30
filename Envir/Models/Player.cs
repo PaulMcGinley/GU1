@@ -36,10 +36,10 @@ public class Player : Actor {
     /// <returns></returns>
     public ActorType PreferredRole() {
 
-        if (playedAsNessie)
+        if (!playedAsNessie)
             return ActorType.Nessie;
 
-        if (playedAsTourist)
+        if (!playedAsTourist)
             return ActorType.Tourist;
 
         return rand.Bool() ? ActorType.Nessie : ActorType.Tourist;

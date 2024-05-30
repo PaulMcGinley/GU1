@@ -87,6 +87,9 @@ public class Flotsam : Actor {
 
     public void Move(GameTime gameTime) {
 
+        if (!isAlive)
+            return;
+
         if (PlayerControlled)
             Player_Move(gameTime);
         else
@@ -117,9 +120,6 @@ public class Flotsam : Actor {
 
     void AI_Move(GameTime gameTime) {
 
-        if (!isAlive)
-            return;
-
         if (gameTime.TotalGameTime.TotalMilliseconds < nextMoveTime)
             return;
 
@@ -146,7 +146,8 @@ public class Flotsam : Actor {
     /// </summary>
     public void Inspect() {
 
-       // System.Diagnostics.Debug.WriteLine("Flotsam inspected pre-check");
+        if (!isAlive)
+            return;
 
         if (isCollected) {
             isFadingOut = true;
@@ -273,13 +274,5 @@ public class Flotsam : Actor {
 
         foreach (var ripple in ripples)
             ripple.Draw(spriteBatch);
-    }
-
-    public void DrawShadowOverlay(SpriteBatch spriteBatch) {
-
-        if (!isAlive && isCollected && !isFadingOut)
-            return;
-
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position, sprite.GetSourceRectangle(), (Color.Black * 0.7f ) * opacity, sprite.GetRotation(), sprite.GetOrigin(), sprite.GetScale() * (PlayerControlled ? 2f : 1f), sprite.GetEffects(), sprite.GetLayerDepth());
     }
 }

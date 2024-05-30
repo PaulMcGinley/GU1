@@ -88,14 +88,14 @@ public class Lobby : IScene {
         }
 
         // Assign roles to the players
-        AssignRoles();
+        //AssignRoles();
 
         // vibrate the controllers to indicate the start of the game / role assignment
-        VibrateControllers(gameTime);
+        //VibrateControllers(gameTime);
 
         // Set the scene to playing
         // ! This may need to be moved to an area after where the roles are assigned
-        GameState.CurrentScene = GameScene.Playing;
+        GameState.CurrentScene = GameScene.StartOfRound;
     }
 
     private void VibrateControllers(GameTime gameTime) {
@@ -112,62 +112,62 @@ public class Lobby : IScene {
 
     // ! There is a bug where sometimes not all roles are assigned correctly
     // ? This might be resolved now
-    public void AssignRoles() {
+    // public void AssignRoles() {
 
-        // Default everyone to tourist
-        foreach (Player player in GameState.Players)
-            player.Role = ActorType.Tourist;
+    //     // Default everyone to tourist
+    //     foreach (Player player in GameState.Players)
+    //         player.Role = ActorType.Tourist;
 
-        // Track the number of nessies that need to be assigned
-        int remainingNessies = (int)nessieCount.Value;
+    //     // Track the number of nessies that need to be assigned
+    //     int remainingNessies = (int)nessieCount.Value;
 
-        // Assign nessies to players who have not played as Nessie before
-        foreach (Player player in GameState.Players) {
+    //     // Assign nessies to players who have not played as Nessie before
+    //     foreach (Player player in GameState.Players) {
 
-            if (player.PreferredRole() == ActorType.Nessie) {
+    //         if (player.PreferredRole() == ActorType.Nessie) {
 
-                player.Role = ActorType.Nessie;
-                remainingNessies--;
-            }
+    //             player.Role = ActorType.Nessie;
+    //             remainingNessies--;
+    //         }
 
-            if (remainingNessies == 0)
-                break;
-        }
+    //         if (remainingNessies == 0)
+    //             break;
+    //     }
 
-        // If there are still nessies to assign, assign them to players who have played as Nessie before
-        if (remainingNessies > 0) {
+    //     // If there are still nessies to assign, assign them to players who have played as Nessie before
+    //     if (remainingNessies > 0) {
 
-            // Assign nessies to players who have played as Nessie before
-            foreach (Player player in GameState.Players) {
+    //         // Assign nessies to players who have played as Nessie before
+    //         foreach (Player player in GameState.Players) {
 
-                if (player.Role == ActorType.Tourist) {
+    //             if (player.Role == ActorType.Tourist) {
 
-                    player.Role = ActorType.Nessie;
-                    remainingNessies--;
-                }
+    //                 player.Role = ActorType.Nessie;
+    //                 remainingNessies--;
+    //             }
 
-                if (remainingNessies == 0)
-                    break;
-            }
-        }
-    }
+    //             if (remainingNessies == 0)
+    //                 break;
+    //         }
+    //     }
+    // }
 
     public void OnSceneStart() {
 
-        bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
+        // bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
 
-        foreach (Player player in GameState.Players)                                                        // Loop through all players
-            if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
-                endGame = false;                                                                            // Set endGame to false
-                break;                                                                                      // Exit the loop
-            }
+        // foreach (Player player in GameState.Players)                                                        // Loop through all players
+        //     if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
+        //         endGame = false;                                                                            // Set endGame to false
+        //         break;                                                                                      // Exit the loop
+        //     }
 
-        if (endGame) {
+        // if (endGame) {
 
-            // Do something
-            // GameState.CurrentScene = GameScene.EndGame;
-            //return;
-        }
+        //     // Do something
+        //     // GameState.CurrentScene = GameScene.EndGame;
+        //     //return;
+        // }
     }
 
     public void OnSceneEnd() {

@@ -15,5 +15,6 @@ public enum GameScene {
     Playing,
     PhotoBook,
     Credits,
-    Settings
+    Settings,
+    StartOfRound,
 }

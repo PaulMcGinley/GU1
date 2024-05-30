@@ -88,7 +88,7 @@ public class Playing : IScene {
             }
 
         if (gameOver)
-            GameState.CurrentScene = GameScene.Lobby;
+            GameState.CurrentScene = GameScene.StartOfRound;
     }
 
     /// <summary>

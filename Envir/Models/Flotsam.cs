@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GU1.Envir.Models;
 
@@ -28,11 +29,12 @@ public class Flotsam : Actor {
     public Vector2 TargetPosition { get; set; }
     public float MoveSpeed { get; set; } = 1.0f;
 
-    private bool isAlive = true;
-    private bool isCollected = false;
-    private bool isFadingOut = false;
+    public bool isAlive = true;
+    public bool isCollected = false;
+    public bool isFadingOut = false;
 
     Color colour = Color.White;
+    public Rectangle boundaryBox => new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64);
 
     double nextMoveTime = 0;
 
@@ -93,6 +95,9 @@ public class Flotsam : Actor {
         else
             AI_Move(gameTime);
 
+        if (isFadingOut)
+            return;
+
         Velocity.Normalize();
 
         Position += (Velocity/500) * MoveSpeed;
@@ -116,6 +121,9 @@ public class Flotsam : Actor {
     }
 
     void AI_Move(GameTime gameTime) {
+
+        if (!isAlive || isFadingOut)
+            return;
 
         if (gameTime.TotalGameTime.TotalMilliseconds < nextMoveTime)
             return;
@@ -143,7 +151,7 @@ public class Flotsam : Actor {
     /// </summary>
     public void Inspect() {
 
-        if (!isAlive && isCollected && !isFadingOut)
+        if (isAlive && isCollected && !isFadingOut)
             isFadingOut = true;
     }
 
@@ -171,14 +179,23 @@ public class Flotsam : Actor {
 
     public void Update(GameTime gameTime) {
 
+        if (!isAlive)
+            return;
+
+        if (isFadingOut && opacity > 0.0f)
+            opacity -= 0.05f;
+        else if (isFadingOut) {
+
+            isFadingOut = false;
+            isAlive = false;
+        }
+
         if (sprite.GetTexture() == null )
             sprite.SetTexture(TLib.Flotsam[spriteIndex]);
 
         Bob(gameTime);
         Move(gameTime);
 
-        if (!isAlive)
-            return;
 
         // // TODO: Optimize this or remove it
         // for (int i = ripples.Count-1; i == 0; i++)
@@ -226,7 +243,7 @@ public class Flotsam : Actor {
     public void Draw(SpriteBatch spriteBatch) {
 
         // Guardian clause: if the flotsam is not alive, has been collected and is not fading out then don't draw it
-        if (!isAlive && isCollected && !isFadingOut)
+        if (!isAlive)
             return;
 
         // ? Why is sprite not drawing itself?

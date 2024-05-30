@@ -103,9 +103,9 @@ public class Lobby : IScene {
         foreach (Player player in GameState.Players) {
 
             if (player.Role == ActorType.Nessie)
-                RumbleQueue.AddRumble(player.ControllerIndex, 2000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
-            else
-                RumbleQueue.AddRumble(player.ControllerIndex, 2000, gameTime.ElapsedGameTime.TotalMilliseconds + 2500, 1f, 1f);
+                RumbleQueue.AddRumble(player.ControllerIndex, 5000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
+            else if (player.Role == ActorType.Tourist)
+                RumbleQueue.AddRumble(player.ControllerIndex, 2500, gameTime.ElapsedGameTime.TotalMilliseconds, 1f, 1f);
         }
 
     }

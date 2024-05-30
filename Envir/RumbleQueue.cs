@@ -20,19 +20,32 @@ public static class RumbleQueue {
 
     public static void Update(GameTime gameTime) {
 
+        if (rumbles.Count == 0) return;
+
         double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
-        for (int i = 0; i < rumbles.Count; i++) {
+
+        for (int i = rumbles.Count -1 ; i >= 0; i--) {
             if (currentTime >= rumbles[i].EndTime) {
                 GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
                 rumbles.RemoveAt(i);
-                i--;
             } else {
                 GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, rumbles[i].LeftMotor, rumbles[i].RightMotor);
             }
         }
+
+        // for (int i = 0; i < rumbles.Count; i++) {
+        //     if (currentTime >= rumbles[i].EndTime) {
+        //         GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
+        //         rumbles.RemoveAt(i);
+        //         i--;
+        //     } else {
+        //         GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, rumbles[i].LeftMotor, rumbles[i].RightMotor);
+        //     }
+        // }
     }
 
     public static void Clear() {
+
         rumbles.Clear();
     }
 

@@ -8,7 +8,7 @@ public class Player : Actor {
 
     readonly Random rand = new();
 
-    CamView CameraView { get; set; }
+    public CamView CameraView { get; set; }
 
     public ActorType Role { get; set; }
     /// <summary>

@@ -51,6 +51,33 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players)
             player.Update(gameTime);
 
+        // nessie collect flotsam
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))
+            if (IsGamePadButtonPressed(player.ControllerIndex, Buttons.A)) {
+
+                foreach (Flotsam flotsam in GameState.Flotsam) {
+
+                    if (flotsam.boundaryBox.Intersects(GameState.Flotsam[player.ControllerIndex].boundaryBox))  // Check if the flotsam is colliding with the player
+                        if (flotsam.Collect())
+                            player.Score += 100;
+                }
+            }
+
+        // tourist reveal flotsam
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist)) {
+
+            foreach (Flotsam flotsam in GameState.Flotsam) {
+
+                if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))  {// Check if the flotsam is colliding with the player
+                System.Diagnostics.Debug.WriteLine("Colliding");
+                    flotsam.Inspect();
+                }
+            }
+        }
+
+
+
+
 #if DEBUG
 
         if (IsKeyPressed(Keys.S))

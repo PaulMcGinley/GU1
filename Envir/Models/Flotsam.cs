@@ -95,8 +95,6 @@ public class Flotsam : Actor {
         else
             AI_Move(gameTime);
 
-        if (isFadingOut)
-            return;
 
         Velocity.Normalize();
 
@@ -122,7 +120,7 @@ public class Flotsam : Actor {
 
     void AI_Move(GameTime gameTime) {
 
-        if (!isAlive || isFadingOut)
+        if (!isAlive)
             return;
 
         if (gameTime.TotalGameTime.TotalMilliseconds < nextMoveTime)
@@ -151,8 +149,12 @@ public class Flotsam : Actor {
     /// </summary>
     public void Inspect() {
 
-        if (isAlive && isCollected && !isFadingOut)
+       // System.Diagnostics.Debug.WriteLine("Flotsam inspected pre-check");
+
+        if (isCollected) {
             isFadingOut = true;
+            System.Diagnostics.Debug.WriteLine("Flotsam inspected");
+        }
     }
 
     /// <summary>
@@ -170,6 +172,7 @@ public class Flotsam : Actor {
         if (isCollected)
             return false;
 
+        System.Diagnostics.Debug.WriteLine("Flotsam collected");
         isCollected = true;
 
         // TODO: Play a sound effect
@@ -182,9 +185,10 @@ public class Flotsam : Actor {
         if (!isAlive)
             return;
 
-        if (isFadingOut && opacity > 0.0f)
+        if (isFadingOut)
             opacity -= 0.05f;
-        else if (isFadingOut) {
+
+         if (opacity <= 0.0f) {
 
             isFadingOut = false;
             isAlive = false;

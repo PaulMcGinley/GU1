@@ -105,14 +105,15 @@ public class Lobby : IScene {
         foreach (Player player in GameState.Players) {
 
             if (player.Role == ActorType.Nessie)
-                RumbleQueue.AddRumble(player.ControllerIndex, 1000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
+                RumbleQueue.AddRumble(player.ControllerIndex, 2000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
             else
-                RumbleQueue.AddRumble(player.ControllerIndex, 1000, gameTime.ElapsedGameTime.TotalMilliseconds + 1500, 1f, 1f);
+                RumbleQueue.AddRumble(player.ControllerIndex, 2000, gameTime.ElapsedGameTime.TotalMilliseconds + 2500, 1f, 1f);
         }
 
     }
 
     // ! There is a bug where sometimes not all roles are assigned correctly
+    // ? This might be resolved now
     public void AssignRoles() {
 
         foreach (Player player in GameState.Players)

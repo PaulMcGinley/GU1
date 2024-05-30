@@ -8,7 +8,8 @@ public class Player : Actor {
 
     readonly Random rand = new();
 
-    public Actor Object { get; set; }
+    //public Actor Object { get; set; }
+    CamView CameraView { get; set; }
 
     public ActorType Role { get; set; }
     /// <summary>
@@ -25,6 +26,7 @@ public class Player : Actor {
     public Player(int controllerIndex) {
 
        ControllerIndex = controllerIndex;
+       CameraView = new CamView(Color.White, 5);
     }
 
     /// <summary>
@@ -69,19 +71,26 @@ public class Player : Actor {
 
     public void AddScore(int score) => Score += score;
 
-
     public new void Update(GameTime gameTime) {
 
-        Object.Update(gameTime);
+        if (Role != ActorType.Tourist) return;
+
+        CameraView.offset += GamePadRightStick(ControllerIndex) * 5;
+
+        CameraView.position = GameState.Boat.Position;
+        CameraView.Update(gameTime);
     }
 
     public new void FixedTimestampUpdate(GameTime gameTime) {
 
-        Object.FixedTimestampUpdate(gameTime);
+        //Object.FixedTimestampUpdate(gameTime);
     }
 
     public new void Draw(SpriteBatch spriteBatch) {
 
-        Object.Draw(spriteBatch);
+        
+
+        if (Role != ActorType.Tourist) return;
+        CameraView.Draw(spriteBatch);
     }
 }

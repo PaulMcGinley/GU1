@@ -9,6 +9,7 @@ namespace GU1.Envir.Models;
 public class Boat : Player {
 
     Vector2 position = new(1920/2, 1080/2);
+    public Vector2 Position => position;
     float rotation = 0;
     Vector2 cycloidYOffset = Vector2.Zero;
 

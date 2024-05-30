@@ -205,6 +205,8 @@ public static class DeviceState {
 
     public static Vector2 GamePadLeftStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Left.X, -GamePadsState[index].ThumbSticks.Left.Y);
 
+    public static Vector2 GamePadRightStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Right.X, -GamePadsState[index].ThumbSticks.Right.Y);
+
     #endregion
 
     #region Any Input

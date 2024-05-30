@@ -48,6 +48,9 @@ public class Playing : IScene {
 
         camera.Update(gameTime);
 
+        foreach (Player player in GameState.Players)
+            player.Update(gameTime);
+
 #if DEBUG
 
         if (IsKeyPressed(Keys.S))
@@ -112,6 +115,9 @@ public class Playing : IScene {
             flotsam.Draw(spriteBatch);
 
         GameState.Boat.Draw(spriteBatch);
+
+        foreach (Player player in GameState.Players)
+            player.Draw(spriteBatch);
 
         spriteBatch.End();
     }

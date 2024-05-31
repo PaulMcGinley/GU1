@@ -28,7 +28,7 @@ public class Playing : IScene {
 
         camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
-        camera.SetZoomLevel(0.5f);                                                                                 // Set the camera zoom level
+        camera.SetZoomLevel(0.5f);                                                                          // Set the camera zoom level
     }
 
     public void LoadContent(ContentManager content) { }
@@ -46,16 +46,22 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players)
             player.Update(gameTime);
 
+        // Check if Nessie has collected any flotsam
         CheckForCollection();
 
+        // Check if the tourist has taken a photo
         CheckForPhotoTaken();
 
+        // Check if the tourist has revealed any collected flotsam
         CheckForReveal();
 
+        // Check if Nessie has collected all the flotsam
         CheckForNessieWin();
 
+        // Check if the tourist has photographed all the nessies
         CheckForTouristWin();
 
+        // Check if the tourist has run out of photos
         CheckForTouristLose();
 
 #if DEBUG
@@ -106,11 +112,10 @@ public class Playing : IScene {
                         if (_score > 0) {
                             player.Score += _score;                                                                 // Add score to player
                             GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isFadingOut = true;    // Set the nessie flotsam to not alive
-                            _score = 0;                                                                            // Reset the score tracker
+                            _score = 0;                                                                             // Reset the score tracker
                         }
                     }
             }
-
     }
 
     private void CheckForNessieWin() {
@@ -147,12 +152,6 @@ public class Playing : IScene {
     /// Check for nessie collecting flotsam
     /// </summary>
     void CheckForCollection() {
-
-        /* Note from Paul:
-         * For who ever is looking at the code below, I apologies.
-         * I had planned on implementing player control differently, but ran out of time.
-         * This works, and is full of educational value... And a whole 'what not to do's' xD
-        */
 
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
                 foreach (Flotsam flotsam in GameState.Flotsam)                                              // Loop through all flotsam objects
@@ -216,7 +215,7 @@ public class Playing : IScene {
         #endregion
 
 
-        #region Gameplay
+        #region Game
 
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix, samplerState: SamplerState.PointClamp);
 

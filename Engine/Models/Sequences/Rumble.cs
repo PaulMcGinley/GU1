@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace GU1.Engine.Models.Sequences;
 
-public class Rumble
-{
+public class Rumble {
+
+    Random random = new();
+
     int index = 0;
     int Index {
         get => index;
@@ -65,7 +68,7 @@ public class Rumble
     void Next() {
 
         if (IsRandom)
-            Index = RandomInteger(Steps.Count - 1);
+            Index = random.Next(Steps.Count - 1);
         else if (IsReversed)
             Index--;
         else
@@ -78,7 +81,7 @@ public class Rumble
     void Previous() {
 
         if (IsRandom)
-            Index = RandomInteger(Steps.Count - 1);
+            Index = random.Next(Steps.Count - 1);
         else if (IsReversed)
             Index++;
         else

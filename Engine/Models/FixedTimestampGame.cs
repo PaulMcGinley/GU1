@@ -9,7 +9,7 @@ public partial class FixedTimestampGame : Game
     public SpriteBatch spriteBatch;
 
     //public int TargetFrameRate { get; set; } = 120;                                                         // The target frame rate of the game // TODO: Add this
-    public float fixedUpdateDelta = (int)(1000 / (float)60);                                                // The fixed update delta time of the game ( 30 fps )
+    public float fixedUpdateDelta = (int)(1000 / (float)60);                                                // The fixed update delta time of the game ( 60 fps )
 
     // helper variables for the fixed update
     private float previousTime = 0;

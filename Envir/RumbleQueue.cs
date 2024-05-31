@@ -9,6 +9,7 @@ public static class RumbleQueue {
     static List<Rumble> rumbles = new();
 
     public static void AddRumble(int controllerIndex,  double startTime, double duration,float leftMotor, float rightMotor) {
+
         rumbles.Add(new Rumble {
             ControllerIndex = controllerIndex,
             EndTime = startTime+duration,
@@ -20,16 +21,16 @@ public static class RumbleQueue {
 
     public static void Update(GameTime gameTime) {
 
-        //if (rumbles.Count == 0) return;
-
         double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-        // Activate rumbles
+        // Handle rumble
         foreach (var rumble in rumbles) {
 
+            // Start rumbles
             if (currentTime >= rumble.StartTime)
                 GamePad.SetVibration((PlayerIndex)rumble.ControllerIndex, rumble.LeftMotor, rumble.RightMotor);
 
+            // Stop rumbles
             if (currentTime >= rumble.EndTime)
                 GamePad.SetVibration((PlayerIndex)rumble.ControllerIndex, 0, 0);
         }
@@ -37,7 +38,7 @@ public static class RumbleQueue {
 
     public static void Clear() {
 
-        rumbles.Clear();
+        // rumbles.Clear();
     }
 
     public static void Stop(int controllerIndex) {
@@ -53,10 +54,10 @@ public static class RumbleQueue {
 
     public static void StopAll() {
 
-        for (int i = 0; i < rumbles.Count; i++) {
+        for (int i = 0; i < rumbles.Count; i++)
             GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
-        }
-        rumbles.Clear();
+
+        //rumbles.Clear();
     }
 
     public static void StopAllExcept(int controllerIndex) {

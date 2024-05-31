@@ -263,7 +263,7 @@ public class Playing : IScene {
         // ? Shouldn't need to clear the flotsam, just maybe a reset method
         GameState.Flotsam.Clear();
 
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 100; i++) {
 
             int idx = random.Int(0, TLib.Flotsam.Length);                                                   // Randomly select a flotsam sprite
 

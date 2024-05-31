@@ -7,22 +7,21 @@ namespace GU1.Envir.Models;
 
 public class Photo {
 
-    //Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last()
-    //$"{DateTime.Now.ToBinary()}.xml"
-
     string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
 
-    public List<Content> content;
+    public Vector2 location;                                                                                // On the map
+    public string fileName = string.Empty;                                                                  // Save file name
+    public string photographer;                                                                             // The name of the player who took the photo
+    public DateTime timeStamp;                                                                              // The time the photo was taken
+    public string Date => timeStamp.ToString("yyyy-MM-dd");                                                 // The date the photo was taken (Extracted from the timeStamp)
+    public string Time => timeStamp.ToString("HH:mm");                                                      // The time the photo was taken (Extracted from the timeStamp)
 
-    public Vector2 location; // On the map
+    public List<Content> content;                                                                           // The content of the photo
 
-    public string fileName; // Save file path
+    public Photo() {
 
-    public string photographer;
-
-    public DateTime timeStamp;
-    public string Date => timeStamp.ToString("yyyy-MM-dd");
-    public string Time => timeStamp.ToString("HH:mm");
+        content = new List<Content>();
+    }
 
     public Photo Load(string fileName) {
 

@@ -105,7 +105,7 @@ public class Lobby : IScene {
             if (player.Role == ActorType.Nessie)
                 RumbleQueue.AddRumble(player.ControllerIndex, 5000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
             else if (player.Role == ActorType.Tourist)
-                RumbleQueue.AddRumble(player.ControllerIndex, 2500, gameTime.ElapsedGameTime.TotalMilliseconds, 1f, 1f);
+                RumbleQueue.AddRumble(player.ControllerIndex, 2500, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
         }
 
     }
@@ -153,6 +153,9 @@ public class Lobby : IScene {
     // }
 
     public void OnSceneStart() {
+
+        for (int i = 0; i < 16; i++)
+            GamePad.SetVibration(i, 0, 0);                                                                     // Stop any controller vibration
 
         // bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
 

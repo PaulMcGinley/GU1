@@ -128,9 +128,9 @@ public class StartOfRound : IScene {
         foreach (Player player in GameState.Players) {
 
             if (player.Role == ActorType.Nessie)
-                RumbleQueue.AddRumble(player.ControllerIndex, currentTime, 4000, 1f, 1f);
+                RumbleQueue.AddRumble(player.ControllerIndex, currentTime, 2000, 1f, 1f);
             else
-                RumbleQueue.AddRumble(player.ControllerIndex, currentTime + screenWaitTime, 4000, 1f, 1f);
+                RumbleQueue.AddRumble(player.ControllerIndex, currentTime + screenWaitTime, 2000, 1f, 1f);
         }
     }
 

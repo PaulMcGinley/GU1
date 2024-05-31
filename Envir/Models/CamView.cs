@@ -49,27 +49,31 @@ public class CamView : IMove {
 
     public bool TakePhoto() {
 
+        // Ain't got no photos, ain't getting no picture bud!
         if (remainingPhotos <= 0)
             return false;
 
-        Photo photo = new()
-        {
-            location = position + offset,
-            timeStamp = DateTime.Now,
-            photographer = "Player", // Set the photographer to the player's name
-            content = new List<Photo.Content>()
-        };
-        foreach (var v in GameState.Flotsam) {
+        // Create a new Photo object and fill in the details
+        Photo photo = new() {
 
-            Photo.Content content = new()
-            {
-                position = v.Position,
-                rotation = v.sprite.GetRotation(),
-                spriteID = v.spriteIndex,
-                isFlipped = v.Velocity.X < 0,
-                isNessie = v.PlayerControlled
-            };
-            photo.content.Add(content);
+            location = position + offset,                                                                   // Set the location of the photo to the camera view position
+            timeStamp = DateTime.Now,                                                                       // Set the time stamp to the current time
+            photographer = "Player"                                                                         // Set the photographer to the player's name
+        };
+
+        // Loop through all the flotsam in the game and add them to the photo
+        foreach (Flotsam flotsam in GameState.Flotsam) {
+
+            if (!flotsam.isAlive) continue;                                                                 // If the flotsam is not alive, skip it
+
+            photo.content.Add(new Photo.Content() {
+
+                position = flotsam.Position,                                                                // Set the position of the flotsam
+                rotation = flotsam.sprite.GetRotation(),                                                    // Set the rotation of the flotsam
+                spriteID = flotsam.spriteIndex,                                                             // Set the sprite ID of the flotsam
+                isFlipped = flotsam.Velocity.X < 0,                                                         // Set the flip of the flotsam based on the velocity
+                isNessie = flotsam.PlayerControlled                                                         // Set the isNessie flag to true if the flotsam is Nessie
+            });
         }
         photo.content.Add(new Photo.Content()
         {

@@ -69,6 +69,7 @@ public class Player : Actor {
         playedAsNessie = false;
         playedAsTourist = false;
         Score = 0;
+        CameraView.Reset();
     }
 
     public void AddScore(int score) => Score += score;

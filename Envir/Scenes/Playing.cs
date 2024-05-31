@@ -56,6 +56,8 @@ public class Playing : IScene {
 
         CheckForTouristWin();
 
+        CheckForTouristLose();
+
 #if DEBUG
 
         if (IsKeyPressed(Keys.S))
@@ -75,14 +77,23 @@ public class Playing : IScene {
 #endif
     }
 
+    private void CheckForTouristLose() {
+
+        int remainingPhotos = 0;
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
+            remainingPhotos += player.CameraView.remainingPhotos;
+
+        if (remainingPhotos == 0)
+            GameState.CurrentScene = GameScene.EndOfRound;
+    }
 
     private void CheckForPhotoTaken() {
 
         int _score = 0;
 
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
-            if (GamePadRightTriggerPressed(player.ControllerIndex)) {
-                player.CameraView.TakePhoto();  // TODO: Make sure this work
+            if (GamePadRightTriggerPressed(player.ControllerIndex) && player.CameraView.TakePhoto()) {
 
                 // check if nessie is in the photo
                 foreach (Player nessie in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
@@ -98,43 +109,37 @@ public class Playing : IScene {
                             _score = 0;                                                                            // Reset the score tracker
                         }
                     }
-
-
-                    //    if (player.CameraView.boundaryBox.Intersects(GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().boundaryBox))
-                    //        player.Score += 1000;
-
-                System.Diagnostics.Debug.WriteLine(player.Score);
             }
 
     }
 
     private void CheckForNessieWin() {
 
-        bool gameOver = true;
+        bool roundOver = true;
 
         foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>!f.PlayerControlled))
             if (!flotsam.isCollected) {
 
-                gameOver = false;
+                roundOver = false;
                 break;
             }
 
-        if (gameOver)
+        if (roundOver)
             GameState.CurrentScene = GameScene.EndOfRound;
     }
 
     private void CheckForTouristWin() {
 
-        bool gameOver = true;
+        bool roundOver = true;
 
         foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>f.PlayerControlled))
             if (flotsam.isAlive) {
 
-                gameOver = false;
+                roundOver = false;
                 break;
             }
 
-        if (gameOver)
+        if (roundOver)
             GameState.CurrentScene = GameScene.EndOfRound;
     }
 

@@ -14,7 +14,7 @@ public class CamView : IMove {
     // public Rectangle boundaryBox => new Rectangle((int)position.X - (TLib.CameraView.Width/2), (int)position.Y - (TLib.CameraView.Height/2), TLib.CameraView.Width, TLib.CameraView.Height);
     Color colour;
     int maxPhotos;
-    int remainingPhotos;
+    public int remainingPhotos;
 
     public CamView(Color colour, int maxPhotos) {
 
@@ -42,20 +42,29 @@ public class CamView : IMove {
 
     public void Update(GameTime gameTime) {
 
-        offset.X = Math.Clamp(offset.X, -500, 500);
-        offset.Y =  Math.Clamp(offset.Y, -500, 500);
+        offset.X = Math.Clamp(offset.X, -500 - (boundaryBox.Width), 500);
+        offset.Y =  Math.Clamp(offset.Y, -500 - (boundaryBox.Height), 500);
     }
 
-    public void TakePhoto() {
+    public bool TakePhoto() {
 
-        if (remainingPhotos > 0)
+        if (remainingPhotos <= 0)
+            return false;
+
             remainingPhotos--;
+
+            return true;
 
         // Play the camera sound
 
         // Flash the screen white
 
         // Save the photo to the photo book
+    }
+
+    public void Reset() {
+
+        remainingPhotos = maxPhotos;
     }
 
     public void Draw(SpriteBatch spriteBatch) {

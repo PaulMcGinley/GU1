@@ -6,7 +6,7 @@ namespace GU1.Envir;
 public static class GameState {
 
     [XmlIgnore] // Ignore this property when serializing
-    public static GameScene CurrentScene = GameScene.MainMenu; //intialised back to main menu  // The current scene of the game
+    public static GameScene CurrentScene = GameScene.PhotoBook; //intialised back to main menu  // The current scene of the game
 
     [XmlIgnore] // Ignore this property when serializing
     public static GameScene PreviousScene = GameScene.None;                                             // The previous scene of the game

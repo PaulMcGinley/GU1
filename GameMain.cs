@@ -30,6 +30,8 @@ public class GameMain : FixedTimestampGame {
 
         base.Initialize();                                                                                  // ! IMPORTANT: Keep this here
 
+        photoBook.Set(spriteBatch);                                                                         // Set the sprite batch for the photo book scene
+
         DeviceState.Initialize();                                                                           // Initialize the input device state to get the initial state of the devices
         FLib.Initialize(Content);                                                                           // Initialize the fonts library
         RLib.Initialize();                                                                                  // Initialize the rumble library

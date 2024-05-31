@@ -11,5 +11,6 @@
         "Nessie",
         "songlength"
     ],
-    "FSharp.suggestGitignore": false
+    "FSharp.suggestGitignore": false,
+    "github.copilot.chat.localeOverride": "en"
 }

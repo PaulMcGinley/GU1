@@ -26,6 +26,8 @@ public class Texture {
 
     public static Texture2D Pixel;
 
+    public static Texture2D TheNessie;
+
     /***********************************************************************
      *** Effects ***********************************************************
      ***********************************************************************/
@@ -66,6 +68,8 @@ public class Texture {
 
         Pixel = new Texture2D(graphicsDevice, 1, 1);
         Pixel.SetData(new[] { Color.White });
+
+        TheNessie = content.Load<Texture2D>("Graphics/Flotsam/TheNessie");
 
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
 

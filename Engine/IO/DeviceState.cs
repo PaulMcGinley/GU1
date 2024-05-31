@@ -201,11 +201,19 @@ public static class DeviceState {
 
     public static float GamePadLeftStickX(int index) => GamePadsState[index].ThumbSticks.Left.X;
 
-    public static float GamePadLeftStickY(int index) => GamePadsState[index].ThumbSticks.Left.Y;
+    public static float GamePadLeftStickY(int index) => -GamePadsState[index].ThumbSticks.Left.Y;
 
-    public static Vector2 GamePadLeftStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Left.X, -GamePadsState[index].ThumbSticks.Left.Y);
+    public static Vector2 GamePadLeftStick(int index) => new(GamePadsState[index].ThumbSticks.Left.X, -GamePadsState[index].ThumbSticks.Left.Y);
 
-    public static Vector2 GamePadRightStick(int index) => new Vector2(GamePadsState[index].ThumbSticks.Right.X, -GamePadsState[index].ThumbSticks.Right.Y);
+    public static Vector2 GamePadRightStick(int index) => new(GamePadsState[index].ThumbSticks.Right.X, -GamePadsState[index].ThumbSticks.Right.Y);
+
+    public static float GamePadRightTrigger(int index) => GamePadsState[index].Triggers.Right;
+
+    public static float GamePadLeftTrigger(int index) => GamePadsState[index].Triggers.Left;
+
+    public static bool GamePadRightTriggerPressed(int index) => GamePadsState[index].Triggers.Right > 0.1f && PreviousGamePadsState[index].Triggers.Right < 0.1f;
+
+    public static bool GamePadLeftTriggerPressed(int index) => GamePadsState[index].Triggers.Left > 0.1f && PreviousGamePadsState[index].Triggers.Left < 0.1f;
 
     #endregion
 

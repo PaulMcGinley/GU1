@@ -169,6 +169,9 @@ public class Flotsam : Actor {
         if (isCollected)
             return false;
 
+        if (isFadingOut)
+            return false;
+
         isCollected = true;
 
         // TODO: Play a sound effect

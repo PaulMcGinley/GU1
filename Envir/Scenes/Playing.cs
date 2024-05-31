@@ -16,24 +16,19 @@ public class Playing : IScene {
     private Camera2D camera;                                                                                // The camera object used to control the view of the game
     GraphicsDevice device;
 
-    //private GameState gameState;
-
     Vector2 RandomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
     public void Initialize(GraphicsDevice device) {
 
         this.device = device;
 
-        background = new Graphic2D(TLib.PlayingBackground[0], new Vector2(1920/2, 1080/2));                           // Create a new 2D graphic object for the background image
+        background = new Graphic2D(TLib.PlayingBackground[0], new Vector2(1920/2, 1080/2));
         background2 = new Sprite2D(TLib.PlayingBackground[1], new Vector2(1920/2, 1080/2));
         background2.SetEffects(SpriteEffects.FlipHorizontally);
 
         camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
         camera.SetZoomLevel(0.5f);                                                                                 // Set the camera zoom level
-
-        //gameState = new GameState();                                                                        // Create a new game state object
-
     }
 
     public void LoadContent(ContentManager content) { }
@@ -53,9 +48,13 @@ public class Playing : IScene {
 
         CheckForCollection();
 
+        CheckForPhotoTaken();
+
         CheckForReveal();
 
-        CheckForEndRound();
+        CheckForNessieWin();
+
+        CheckForTouristWin();
 
 #if DEBUG
 
@@ -76,12 +75,60 @@ public class Playing : IScene {
 #endif
     }
 
-    private void CheckForEndRound() {
+
+    private void CheckForPhotoTaken() {
+
+        int _score = 0;
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
+            if (GamePadRightTriggerPressed(player.ControllerIndex)) {
+                player.CameraView.TakePhoto();  // TODO: Make sure this work
+
+                // check if nessie is in the photo
+                foreach (Player nessie in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
+                    if (GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isAlive) {      // Check if the flotsam is still alive
+                        _score = Engine.Graphics.Calculate.SpriteInRectanglePercentage(                             // Calculate the percentage of the flotsam that is in the photo
+                            GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().boundaryBox,// Get the flotsam boundary box
+                            player.CameraView.boundaryBox);                                                         // Within the camera view boundary box
+
+                        // Check to see if we got a score
+                        if (_score > 0) {
+                            player.Score += _score;                                                                 // Add score to player
+                            GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isFadingOut = true;    // Set the nessie flotsam to not alive
+                            _score = 0;                                                                            // Reset the score tracker
+                        }
+                    }
+
+
+                    //    if (player.CameraView.boundaryBox.Intersects(GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().boundaryBox))
+                    //        player.Score += 1000;
+
+                System.Diagnostics.Debug.WriteLine(player.Score);
+            }
+
+    }
+
+    private void CheckForNessieWin() {
 
         bool gameOver = true;
 
         foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>!f.PlayerControlled))
             if (!flotsam.isCollected) {
+
+                gameOver = false;
+                break;
+            }
+
+        if (gameOver)
+            GameState.CurrentScene = GameScene.StartOfRound;
+    }
+
+    private void CheckForTouristWin() {
+
+        bool gameOver = true;
+
+        foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>f.PlayerControlled))
+            if (flotsam.isAlive) {
 
                 gameOver = false;
                 break;

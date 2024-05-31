@@ -18,7 +18,7 @@ public static class Calculate {
         int intersectedArea = intersection.Width * intersection.Height;                                     // Calculate the area of the intersection
 
         int percentage = (int)((float)intersectedArea / totalArea * 100);                                   // Calculate the percentage of the area of the sprite that is inside the camera view
-        return percentage;                                                                                  // Return the percentage as an integer
+        return percentage * 10;                                                                             // Return the percentage as an integer multiplied by 10 for a maximum of 1000 score
     }
 
     /// <summary>
@@ -41,6 +41,6 @@ public static class Calculate {
         }
 
         int percentage = (int)((float)intersectedArea / totalArea * 100);                                   // Calculate the percentage of the area of the sprite that is inside the camera view
-        return percentage;                                                                                  // Return the percentage as an integer
+        return percentage * 10;                                                                             // Return the percentage as an integer
     }
 }

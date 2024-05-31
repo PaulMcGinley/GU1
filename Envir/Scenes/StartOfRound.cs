@@ -75,7 +75,7 @@ public class StartOfRound : IScene {
 
 
        // spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0, 0, 1920, 1080), Color.Black);              // Draw the main menu background
-       DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "", (1080/2), new Vector2(1920/2, 1080/2), Color.White);
+       DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, (((sceneStartTime + (screenWaitTime*2) +3000)- currentTime)/1000).ToString("0.0"), (1080/2), new Vector2(1920, 1080), Color.White);
     }
 
     public void AssignRoles() {
@@ -139,7 +139,7 @@ public class StartOfRound : IScene {
         bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
 
         foreach (Player player in GameState.Players) {                                                       // Loop through all players
-            System.Diagnostics.Debug.WriteLine(player.ControllerIndex + " " + player.playedBothRoles);
+
             if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
                 endGame = false;                                                                            // Set endGame to false
                 break;                                                                                      // Exit the loop
@@ -159,7 +159,7 @@ public class StartOfRound : IScene {
         }
     }
 
-    public void OnSceneEnd() { 
+    public void OnSceneEnd() {
 
         rumbleControllers = false;                                                                           // Set rumbleControllers to true
     }

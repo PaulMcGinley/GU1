@@ -41,16 +41,18 @@ public static class RumbleQueue {
     }
 
     public static void Stop(int controllerIndex) {
-        for (int i = 0; i < rumbles.Count; i++) {
-            if (rumbles[i].ControllerIndex == controllerIndex) {
-                GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
-                rumbles.RemoveAt(i);
-                i--;
-            }
-        }
+
+        // for (int i = 0; i < rumbles.Count; i++) {
+        //     if (rumbles[i].ControllerIndex == controllerIndex) {
+        //         GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
+        //         rumbles.RemoveAt(i);
+        //         i--;
+        //     }
+        // }
     }
 
     public static void StopAll() {
+
         for (int i = 0; i < rumbles.Count; i++) {
             GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
         }
@@ -58,13 +60,14 @@ public static class RumbleQueue {
     }
 
     public static void StopAllExcept(int controllerIndex) {
-        for (int i = 0; i < rumbles.Count; i++) {
-            if (rumbles[i].ControllerIndex != controllerIndex) {
-                GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
-                rumbles.RemoveAt(i);
-                i--;
-            }
-        }
+
+        // for (int i = 0; i < rumbles.Count; i++) {
+        //     if (rumbles[i].ControllerIndex != controllerIndex) {
+        //         GamePad.SetVibration((PlayerIndex)rumbles[i].ControllerIndex, 0, 0);
+        //         rumbles.RemoveAt(i);
+        //         i--;
+        //     }
+        // }
     }
 
     class Rumble {

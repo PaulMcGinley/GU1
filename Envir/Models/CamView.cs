@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,7 +19,7 @@ public class CamView : IMove {
 
     public CamView(Color colour, int maxPhotos) {
 
-        this.position = position;                                                                           // Position of the camera view within the game world
+        //this.position = position;                                                                           // Position of the camera view within the game world
         this.colour = colour;                                                                               // The players colour
         this.maxPhotos = maxPhotos;                                                                         // The maximum number of photos the player can take
         this.remainingPhotos = maxPhotos;                                                                   // The number of photos the player has left (set this to the max number of photos at the start of the game)
@@ -51,9 +52,37 @@ public class CamView : IMove {
         if (remainingPhotos <= 0)
             return false;
 
-            remainingPhotos--;
+        Photo photo = new()
+        {
+            location = position + offset,
+            timeStamp = DateTime.Now,
+            photographer = "Player", // Set the photographer to the player's name
+            content = new List<Photo.Content>()
+        };
+        foreach (var v in GameState.Flotsam) {
 
-            return true;
+            Photo.Content content = new()
+            {
+                position = v.Position,
+                rotation = v.sprite.GetRotation(),
+                spriteID = v.spriteIndex,
+                isFlipped = v.Velocity.X < 0,
+                isNessie = v.PlayerControlled
+            };
+            photo.content.Add(content);
+        }
+        photo.content.Add(new Photo.Content()
+        {
+            position = GameState.Boat.Position,
+            rotation = GameState.Boat.rotation,
+            spriteID = -1,
+            isFlipped = GameState.Boat.Velocity.X < 0,
+            isBoat = true
+        });
+
+        remainingPhotos--;
+
+        return true;
 
         // Play the camera sound
 
@@ -72,7 +101,5 @@ public class CamView : IMove {
         // draw the cam view boundary box
         spriteBatch.Draw(TLib.Pixel, boundaryBox, Color.White *0.5f);
         spriteBatch.Draw(TLib.CameraView, position + offset, Color.White); // Draw the camera view (texture
-
-
     }
 }

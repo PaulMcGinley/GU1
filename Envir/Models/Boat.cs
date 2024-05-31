@@ -10,13 +10,13 @@ public class Boat : Player {
     Vector2 position;
     public Vector2 Position => position;                                                                    // Property to get position of boat (Readonly)
 
-    float rotation = 0;                                                                                     // Rotation of boat
+    public float rotation = 0;                                                                                     // Rotation of boat
 
     Vector2 cycloidYOffset = Vector2.Zero;                                                                  // Offset for bobbing effect
 
     // TODO: Change this to something else
     // This is legacy
-    SpriteEffects spriteEffect = SpriteEffects.None;
+    public SpriteEffects spriteEffect = SpriteEffects.None;
 
     public Boat(int controllerIndex) : base(controllerIndex) {
 
@@ -56,6 +56,7 @@ public class Boat : Player {
 
     public void Draw(SpriteBatch spriteBatch) {
 
+        // ! OMFG FIX THIS XD
         spriteBatch.Draw((spriteEffect == SpriteEffects.None ? TLib.Boat[0] : TLib.Boat[1]), position + cycloidYOffset, null, Color.White, rotation, new Vector2(TLib.Boat[0].Width/2, TLib.Boat[0].Height/2), 1, SpriteEffects.None, 0);
     }
 

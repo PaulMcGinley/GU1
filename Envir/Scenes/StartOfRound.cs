@@ -11,12 +11,13 @@ public class StartOfRound : IScene {
     double sceneStartTime = 0;                                                                              // Time the scene started
     double currentTime = 0;                                                                                 // Current time in the scene
 
-    int screenWaitTime = 1;                                                                                // Time to wait on each screen
+    int screenWaitTime = 5000;                                                                                // Time to wait on each screen
 
    // int playerCount = GameState.Players.Count;                                                              // Number of players in the game
     float nessieCount => GameState.Players.Count / 3.3f;                                                  // Number of nessies in the game
     float touristCount => GameState.Players.Count - nessieCount;                                                          // Number of tourists in the game
 
+    bool rumbleControllers = false;                                                                         // Whether to rumble the controllers
     public void Initialize(GraphicsDevice device) { }
 
     public void LoadContent(ContentManager content) { }
@@ -28,12 +29,17 @@ public class StartOfRound : IScene {
         if (GameState.CurrentScene != GameScene.StartOfRound)                                               // If the current scene is not the StartOfRound scene
             return;                                                                                         // Exit the method
 
-        if (sceneStartTime < 0.1f)                                                                          // If the scene has just started
-            sceneStartTime = gameTime.TotalGameTime.TotalSeconds;                                           // Set the scene start time
+        if (sceneStartTime < 0.1D)                                                                          // If the scene has just started
+            sceneStartTime = gameTime.TotalGameTime.TotalMilliseconds;                                           // Set the scene start time
 
-        currentTime = gameTime.TotalGameTime.TotalSeconds;                                                  // Update the current time
+        currentTime = gameTime.TotalGameTime.TotalMilliseconds;                                                  // Update the current time
 
-        if (currentTime - sceneStartTime > (screenWaitTime*2)+3)                                                             // If the scene has been running for more than 10 seconds
+        if (!rumbleControllers) {                                                                              // If the controllers should rumble
+            RumbleControllers();                                                                            // Rumble the controllers
+            rumbleControllers = true;                                                                      // Set rumbleControllers to false
+        }
+
+        if (currentTime - sceneStartTime > (screenWaitTime*2)+3000)                                                             // If the scene has been running for more than 10 seconds
             GameState.CurrentScene = GameScene.Playing;                                                     // Move to the Playing scene
     }
 
@@ -117,6 +123,17 @@ public class StartOfRound : IScene {
 
     }
 
+    private void RumbleControllers() {
+
+        foreach (Player player in GameState.Players) {
+
+            if (player.Role == ActorType.Nessie)
+                RumbleQueue.AddRumble(player.ControllerIndex, currentTime, 4000, 1f, 1f);
+            else
+                RumbleQueue.AddRumble(player.ControllerIndex, currentTime + screenWaitTime, 4000, 1f, 1f);
+        }
+    }
+
     public void OnSceneStart() {
 
         bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
@@ -142,6 +159,9 @@ public class StartOfRound : IScene {
         }
     }
 
-    public void OnSceneEnd() { }
+    public void OnSceneEnd() { 
+
+        rumbleControllers = false;                                                                           // Set rumbleControllers to true
+    }
 
 }

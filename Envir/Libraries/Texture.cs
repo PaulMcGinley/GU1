@@ -45,6 +45,7 @@ public class Texture {
      ***********************************************************************/
 
      public static Texture2D Arrow;
+     public static Texture2D ScoreRow;
 
      public static Texture2D[] Numbers = new Texture2D[10];
 
@@ -76,6 +77,7 @@ public class Texture {
 
         // UI Elements
         Arrow = content.Load<Texture2D>("Graphics/UI/arrow");
+        ScoreRow = content.Load<Texture2D>("Graphics/UI/ScoreRow");
 
         for (int i = 0; i < Numbers.Length; i++)
             Numbers[i] = content.Load<Texture2D>($"Numbers/{i}");

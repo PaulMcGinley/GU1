@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -32,6 +31,11 @@ public class EndOfRound : IScene {
 
         for (int i = 0; i < GameState.Players.Count; i++) {                                                // For each player in the game
 
+            spriteBatch.Draw(TLib.ScoreRow, new Vector2((1920/2) - (TLib.ScoreRow.Width/2), 15 + (i* TLib.ScoreRow.Height) + (i*5)), Color.White);            // Draw the player's name and score
+        }
+
+        for (int i = 0; i < GameState.Players.Count; i++) {                                                // For each player in the game
+
             var player = GameState.Players[i];                                                              // Get the player
             var position = new Vector2(1920/2, 300 + (i * 50));                                                // Calculate the position of the player
             var score = player.Score;                                                                       // Get the player's score
@@ -45,7 +49,7 @@ public class EndOfRound : IScene {
 
     public void OnSceneStart() { }
 
-    public void OnSceneEnd() { 
+    public void OnSceneEnd() {
 
        // GameState.CurrentScene = GameScene.StartOfRound;                                                   // Move to the StartOfRound scene
     }

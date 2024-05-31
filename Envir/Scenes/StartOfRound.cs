@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +24,9 @@ public class StartOfRound : IScene {
     public void UnloadContent() { }
 
     public void Update(GameTime gameTime) {
+
+        if (GameState.CurrentScene != GameScene.StartOfRound)                                               // If the current scene is not the StartOfRound scene
+            return;                                                                                         // Exit the method
 
         if (sceneStartTime < 0.1f)                                                                          // If the scene has just started
             sceneStartTime = gameTime.TotalGameTime.TotalSeconds;                                           // Set the scene start time
@@ -106,28 +110,36 @@ public class StartOfRound : IScene {
                     break;
             }
         }
+
+        // Actually set the remaining players as defined tourists
+        foreach (Player player in GameState.Players.Where(p => p.Role == ActorType.Tourist))
+            player.SetPlayedAs(ActorType.Tourist);
+
     }
 
     public void OnSceneStart() {
 
         bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
 
-        foreach (Player player in GameState.Players)                                                        // Loop through all players
+        foreach (Player player in GameState.Players) {                                                       // Loop through all players
+            System.Diagnostics.Debug.WriteLine(player.ControllerIndex + " " + player.playedBothRoles);
             if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
                 endGame = false;                                                                            // Set endGame to false
                 break;                                                                                      // Exit the loop
             }
+        }
 
         if (endGame) {
 
             // Do something
              GameState.CurrentScene = GameScene.MainMenu;
-            //return;
-        }
+            return;
+        } else {
 
         AssignRoles();
 
         sceneStartTime = currentTime = 0;                                                                    // Reset the scene start and current times
+        }
     }
 
     public void OnSceneEnd() { }

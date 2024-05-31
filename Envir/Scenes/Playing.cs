@@ -96,9 +96,9 @@ public class Playing : IScene {
     /// </summary>
     void CheckForCollection() {
 
-        /* Note from Dev:
+        /* Note from Paul:
          * For who ever is looking at the code below, I apologies.
-         * I had planned on implmenting player control differently, but ran out of time.
+         * I had planned on implementing player control differently, but ran out of time.
          * This works, and is full of educational value... And a whole 'what not to do's' xD
         */
 

@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 
 namespace GU1.Envir.Models;
 
 public class Photo {
+
+    //Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last()
+    //$"{DateTime.Now.ToBinary()}.xml"
+
+    string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
 
     public List<Content> content;
 
@@ -18,13 +24,31 @@ public class Photo {
     public string Date => timeStamp.ToString("yyyy-MM-dd");
     public string Time => timeStamp.ToString("HH:mm");
 
-    public void Load(string fileName) {
+    public Photo Load(string fileName) {
+
+        string _path = $"{SaveDir}/{fileName}.xml";
+
+        if (!File.Exists(_path))
+            throw new FileNotFoundException($"File not found: {_path}");
 
         this.fileName = fileName;
+
+        // Load the photo from the path
+        return XMLSerializer.Deserialize<Photo>(_path);
     }
 
-    public void Save(string fileName) {
+    public void Save() {
+
+        if (fileName == null)
+            fileName = $"{DateTime.Now.ToBinary()}";
+
+        string _path = $"{SaveDir}/{fileName}.xml";
+
+        if (!Directory.Exists(SaveDir))
+            Directory.CreateDirectory(SaveDir);
+
         // Save the photo to the path
+        XMLSerializer.Serialize<Photo>(_path, this);
     }
 
     // public void Optimize() {

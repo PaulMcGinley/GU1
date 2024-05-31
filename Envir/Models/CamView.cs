@@ -80,6 +80,8 @@ public class CamView : IMove {
             isBoat = true
         });
 
+        photo.Save();
+
         remainingPhotos--;
 
         return true;

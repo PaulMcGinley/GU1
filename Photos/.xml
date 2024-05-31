@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Photo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <location>
-    <X>368.34998</X>
-    <Y>198.70761</Y>
+    <X>2531.2876</X>
+    <Y>706.687</Y>
   </location>
   <fileName />
   <photographer>Player</photographer>
-  <timeStamp>2024-05-31T20:35:21.529875+01:00</timeStamp>
+  <timeStamp>2024-05-31T23:49:22.517221+01:00</timeStamp>
   <content>
     <Content>
       <position>
-        <X>249.26456</X>
-        <Y>-375.6801</Y>
+        <X>512.33075</X>
+        <Y>-417.11978</Y>
       </position>
-      <rotation>0.14888127</rotation>
-      <spriteID>5</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2032.9747</X>
-        <Y>-335.09644</Y>
-      </position>
-      <rotation>-0.38590032</rotation>
+      <rotation>-0.0074061914</rotation>
       <spriteID>6</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -32,131 +21,32 @@
     </Content>
     <Content>
       <position>
-        <X>270.89493</X>
-        <Y>-324.03568</Y>
+        <X>903.84625</X>
+        <Y>-390.5284</Y>
       </position>
-      <rotation>-0.39007157</rotation>
-      <spriteID>8</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>451.91846</X>
-        <Y>-304.66895</Y>
-      </position>
-      <rotation>0.30583453</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>940.7786</X>
-        <Y>-284.75436</Y>
-      </position>
-      <rotation>0.13045146</rotation>
-      <spriteID>10</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2139.4185</X>
-        <Y>-176.59438</Y>
-      </position>
-      <rotation>-0.3781613</rotation>
+      <rotation>-0.38741648</rotation>
       <spriteID>2</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>775.9989</X>
-        <Y>-157.66655</Y>
-      </position>
-      <rotation>0.1261027</rotation>
-      <spriteID>9</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-79.75765</X>
-        <Y>-155.13176</Y>
-      </position>
-      <rotation>-0.30723393</rotation>
-      <spriteID>5</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-586.8354</X>
-        <Y>-136.0029</Y>
-      </position>
-      <rotation>-0.37930825</rotation>
-      <spriteID>1</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>762.8389</X>
-        <Y>-133.93622</Y>
+        <X>747.76276</X>
+        <Y>-353.83487</Y>
       </position>
-      <rotation>-0.0913657</rotation>
-      <spriteID>6</spriteID>
+      <rotation>0.24157599</rotation>
+      <spriteID>13</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1847.9176</X>
-        <Y>-84.02181</Y>
+        <X>1630.3818</X>
+        <Y>-298.75012</Y>
       </position>
-      <rotation>0.16659807</rotation>
-      <spriteID>10</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>70.33626</X>
-        <Y>-67.05577</Y>
-      </position>
-      <rotation>0.20294821</rotation>
-      <spriteID>12</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>65.998535</X>
-        <Y>-33.126396</Y>
-      </position>
-      <rotation>0.3854474</rotation>
-      <spriteID>2</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>88.3595</X>
-        <Y>0.288985</Y>
-      </position>
-      <rotation>0.3883732</rotation>
+      <rotation>-0.07131587</rotation>
       <spriteID>4</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -164,32 +54,43 @@
     </Content>
     <Content>
       <position>
-        <X>1711.4004</X>
-        <Y>0.8054178</Y>
+        <X>1321.5273</X>
+        <Y>-259.9936</Y>
       </position>
-      <rotation>0.35014862</rotation>
-      <spriteID>9</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>686.4776</X>
-        <Y>50.8252</Y>
-      </position>
-      <rotation>0.38548195</rotation>
-      <spriteID>1</spriteID>
+      <rotation>0.12216946</rotation>
+      <spriteID>12</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1986.7184</X>
-        <Y>71.48224</Y>
+        <X>-592.1422</X>
+        <Y>-255.74104</Y>
       </position>
-      <rotation>0.3999961</rotation>
+      <rotation>-0.3787874</rotation>
+      <spriteID>6</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>970.20557</X>
+        <Y>-203.1926</Y>
+      </position>
+      <rotation>-0.36120376</rotation>
+      <spriteID>0</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1052.3892</X>
+        <Y>-198.59743</Y>
+      </position>
+      <rotation>0.30587828</rotation>
       <spriteID>6</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -197,21 +98,32 @@
     </Content>
     <Content>
       <position>
-        <X>106.622925</X>
-        <Y>75.66374</Y>
+        <X>1926.4331</X>
+        <Y>-195.23932</Y>
       </position>
-      <rotation>0.35112125</rotation>
-      <spriteID>12</spriteID>
+      <rotation>0.29080376</rotation>
+      <spriteID>0</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1618.5481</X>
-        <Y>76.79956</Y>
+        <X>1909.2908</X>
+        <Y>-167.18237</Y>
       </position>
-      <rotation>-0.3596596</rotation>
+      <rotation>-0.36619562</rotation>
+      <spriteID>8</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-149.66962</X>
+        <Y>-165.72227</Y>
+      </position>
+      <rotation>0.15627043</rotation>
       <spriteID>10</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -219,10 +131,32 @@
     </Content>
     <Content>
       <position>
-        <X>-39.26883</X>
-        <Y>105.89908</Y>
+        <X>1178.5787</X>
+        <Y>-151.93466</Y>
       </position>
-      <rotation>0.35665837</rotation>
+      <rotation>-0.22663207</rotation>
+      <spriteID>1</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>647.756</X>
+        <Y>-130.23865</Y>
+      </position>
+      <rotation>-0.21596642</rotation>
+      <spriteID>0</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>127.49083</X>
+        <Y>-83.47638</Y>
+      </position>
+      <rotation>-0.3999586</rotation>
       <spriteID>13</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -230,10 +164,10 @@
     </Content>
     <Content>
       <position>
-        <X>1266.9707</X>
-        <Y>106.53804</Y>
+        <X>-502.09497</X>
+        <Y>-52.43196</Y>
       </position>
-      <rotation>0.052292198</rotation>
+      <rotation>0.3092094</rotation>
       <spriteID>2</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -241,21 +175,10 @@
     </Content>
     <Content>
       <position>
-        <X>684.3967</X>
-        <Y>116.65665</Y>
+        <X>1978.9941</X>
+        <Y>-42.745903</Y>
       </position>
-      <rotation>-0.15445742</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-635.65295</X>
-        <Y>119.31624</Y>
-      </position>
-      <rotation>-0.19418345</rotation>
+      <rotation>0.26551718</rotation>
       <spriteID>12</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -263,43 +186,153 @@
     </Content>
     <Content>
       <position>
-        <X>71.64508</X>
-        <Y>147.34933</Y>
+        <X>1559.4175</X>
+        <Y>-37.494514</Y>
       </position>
-      <rotation>0.39769503</rotation>
-      <spriteID>0</spriteID>
+      <rotation>0.33304444</rotation>
+      <spriteID>4</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>2109.1985</X>
-        <Y>153.44193</Y>
+        <X>1522.6385</X>
+        <Y>-19.197475</Y>
       </position>
-      <rotation>0.08559511</rotation>
-      <spriteID>11</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1262.0421</X>
-        <Y>169.54843</Y>
-      </position>
-      <rotation>-0.09966682</rotation>
-      <spriteID>13</spriteID>
+      <rotation>0.21245733</rotation>
+      <spriteID>8</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1431.8608</X>
-        <Y>173.09387</Y>
+        <X>-407.9354</X>
+        <Y>39.92867</Y>
       </position>
-      <rotation>-0.32938462</rotation>
+      <rotation>0.39999264</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-53.57772</X>
+        <Y>73.192</Y>
+      </position>
+      <rotation>-0.2922944</rotation>
+      <spriteID>13</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1148.6666</X>
+        <Y>105.37138</Y>
+      </position>
+      <rotation>-0.2549356</rotation>
+      <spriteID>11</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-158.42259</X>
+        <Y>123.67795</Y>
+      </position>
+      <rotation>0.39864376</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>140.76257</X>
+        <Y>150.94077</Y>
+      </position>
+      <rotation>-0.00516376</rotation>
+      <spriteID>0</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>986.9224</X>
+        <Y>153.52568</Y>
+      </position>
+      <rotation>0.31170112</rotation>
+      <spriteID>0</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-150.06558</X>
+        <Y>166.1112</Y>
+      </position>
+      <rotation>-0.39977306</rotation>
+      <spriteID>9</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-215.57753</X>
+        <Y>211.46155</Y>
+      </position>
+      <rotation>0.13350743</rotation>
+      <spriteID>1</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>877.31116</X>
+        <Y>215.75874</Y>
+      </position>
+      <rotation>0.1917297</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2616.7415</X>
+        <Y>226.98398</Y>
+      </position>
+      <rotation>-0.39942127</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>765.0013</X>
+        <Y>228.2208</Y>
+      </position>
+      <rotation>-0.09229409</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>660.67957</X>
+        <Y>237.2088</Y>
+      </position>
+      <rotation>-0.34114105</rotation>
       <spriteID>3</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -307,76 +340,54 @@
     </Content>
     <Content>
       <position>
-        <X>2625.4392</X>
-        <Y>173.40115</Y>
+        <X>252.18513</X>
+        <Y>253.91553</Y>
       </position>
-      <rotation>-0.05507527</rotation>
-      <spriteID>6</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1120.0529</X>
-        <Y>186.61021</Y>
-      </position>
-      <rotation>-0.3912189</rotation>
-      <spriteID>5</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1583.2075</X>
-        <Y>186.71568</Y>
-      </position>
-      <rotation>-0.39574382</rotation>
-      <spriteID>9</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2242.7234</X>
-        <Y>214.08337</Y>
-      </position>
-      <rotation>0.37530562</rotation>
+      <rotation>0.22327264</rotation>
       <spriteID>4</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>796.521</X>
+        <Y>286.65707</Y>
+      </position>
+      <rotation>0.089550756</rotation>
+      <spriteID>3</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1920.1776</X>
-        <Y>215.5688</Y>
+        <X>737.13</X>
+        <Y>295.6564</Y>
       </position>
-      <rotation>0.021920364</rotation>
-      <spriteID>7</spriteID>
+      <rotation>-0.22598219</rotation>
+      <spriteID>13</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1194.7849</X>
+        <Y>299.60004</Y>
+      </position>
+      <rotation>0.3204275</rotation>
+      <spriteID>11</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>2119.131</X>
-        <Y>251.46425</Y>
+        <X>2301.3499</X>
+        <Y>305.34656</Y>
       </position>
-      <rotation>-0.37914714</rotation>
-      <spriteID>1</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1076.7323</X>
-        <Y>255.97324</Y>
-      </position>
-      <rotation>0.2492136</rotation>
+      <rotation>0.019802572</rotation>
       <spriteID>8</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -384,230 +395,373 @@
     </Content>
     <Content>
       <position>
-        <X>1216.8379</X>
-        <Y>267.21912</Y>
+        <X>-465.20956</X>
+        <Y>313.29816</Y>
       </position>
-      <rotation>-0.04940783</rotation>
-      <spriteID>7</spriteID>
+      <rotation>-0.39185145</rotation>
+      <spriteID>11</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-106.7993</X>
+        <Y>314.7958</Y>
+      </position>
+      <rotation>-0.3776669</rotation>
+      <spriteID>10</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>462.29306</X>
-        <Y>289.9787</Y>
+        <X>1831.0006</X>
+        <Y>321.94766</Y>
       </position>
-      <rotation>0.27221015</rotation>
+      <rotation>-0.1894401</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>176.39996</X>
+        <Y>354.43884</Y>
+      </position>
+      <rotation>0.3711968</rotation>
+      <spriteID>4</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1282.167</X>
+        <Y>357.57144</Y>
+      </position>
+      <rotation>-0.086801104</rotation>
+      <spriteID>2</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>889.1983</X>
+        <Y>358.14886</Y>
+      </position>
+      <rotation>0.3978803</rotation>
+      <spriteID>11</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1667.7739</X>
+        <Y>364.6191</Y>
+      </position>
+      <rotation>0.27938133</rotation>
+      <spriteID>6</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1279.7354</X>
+        <Y>370.87836</Y>
+      </position>
+      <rotation>0.016843526</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>138.57918</X>
+        <Y>372.00858</Y>
+      </position>
+      <rotation>-0.10889603</rotation>
       <spriteID>13</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2783.7139</X>
+        <Y>387.75424</Y>
+      </position>
+      <rotation>-0.33462098</rotation>
+      <spriteID>3</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>904.58575</X>
+        <Y>410.40067</Y>
+      </position>
+      <rotation>0.35721597</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2322.641</X>
+        <Y>427.30472</Y>
+      </position>
+      <rotation>-0.3310858</rotation>
+      <spriteID>6</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1523.95</X>
+        <Y>430.8518</Y>
+      </position>
+      <rotation>0.3769808</rotation>
+      <spriteID>2</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1293.876</X>
+        <Y>460.69168</Y>
+      </position>
+      <rotation>0.39739212</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>956.728</X>
+        <Y>466.92932</Y>
+      </position>
+      <rotation>-0.3188457</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1381.6749</X>
+        <Y>487.48706</Y>
+      </position>
+      <rotation>-0.28250733</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1459.1628</X>
+        <Y>501.64514</Y>
+      </position>
+      <rotation>0.39462343</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1936.8977</X>
+        <Y>508.108</Y>
+      </position>
+      <rotation>0.13157572</rotation>
+      <spriteID>11</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>948.69</X>
+        <Y>521.8731</Y>
+      </position>
+      <rotation>0.3575808</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1690.7351</X>
+        <Y>545.97235</Y>
+      </position>
+      <rotation>-0.051974468</rotation>
+      <spriteID>0</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>56.611908</X>
+        <Y>547.5483</Y>
+      </position>
+      <rotation>0.14151487</rotation>
+      <spriteID>9</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1861.2781</X>
+        <Y>629.97156</Y>
+      </position>
+      <rotation>0.39657983</rotation>
+      <spriteID>4</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1172.4886</X>
+        <Y>637.1004</Y>
+      </position>
+      <rotation>0.18091196</rotation>
+      <spriteID>2</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>719.0146</X>
+        <Y>637.8668</Y>
+      </position>
+      <rotation>0.24390182</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>956.1117</X>
+        <Y>640.4999</Y>
+      </position>
+      <rotation>-0.38170046</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-223.13525</X>
+        <Y>647.0957</Y>
+      </position>
+      <rotation>0.042235363</rotation>
+      <spriteID>6</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2101.2532</X>
+        <Y>653.118</Y>
+      </position>
+      <rotation>-0.11095051</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2660.2922</X>
+        <Y>678.9331</Y>
+      </position>
+      <rotation>0.38011327</rotation>
+      <spriteID>2</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>417.08737</X>
+        <Y>708.875</Y>
+      </position>
+      <rotation>-0.17765139</rotation>
+      <spriteID>6</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1943.0798</X>
+        <Y>719.27484</Y>
+      </position>
+      <rotation>0.27396494</rotation>
+      <spriteID>3</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-198.24805</X>
+        <Y>744.8878</Y>
+      </position>
+      <rotation>-0.06751267</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>85.24463</X>
+        <Y>746.55145</Y>
+      </position>
+      <rotation>-0.39975107</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2596</X>
+        <Y>769</Y>
+      </position>
+      <rotation>-0.20550063</rotation>
+      <spriteID>1</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>true</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1695.3873</X>
-        <Y>296.02942</Y>
+        <X>379.97</X>
+        <Y>785.3318</Y>
       </position>
-      <rotation>-0.34452084</rotation>
-      <spriteID>8</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-755.89667</X>
-        <Y>300.37827</Y>
-      </position>
-      <rotation>0.2299562</rotation>
-      <spriteID>11</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>584.09015</X>
-        <Y>316.05795</Y>
-      </position>
-      <rotation>0.35644114</rotation>
-      <spriteID>6</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>687.9326</X>
-        <Y>327.8323</Y>
-      </position>
-      <rotation>0.36788288</rotation>
-      <spriteID>5</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-128.56914</X>
-        <Y>365.06567</Y>
-      </position>
-      <rotation>0.19043654</rotation>
-      <spriteID>11</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2219.9045</X>
-        <Y>368.48322</Y>
-      </position>
-      <rotation>-0.3708809</rotation>
-      <spriteID>12</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-765.4667</X>
-        <Y>384.14835</Y>
-      </position>
-      <rotation>0.2908896</rotation>
-      <spriteID>13</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1250.0654</X>
-        <Y>437.47504</Y>
-      </position>
-      <rotation>-0.35922074</rotation>
-      <spriteID>9</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1205.3907</X>
-        <Y>447.95532</Y>
-      </position>
-      <rotation>-0.38012445</rotation>
-      <spriteID>13</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>161.58664</X>
-        <Y>454.4474</Y>
-      </position>
-      <rotation>0.068099104</rotation>
-      <spriteID>13</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1197.4907</X>
-        <Y>463.1975</Y>
-      </position>
-      <rotation>-0.35287696</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1284.0073</X>
-        <Y>466.47388</Y>
-      </position>
-      <rotation>-0.12831101</rotation>
-      <spriteID>9</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>735.5292</X>
-        <Y>481.45642</Y>
-      </position>
-      <rotation>0.3514986</rotation>
-      <spriteID>4</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-588.0114</X>
-        <Y>506.04626</Y>
-      </position>
-      <rotation>0.3152148</rotation>
-      <spriteID>2</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1041.3936</X>
-        <Y>510.66794</Y>
-      </position>
-      <rotation>-0.28703776</rotation>
-      <spriteID>4</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1794.7041</X>
-        <Y>566.1767</Y>
-      </position>
-      <rotation>-0.20178601</rotation>
-      <spriteID>6</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>686.4208</X>
-        <Y>568.8974</Y>
-      </position>
-      <rotation>-0.37442386</rotation>
-      <spriteID>2</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1321.8074</X>
-        <Y>583.86865</Y>
-      </position>
-      <rotation>-0.25180343</rotation>
-      <spriteID>3</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-670.65857</X>
-        <Y>611.6241</Y>
-      </position>
-      <rotation>-0.03916599</rotation>
+      <rotation>-0.27682477</rotation>
       <spriteID>1</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -615,43 +769,76 @@
     </Content>
     <Content>
       <position>
-        <X>-5.0890183</X>
-        <Y>630.6049</Y>
+        <X>907.07446</X>
+        <Y>804.25323</Y>
       </position>
-      <rotation>-0.36677322</rotation>
-      <spriteID>13</spriteID>
+      <rotation>0.096851185</rotation>
+      <spriteID>3</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>-883.5864</X>
-        <Y>633.9595</Y>
+        <X>1713.2292</X>
+        <Y>833.21484</Y>
       </position>
-      <rotation>-0.37574592</rotation>
-      <spriteID>2</spriteID>
+      <rotation>-0.3498887</rotation>
+      <spriteID>3</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1730.0981</X>
-        <Y>643.30084</Y>
+        <X>-45.04863</X>
+        <Y>859.114</Y>
       </position>
-      <rotation>0.37942618</rotation>
-      <spriteID>10</spriteID>
+      <rotation>0.23223746</rotation>
+      <spriteID>13</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1671.7104</X>
+        <Y>873.95734</Y>
+      </position>
+      <rotation>0.050491862</rotation>
+      <spriteID>3</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1117.3516</X>
-        <Y>659.6303</Y>
+        <X>88.835205</X>
+        <Y>895.4917</Y>
       </position>
-      <rotation>-0.26489615</rotation>
+      <rotation>-0.13433461</rotation>
+      <spriteID>4</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>558.5344</X>
+        <Y>898.34033</Y>
+      </position>
+      <rotation>-0.3665711</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>766.91364</X>
+        <Y>899.66315</Y>
+      </position>
+      <rotation>0.3795596</rotation>
       <spriteID>11</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -659,120 +846,43 @@
     </Content>
     <Content>
       <position>
-        <X>2466.186</X>
-        <Y>670.2021</Y>
+        <X>1031.3264</X>
+        <Y>907.2808</Y>
       </position>
-      <rotation>0.13010187</rotation>
+      <rotation>-0.005182499</rotation>
+      <spriteID>9</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>761.3323</X>
+        <Y>917.2942</Y>
+      </position>
+      <rotation>0.06350022</rotation>
       <spriteID>7</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1756.36</X>
-        <Y>671.6999</Y>
-      </position>
-      <rotation>0.01726495</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>545.0188</X>
-        <Y>731.65247</Y>
-      </position>
-      <rotation>-0.38547316</rotation>
-      <spriteID>3</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>1209.1482</X>
-        <Y>736.2909</Y>
+        <X>1348.2427</X>
+        <Y>960.93225</Y>
       </position>
-      <rotation>-0.21924122</rotation>
-      <spriteID>5</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1698.7943</X>
-        <Y>743.70337</Y>
-      </position>
-      <rotation>0.2408875</rotation>
+      <rotation>-0.38158348</rotation>
       <spriteID>6</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1410.2958</X>
-        <Y>745.4127</Y>
-      </position>
-      <rotation>-0.36512178</rotation>
-      <spriteID>4</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>472.77515</X>
-        <Y>748.812</Y>
-      </position>
-      <rotation>-0.048617106</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1243.2617</X>
-        <Y>756.10754</Y>
-      </position>
-      <rotation>-0.1279834</rotation>
-      <spriteID>1</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>545.0457</X>
-        <Y>781.8209</Y>
+        <X>-338.31274</X>
+        <Y>965.73804</Y>
       </position>
-      <rotation>-0.30407292</rotation>
-      <spriteID>13</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2130.6123</X>
-        <Y>794.83234</Y>
-      </position>
-      <rotation>-0.0037396625</rotation>
-      <spriteID>3</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2023.3683</X>
-        <Y>812.2286</Y>
-      </position>
-      <rotation>0.39455962</rotation>
+      <rotation>-0.34981066</rotation>
       <spriteID>5</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -780,76 +890,10 @@
     </Content>
     <Content>
       <position>
-        <X>134.52402</X>
-        <Y>840.237</Y>
+        <X>1050.662</X>
+        <Y>978.4726</Y>
       </position>
-      <rotation>-0.15107545</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>919.60547</X>
-        <Y>892.31726</Y>
-      </position>
-      <rotation>-0.36413816</rotation>
-      <spriteID>12</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>543.5534</X>
-        <Y>908.7434</Y>
-      </position>
-      <rotation>-0.39577395</rotation>
-      <spriteID>11</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1166.1108</X>
-        <Y>927.6142</Y>
-      </position>
-      <rotation>-0.269086</rotation>
-      <spriteID>1</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>955.4739</X>
-        <Y>928.5853</Y>
-      </position>
-      <rotation>-0.2383496</rotation>
-      <spriteID>5</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2347.9375</X>
-        <Y>929.96027</Y>
-      </position>
-      <rotation>-0.060156852</rotation>
-      <spriteID>8</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>781.0335</X>
-        <Y>948.28516</Y>
-      </position>
-      <rotation>0.12881269</rotation>
+      <rotation>0.39690235</rotation>
       <spriteID>12</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -857,175 +901,32 @@
     </Content>
     <Content>
       <position>
-        <X>1907.9004</X>
-        <Y>950.9032</Y>
+        <X>2042.1287</X>
+        <Y>982.97095</Y>
       </position>
-      <rotation>0.31168994</rotation>
-      <spriteID>11</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>595.70984</X>
-        <Y>958.2442</Y>
-      </position>
-      <rotation>0.35422096</rotation>
-      <spriteID>10</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>893.3334</X>
-        <Y>969.9501</Y>
-      </position>
-      <rotation>0.021846227</rotation>
-      <spriteID>1</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1362.7094</X>
-        <Y>991.13354</Y>
-      </position>
-      <rotation>-0.16417888</rotation>
-      <spriteID>13</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>479.9026</X>
-        <Y>1009.3753</Y>
-      </position>
-      <rotation>-0.3332437</rotation>
-      <spriteID>1</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>577.4114</X>
-        <Y>1028.3193</Y>
-      </position>
-      <rotation>-0.39968175</rotation>
-      <spriteID>8</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2161.9343</X>
-        <Y>1046.3064</Y>
-      </position>
-      <rotation>-0.2105614</rotation>
+      <rotation>0.044770796</rotation>
       <spriteID>2</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>650.49927</X>
-        <Y>1066.7975</Y>
-      </position>
-      <rotation>0.16970408</rotation>
-      <spriteID>10</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>-573.8009</X>
-        <Y>1070.7968</Y>
-      </position>
-      <rotation>-0.30867898</rotation>
-      <spriteID>8</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>640.3815</X>
-        <Y>1104.2302</Y>
-      </position>
-      <rotation>0.35194927</rotation>
-      <spriteID>8</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>868.02313</X>
-        <Y>1127.9203</Y>
+        <X>1143.1335</X>
+        <Y>983.5103</Y>
       </position>
-      <rotation>0.39902076</rotation>
-      <spriteID>2</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>2076.011</X>
-        <Y>1132.0337</Y>
-      </position>
-      <rotation>0.23510686</rotation>
-      <spriteID>0</spriteID>
-      <isFlipped>false</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>529.66943</X>
-        <Y>1159.1694</Y>
-      </position>
-      <rotation>-0.2634951</rotation>
-      <spriteID>0</spriteID>
+      <rotation>0.027584542</rotation>
+      <spriteID>7</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
       <isBoat>false</isBoat>
     </Content>
     <Content>
       <position>
-        <X>36.932846</X>
-        <Y>1232.9897</Y>
+        <X>2527.173</X>
+        <Y>987.32983</Y>
       </position>
-      <rotation>-0.18192656</rotation>
-      <spriteID>4</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>661.87646</X>
-        <Y>1262.9987</Y>
-      </position>
-      <rotation>-0.3523483</rotation>
-      <spriteID>4</spriteID>
-      <isFlipped>true</isFlipped>
-      <isNessie>false</isNessie>
-      <isBoat>false</isBoat>
-    </Content>
-    <Content>
-      <position>
-        <X>1913.0294</X>
-        <Y>1263.5929</Y>
-      </position>
-      <rotation>-0.3863192</rotation>
+      <rotation>0.2897762</rotation>
       <spriteID>9</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -1033,10 +934,32 @@
     </Content>
     <Content>
       <position>
-        <X>1950.3284</X>
-        <Y>1419.8208</Y>
+        <X>1854.1223</X>
+        <Y>1002.15125</Y>
       </position>
-      <rotation>-0.31468967</rotation>
+      <rotation>0.27186352</rotation>
+      <spriteID>13</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1624.1575</X>
+        <Y>1006.0066</Y>
+      </position>
+      <rotation>-0.18035471</rotation>
+      <spriteID>3</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-454.24817</X>
+        <Y>1021.1127</Y>
+      </position>
+      <rotation>-0.07363368</rotation>
       <spriteID>5</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>
@@ -1044,10 +967,98 @@
     </Content>
     <Content>
       <position>
-        <X>948.3798</X>
-        <Y>1487.8724</Y>
+        <X>-335.99533</X>
+        <Y>1088.2893</Y>
       </position>
-      <rotation>-0.39942494</rotation>
+      <rotation>-0.21639185</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>470.11676</X>
+        <Y>1144.9644</Y>
+      </position>
+      <rotation>-0.2664133</rotation>
+      <spriteID>3</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1631.882</X>
+        <Y>1175.6606</Y>
+      </position>
+      <rotation>0.12677863</rotation>
+      <spriteID>13</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2020.6533</X>
+        <Y>1185.8069</Y>
+      </position>
+      <rotation>-0.16852517</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>765.4209</X>
+        <Y>1202.4874</Y>
+      </position>
+      <rotation>0.38613755</rotation>
+      <spriteID>9</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1102.6204</X>
+        <Y>1225.4305</Y>
+      </position>
+      <rotation>0.24352846</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1234.5073</X>
+        <Y>1227.5127</Y>
+      </position>
+      <rotation>0.3892414</rotation>
+      <spriteID>10</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>394.603</X>
+        <Y>1247.6104</Y>
+      </position>
+      <rotation>0.18990332</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-39.08572</X>
+        <Y>1260.4048</Y>
+      </position>
+      <rotation>0.17030388</rotation>
       <spriteID>4</spriteID>
       <isFlipped>true</isFlipped>
       <isNessie>false</isNessie>
@@ -1055,10 +1066,65 @@
     </Content>
     <Content>
       <position>
-        <X>996.35</X>
-        <Y>698.48517</Y>
+        <X>-606.64764</X>
+        <Y>1298.5414</Y>
       </position>
-      <rotation>-0.093854465</rotation>
+      <rotation>0.3749346</rotation>
+      <spriteID>5</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1618.3157</X>
+        <Y>1306.0536</Y>
+      </position>
+      <rotation>0.3878419</rotation>
+      <spriteID>1</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>1137.3691</X>
+        <Y>1314.9359</Y>
+      </position>
+      <rotation>0.036129735</rotation>
+      <spriteID>1</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-691.7897</X>
+        <Y>1390.7747</Y>
+      </position>
+      <rotation>-0.38989705</rotation>
+      <spriteID>12</spriteID>
+      <isFlipped>true</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>-829.5621</X>
+        <Y>1574.9238</Y>
+      </position>
+      <rotation>0.3875484</rotation>
+      <spriteID>3</spriteID>
+      <isFlipped>false</isFlipped>
+      <isNessie>false</isNessie>
+      <isBoat>false</isBoat>
+    </Content>
+    <Content>
+      <position>
+        <X>2031.2875</X>
+        <Y>1116.3549</Y>
+      </position>
+      <rotation>0.073237926</rotation>
       <spriteID>-1</spriteID>
       <isFlipped>false</isFlipped>
       <isNessie>false</isNessie>

@@ -15,7 +15,8 @@ public static class RumbleQueue {
             EndTime = startTime+duration,
             StartTime = startTime,
             LeftMotor = leftMotor,
-            RightMotor = rightMotor
+            RightMotor = rightMotor,
+            Expired = false
         });
     }
 
@@ -27,12 +28,14 @@ public static class RumbleQueue {
         foreach (var rumble in rumbles) {
 
             // Start rumbles
-            if (currentTime >= rumble.StartTime)
+            if (currentTime >= rumble.StartTime && !rumble.Expired)
                 GamePad.SetVibration((PlayerIndex)rumble.ControllerIndex, rumble.LeftMotor, rumble.RightMotor);
 
             // Stop rumbles
-            if (currentTime >= rumble.EndTime)
+            if (currentTime >= rumble.EndTime && !rumble.Expired) {
                 GamePad.SetVibration((PlayerIndex)rumble.ControllerIndex, 0, 0);
+                rumble.Expired = true;
+            }
         }
     }
 
@@ -77,5 +80,6 @@ public static class RumbleQueue {
         public double StartTime;
         public float LeftMotor;
         public float RightMotor;
+        public bool Expired;
     }
 }

@@ -211,7 +211,7 @@ public static class DeviceState {
 
     public static float GamePadLeftTrigger(int index) => GamePadsState[index].Triggers.Left;
 
-    public static bool GamePadRightTriggerPressed(int index) => GamePadsState[index].Triggers.Right > 0.1f && PreviousGamePadsState[index].Triggers.Right < 0.1f;
+    public static bool GamePadRightTriggerPressed(int index) => GamePadsState[index].Triggers.Right > 0.1f && PreviousGamePadsState[index].Triggers.Right < 0.1f; // I've added the 0.1f threshold to prevent accidental presses
 
     public static bool GamePadLeftTriggerPressed(int index) => GamePadsState[index].Triggers.Left > 0.1f && PreviousGamePadsState[index].Triggers.Left < 0.1f;
 

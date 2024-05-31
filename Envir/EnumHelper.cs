@@ -17,4 +17,5 @@ public enum GameScene {
     Credits,
     Settings,
     StartOfRound,
+    EndOfRound
 }

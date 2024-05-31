@@ -18,6 +18,7 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.Credits credits = new();
     readonly Envir.Scenes.Settings settings = new();
     readonly Envir.Scenes.StartOfRound startOfRound = new();
+    readonly Envir.Scenes.EndOfRound endOfRound = new();
 
     #endregion
 
@@ -42,6 +43,7 @@ public class GameMain : FixedTimestampGame {
         credits.Initialize(GraphicsDevice);
         settings.Initialize(GraphicsDevice);
         startOfRound.Initialize(GraphicsDevice);
+        endOfRound.Initialize(GraphicsDevice);
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -147,6 +149,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.StartOfRound:
                 startOfRound.Update(gameTime);
                 break;
+            case GameScene.EndOfRound:
+                 endOfRound.Update(gameTime);
+                break;
         }
 
         base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
@@ -197,7 +202,9 @@ public class GameMain : FixedTimestampGame {
                 lobby.Draw(spriteBatch);
                 break;
             case GameScene.Playing:
+            case GameScene.EndOfRound:
                 playing.Draw(spriteBatch);
+                endOfRound.Draw(spriteBatch);
                 break;
             case GameScene.PhotoBook:
                 photoBook.Draw(spriteBatch);

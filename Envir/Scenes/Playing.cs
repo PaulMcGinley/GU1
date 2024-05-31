@@ -120,7 +120,7 @@ public class Playing : IScene {
             }
 
         if (gameOver)
-            GameState.CurrentScene = GameScene.StartOfRound;
+            GameState.CurrentScene = GameScene.EndOfRound;
     }
 
     private void CheckForTouristWin() {
@@ -135,7 +135,7 @@ public class Playing : IScene {
             }
 
         if (gameOver)
-            GameState.CurrentScene = GameScene.StartOfRound;
+            GameState.CurrentScene = GameScene.EndOfRound;
     }
 
     /// <summary>

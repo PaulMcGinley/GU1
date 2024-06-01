@@ -12,6 +12,7 @@ public class NamePlayer : IScene {
 
     int playerIndex = 0;
     Color colour;
+    bool controllersRumbled = false;
 
     int selectedIndex = 0;
     int Index {
@@ -43,6 +44,12 @@ public class NamePlayer : IScene {
     public void UnloadContent() { }
 
     public void Update(GameTime gameTime) {
+
+        if (controllersRumbled == false) {
+
+            RumbleQueue.AddRumble(playerIndex, gameTime.TotalGameTime.TotalMilliseconds, 250, 1f, 1f);
+            controllersRumbled = true;
+        }
 
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadUp)) {
 
@@ -90,8 +97,6 @@ public class NamePlayer : IScene {
         // Draw TLib.NamePlayerCursor at the selected index
         spriteBatch.Draw(TLib.NamePlayerCursor, new Vector2(1920 / 2 + (Index * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), 1080 / 2 -5), null, colour, 0, new Vector2(TLib.NamePlayerCursor.Width / 2, TLib.NamePlayerCursor.Height / 2), 1, SpriteEffects.None, 0);
 
-        //spriteBatch.DrawString(FLib.DebugFont, selectedIndex.ToString(), new Vector2(1920 / 2, 1080 / 2), Color.White);
-
         for (int i = 0; i < playerName.Length; i++) {
 
             spriteBatch.DrawString(FLib.DebugFont, playerName[i].ToString(), new Vector2(1920 / 2 + (i * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), (1080 / 2 )), Color.White);
@@ -124,6 +129,15 @@ public class NamePlayer : IScene {
         selectedIndex = 0;
         colour = Color.White;
         playerName = new char[5] { 'A', 'A', 'A', 'A', 'A'};
+        controllersRumbled = false;
+
+        foreach (Player player in GameState.Players) {
+
+            if (player.CameraView.playerName == string.Empty) {
+
+                GameState.CurrentScene = GameScene.NamePlayer;
+            }
+        }
     }
 
 }

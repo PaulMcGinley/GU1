@@ -20,6 +20,8 @@ public class Lobby : IScene {
     FancyNumber nessieCount = new();
     FancyNumber touristCount = new();
 
+    float animationScale = 0;                                                                                // Scale animated text
+
     public void Initialize(GraphicsDevice device) { }
 
     public void LoadContent(ContentManager content) { }
@@ -52,7 +54,10 @@ public class Lobby : IScene {
             StartGame(gameTime);
     }
 
-    public void FixedUpdate(GameTime gameTime) { }
+    public void FixedUpdate(GameTime gameTime) {
+
+       animationScale = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) * 0.1f + 1;
+    }
 
     public void Draw(SpriteBatch spriteBatch) {
 
@@ -60,9 +65,10 @@ public class Lobby : IScene {
 
         spriteBatch.Draw(TLib.LobbyBackground, new Vector2(0, 0), Color.White);
 
-        // TODO: Use TextStudio to generate a graphic to replace this text
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press A to join, B to leave. Press START to begin.", 1080-100, new Vector2(1920,1080), Color.Black);
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press BACK to go back to the main menu.", 1080-70, new Vector2(1920,1080), Color.Black);
+        if (controllerIndexs.Count < 2)
+            spriteBatch.Draw(TLib.Press_A_ToJoin, new Vector2(1920/2, 1080 - (TLib.Press_A_ToJoin.Height/2)), new Rectangle(0,0, TLib.Press_A_ToJoin.Width, TLib.Press_A_ToJoin.Height), Color.AliceBlue, 0, new Vector2(TLib.Press_A_ToJoin.Width/2, TLib.Press_A_ToJoin.Height/2), 0.5f, SpriteEffects.None, 0);
+        else
+            spriteBatch.Draw(TLib.Press_Start_ToBegin, new Vector2(1920/2, 1080 - (TLib.Press_Start_ToBegin.Height/2)), new Rectangle(0,0, TLib.Press_Start_ToBegin.Width, TLib.Press_Start_ToBegin.Height), Color.AliceBlue, 0, new Vector2(TLib.Press_Start_ToBegin.Width/2, TLib.Press_Start_ToBegin.Height/2), 0.75f*animationScale, SpriteEffects.None, 0);
 
         playerCount.Draw(spriteBatch, new Vector2(1920/2, 1080/2), playerCount < 2 ? Color.Red : Color.White);
         nessieCount.Draw(spriteBatch, new Vector2(1920/4, 1080/3), Color.White);
@@ -70,7 +76,6 @@ public class Lobby : IScene {
 
         spriteBatch.End();
     }
-
 
     void StartGame(GameTime gameTime) {
 
@@ -88,79 +93,19 @@ public class Lobby : IScene {
                 GameState.Players.Add(new Player(controllerIndexs[i]));                                     // Add a new player to the list of players with the controller index
         }
 
+        // Check if all players have entered their name
         foreach (Player player in GameState.Players) {
 
-            if (player.CameraView.playerName == string.Empty) {
+            if (player.CameraView.playerName == string.Empty) {                                            // If the player has not entered their name
 
-                GameState.CurrentScene = GameScene.NamePlayer;
+                GameState.CurrentScene = GameScene.NamePlayer;                                              // Move to the NamePlayer scene
                 return;
             }
         }
 
-        // Assign roles to the players
-        //AssignRoles();
-
-        // vibrate the controllers to indicate the start of the game / role assignment
-        //VibrateControllers(gameTime);
-
-        // Set the scene to playing
-        // ! This may need to be moved to an area after where the roles are assigned
         GameState.CurrentScene = GameScene.StartOfRound;
     }
 
-    private void VibrateControllers(GameTime gameTime) {
-
-        foreach (Player player in GameState.Players) {
-
-            if (player.Role == ActorType.Nessie)
-                RumbleQueue.AddRumble(player.ControllerIndex, 5000, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
-            else if (player.Role == ActorType.Tourist)
-                RumbleQueue.AddRumble(player.ControllerIndex, 2500, gameTime.ElapsedGameTime.TotalMilliseconds, 1, 1);
-        }
-
-    }
-
-    // ! There is a bug where sometimes not all roles are assigned correctly
-    // ? This might be resolved now
-    // public void AssignRoles() {
-
-    //     // Default everyone to tourist
-    //     foreach (Player player in GameState.Players)
-    //         player.Role = ActorType.Tourist;
-
-    //     // Track the number of nessies that need to be assigned
-    //     int remainingNessies = (int)nessieCount.Value;
-
-    //     // Assign nessies to players who have not played as Nessie before
-    //     foreach (Player player in GameState.Players) {
-
-    //         if (player.PreferredRole() == ActorType.Nessie) {
-
-    //             player.Role = ActorType.Nessie;
-    //             remainingNessies--;
-    //         }
-
-    //         if (remainingNessies == 0)
-    //             break;
-    //     }
-
-    //     // If there are still nessies to assign, assign them to players who have played as Nessie before
-    //     if (remainingNessies > 0) {
-
-    //         // Assign nessies to players who have played as Nessie before
-    //         foreach (Player player in GameState.Players) {
-
-    //             if (player.Role == ActorType.Tourist) {
-
-    //                 player.Role = ActorType.Nessie;
-    //                 remainingNessies--;
-    //             }
-
-    //             if (remainingNessies == 0)
-    //                 break;
-    //         }
-    //     }
-    // }
 
     public void OnSceneStart() {
 

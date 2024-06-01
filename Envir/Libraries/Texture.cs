@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -61,6 +60,14 @@ public class Texture {
      public static Texture2D NamePlayerTitle;
      public static Texture2D NamePlayerCursor;
 
+     public static Texture2D Press_A_ToJoin;
+     public static Texture2D Press_A_ToContinue;
+     public static Texture2D Press_Start_ToBegin;
+     public static Texture2D Press_Start_ToConfirm;
+
+     public static Texture2D WinnerTitle;
+     public static Texture2D LeaderboardTitle;
+
     /// <summary>
     /// Load all the textures
     /// </summary>
@@ -105,5 +112,13 @@ public class Texture {
         NamePlayerBackground = content.Load<Texture2D>("Graphics/UI/npBox");
         NamePlayerTitle = content.Load<Texture2D>("Graphics/UI/npTitle");
         NamePlayerCursor = content.Load<Texture2D>("Graphics/UI/npSelector");
+
+        Press_A_ToJoin = content.Load<Texture2D>("Graphics/UI/Press-A-to-join");
+        Press_A_ToContinue = content.Load<Texture2D>("Graphics/UI/Press-A-to-continue");
+        Press_Start_ToBegin = content.Load<Texture2D>("Graphics/UI/Press-Start-to-begin");
+        Press_Start_ToConfirm = content.Load<Texture2D>("Graphics/UI/Press-Start-to-confirm");
+
+        WinnerTitle = content.Load<Texture2D>("Graphics/WinnerTitle");
+        LeaderboardTitle = content.Load<Texture2D>("Graphics/LeaderboardTitle");
     }
 }

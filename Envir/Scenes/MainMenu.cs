@@ -56,7 +56,7 @@ public class MainMenu : IScene {
                         break;
 
                     case MenuItems.Controls:
-                        GameState.CurrentScene = GameScene.Settings;
+                        GameState.CurrentScene = GameScene.PhotoBook;
                         break;
 
                     case MenuItems.Credits:

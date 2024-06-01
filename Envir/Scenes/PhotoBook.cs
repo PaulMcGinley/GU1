@@ -12,7 +12,7 @@ public class PhotoBook : IScene {
 
     Random  rand = new();
 
-    Photo photo;
+    //Photo photo;
     SpriteBatch spriteBatch;
 
     Photo[] photos;
@@ -27,12 +27,12 @@ public class PhotoBook : IScene {
 
     public void Initialize(GraphicsDevice device) {
 
-        photo = new Photo();
-        photo = photo.Load("-8584844245441848118");
+        // photo = new Photo();
+        // photo = photo.Load("-8584844245441848118");
 
-        photo.Render(spriteBatch);
+        // photo.Render(spriteBatch);
 
-        string directoryPath = photo.SaveDir; // your directory path
+        string directoryPath = Photo.SaveDir; // your directory path
         var regex = new Regex(@"^-\d+\.xml$");
 
         string[] files = Directory.EnumerateFiles(directoryPath, "*.xml")
@@ -82,7 +82,7 @@ public class PhotoBook : IScene {
         // spriteBatch.Draw(photo.fullPicture, new Vector2(1920/2,1080/2), new Rectangle((int)photo.location.X -128, (int)photo.location.Y -128, 256, 256), Color.White, 0, new Vector2(128, 128), 1, SpriteEffects.None, 0);
 
         for (int i = 0; i < photos.Length; i++)
-            spriteBatch.Draw(photos[i].framedPicture, photoLocations[i], null, Color.White, photoRotations[i], new Vector2(0, 0), 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(photos[i].framedPicture, photoLocations[i], null, Color.White, photoRotations[i]-0.5f, new Vector2(0, 0), 1, SpriteEffects.None, 0);
 
         // foreach (var photo in photos)
         //     spriteBatch.Draw(photo.framedPicture, new Vector2(rand.Next(0, 1920), rand.Next(0, 1080)), null, Color.White, (float)rand.NextDouble(), new Vector2(0, 0), 1, SpriteEffects.None, 0);

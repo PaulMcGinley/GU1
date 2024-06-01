@@ -9,7 +9,7 @@ namespace GU1.Envir.Models;
 
 public class Photo {
 
-    public string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
+    public static string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
 
     #region Data
 
@@ -69,14 +69,14 @@ public class Photo {
         #region Render Picture
 
         // set render target
-        fullPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, 1920, 1080);
+        fullPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, 1920*2, 1080*2);
         spriteBatch.GraphicsDevice.SetRenderTarget(fullPicture);
         spriteBatch.GraphicsDevice.Clear(Color.Black);
 
         spriteBatch.Begin();
 
         // Draw the background
-        spriteBatch.Draw(TLib.PlayingBackground[0], new Vector2(0, 0), Color.White);
+        spriteBatch.Draw(TLib.PlayingBackground[0], new Rectangle(0,0,1920*2,1080*2), new Rectangle(0,0,1920,1080), Color.White);
 
         // Sort the sprites so they are drawn in the correct order
         content.Sort((a, b) => a.position.X.CompareTo(b.position.X));
@@ -86,13 +86,13 @@ public class Photo {
         foreach (var item in content) {
 
             if (item.isBoat)
-                spriteBatch.Draw(TLib.Boat[item.isFlipped ? 1 : 0], item.position, null, Color.White, item.rotation, new Vector2(128, 128), 0.5f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.Boat[item.isFlipped ? 1 : 0], item.position + new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
             else if (item.isNessie)
-                spriteBatch.Draw(TLib.TheNessie, item.position, null, Color.White, item.rotation, new Vector2(128, 128), 0.5f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.TheNessie, item.position+ new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
             else
-                spriteBatch.Draw(TLib.Flotsam[item.spriteID], item.position, null, Color.White, item.rotation, new Vector2(128, 128), 0.5f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.Flotsam[item.spriteID], item.position+ new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), .75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
         }
 
         spriteBatch.End();
@@ -108,7 +108,7 @@ public class Photo {
 
         spriteBatch.Begin();
 
-        spriteBatch.Draw(fullPicture, new Rectangle(0, 0, 256, 256), new Rectangle((int)location.X - 128, (int)location.Y - 128, 256, 256), Color.White);
+        spriteBatch.Draw(fullPicture, new Rectangle(0, 0, 256, 256), new Rectangle((int)location.X +(1920/2), (int)location.Y - 128 + (1080/2), 256, 256), Color.White);
 
         spriteBatch.End();
 

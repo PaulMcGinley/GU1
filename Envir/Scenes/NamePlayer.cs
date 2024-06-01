@@ -85,7 +85,7 @@ public class NamePlayer : IScene {
         spriteBatch.Draw(TLib.NamePlayerTitle, new Vector2(1920 / 2, 1080 / 2 - 180), null, colour, 0, new Vector2(TLib.NamePlayerTitle.Width / 2, TLib.NamePlayerTitle.Height / 2), 1, SpriteEffects.None, 0);
 
         //Draw string player index in NamePlayerTitle
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Player " + (playerIndex + 1), 1080/2 - 190, new Vector2(1920, 1080), Color.White);
+        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, $"Player {playerIndex + 1} - {Name}", 1080/2 - 190, new Vector2(1920, 1080), Color.White);
 
         // Draw TLib.NamePlayerCursor at the selected index
         spriteBatch.Draw(TLib.NamePlayerCursor, new Vector2(1920 / 2 + (Index * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), 1080 / 2 -5), null, colour, 0, new Vector2(TLib.NamePlayerCursor.Width / 2, TLib.NamePlayerCursor.Height / 2), 1, SpriteEffects.None, 0);
@@ -96,6 +96,9 @@ public class NamePlayer : IScene {
 
             spriteBatch.DrawString(FLib.DebugFont, playerName[i].ToString(), new Vector2(1920 / 2 + (i * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), (1080 / 2 )), Color.White);
         }
+
+        // Press start to confirm under the background
+        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press START to confirm", 1080/2 + 190, new Vector2(1920, 1080), Color.White);
 
         spriteBatch.End();
 

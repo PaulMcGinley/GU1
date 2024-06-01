@@ -16,12 +16,16 @@ global using FLib = GU1.Envir.Libraries.Fonts;
 global using TLib = GU1.Envir.Libraries.Texture;
 global using RLib = GU1.Envir.Libraries.Rumble;
 global using SLib = GU1.Envir.Libraries.Sounds;
+using System.IO;
 
 namespace GU1;
 
 internal static class Program {
 
     private static void Main() {
+
+        if (!Directory.Exists(Photo.SaveDir))
+            Directory.CreateDirectory(Photo.SaveDir);
 
         using var game = new GU1.GameMain();
         game.Run();

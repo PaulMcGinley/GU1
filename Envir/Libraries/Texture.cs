@@ -28,6 +28,12 @@ public class Texture {
 
     public static Texture2D TheNessie;
 
+    public static Texture2D NessieAvatar;
+    public static Texture2D TouristAvatar;
+
+    public static Texture2D NessieTitle;
+    public static Texture2D TouristTitle;
+
     /***********************************************************************
      *** Effects ***********************************************************
      ***********************************************************************/
@@ -74,6 +80,12 @@ public class Texture {
         Pixel.SetData(new[] { Color.White });
 
         TheNessie = content.Load<Texture2D>("Graphics/Flotsam/TheNessie");
+
+        NessieAvatar = content.Load<Texture2D>("Graphics/nessieAvatar");
+        TouristAvatar = content.Load<Texture2D>("Graphics/touristAvatar");
+
+        NessieTitle = content.Load<Texture2D>("Graphics/nessieTitle");
+        TouristTitle = content.Load<Texture2D>("Graphics/touristTitle");
 
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
 

@@ -11,7 +11,7 @@ public class StartOfRound : IScene {
     double sceneStartTime = 0;                                                                              // Time the scene started
     double currentTime = 0;                                                                                 // Current time in the scene
 
-    int screenWaitTime = 5000;                                                                                // Time to wait on each screen
+    int screenWaitTime = 3000;                                                                                // Time to wait on each screen
 
    // int playerCount = GameState.Players.Count;                                                              // Number of players in the game
     float nessieCount => GameState.Players.Count / 3.3f;                                                  // Number of nessies in the game
@@ -39,7 +39,7 @@ public class StartOfRound : IScene {
             rumbleControllers = true;                                                                      // Set rumbleControllers to false
         }
 
-        if (currentTime - sceneStartTime > (screenWaitTime*2)+3000)                                                             // If the scene has been running for more than 10 seconds
+        if (currentTime - sceneStartTime > (screenWaitTime*2)/*+3000*/)                                                             // If the scene has been running for more than 10 seconds
             GameState.CurrentScene = GameScene.Playing;                                                     // Move to the Playing scene
     }
 
@@ -49,12 +49,15 @@ public class StartOfRound : IScene {
 
         spriteBatch.Begin();
 
+        spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0, 0, 1920, 1080), Color.White);              // Draw the main menu background
+
+
         if (currentTime - sceneStartTime < screenWaitTime)                                                              // If the scene has been running for less than 10 seconds
             DrawNessieScreen(spriteBatch);                                                                  // Draw the Nessie screen
-        else if (currentTime - sceneStartTime < screenWaitTime*2)                                                         // If the scene has been running for less than 20 seconds
+        else /*if (currentTime - sceneStartTime < screenWaitTime*2)*/                                                         // If the scene has been running for less than 20 seconds
             DrawTouristScreen(spriteBatch);                                                                 // Otherwise, draw the Tourist screen
-        else
-            DrawCountdownScreen(spriteBatch);                                                               // Otherwise, draw the countdown screen
+        //else
+        //    DrawCountdownScreen(spriteBatch);                                                               // Otherwise, draw the countdown screen
 
         spriteBatch.End();
 
@@ -62,13 +65,20 @@ public class StartOfRound : IScene {
 
     public void DrawNessieScreen(SpriteBatch spriteBatch) {
 
-        spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0, 0, 1920, 1080), Color.Blue);              // Draw the main menu background
+        // Avatar
+        spriteBatch.Draw(TLib.NessieAvatar, new Vector2(1920 / 2, 1080 / 2), null, Color.White, 0, new Vector2(TLib.NessieAvatar.Width / 2, TLib.NessieAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
+
+        // Title
+        spriteBatch.Draw(TLib.NessieTitle, new Vector2(1920 / 2, 1080 / 2 - 200), null, Color.White, 0, new Vector2(TLib.NessieTitle.Width / 2, TLib.NessieTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
     }
 
     public void DrawTouristScreen(SpriteBatch spriteBatch) {
 
+        // Title
+        spriteBatch.Draw(TLib.TouristAvatar, new Vector2(1920 / 2, 1080 / 2), null, Color.White, 0, new Vector2(TLib.TouristAvatar.Width / 2, TLib.TouristAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
 
-        spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0, 0, 1920, 1080), Color.Red);              // Draw the main menu background
+        // Title
+        spriteBatch.Draw(TLib.TouristTitle, new Vector2(1920 / 2, 1080 / 2 - 200), null, Color.White, 0, new Vector2(TLib.TouristTitle.Width / 2, TLib.TouristTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
     }
 
     private void DrawCountdownScreen(SpriteBatch spriteBatch) {

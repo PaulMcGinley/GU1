@@ -26,7 +26,10 @@ public class Player : Actor {
     public Player(int controllerIndex) {
 
        ControllerIndex = controllerIndex;
-       CameraView = new CamView(Color.White, MaxPhotos);
+
+        // TODO: Create a list of colours
+       Color c = new Color(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255));
+       CameraView = new CamView(c, MaxPhotos);
     }
 
     public void SetName(string name) => CameraView.playerName = name;

@@ -13,7 +13,7 @@ public class CamView : IMove {
     public Vector2 offset = Vector2.Zero;
     public Rectangle boundaryBox => new Rectangle((int)position.X + (int)offset.X, (int)position.Y + (int) offset.Y, TLib.CameraView.Width, TLib.CameraView.Height);
     // public Rectangle boundaryBox => new Rectangle((int)position.X - (TLib.CameraView.Width/2), (int)position.Y - (TLib.CameraView.Height/2), TLib.CameraView.Width, TLib.CameraView.Height);
-    Color colour;
+    public Color colour;
     int maxPhotos;
     public int remainingPhotos;
     public Photo[] photos;

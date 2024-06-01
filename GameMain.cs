@@ -224,7 +224,9 @@ public class GameMain : FixedTimestampGame {
                 mainMenu.Draw(spriteBatch);
                 break;
             case GameScene.Lobby:
+            case GameScene.NamePlayer:
                 lobby.Draw(spriteBatch);
+                namePlayer.Draw(spriteBatch);
                 break;
             case GameScene.Playing:
             case GameScene.EndOfRound:
@@ -242,9 +244,6 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.StartOfRound:
                 startOfRound.Draw(spriteBatch);
-                break;
-            case GameScene.NamePlayer:
-                namePlayer.Draw(spriteBatch);
                 break;
         }
 

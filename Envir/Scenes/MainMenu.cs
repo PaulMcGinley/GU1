@@ -10,6 +10,9 @@ public class MainMenu : IScene {
 
     Graphic2D background;
 
+    Color menuHotColor = Color.AliceBlue;
+    Color menuColdColor = Color.White *0.5f;
+
     int selectedMenuIndex = 0;
     int SelectedMenuIndex {
 
@@ -55,8 +58,16 @@ public class MainMenu : IScene {
                         GameState.CurrentScene = GameScene.Lobby;
                         break;
 
-                    case MenuItems.Controls:
+                    case MenuItems.Photographs:
                         GameState.CurrentScene = GameScene.PhotoBook;
+                        break;
+
+                    case MenuItems.Settings:
+                        GameState.CurrentScene = GameScene.Settings;
+                        break;
+
+                    case MenuItems.HowToPlay:
+                        //GameState.CurrentScene = GameScene.HowToPlay;
                         break;
 
                     case MenuItems.Credits:
@@ -93,50 +104,26 @@ public class MainMenu : IScene {
         // Draw the background
         background.Draw(spriteBatch);
 
-        // @AlexanderTuffy good work ^_^ , however if you wish to optimize / minify your code, you should look at the ternary operator ?:
-        // That way you can do an inline if statement for each box, and only draw the box that is selected
-        // Here is an example of how you could do it:
-        // spriteBatch.Draw(TLib.Pixel, new Rectangle(x, y, w, h), selectedMenuIndex == 0 ? Color.Gray : Color.White);
-        // If you choose to do so, you couuld create variables for the colours =]
-        // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator
-        // Draw the menu items
-        //making the colour change to gray when each indivisual box is selected
-        if (selectedMenuIndex == 0) //when the first box is selected
-        {
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.Gray);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.White);
-        }
-        else if (selectedMenuIndex == 1) //when the second box is selected
-        {
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.Gray);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.White);
-        }
-        else if (selectedMenuIndex == 2) //when the Third box is selected
-        {
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.Gray);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.White);
-        }
-        else if (selectedMenuIndex == 3) //when the Fourth box is selected
-        {
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), Color.White);
-            spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), Color.Gray);
-        }
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), selectedMenuIndex == 0 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), selectedMenuIndex == 1 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), selectedMenuIndex == 2 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), selectedMenuIndex == 3 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 180, 400, 100), selectedMenuIndex == 4 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 300, 400, 100), selectedMenuIndex == 5 ? menuHotColor : Color.Red*0.5f);
+
         // Draw the text
         spriteBatch.DrawString(FLib.DebugFont, "PLAY GAME", new Vector2((1920/2)-50, (1080/2)-260), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "PHOTOGRAPHS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "HOW TO PLAY", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)+220), Color.Black);
+        spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+340), Color.Black);
 
         // Draw the arrow
-        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-275 + (SelectedMenuIndex * 120)), Color.Gray);
+        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-275 + (SelectedMenuIndex * 120)), menuHotColor);
+
+        // Draw the arrow flipped on the other side
+        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)+225, (1080/2)-275 + (SelectedMenuIndex * 120)), null, menuHotColor, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
 
         spriteBatch.End( );
     }
@@ -148,8 +135,10 @@ public class MainMenu : IScene {
     enum MenuItems { //declaring the menu items box values
 
         Play = 0, //sets the value of the box Play Game to 0
-        Controls = 1, //Sets the value of the Settings Box to 1
-        Credits = 2, //Sets the value of the Credits box to 2
-        Exit = 3 //sets the value of Exit Game box to 3
+        Photographs = 1, //Sets the value of the Settings Box to 1
+        Settings = 2,
+        HowToPlay = 3,
+        Credits = 4, //Sets the value of the Credits box to 2
+        Exit = 5 //sets the value of Exit Game box to 3
     }
 }

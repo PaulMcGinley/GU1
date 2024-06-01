@@ -16,6 +16,8 @@ public class CamView : IMove {
     Color colour;
     int maxPhotos;
     public int remainingPhotos;
+    public Photo[] photos;
+    public string playerName = string.Empty;
 
     public CamView(Color colour, int maxPhotos) {
 
@@ -24,6 +26,7 @@ public class CamView : IMove {
         this.maxPhotos = maxPhotos;                                                                         // The maximum number of photos the player can take
         this.remainingPhotos = maxPhotos;                                                                   // The number of photos the player has left (set this to the max number of photos at the start of the game)
         offset = new Vector2(rand.Next(-500,500), rand.Next(-500,500));                                                                    // Random offset for the camera view
+        photos = new Photo[maxPhotos];                                                                      // Create an array of photos
     }
 
     #region IMove Interface
@@ -53,12 +56,13 @@ public class CamView : IMove {
         if (remainingPhotos <= 0)
             return false;
 
+        int nextPhotoIndex = Array.FindIndex(photos, p => p == null);
         // Create a new Photo object and fill in the details
-        Photo photo = new() {
+        photos[nextPhotoIndex] = new() {
 
             location = position + offset,                                                                   // Set the location of the photo to the camera view position
             timeStamp = DateTime.Now,                                                                       // Set the time stamp to the current time
-            photographer = "Player"                                                                         // Set the photographer to the player's name
+            photographer = playerName                                                                       // Set the photographer to the player's name
         };
 
         // Loop through all the flotsam in the game and add them to the photo
@@ -66,7 +70,7 @@ public class CamView : IMove {
 
             if (!flotsam.isAlive) continue;                                                                 // If the flotsam is not alive, skip it
 
-            photo.content.Add(new Photo.Content() {
+            photos[nextPhotoIndex].content.Add(new Photo.Content() {
 
                 position = flotsam.Position,                                                                // Set the position of the flotsam
                 rotation = flotsam.sprite.GetRotation(),                                                    // Set the rotation of the flotsam
@@ -75,8 +79,8 @@ public class CamView : IMove {
                 isNessie = flotsam.PlayerControlled                                                         // Set the isNessie flag to true if the flotsam is Nessie
             });
         }
-        photo.content.Add(new Photo.Content()
-        {
+
+        photos[nextPhotoIndex].content.Add(new Photo.Content() {
             position = GameState.Boat.Position,
             rotation = GameState.Boat.rotation,
             spriteID = -1,
@@ -84,7 +88,7 @@ public class CamView : IMove {
             isBoat = true
         });
 
-        photo.Save();
+        photos[nextPhotoIndex].Save();
 
         remainingPhotos--;
 
@@ -100,6 +104,7 @@ public class CamView : IMove {
     public void Reset() {
 
         remainingPhotos = maxPhotos;
+        photos = new Photo[maxPhotos];
     }
 
     public void Draw(SpriteBatch spriteBatch) {

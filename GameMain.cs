@@ -19,6 +19,7 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.Settings settings = new();
     readonly Envir.Scenes.StartOfRound startOfRound = new();
     readonly Envir.Scenes.EndOfRound endOfRound = new();
+    readonly Envir.Scenes.NamePlayer namePlayer = new();
 
     #endregion
 
@@ -46,6 +47,7 @@ public class GameMain : FixedTimestampGame {
         settings.Initialize(GraphicsDevice);
         startOfRound.Initialize(GraphicsDevice);
         endOfRound.Initialize(GraphicsDevice);
+        namePlayer.Initialize(GraphicsDevice);
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -96,6 +98,12 @@ public class GameMain : FixedTimestampGame {
                 case GameScene.StartOfRound:
                     startOfRound.OnSceneEnd();
                     break;
+                case GameScene.EndOfRound:
+                    endOfRound.OnSceneEnd();
+                    break;
+                case GameScene.NamePlayer:
+                    namePlayer.OnSceneEnd();
+                    break;
             }
 
             // Call the start methods of the scenes
@@ -121,6 +129,12 @@ public class GameMain : FixedTimestampGame {
                     break;
                 case GameScene.StartOfRound:
                     startOfRound.OnSceneStart();
+                    break;
+                case GameScene.EndOfRound:
+                    endOfRound.OnSceneStart();
+                    break;
+                case GameScene.NamePlayer:
+                    namePlayer.OnSceneStart();
                     break;
             }
         }
@@ -154,6 +168,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.EndOfRound:
                  endOfRound.Update(gameTime);
                 break;
+            case GameScene.NamePlayer:
+                namePlayer.Update(gameTime);
+                break;
         }
 
         base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
@@ -184,6 +201,12 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.StartOfRound:
                 startOfRound.FixedUpdate(gameTime);
+                break;
+            case GameScene.EndOfRound:
+                endOfRound.FixedUpdate(gameTime);
+                break;
+            case GameScene.NamePlayer:
+                namePlayer.FixedUpdate(gameTime);
                 break;
         }
 
@@ -219,6 +242,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.StartOfRound:
                 startOfRound.Draw(spriteBatch);
+                break;
+            case GameScene.NamePlayer:
+                namePlayer.Draw(spriteBatch);
                 break;
         }
 

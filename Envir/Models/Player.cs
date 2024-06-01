@@ -22,11 +22,14 @@ public class Player : Actor {
     bool playedAsTourist = false;        // Track if the player has played as Tourist before
     public bool playedBothRoles => playedAsNessie & playedAsTourist;
 
+    const int MaxPhotos = 5;
     public Player(int controllerIndex) {
 
        ControllerIndex = controllerIndex;
-       CameraView = new CamView(Color.White, 5);
+       CameraView = new CamView(Color.White, MaxPhotos);
     }
+
+    public void SetName(string name) => CameraView.playerName = name;
 
     /// <summary>
     /// Player is responsible for choosing their preferred role.

@@ -9,7 +9,7 @@ namespace GU1.Envir.Models;
 
 public class Photo {
 
-    string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
+    public string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
 
     #region Data
 
@@ -52,7 +52,7 @@ public class Photo {
 
     public void Save() {
 
-        if (fileName == null)
+        if (fileName == string.Empty)
             fileName = $"{DateTime.Now.ToBinary()}";
 
         string _path = $"{SaveDir}/{fileName}.xml";

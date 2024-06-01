@@ -78,6 +78,7 @@ public class Lobby : IScene {
         if (playerCount < 2)
             return;
 
+
         // Check if the player count has changed
         if (GameState.Players.Count != playerCount.Value) {
 
@@ -85,6 +86,15 @@ public class Lobby : IScene {
 
             for (int i = 0; i < playerCount.Value; i++)                                                     // Loop through the number of players
                 GameState.Players.Add(new Player(controllerIndexs[i]));                                     // Add a new player to the list of players with the controller index
+        }
+
+        foreach (Player player in GameState.Players) {
+
+            if (player.CameraView.playerName == string.Empty) {
+
+                GameState.CurrentScene = GameScene.NamePlayer;
+                return;
+            }
         }
 
         // Assign roles to the players

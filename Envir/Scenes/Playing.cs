@@ -256,7 +256,10 @@ public class Playing : IScene {
         StartNewRound();
     }
 
-    public void OnSceneEnd() { }
+    public void OnSceneEnd() { 
+
+        GC.Collect();
+    }
 
     public void StartNewRound() {
 

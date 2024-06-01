@@ -17,7 +17,12 @@ public class NamePlayer : IScene {
     int Index {
         get => selectedIndex;
         set {
-            value = Math.Clamp(value, 0, 2);
+            if (value < 0)
+                selectedIndex = 0;
+            else if (value > 4)
+                selectedIndex = 4;
+            else
+                selectedIndex = value;
         }
     }
 
@@ -41,21 +46,21 @@ public class NamePlayer : IScene {
 
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadUp)) {
 
-            playerName[selectedIndex] = (char)(playerName[selectedIndex] + 1);
-            playerName[selectedIndex] = (char)Math.Clamp(playerName[selectedIndex], firstLetter, lastLetter); // this wont work if its already out of bounds
+            playerName[Index] = (char)(playerName[Index] + 1);
+            playerName[Index] = (char)Math.Clamp(playerName[Index], firstLetter, lastLetter); // this wont work if its already out of bounds
         }
 
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadDown)) {
 
-            playerName[selectedIndex] = (char)(playerName[selectedIndex] - 1);
-            playerName[selectedIndex] = (char)Math.Clamp(playerName[selectedIndex], firstLetter, lastLetter); // this wont work if its already out of bounds
+            playerName[Index] = (char)(playerName[Index] - 1);
+            playerName[Index] = (char)Math.Clamp(playerName[Index], firstLetter, lastLetter); // this wont work if its already out of bounds
         }
 
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadLeft))
-            selectedIndex--;
+            Index--;
 
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadRight))
-            selectedIndex++;
+            Index++;
 
         if (IsGamePadButtonPressed(playerIndex, Buttons.Start))
             GameState.CurrentScene = GameScene.Lobby;
@@ -83,7 +88,7 @@ public class NamePlayer : IScene {
         DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Player " + (playerIndex + 1), 1080/2 - 190, new Vector2(1920, 1080), Color.White);
 
         // Draw TLib.NamePlayerCursor at the selected index
-        spriteBatch.Draw(TLib.NamePlayerCursor, new Vector2(1920 / 2 + (selectedIndex * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), 1080 / 2 -5), null, colour, 0, new Vector2(TLib.NamePlayerCursor.Width / 2, TLib.NamePlayerCursor.Height / 2), 1, SpriteEffects.None, 0);
+        spriteBatch.Draw(TLib.NamePlayerCursor, new Vector2(1920 / 2 + (Index * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), 1080 / 2 -5), null, colour, 0, new Vector2(TLib.NamePlayerCursor.Width / 2, TLib.NamePlayerCursor.Height / 2), 1, SpriteEffects.None, 0);
 
         //spriteBatch.DrawString(FLib.DebugFont, selectedIndex.ToString(), new Vector2(1920 / 2, 1080 / 2), Color.White);
 

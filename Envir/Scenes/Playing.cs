@@ -178,7 +178,10 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
             foreach (Flotsam flotsam in GameState.Flotsam)
                 if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))  // Check if the flotsam is colliding with the player
-                    flotsam.Inspect();
+                        if (flotsam.Inspect()) {
+
+                            player.Score += 100;                                                            // Add 100 to the player's score
+                        }
     }
 
     /// <summary>
@@ -256,7 +259,7 @@ public class Playing : IScene {
         StartNewRound();
     }
 
-    public void OnSceneEnd() { 
+    public void OnSceneEnd() {
 
         GC.Collect();
     }

@@ -144,14 +144,20 @@ public class Flotsam : Actor {
     /// <summary>
     /// This method is called when a tourist moves their camera view over the floatsam
     /// </summary>
-    public void Inspect() {
+    public bool Inspect() {
 
         if (!isAlive)
-            return;
+            return false;
+
+        if (isFadingOut)
+            return false;
 
         if (isCollected) {
             isFadingOut = true;
+            return true;
         }
+
+        return false;
     }
 
     /// <summary>

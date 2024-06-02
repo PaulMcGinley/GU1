@@ -89,7 +89,7 @@ public class Photo {
         foreach (var item in content) {
 
             if (item.isBoat)
-                spriteBatch.Draw(TLib.Boat[item.isFlipped ? 1 : 0], item.position + new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.Boat[item.isFlipped ? 1 : 0], item.position + new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, SpriteEffects.None, 0);
 
             else if (item.isNessie)
                 spriteBatch.Draw(TLib.TheNessie, item.position+ new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);

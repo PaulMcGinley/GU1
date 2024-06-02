@@ -145,6 +145,9 @@ public class PhotoBook : IScene {
             photos[i].Render(spriteBatch);
         }
 
+        // Sort the photos by the date they were taken
+        photos = photos.OrderByDescending(photo => photo.timeStamp).ToArray();
+
         photoLocations = new Vector2[files.Length];                                                         // Create a new array of photo locations with the length of the file count
 
         // Using modulo to create a grid of photos

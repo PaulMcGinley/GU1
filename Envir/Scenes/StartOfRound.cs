@@ -153,6 +153,7 @@ public class StartOfRound : IScene {
         if (endGame) {
 
             GameState.CurrentScene = GameScene.MainMenu;
+            GameState.Players.Clear();
             return;
 
         } else {

@@ -32,7 +32,7 @@ public class GameMain : FixedTimestampGame {
 
         base.Initialize();                                                                                  // ! IMPORTANT: Keep this here
 
-        photoBook.Set(spriteBatch);                                                                         // Set the sprite batch for the photo book scene
+        photoBook.Set(spriteBatch);                                                                         // Set the sprite batch for the photo book scene so it can render the photos outwith the draw method
 
         DeviceState.Initialize();                                                                           // Initialize the input device state to get the initial state of the devices
         FLib.Initialize(Content);                                                                           // Initialize the fonts library
@@ -69,8 +69,8 @@ public class GameMain : FixedTimestampGame {
         if (IsKeyPressed(Keys.F1))
             E.Config.ShowDebugInfo = !E.Config.ShowDebugInfo;                                               // Toggle the debug info
 
-        if(IsAnyInputDown(Keys.Escape, Buttons.Back))                                                       // Check if the escape key or any controller back button is pressed
-            Exit();                                                                                         // Exit the game
+        // if(IsAnyInputDown(Keys.Escape, Buttons.Back))                                                       // Check if the escape key or any controller back button is pressed
+        //     Exit();                                                                                         // Exit the game
 #endif
 
         // Check if the scene has changed

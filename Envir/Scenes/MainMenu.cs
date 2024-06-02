@@ -120,10 +120,10 @@ public class MainMenu : IScene {
         spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+340), Color.Black);
 
         // Draw the arrow
-        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)-250, (1080/2)-275 + (SelectedMenuIndex * 120)), menuHotColor);
+        spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)-350, (1080/2)-295 + (SelectedMenuIndex * 120)), menuHotColor);
 
         // Draw the arrow flipped on the other side
-        spriteBatch.Draw(TLib.Arrow, new Vector2((1920/2)+225, (1080/2)-275 + (SelectedMenuIndex * 120)), null, menuHotColor, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
+        spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)+225, (1080/2)-295 + (SelectedMenuIndex * 120)), null, menuHotColor, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
 
         spriteBatch.End( );
     }

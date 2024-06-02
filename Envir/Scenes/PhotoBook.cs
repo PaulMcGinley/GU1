@@ -62,6 +62,9 @@ public class PhotoBook : IScene {
                 }
             }
         }
+
+        if (IsGamePadButtonPressed(0, Buttons.Y))
+            cursor.Position = camera.Position;
     }
 
     public void FixedUpdate(GameTime gameTime) {

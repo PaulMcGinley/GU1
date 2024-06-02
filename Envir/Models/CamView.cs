@@ -48,7 +48,7 @@ public class CamView : IMove {
         offset.Y =  Math.Clamp(offset.Y, -500 - (boundaryBox.Height), 500);
     }
 
-    public bool TakePhoto() {
+    public bool TakePhoto(float bgOpacity) {
 
         // Ain't got no photos, ain't getting no picture bud!
         if (remainingPhotos <= 0)
@@ -58,6 +58,7 @@ public class CamView : IMove {
         // Create a new Photo object and fill in the details
         photos[nextPhotoIndex] = new() {
 
+            bgOpacity = bgOpacity,                                                                          // Set the background opacity
             location = position + offset,                                                                   // Set the location of the photo to the camera view position
             timeStamp = DateTime.Now,                                                                       // Set the time stamp to the current time
             photographer = playerName                                                                       // Set the photographer to the player's name

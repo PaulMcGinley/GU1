@@ -20,7 +20,9 @@ public class Photo {
     public string Date => timeStamp.ToString("yyyy-MM-dd");                                                 // The date the photo was taken (Extracted from the timeStamp)
     public string Time => timeStamp.ToString("HH:mm");                                                      // The time the photo was taken (Extracted from the timeStamp)
 
-    public List<Content> content = new();                                                                           // The content of the photo
+    public List<Content> content = new();                                                                   // The content of the photo
+
+    public float bgOpacity = 0f;                                                                            // The opacity of the background
 
     #endregion
 
@@ -77,6 +79,7 @@ public class Photo {
 
         // Draw the background
         spriteBatch.Draw(TLib.PlayingBackground[0], new Rectangle(0,0,1920*2,1080*2), new Rectangle(0,0,1920,1080), Color.White);
+        spriteBatch.Draw(TLib.PlayingBackground[1], new Rectangle(0,0,1920*2,1080*2), new Rectangle(0,0,1920,1080), Color.White * bgOpacity, 0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
 
         // Sort the sprites so they are drawn in the correct order
         content.Sort((a, b) => a.position.X.CompareTo(b.position.X));
@@ -151,20 +154,6 @@ public class Photo {
         spriteBatch.GraphicsDevice.SetRenderTarget(null);
 
     }
-
-    // public void Optimize() {
-
-    //     foreach (var item in content) {
-
-    //         if (item.isBoat) continue;
-    //         if (item.isNessie) continue;
-
-    //         if(item.position.X < location.X - 128) content.Remove(item);
-    //         else if(item.position.X > location.X + 128) content.Remove(item);
-    //         else if(item.position.Y < location.Y - 128) content.Remove(item);
-    //         else if(item.position.Y > location.Y + 128) content.Remove(item);
-    //     }
-    // }
 
     public struct Content {
 

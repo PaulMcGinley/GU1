@@ -99,7 +99,7 @@ public class Playing : IScene {
         int _score = 0;
 
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
-            if (GamePadRightTriggerPressed(player.ControllerIndex) && player.CameraView.TakePhoto()) {
+            if (GamePadRightTriggerPressed(player.ControllerIndex) && player.CameraView.TakePhoto(background2.GetOpacity())) {
 
                 // check if nessie is in the photo
                 foreach (Player nessie in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie

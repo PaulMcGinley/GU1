@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -28,6 +29,9 @@ public class PhotoViewer : IScene {
         if (Photo == null)
             return;
 
+        if (Photo.fullPicture == null)
+            Photo.RenderFullPicture(spriteBatch);
+
         spriteBatch.Begin();
 
         spriteBatch.Draw(Photo.fullPicture, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
@@ -36,9 +40,9 @@ public class PhotoViewer : IScene {
 
             Vector2 location = new Vector2(1920, 1080) + new Vector2(Photo.location.X, Photo.location.Y);
             Vector2 scale = new Vector2(0.5f, 0.5f); // scale factor for 4K to 1080p
-            Vector2 location1080p = Vector2.Multiply(location, scale);
+            Vector2 location1080p = Vector2.Multiply(location, scale)- new Vector2(1920/4,1080/4) - new Vector2(64+12.5f,64+12.5f);
 
-            spriteBatch.Draw(Photo.framedPicture, location1080p - new Vector2(1920/4,1080/4) - new Vector2(64+12.5f,64+12.5f), null, Color.White*0.5f, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+            spriteBatch.Draw(Photo.framedPicture, location1080p , null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
         }
 
         spriteBatch.End();
@@ -46,9 +50,13 @@ public class PhotoViewer : IScene {
 
     public void OnSceneStart() {}
 
-    public void OnSceneEnd() {}
+    public void OnSceneEnd() {
 
-    public void SetPhoto(Photo photo) {
+        Photo.Dispose();
+        GC.Collect();
+    }
+
+    public void SetPhoto(ref Photo photo) {
 
         Photo = photo;
     }

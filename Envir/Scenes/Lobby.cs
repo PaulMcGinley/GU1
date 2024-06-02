@@ -109,23 +109,8 @@ public class Lobby : IScene {
 
     public void OnSceneStart() {
 
-        for (int i = 0; i < 16; i++)
-            GamePad.SetVibration(i, 0, 0);                                                                     // Stop any controller vibration
-
-        // bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
-
-        // foreach (Player player in GameState.Players)                                                        // Loop through all players
-        //     if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
-        //         endGame = false;                                                                            // Set endGame to false
-        //         break;                                                                                      // Exit the loop
-        //     }
-
-        // if (endGame) {
-
-        //     // Do something
-        //     // GameState.CurrentScene = GameScene.EndGame;
-        //     //return;
-        // }
+        if (GameState.Players.Count == 0)
+            controllerIndexs.Clear();
     }
 
     public void OnSceneEnd() {

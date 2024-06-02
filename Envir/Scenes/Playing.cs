@@ -113,7 +113,11 @@ public class Playing : IScene {
                             player.Score += _score;                                                                 // Add score to player
                             GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isFadingOut = true;    // Set the nessie flotsam to not alive
                             _score = 0;                                                                             // Reset the score tracker
+
+                            SLib.Camera[0].Play();                                                                  // Play the camera sound effect
                         }
+                        else
+                            SLib.Camera[1].Play();                                                                  // Play the camera sound effect
                     }
             }
     }
@@ -159,7 +163,7 @@ public class Playing : IScene {
                                         .Where(p=>p.PlayerIndex == player.ControllerIndex)                  // Get a list of flotsam that have the same player index as the player
                                         .First()                                                            // Get the first flotsam object from the list, because we only need one and only have one xD
                                         .boundaryBox.Intersects(flotsam.boundaryBox) &&                     // Check if the player is colliding with the flotsam
-                        IsGamePadButtonPressed(player.ControllerIndex, Buttons.A))                          // Check if the player is pressing the A button
+                        (IsGamePadButtonPressed(player.ControllerIndex, Buttons.A) || GamePadRightTriggerPressed(player.ControllerIndex)|| GamePadLeftTriggerPressed(player.ControllerIndex)))                          // Check if the player is pressing the A button or the trigger
                         // We ask the flotsam to collect the object, if it returns true, the player has collected the flotsam, if false, the player has not collected the flotsam
                         if (flotsam.Collect()) {
 
@@ -178,10 +182,8 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
             foreach (Flotsam flotsam in GameState.Flotsam)
                 if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))  // Check if the flotsam is colliding with the player
-                        if (flotsam.Inspect()) {
-
+                        if (flotsam.Inspect())
                             player.Score += 100;                                                            // Add 100 to the player's score
-                        }
     }
 
     /// <summary>

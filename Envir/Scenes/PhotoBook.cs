@@ -78,6 +78,27 @@ public class PhotoBook : IScene {
         camera.LookAt(camera.Position + new Vector2(0, GamePadLeftStickY(0)*10f));
 
         cursor.Position += GamePadRightStick(0)*10f;
+
+        
+        // // Loop through all the photos and dispose the Photo if it is not on screen and within a given distance and load the photo if it is on screen and within a given distance
+        // for (int i = 0; i < photos.Length; i++) {
+
+        //     if (photoLocations[i].Y < camera.Position.Y - 1080 && photoLocations[i].Y > camera.Position.Y + 1080) {
+
+        //         photos[i].Dispose();
+        //         photos[i] = null;
+        //     }
+
+        //     if (photoLocations[i].Y > camera.Position.Y - 1080 && photoLocations[i].Y < camera.Position.Y + 1080) {
+
+        //         if (photos[i] == null) {
+
+        //             photos[i] = new Photo();
+        //             photos[i].Render(spriteBatch);
+        //             //photos[i] = photos[i].Load(i.ToString());
+        //         }
+        //     }
+        // }
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -158,12 +179,15 @@ public class PhotoBook : IScene {
         for (int i = 0; i < files.Length; i++)
             photoBounds[i] = new Rectangle((int)photoLocations[i].X, (int)photoLocations[i].Y, 320, 420);   // Set the photo bounds based on the photo location
 
+        GC.Collect();
     }
 
     public void Dispose() {
 
         // TODO: Dispose of the photos to free up memory
-        // foreach (var photo in photos)
-        //     photo.Dispose();
+        foreach (var photo in photos)
+            photo.Dispose();
+
+            GC.Collect();
     }
 }

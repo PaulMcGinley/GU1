@@ -39,6 +39,12 @@ public class Photo {
 
     #endregion
 
+    public void Dispose() {
+
+        fullPicture.Dispose();
+        GC.Collect();
+    }
+
     public Photo Load(string fileName) {
 
         string _path = $"{SaveDir}/{fileName}.xml";
@@ -66,9 +72,10 @@ public class Photo {
         XMLSerializer.Serialize<Photo>(_path, this);
     }
 
-    public void Render(SpriteBatch spriteBatch) {
+    public void RenderFullPicture(SpriteBatch spriteBatch) {
 
-        #region Render Picture
+        if (fullPicture != null)
+            fullPicture.Dispose();
 
         // set render target
         fullPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, 1920*2, 1080*2);
@@ -100,10 +107,13 @@ public class Photo {
 
         spriteBatch.End();
 
-        #endregion
+        spriteBatch.GraphicsDevice.SetRenderTarget(null);
+    }
 
+    public void RenderCroppedPicture(SpriteBatch spriteBatch) {
 
-        #region Cropped Picture
+        if (croppedPicture != null)
+            croppedPicture.Dispose();
 
         croppedPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, 256, 256);
         spriteBatch.GraphicsDevice.SetRenderTarget(croppedPicture);
@@ -115,10 +125,13 @@ public class Photo {
 
         spriteBatch.End();
 
-        #endregion
+        spriteBatch.GraphicsDevice.SetRenderTarget(null);
+    }
 
+    public void RenderFramedPicture(SpriteBatch spriteBatch) {
 
-        #region Framed Picture
+        if (framedPicture != null)
+            framedPicture.Dispose();
 
         framedPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, croppedPicture.Width + 50, croppedPicture.Height + 125);
         spriteBatch.GraphicsDevice.SetRenderTarget(framedPicture);
@@ -149,10 +162,19 @@ public class Photo {
 
         spriteBatch.End();
 
-        #endregion
-
         spriteBatch.GraphicsDevice.SetRenderTarget(null);
+    }
 
+    public void Render(SpriteBatch spriteBatch) {
+
+        if (fullPicture == null)
+            RenderFullPicture(spriteBatch);
+
+        if (croppedPicture == null)
+            RenderCroppedPicture(spriteBatch);
+
+        if (framedPicture == null)
+            RenderFramedPicture(spriteBatch);
     }
 
     public struct Content {

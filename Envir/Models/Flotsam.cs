@@ -180,6 +180,8 @@ public class Flotsam : Actor {
 
         isCollected = true;
 
+        SLib.Collect[rand.Next(0, 2)].Play();
+
         // TODO: Play a sound effect
 
         return true;
@@ -256,13 +258,13 @@ public class Flotsam : Actor {
             return;
 
         // ? Why is sprite not drawing itself?
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), (PlayerControlled ? Color.Black : (isCollected ? Color.Red : Color.White)) * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White /*(PlayerControlled ? Color.Black : (isCollected ? Color.Red : Color.White))*/ * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
 
         // #region Boundary Box
 
         // Draw a box around the flotsam if it is player controlled
-        if (PlayerControlled)
-            DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
+        // if (PlayerControlled)
+        //     DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
 
         // #endregion
 

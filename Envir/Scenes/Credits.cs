@@ -87,6 +87,8 @@ public class Credits : IScene {
         camera.LookAt(new Vector2(viewport.Width/2, 0));
 
         // TODO: Play the credits music
+
+        SLib.Whistle.Play();
     }
 
     public void OnSceneEnd() { }

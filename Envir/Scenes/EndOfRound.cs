@@ -108,9 +108,14 @@ public class EndOfRound : IScene {
         spriteBatch.End();
     }
 
-    public void OnSceneStart() { }
+    public void OnSceneStart() {
 
-    public void OnSceneEnd() { }
+        //SLib.Victory.Play();                                                                                // Play the victory sound
+    }
+
+    public void OnSceneEnd() {
+
+    }
 
     #endregion
 }

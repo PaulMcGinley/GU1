@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/ambient.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ambient.mp3
+
 #begin Audio/camera1.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -24,6 +30,42 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/camera2.mp3
+
+#begin Audio/click.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/click.mp3
+
+#begin Audio/collect1.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/collect1.mp3
+
+#begin Audio/collect2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/collect2.mp3
+
+#begin Audio/ding.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ding.mp3
+
+#begin Audio/victory.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/victory.mp3
+
+#begin Audio/whistle.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/whistle.mp3
 
 #begin Fonts/Debug.spritefont
 /importer:FontDescriptionImporter

@@ -152,8 +152,7 @@ public class StartOfRound : IScene {
 
         if (endGame) {
 
-            GameState.CurrentScene = GameScene.MainMenu;
-            GameState.Players.Clear();
+            GameState.CurrentScene = GameScene.EndOfGame;                                                    // Move to the EndOfGame scene
             return;
 
         } else {

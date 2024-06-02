@@ -20,7 +20,8 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.StartOfRound startOfRound = new();
     readonly Envir.Scenes.EndOfRound endOfRound = new();
     readonly Envir.Scenes.NamePlayer namePlayer = new();
-    Envir.Scenes.PhotoViewer photoViewer = new();
+    readonly Envir.Scenes.PhotoViewer photoViewer = new();
+    readonly Envir.Scenes.EndOfGame endOfGame = new();
 
     #endregion
 
@@ -38,6 +39,7 @@ public class GameMain : FixedTimestampGame {
         FLib.Initialize(Content);                                                                           // Initialize the fonts library
         RLib.Initialize();                                                                                  // Initialize the rumble library
         TLib.Initialize(GraphicsDevice, Content);                                                           // Initialize the textures library
+        SLib.Initialize(Content);                                                                           // Initialize the sounds library
 
         // Initialize all the scenes
         mainMenu.Initialize(GraphicsDevice);
@@ -50,6 +52,7 @@ public class GameMain : FixedTimestampGame {
         endOfRound.Initialize(GraphicsDevice);
         namePlayer.Initialize(GraphicsDevice);
         photoViewer.Initialize(GraphicsDevice);
+        endOfGame.Initialize(GraphicsDevice);
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -69,8 +72,8 @@ public class GameMain : FixedTimestampGame {
         if (IsKeyPressed(Keys.F1))
             E.Config.ShowDebugInfo = !E.Config.ShowDebugInfo;                                               // Toggle the debug info
 
-        // if(IsAnyInputDown(Keys.Escape, Buttons.Back))                                                       // Check if the escape key or any controller back button is pressed
-        //     Exit();                                                                                         // Exit the game
+        if(IsAnyInputDown(Keys.Escape))                                                       // Check if the escape key or any controller back button is pressed
+            Exit();                                                                                         // Exit the game
 #endif
 
         // Check if the scene has changed
@@ -109,6 +112,9 @@ public class GameMain : FixedTimestampGame {
                 case GameScene.PhotoViewer:
                     photoViewer.OnSceneEnd();
                     break;
+                case GameScene.EndOfGame:
+                    endOfGame.OnSceneEnd();
+                    break;
             }
 
             // Call the start methods of the scenes
@@ -143,6 +149,9 @@ public class GameMain : FixedTimestampGame {
                     break;
                 case GameScene.PhotoViewer:
                     photoViewer.OnSceneStart();
+                    break;
+                case GameScene.EndOfGame:
+                    endOfGame.OnSceneStart();
                     break;
             }
         }
@@ -181,6 +190,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.PhotoViewer:
                 photoViewer.Update(gameTime);
+                break;
+            case GameScene.EndOfGame:
+                endOfGame.Update(gameTime);
                 break;
         }
 
@@ -222,6 +234,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.PhotoViewer:
                 photoViewer.FixedUpdate(gameTime);
                 break;
+            case GameScene.EndOfGame:
+                endOfGame.FixedUpdate(gameTime);
+                break;
         }
 
         base.FixedUpdate(gameTime);                                                                         // ! IMPORTANT: Keep this here
@@ -244,8 +259,10 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.Playing:
             case GameScene.EndOfRound:
+            case GameScene.EndOfGame:
                 playing.Draw(spriteBatch);
                 endOfRound.Draw(spriteBatch);
+                endOfGame.Draw(spriteBatch);
                 break;
             case GameScene.PhotoBook:
                 photoBook.Draw(spriteBatch);

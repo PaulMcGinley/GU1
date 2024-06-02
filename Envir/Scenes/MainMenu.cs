@@ -24,6 +24,8 @@ public class MainMenu : IScene {
                 selectedMenuIndex = 0;
             else
                 selectedMenuIndex = value;
+
+            SLib.Click.Play();
         }
     }
 
@@ -128,7 +130,10 @@ public class MainMenu : IScene {
         spriteBatch.End( );
     }
 
-    public void OnSceneStart() { }
+    public void OnSceneStart() {
+
+        GameState.Players.Clear();
+    }
 
     public void OnSceneEnd() { }
 

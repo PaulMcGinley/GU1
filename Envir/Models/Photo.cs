@@ -108,7 +108,7 @@ public class Photo {
 
         spriteBatch.Begin();
 
-        spriteBatch.Draw(fullPicture, new Rectangle(0, 0, 256, 256), new Rectangle((int)location.X +(1920/2), (int)location.Y - 128 + (1080/2), 256, 256), Color.White);
+        spriteBatch.Draw(fullPicture, new Rectangle(0, 0, 256, 256), new Rectangle((int)location.X +(1920/2)-128 , (int)location.Y - 128 + (1080/2), 256, 256), Color.White);
 
         spriteBatch.End();
 
@@ -123,9 +123,15 @@ public class Photo {
 
         spriteBatch.Begin();
 
-        DrawRectangle(new Rectangle(1, 1, framedPicture.Width-1, framedPicture.Height-1), spriteBatch, Color.Lime, 0);
+        // Outer Border
+        DrawRectangle(new Rectangle(1, 1, framedPicture.Width-1, framedPicture.Height-1), spriteBatch, Color.DarkGray, 0);
+        DrawRectangle(new Rectangle(2, 2, framedPicture.Width-2, framedPicture.Height-2), spriteBatch, Color.DarkGray, 0);
 
+
+        // Photograph
         spriteBatch.Draw(croppedPicture, new Vector2(25, 25), Color.White);
+
+        // Photograph Border
         DrawRectangle(new Rectangle(20, 20, croppedPicture.Width+10, croppedPicture.Height+10), spriteBatch, Color.Black, 0);
         DrawRectangle(new Rectangle(21, 21, croppedPicture.Width+8, croppedPicture.Height+8), spriteBatch, Color.Black, 0);
         DrawRectangle(new Rectangle(22, 22, croppedPicture.Width+6, croppedPicture.Height+6), spriteBatch, Color.Black, 0);
@@ -133,6 +139,7 @@ public class Photo {
         DrawRectangle(new Rectangle(24, 24, croppedPicture.Width+2, croppedPicture.Height+2), spriteBatch, Color.Black, 0);
         DrawRectangle(new Rectangle(25, 25, croppedPicture.Width, croppedPicture.Height), spriteBatch, Color.Black, 0);
 
+        // Writing
         spriteBatch.DrawString(FLib.DebugFont, $"Captured by {photographer}", new Vector2(25, 25 + croppedPicture.Height + 15), Color.DarkRed);
         spriteBatch.DrawString(FLib.DebugFont, $"Date: {Date}", new Vector2(25, 25 + croppedPicture.Height + 35), Color.DarkRed);
         spriteBatch.DrawString(FLib.DebugFont, $"Time: {Time}", new Vector2(25, 25 + croppedPicture.Height + 55), Color.DarkRed);

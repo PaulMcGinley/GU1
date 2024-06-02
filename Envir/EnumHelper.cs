@@ -19,4 +19,5 @@ public enum GameScene {
     StartOfRound,
     EndOfRound,
     NamePlayer,
+    PhotoViewer
 }

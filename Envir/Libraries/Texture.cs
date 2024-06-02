@@ -68,6 +68,8 @@ public class Texture {
      public static Texture2D WinnerTitle;
      public static Texture2D LeaderboardTitle;
 
+     public static Texture2D Cursor;
+
     /// <summary>
     /// Load all the textures
     /// </summary>
@@ -120,5 +122,7 @@ public class Texture {
 
         WinnerTitle = content.Load<Texture2D>("Graphics/WinnerTitle");
         LeaderboardTitle = content.Load<Texture2D>("Graphics/LeaderboardTitle");
+
+        Cursor = content.Load<Texture2D>("Graphics/cursor");
     }
 }

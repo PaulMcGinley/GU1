@@ -16,13 +16,19 @@ public class Credits : IScene {
     readonly string[,] credits = new string[,] {                                                            // The list of credits, job and name
 
         //JOB                           NAME
-        { "Game Concept / Design",      "Corey Connolly" },
-        { "Project Manager",            "Kieran Bett" },
-        { "Lead Programmer",            "Paul Mcginely" },
-        { "Additional Programer" ,      "Alexander Tuffy" },
-        { "Audio Creator",              "Albert Bugheanu" },
-        { "Floatsam Art designer",      "Alexander Tuffy" },
-        { "Nessie Art Designer",        "Corey Connolly" },
+        { "Game Concept",               "Corey Connolly"    },
+        { "Game Design",                "Paul McGinley"     },
+        { "Inspiration",                "Hidden in plain sight" },
+        { "Project Manager",            "Kieran Bett"       },
+        { "Lead Programmer",            "Paul McGinely"     },
+        { "Additional Programer" ,      "Alexander Tuffy"   },
+        { "Audio Creator",              "Albert Bugheanu"   },
+        { "Sourced Audio",              "Pixabay.com"       },
+        { "Lead Art Designer",          "Alexander Tuffy"   },
+        { "Additional Art by",          "Corey Connolly"    },
+        { "Tester 1",                   "Paul McGinley"     },
+        { "Tester 2",                   "Bash McGinley"     },
+        { "Tester 3",                   "Natalie Wood"      },
     };
 
     #region IScene Implementation
@@ -47,7 +53,7 @@ public class Credits : IScene {
 
     public void FixedUpdate(GameTime gameTime) {
 
-        if (camera.Position.Y > credits.GetLength(0) * lineSpacing + 250)                                   // If the camera has scrolled past the credits
+        if (camera.Position.Y > credits.GetLength(0) * lineSpacing + 250 + (1080/2))                                   // If the camera has scrolled past the credits
             return;                                                                                         // Return
 
         // Move camera
@@ -73,7 +79,8 @@ public class Credits : IScene {
                             screenDimensions,                                                               // Screen dimensions
                             Color.White);                                                                   // Colour
 
-        DrawTextCenteredScreen(spriteBatch, FLib.LeaderboardFont, "Press BACK to exit", yPosition: (credits.GetLength(0)*lineSpacing)+250, screenDimensions, Color.White);
+        DrawTextCenteredScreen(spriteBatch, FLib.LeaderboardFont, "Thanks for playing!", yPosition: (credits.GetLength(0)*lineSpacing)+220 + (1080/2), screenDimensions, Color.White);
+        DrawTextCenteredScreen(spriteBatch, FLib.LeaderboardFont, "Press BACK to return to the main menu", yPosition: (credits.GetLength(0)*lineSpacing)+250 + (1080/2), screenDimensions, Color.White);
 
         spriteBatch.End();
     }

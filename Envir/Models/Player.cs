@@ -49,7 +49,8 @@ public class Player : Actor {
         if (!playedAsTourist)
             return ActorType.Tourist;
 
-        return rand.Bool() ? ActorType.Nessie : ActorType.Tourist;
+        //return rand.Bool() ? ActorType.Nessie : ActorType.Tourist;
+        return ActorType.Tourist;
     }
 
     /// <summary>
@@ -65,6 +66,8 @@ public class Player : Actor {
 
         if (role == ActorType.Tourist)
             playedAsTourist = true;
+
+        CameraView.Reset();
     }
 
     /// <summary>

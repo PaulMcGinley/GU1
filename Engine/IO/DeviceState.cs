@@ -244,9 +244,9 @@ public static class DeviceState {
 
     public static bool IsAnyInputPressed(params object[] keys) {
 
-        foreach (ButtonState button in keys.Select(v => (ButtonState)v))
-            if ((MouseState.LeftButton == button && PreviousMouseState.LeftButton == ButtonState.Released) || (MouseState.RightButton == button && PreviousMouseState.RightButton == ButtonState.Released))
-                return true;
+        // foreach (ButtonState button in keys.Select(v => (ButtonState)v))
+        //     if ((MouseState.LeftButton == button && PreviousMouseState.LeftButton == ButtonState.Released) || (MouseState.RightButton == button && PreviousMouseState.RightButton == ButtonState.Released))
+        //         return true;
 
         foreach (Keys key in keys.Select(v => (Keys)v))
             if (IsKeyPressed(key))

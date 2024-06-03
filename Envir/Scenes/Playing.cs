@@ -18,6 +18,9 @@ public class Playing : IScene {
 
     Vector2 RandomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
+
+    #region IScene Implementation
+
     public void Initialize(GraphicsDevice device) {
 
         this.device = device;
@@ -35,10 +38,6 @@ public class Playing : IScene {
 
     public void UnloadContent() { }
 
-    /// <summary>
-    /// Uncapped update method, run every frame and used for checking collisions
-    /// </summary>
-    /// <param name="gameTime"></param>
     public void Update(GameTime gameTime) {
 
         camera.Update(gameTime);
@@ -63,133 +62,8 @@ public class Playing : IScene {
 
         // Check if the tourist has run out of photos
         CheckForTouristLose();
-
-#if DEBUG
-
-        if (IsKeyPressed(Keys.S))
-            camera.Shake(10, 0.5f);
-
-        // if (IsKeyPressed(Keys.F2))
-        //     XMLSerializer.Serialize<GameState>($"{DateTime.Now.ToBinary()}.xml", gameState);
-
-        if (IsKeyPressed(Keys.F3)) {
-
-            // TODO: This should have its own renderer
-            // GameState _gameState = XMLSerializer.Deserialize<GameState>(Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xml").Last());
-
-            // gameState.Flotsam = _gameState.Flotsam;
-            // gameState.Players = _gameState.Players;
-        }
-#endif
     }
 
-    private void CheckForTouristLose() {
-
-        int remainingPhotos = 0;
-
-        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
-            remainingPhotos += player.CameraView.remainingPhotos;
-
-        if (remainingPhotos == 0)
-            GameState.CurrentScene = GameScene.EndOfRound;
-    }
-
-    private void CheckForPhotoTaken() {
-
-        int _score = 0;
-
-        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
-            if (GamePadRightTriggerPressed(player.ControllerIndex) && player.CameraView.TakePhoto(background2.GetOpacity())) {
-
-                // check if nessie is in the photo
-                foreach (Player nessie in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
-                    if (GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isAlive) {      // Check if the flotsam is still alive
-                        _score = Engine.Graphics.Calculate.SpriteInRectanglePercentage(                             // Calculate the percentage of the flotsam that is in the photo
-                            GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().boundaryBox,// Get the flotsam boundary box
-                            player.CameraView.boundaryBox);                                                         // Within the camera view boundary box
-
-                        // Check to see if we got a score
-                        if (_score > 0) {
-                            player.Score += _score;                                                                 // Add score to player
-                            GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isFadingOut = true;    // Set the nessie flotsam to not alive
-                            _score = 0;                                                                             // Reset the score tracker
-
-                            SLib.Camera[0].Play();                                                                  // Play the camera sound effect
-                        }
-                        else
-                            SLib.Camera[1].Play();                                                                  // Play the camera sound effect
-                    }
-            }
-    }
-
-    private void CheckForNessieWin() {
-
-        bool roundOver = true;
-
-        foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>!f.PlayerControlled))
-            if (!flotsam.isCollected) {
-
-                roundOver = false;
-                break;
-            }
-
-        if (roundOver)
-            GameState.CurrentScene = GameScene.EndOfRound;
-    }
-
-    private void CheckForTouristWin() {
-
-        bool roundOver = true;
-
-        foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>f.PlayerControlled))
-            if (flotsam.isAlive) {
-
-                roundOver = false;
-                break;
-            }
-
-        if (roundOver)
-            GameState.CurrentScene = GameScene.EndOfRound;
-    }
-
-    /// <summary>
-    /// Check for nessie collecting flotsam
-    /// </summary>
-    void CheckForCollection() {
-
-        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
-                foreach (Flotsam flotsam in GameState.Flotsam)                                              // Loop through all flotsam objects
-                    if(GameState.Flotsam                                                                    // If, from the list of flotsam
-                                        .Where(p=>p.PlayerIndex == player.ControllerIndex)                  // Get a list of flotsam that have the same player index as the player
-                                        .First()                                                            // Get the first flotsam object from the list, because we only need one and only have one xD
-                                        .boundaryBox.Intersects(flotsam.boundaryBox) &&                     // Check if the player is colliding with the flotsam
-                        (IsGamePadButtonPressed(player.ControllerIndex, Buttons.A) || GamePadRightTriggerPressed(player.ControllerIndex)|| GamePadLeftTriggerPressed(player.ControllerIndex)))                          // Check if the player is pressing the A button or the trigger
-                        // We ask the flotsam to collect the object, if it returns true, the player has collected the flotsam, if false, the player has not collected the flotsam
-                        if (flotsam.Collect()) {
-
-                            player.Score += 100;                                                            // Add 100 to the player's score
-                            return;                                                                         // Exit the method to prevent the player from collecting multiple flotsam in one frame
-                        }
-    }
-
-    /// <summary>
-    /// Check for tourist revealing flotsam
-    /// </summary>
-    void CheckForReveal() {
-
-        // No complaints here, would ideally be optimized but it works without a major performance hit
-
-        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
-            foreach (Flotsam flotsam in GameState.Flotsam)
-                if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))  // Check if the flotsam is colliding with the player
-                        if (flotsam.Inspect())
-                            player.Score += 100;                                                            // Add 100 to the player's score
-    }
-
-    /// <summary>
-    /// Fixed update method runs at a fixed rate and time limited, is used for non critical game logic
-    /// </summary>
-    /// <param name="gameTime"></param>
     public void FixedUpdate(GameTime gameTime) {
 
         foreach (var flotsam in GameState.Flotsam)
@@ -224,21 +98,23 @@ public class Playing : IScene {
 
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix, samplerState: SamplerState.PointClamp);
 
-
+        // Ripples
         foreach (var flotsam in GameState.Flotsam)
             flotsam.DrawRipples(spriteBatch);
 
         spriteBatch.End();
 
 
-        // Need to start a new batch to draw the flotsam sprites, as they are drawn on top of the ripples
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
+        // Flotsam
         foreach (var flotsam in GameState.Flotsam)
             flotsam.Draw(spriteBatch);
 
+        // Board
         GameState.Boat.Draw(spriteBatch);
 
+        // Players
         foreach (Player player in GameState.Players)
             player.Draw(spriteBatch);
 
@@ -246,14 +122,6 @@ public class Playing : IScene {
 
         #endregion
 
-
-        #region UI
-
-        spriteBatch.Begin();
-
-        spriteBatch.End();
-
-        #endregion
     }
 
     public void OnSceneStart() {
@@ -263,13 +131,114 @@ public class Playing : IScene {
 
     public void OnSceneEnd() {
 
-        GC.Collect();
+        GC.Collect(5, GCCollectionMode.Forced, false, true);                                                // Run the garbage collector
     }
+
+    #endregion
+
+
+    #region Game Logic
+
+    private void CheckForTouristLose() {
+
+        int remainingPhotos = 0;                                                                            // The number of photos remaining overall
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
+            remainingPhotos += player.CameraView.remainingPhotos;                                           // Add the player's remaining photos to the overall remaining photos
+
+        if (remainingPhotos == 0)                                                                           // If there are no photos remaining
+            GameState.CurrentScene = GameScene.EndOfRound;                                                  // Move to the end of round scene
+    }
+
+    private void CheckForPhotoTaken() {
+
+        int _score = 0;                                                                                     // The score tracker
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
+            if (GamePadRightTriggerPressed(player.ControllerIndex) && player.CameraView.TakePhoto(background2.GetOpacity())) {
+
+                // check if nessie is in the photo
+                foreach (Player nessie in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
+                    if (GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isAlive) {      // Check if the flotsam is still alive
+                        _score = Engine.Graphics.Calculate.SpriteInRectanglePercentage(                             // Calculate the percentage of the flotsam that is in the photo
+                            GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().boundaryBox,// Get the flotsam boundary box
+                            player.CameraView.boundaryBox);                                                         // Within the camera view boundary box
+
+                        // Check to see if we got a score
+                        if (_score > 0) {
+                            player.Score += _score;                                                         // Add score to player
+                            GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isFadingOut = true;    // Set the nessie flotsam to not alive
+                            _score = 0;                                                                     // Reset the score tracker
+
+                            SLib.Camera[0].Play();                                                          // Play the camera sound effect
+                        }
+                        else
+                            SLib.Camera[1].Play();                                                          // Play the camera sound effect
+                    }
+            }
+    }
+
+    private void CheckForNessieWin() {
+
+        bool roundOver = true;                                                                              // Assume the round is over
+
+        foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>!f.PlayerControlled))
+            if (!flotsam.isCollected) {                                                                     // If the flotsam is not collected
+
+                roundOver = false;                                                                          // The round is not over
+                break;                                                                                      // Exit the loop
+            }
+
+        if (roundOver)                                                                                      // If the round is over
+            GameState.CurrentScene = GameScene.EndOfRound;                                                  // Move to the end of round scene
+    }
+
+    private void CheckForTouristWin() {
+
+        bool roundOver = true;                                                                              // Assume the round is over
+
+        foreach (Flotsam flotsam in GameState.Flotsam.Where(f=>f.PlayerControlled))
+            if (flotsam.isAlive) {                                                                          // If the flotsam is still alive
+
+                roundOver = false;                                                                          // The round is not over
+                break;                                                                                      // Exit the loop
+            }
+
+        if (roundOver)                                                                                      // If the round is over
+            GameState.CurrentScene = GameScene.EndOfRound;                                                  // Move to the end of round scene
+    }
+
+    private void CheckForCollection() {
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
+            foreach (Flotsam flotsam in GameState.Flotsam)                                                  // Loop through all flotsam objects
+                if(GameState.Flotsam                                                                        // If, from the list of flotsam
+                    .Where(p=>p.PlayerIndex == player.ControllerIndex)                                      // Get a list of flotsam that have the same player index as the player
+                    .First()                                                                                // Get the first flotsam object from the list, because we only need one and only have one xD
+                    .boundaryBox.Intersects(flotsam.boundaryBox)                                            // Check if the player is colliding with the flotsam
+                && (IsGamePadButtonPressed(player.ControllerIndex, Buttons.A) || GamePadRightTriggerPressed(player.ControllerIndex)|| GamePadLeftTriggerPressed(player.ControllerIndex)))  // Check if the player is pressing the A button or the trigger
+                        // We ask the flotsam to collect the object, if it returns true, the player has collected the flotsam, if false, the player has not collected the flotsam
+                    if (flotsam.Collect()) {
+
+                        player.Score += 100;                                                                // Add 100 to the player's score
+                        return;                                                                             // Exit the method to prevent the player from collecting multiple flotsam in one frame
+                    }
+    }
+
+    private void CheckForReveal() {
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
+            foreach (Flotsam flotsam in GameState.Flotsam)
+                if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))                          // Check if the flotsam is colliding with the player
+                        if (flotsam.Inspect())
+                            player.Score += 100;                                                            // Add 100 to the player's score
+    }
+
+    #endregion
 
     public void StartNewRound() {
 
-        // ? Shouldn't need to clear the flotsam, just maybe a reset method
-        GameState.Flotsam.Clear();
+        GameState.Flotsam.Clear();                                                                          // Clear the list of flotsam objects
 
         for (int i = 0; i <= 100; i++) {
 

@@ -74,7 +74,7 @@ public class NamePlayer : IScene {
 
         // Check for input (START) to confirm
         if (IsGamePadButtonPressed(playerIndex, Buttons.Start))
-            GameState.CurrentScene = GameScene.Lobby;                                                       // Move to the next scene
+            GameState.CurrentScene = GameScene.StartOfRound;                                                       // Move to the next scene
 
     }
 

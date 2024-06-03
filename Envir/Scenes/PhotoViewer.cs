@@ -8,42 +8,47 @@ namespace GU1.Envir.Scenes;
 
 public class PhotoViewer : IScene {
 
-    public static Photo Photo;
+    public static Photo Photo;                                                                              // The photo to view
 
-    public void Initialize(GraphicsDevice device) {}
+    Vector2 location => new Vector2(1920, 1080) + new Vector2(Photo.location.X, Photo.location.Y);          // Location of the photo
+    Vector2 correctLocation => Vector2.Multiply(location, 0.5f) - new Vector2(1920/4, 1080/4) - new Vector2(64 + 12.5f, 64 + 12.5f);    // Corrected location of the photo from 4K to 1080p
 
-    public void LoadContent(ContentManager content) {}
+    #region IScene Implementation
 
-    public void UnloadContent() {}
+    public void Initialize(GraphicsDevice device) { }                                                       // Not Implemented
+
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
+
+    public void UnloadContent() { }                                                                         // Not Implemented
 
     public void Update(GameTime gameTime) {
 
+        // Check for input to go back to the photo book
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back))
             GameState.CurrentScene = GameScene.PhotoBook;
     }
 
-    public void FixedUpdate(GameTime gameTime) {}
+    public void FixedUpdate(GameTime gameTime) { }                                                          // Not Implemented
 
     public void Draw(SpriteBatch spriteBatch) {
 
+        // Guard clause to check if there is a photo
         if (Photo == null)
             return;
 
+        // Render the full picture if it is not rendered yet
         if (Photo.fullPicture == null)
             Photo.RenderFullPicture(spriteBatch);
 
+
         spriteBatch.Begin();
 
+        // Background (Full Picture)
         spriteBatch.Draw(Photo.fullPicture, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
 
-        if (IsAnyInputPressed(Keys.Y, Buttons.Y)) {
-
-            Vector2 location = new Vector2(1920, 1080) + new Vector2(Photo.location.X, Photo.location.Y);
-            Vector2 scale = new Vector2(0.5f, 0.5f); // scale factor for 4K to 1080p
-            Vector2 location1080p = Vector2.Multiply(location, scale)- new Vector2(1920/4,1080/4) - new Vector2(64+12.5f,64+12.5f);
-
-            spriteBatch.Draw(Photo.framedPicture, location1080p , null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
-        }
+        // Framed Picture
+        if (IsAnyInputPressed(Keys.Y, Buttons.Y))
+            spriteBatch.Draw(Photo.framedPicture, correctLocation , null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
 
         spriteBatch.End();
     }
@@ -52,9 +57,11 @@ public class PhotoViewer : IScene {
 
     public void OnSceneEnd() {
 
-        Photo.Dispose();
-        GC.Collect();
+        Photo.Dispose();                                                                                    // Dispose of the photo
     }
+
+    #endregion
+
 
     public void SetPhoto(ref Photo photo) {
 

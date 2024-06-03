@@ -94,7 +94,7 @@ public class Credits : IScene {
 
         // TODO: Play the credits music
 
-        SLib.Whistle.Play();
+        SLib.Whistle.Play(GameState.SFXVolume, 0, 0);
     }
 
     public void OnSceneEnd() { }

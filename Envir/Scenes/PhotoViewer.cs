@@ -47,7 +47,7 @@ public class PhotoViewer : IScene {
         spriteBatch.Draw(Photo.fullPicture, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
 
         // Framed Picture
-        if (IsAnyInputPressed(Keys.Y, Buttons.Y))
+        if (IsAnyInputDown(Keys.Y, Buttons.Y))
             spriteBatch.Draw(Photo.framedPicture, correctLocation , null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
 
         spriteBatch.End();

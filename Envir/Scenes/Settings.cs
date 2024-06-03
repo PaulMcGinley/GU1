@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,84 +8,90 @@ namespace GU1.Envir.Scenes;
 
 public class Settings : IScene {
 
-    Camera2D camera;                                                                                        // Orthographic camera for the scene
+    Color menuHotColor = Color.Lime;                                                                       // Selected menu item colour
+    Color menuColdColor = Color.White;                                                                      // Unselected menu item colour
 
-    Viewport viewport;                                                                                      // The viewport of the scene
-    Vector2 screenDimensions => new(viewport.Width, viewport.Height);                                       // The dimensions of the screen from the viewport
+    int selectedMenuIndex = 0;                                                                              // The index of the selected menu item (variable)
+    int SelectedMenuIndex {                                                                                 // The index of the selected menu item (property)
 
-    const int lineSpacing = 50;                                                                             // The space between each line of text
-    readonly string[,] settings = new string[,] {
-        //displaying controls
-        //for Tourist
-        {"Tourist Controls~", " " },                                            //text to be displayed
-        { "Left Thumstick:", "Move Player" },                                   //controls can be updated as we go along 
-        { "Right Thumbstick:", "Move Camera" },
-        { "Right trigger:", "take photo" },
-        { "Left Trigger:" , "Hold Camera steady" },
-        //for Nessie
-        {"Nessie Controls~", " "},
-        { "Left Thumstick:", "Move Player" },
-    };
+        get => selectedMenuIndex;                                                                           // Get the selected menu index
+        set {
+            if (value < 0)                                                                                  // If the value is less than 0 (less than the first menu item)
+                selectedMenuIndex = Enum.GetValues(typeof(MenuItems)).Length - 1;                           // Set the selected menu index to the last menu item
+            else if (value > Enum.GetValues(typeof(MenuItems)).Length - 1)                                  // If the value is greater than the last menu item
+                selectedMenuIndex = 0;                                                                      // Set the selected menu index to the first menu item
+            else                                                                                            // Otherwise
+                selectedMenuIndex = value;                                                                  // Set the selected menu index to the value
 
-    public void Initialize(GraphicsDevice device) {
-
-        viewport = device.Viewport;
-        camera = new Camera2D(viewport);
+            SLib.Click.Play(GameState.SFXVolume, 0, 0);                                                     // Play the click sound
+        }
     }
 
-    public void LoadContent(ContentManager content) { }
+    #region  IScene Implementation
 
-    public void UnloadContent() { }
+    public void Initialize(GraphicsDevice device) { }                                                       // Not Implemented
 
-    public void Update(GameTime gameTime)
-    {
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
 
-        if (IsAnyInputDown(Keys.B, Buttons.B, Buttons.Start))
+    public void UnloadContent() { }                                                                         // Not Implemented
 
+    public void Update(GameTime gameTime) {
+
+        // Check for menu navigation
+        if (IsAnyInputPressed(Keys.Down, Buttons.DPadDown))
+            SelectedMenuIndex++;
+
+        if (IsAnyInputPressed(Keys.Up, Buttons.DPadUp))
+            SelectedMenuIndex--;
+
+        // Check for value changes
+        if (IsAnyInputPressed(Keys.Right, Buttons.DPadRight))
+            if (SelectedMenuIndex == 0)
+                GameState.MusicVolume += 0.05f;
+            else if (SelectedMenuIndex == 1)
+                GameState.SFXVolume += 0.05f;
+
+        if (IsAnyInputPressed(Keys.Left, Buttons.DPadLeft))
+            if (SelectedMenuIndex == 0)
+                GameState.MusicVolume -= 0.05f;
+            else if (SelectedMenuIndex == 1)
+                GameState.SFXVolume -= 0.05f;
+
+        // Check for return to main menu
+        if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
     }
 
-
-    public void FixedUpdate(GameTime gameTime) {
-
-        // Move camera
-        camera.Update(gameTime);
-    }
+    public void FixedUpdate(GameTime gameTime) { }                                                          // Not Implemented
 
     public void Draw(SpriteBatch spriteBatch) {
-        //draw the settings
+
         spriteBatch.Begin();
 
-        // Draw the title
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Player Controls", yPosition: 100f, screenDimensions, Color.White);
+        // Draw the background
+        spriteBatch.Draw(TLib.LobbyBackground, Vector2.Zero, Color.White);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle(0, 0, 1920, 1080), Color.Black * 0.5f);
 
-        //draw the bottom left text to get back to the menu
-        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
+        // Name
+        spriteBatch.DrawString(FLib.DebugFont, "Music Volume", new Vector2((1920 / 2) - 50 - FLib.DebugFont.MeasureString("Music Volume").X, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.DebugFont, "SFX Volume", new Vector2((1920 / 2) - 50 - FLib.DebugFont.MeasureString("SFX Volume").X, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
 
-        // Draw the Settings that will be displayed on screeen
-        for (int i = 0; i < settings.GetLength(0); i++)
-        {
-            DrawTextCredits(spriteBatch,                                                                    // SpriteBatch
-                            FLib.DebugFont,                                                                 // Font
-                            settings[i, 0],                                                                  // What text
-                            settings[i, 1],                                                                  // Who text
-                            yPosition: 200f + (i * lineSpacing),                                            // Y position
-                            screenDimensions,                                                               // Screen dimensions
-                            Color.White);                                                                   // Colour
-        }
-
-        // TODO: Draw random images around the scene to make it more interesting
-        // Was thinking of like a sticker bomb effect or maybe the pictures taken in the game?
-        // The images should be drawn at pseudo-random positions around the screen and because the camera is moving, we do not need to update the positions of the images =]
-        // think this would be good to have in this menu aswell
+        // Values
+        spriteBatch.DrawString(FLib.DebugFont, $"{GameState.MusicVolume * 100:0}%", new Vector2((1920 / 2) + 50, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.DebugFont, $"{GameState.SFXVolume * 100:0}%", new Vector2((1920 / 2) + 50, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
 
         spriteBatch.End();
     }
 
-    public void OnSceneStart() {
-        // TODO: Play the some music
+    public void OnSceneStart() { }                                                                          // Not Implemented
+
+    public void OnSceneEnd() { }                                                                            // Not Implemented
+
+    #endregion
+
+    enum MenuItems {
+
+        MusicVolume = 0,
+        SFXVolume = 1,
     }
-
-    public void OnSceneEnd() { }
-
 }

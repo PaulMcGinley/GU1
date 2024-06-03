@@ -24,6 +24,8 @@ public class NamePlayer : IScene {
                 selectedIndex = 4;                                                                          // Set the selected index to 4 (prevent out of bounds)
             else
                 selectedIndex = value;                                                                      // Otherwise set the selected index to the value
+
+            SLib.Click.Play(GameState.SFXVolume, 0, 0);
         }
     }
 

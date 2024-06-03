@@ -180,7 +180,7 @@ public class Flotsam : Actor {
 
         isCollected = true;
 
-        SLib.Collect[rand.Next(0, 2)].Play();
+        SLib.Collect[rand.Next(0, 2)].Play(GameState.SFXVolume, 0, 0);
 
         // TODO: Play a sound effect
 

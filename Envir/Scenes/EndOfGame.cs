@@ -86,7 +86,7 @@ public class EndOfGame : IScene {
     public void OnSceneStart() {
 
         System.Diagnostics.Debug.WriteLine("EndOfGame.OnSceneStart");
-        SLib.Victory.Play();                                                                                // Play the victory sound
+        SLib.Victory.Play(GameState.SFXVolume, 0, 0);                                                       // Play the victory sound
 
         // Should be able to use LINQ here
         // winner = GameState.Players[0];

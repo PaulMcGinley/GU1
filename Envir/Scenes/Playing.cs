@@ -170,10 +170,10 @@ public class Playing : IScene {
                             GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isFadingOut = true;    // Set the nessie flotsam to not alive
                             _score = 0;                                                                     // Reset the score tracker
 
-                            SLib.Camera[0].Play();                                                          // Play the camera sound effect
+                            SLib.Camera[0].Play(GameState.SFXVolume, 0, 0);                                 // Play the camera sound effect
                         }
                         else
-                            SLib.Camera[1].Play();                                                          // Play the camera sound effect
+                            SLib.Camera[1].Play(GameState.SFXVolume, 0, 0);                                 // Play the camera sound effect
                     }
             }
     }

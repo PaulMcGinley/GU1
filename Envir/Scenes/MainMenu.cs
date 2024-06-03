@@ -25,7 +25,7 @@ public class MainMenu : IScene {
             else                                                                                            // Otherwise
                 selectedMenuIndex = value;                                                                  // Set the selected menu index to the value
 
-            SLib.Click.Play();                                                                              // Play the click sound
+            SLib.Click.Play(GameState.SFXVolume, 0, 0);                                                     // Play the click sound
         }
     }
 

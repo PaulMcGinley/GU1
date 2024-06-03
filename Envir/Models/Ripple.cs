@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Envir.Models;
@@ -22,16 +21,14 @@ public class Ripple {
 
     public void Update(GameTime gameTime) {
 
-        Radius+=5;
-
+        Radius += 5;
 
         Opacity -= 0.01f;
         if (Opacity <= 0.05f)
             Opacity = 0;
-
     }
 
-    public void Draw(SpriteBatch spriteBatch){
+    public void Draw(SpriteBatch spriteBatch) {
 
         if (Expired)
             return;

@@ -18,7 +18,7 @@ public class PhotoViewer : IScene {
 
     public void Update(GameTime gameTime) {
 
-        if (IsGamePadButtonPressed(0, Buttons.B))
+        if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back))
             GameState.CurrentScene = GameScene.PhotoBook;
     }
 
@@ -36,7 +36,7 @@ public class PhotoViewer : IScene {
 
         spriteBatch.Draw(Photo.fullPicture, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
 
-        if (IsGamePadButtonDown(0, Buttons.Y)) {
+        if (IsAnyInputPressed(Keys.Y, Buttons.Y)) {
 
             Vector2 location = new Vector2(1920, 1080) + new Vector2(Photo.location.X, Photo.location.Y);
             Vector2 scale = new Vector2(0.5f, 0.5f); // scale factor for 4K to 1080p

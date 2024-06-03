@@ -22,6 +22,7 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.NamePlayer namePlayer = new();
     readonly Envir.Scenes.PhotoViewer photoViewer = new();
     readonly Envir.Scenes.EndOfGame endOfGame = new();
+    readonly Envir.Scenes.Controls controls = new();
 
     #endregion
 
@@ -53,6 +54,7 @@ public class GameMain : FixedTimestampGame {
         namePlayer.Initialize(GraphicsDevice);
         photoViewer.Initialize(GraphicsDevice);
         endOfGame.Initialize(GraphicsDevice);
+        controls.Initialize(GraphicsDevice);
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -115,6 +117,9 @@ public class GameMain : FixedTimestampGame {
                 case GameScene.EndOfGame:
                     endOfGame.OnSceneEnd();
                     break;
+                case GameScene.Controls:
+                    controls.OnSceneEnd();
+                    break;
             }
 
             // Call the start methods of the scenes
@@ -152,6 +157,9 @@ public class GameMain : FixedTimestampGame {
                     break;
                 case GameScene.EndOfGame:
                     endOfGame.OnSceneStart();
+                    break;
+                case GameScene.Controls:
+                    controls.OnSceneStart();
                     break;
             }
         }
@@ -193,6 +201,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.EndOfGame:
                 endOfGame.Update(gameTime);
+                break;
+            case GameScene.Controls:
+                controls.Update(gameTime);
                 break;
         }
 
@@ -237,6 +248,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.EndOfGame:
                 endOfGame.FixedUpdate(gameTime);
                 break;
+            case GameScene.Controls:
+                controls.FixedUpdate(gameTime);
+                break;
         }
 
         base.FixedUpdate(gameTime);                                                                         // ! IMPORTANT: Keep this here
@@ -278,6 +292,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.PhotoViewer:
                 photoViewer.Draw(spriteBatch);
+                break;
+            case GameScene.Controls:
+                controls.Draw(spriteBatch);
                 break;
         }
 

@@ -20,5 +20,6 @@ public enum GameScene {
     EndOfRound,
     NamePlayer,
     PhotoViewer,
-    EndOfGame
+    EndOfGame,
+    Controls
 }

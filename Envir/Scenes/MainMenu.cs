@@ -8,104 +8,90 @@ namespace GU1.Envir.Scenes;
 
 public class MainMenu : IScene {
 
-    Graphic2D background;
+    Graphic2D background;                                                                                   // Background image
 
-    Color menuHotColor = Color.AliceBlue;
-    Color menuColdColor = Color.White *0.5f;
+    Color menuHotColor = Color.AliceBlue;                                                                   // Selected menu item colour
+    Color menuColdColor = Color.White *0.5f;                                                                // Unselected menu item colour
 
-    int selectedMenuIndex = 0;
-    int SelectedMenuIndex {
+    int selectedMenuIndex = 0;                                                                              // The index of the selected menu item (variable)
+    int SelectedMenuIndex {                                                                                 // The index of the selected menu item (property)
 
-        get => selectedMenuIndex;
+        get => selectedMenuIndex;                                                                           // Get the selected menu index
         set {
-            if (value < 0)
-                selectedMenuIndex = Enum.GetValues(typeof(MenuItems)).Length - 1; // TODO: Put this in a function where it can be reused
-            else if (value > Enum.GetValues(typeof(MenuItems)).Length - 1)
-                selectedMenuIndex = 0;
-            else
-                selectedMenuIndex = value;
+            if (value < 0)                                                                                  // If the value is less than 0 (less than the first menu item)
+                selectedMenuIndex = Enum.GetValues(typeof(MenuItems)).Length - 1;                           // Set the selected menu index to the last menu item
+            else if (value > Enum.GetValues(typeof(MenuItems)).Length - 1)                                  // If the value is greater than the last menu item
+                selectedMenuIndex = 0;                                                                      // Set the selected menu index to the first menu item
+            else                                                                                            // Otherwise
+                selectedMenuIndex = value;                                                                  // Set the selected menu index to the value
 
-            SLib.Click.Play();
+            SLib.Click.Play();                                                                              // Play the click sound
         }
     }
+
+
+    #region IScene Implementation
 
     public void Initialize(GraphicsDevice device) {
 
         background = new Graphic2D(TLib.mainMenuBackground, new Vector2(device.Viewport.Width / 2, device.Viewport.Height / 2));
     }
 
-    public void LoadContent(ContentManager content) {
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
 
-    }
-
-    public void UnloadContent() {
-
-    }
+    public void UnloadContent() { }                                                                         // Not Implemented
 
     public void Update(GameTime gameTime) {
 
-        #region Gamepad Input
+        // Check for menu navigation
+        if (IsAnyInputPressed(Keys.Down, Buttons.DPadDown))
+            SelectedMenuIndex++;
 
-        if (IsGamePadButtonPressed(0, Buttons.DPadDown))
-            SelectedMenuIndex++; //when the player moves down the Slected menu box value increases thus changing box
+        if (IsAnyInputPressed(Keys.Up, Buttons.DPadUp))
+            SelectedMenuIndex--;
 
-        if (IsGamePadButtonPressed(0, Buttons.DPadUp))
-            SelectedMenuIndex--; //when the player moves up the Slected menu box value decreases thus changing box
+        // Check for menu selection
+        if (IsAnyInputPressed(Keys.Enter, Buttons.A, Buttons.Start)) {
 
-        if (IsAnyInputDown(Keys.Enter, Buttons.A, Buttons.Start)) {
+            switch ((MenuItems)SelectedMenuIndex) {
 
-                switch ((MenuItems)SelectedMenuIndex) {
+                case MenuItems.Play:
+                    GameState.CurrentScene = GameScene.Lobby;
+                    break;
 
-                    case MenuItems.Play:
-                        GameState.CurrentScene = GameScene.Lobby;
-                        break;
+                case MenuItems.Photographs:
+                    GameState.CurrentScene = GameScene.PhotoBook;
+                    break;
 
-                    case MenuItems.Photographs:
-                        GameState.CurrentScene = GameScene.PhotoBook;
-                        break;
+                case MenuItems.Settings:
+                    GameState.CurrentScene = GameScene.Settings;
+                    break;
 
-                    case MenuItems.Settings:
-                        GameState.CurrentScene = GameScene.Settings;
-                        break;
+                case MenuItems.HowToPlay:
+                    GameState.CurrentScene = GameScene.Controls;
+                    break;
 
-                    case MenuItems.HowToPlay:
-                        //GameState.CurrentScene = GameScene.HowToPlay;
-                        break;
+                case MenuItems.Credits:
+                    GameState.CurrentScene = GameScene.Credits;
+                    break;
 
-                    case MenuItems.Credits:
-                        GameState.CurrentScene = GameScene.Credits;
-                        break;
-
-                    case MenuItems.Exit:
-                        Environment.Exit(0); // Exit code 0 = success, no errors
-                        break;
-                }
+                case MenuItems.Exit:
+                    Environment.Exit(0); // Exit code 0 = success, no errors
+                    break;
             }
-
-        #endregion
-
-        #region Keyboard Input
-
-        if (IsKeyPressed(Keys.Down))
-            SelectedMenuIndex++; //when the player moves down the Slected menu box value increases thus changing box
-
-        if (IsKeyPressed(Keys.Up))
-            SelectedMenuIndex--; //when the player moves up the Slected menu box value decreases thus changing box
-
-        #endregion
+        }
     }
 
-    public void FixedUpdate(GameTime gameTime) {
-
-    }
+    public void FixedUpdate(GameTime gameTime) { }                                                          // Not Implemented
 
     public void Draw(SpriteBatch spriteBatch) {
 
         spriteBatch.Begin( );
 
-        // Draw the background
+        //Background
         background.Draw(spriteBatch);
 
+        // Menu boxes
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), selectedMenuIndex == 0 ? menuHotColor : menuColdColor);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), selectedMenuIndex == 1 ? menuHotColor : menuColdColor);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), selectedMenuIndex == 2 ? menuHotColor : menuColdColor);
@@ -113,7 +99,7 @@ public class MainMenu : IScene {
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 180, 400, 100), selectedMenuIndex == 4 ? menuHotColor : menuColdColor);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 300, 400, 100), selectedMenuIndex == 5 ? menuHotColor : Color.Red*0.5f);
 
-        // Draw the text
+        // Menu text
         spriteBatch.DrawString(FLib.DebugFont, "PLAY GAME", new Vector2((1920/2)-50, (1080/2)-260), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "PHOTOGRAPHS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
@@ -121,29 +107,32 @@ public class MainMenu : IScene {
         spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)+220), Color.Black);
         spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+340), Color.Black);
 
-        // Draw the arrow
+        // Left Nessie
         spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)-350, (1080/2)-295 + (SelectedMenuIndex * 120)), menuHotColor);
 
-        // Draw the arrow flipped on the other side
+        // Right Nessie
         spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)+225, (1080/2)-295 + (SelectedMenuIndex * 120)), null, menuHotColor, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
 
         spriteBatch.End( );
     }
 
-    public void OnSceneStart() {
+    public void OnSceneStart() { }                                                                          // Not Implemented
 
-        GameState.Players.Clear();
-    }
+    public void OnSceneEnd() { }                                                                            // Not Implemented
 
-    public void OnSceneEnd() { }
+    #endregion
 
-    enum MenuItems { //declaring the menu items box values
 
-        Play = 0, //sets the value of the box Play Game to 0
-        Photographs = 1, //Sets the value of the Settings Box to 1
+    /// <summary>
+    /// Enumerator for the menu items
+    /// </summary>
+    enum MenuItems {
+
+        Play = 0,
+        Photographs = 1,
         Settings = 2,
         HowToPlay = 3,
-        Credits = 4, //Sets the value of the Credits box to 2
-        Exit = 5 //sets the value of Exit Game box to 3
+        Credits = 4,
+        Exit = 5
     }
 }

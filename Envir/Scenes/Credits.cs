@@ -14,6 +14,7 @@ public class Credits : IScene {
 
     const int lineSpacing = 50;                                                                             // The space between each line of text
     readonly string[,] credits = new string[,] {                                                            // The list of credits, job and name
+
         //JOB                           NAME
         { "Game Concept / Design",      "Corey Connolly" },
         { "Project Manager",            "Kieran Bett" },
@@ -24,40 +25,45 @@ public class Credits : IScene {
         { "Nessie Art Designer",        "Corey Connolly" },
     };
 
+    #region IScene Implementation
+
     public void Initialize(GraphicsDevice device) {
 
         viewport = device.Viewport;
         camera = new Camera2D(viewport);
     }
 
-    public void LoadContent(ContentManager content) { }
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
 
-    public void UnloadContent() { }
+    public void UnloadContent() { }                                                                         // Not Implemented
 
     public void Update(GameTime gameTime) {
 
-        if (IsAnyInputDown(Keys.B, Buttons.B, Buttons.Start))
+        // Check for input to go back to the main menu
+        if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Start, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
     }
 
     public void FixedUpdate(GameTime gameTime) {
 
         // Move camera
-        camera.Update(gameTime);
         camera.LookAt(new Vector2(camera.Boundaries.Width/2, camera.Position.Y + 1f));                      // Move the camera to scroll the credits
+        camera.Update(gameTime);                                                                            // Update the camera
     }
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        spriteBatch.Begin(); // There is no transform matrix for the background, it will always be drawn at the same position
+        // Static drawing
+        spriteBatch.Begin();
 
-        // TODO: Draw the background
+        // TODO: Draw the background image
 
         DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
 
         spriteBatch.End();
 
 
+        // Dynamic drawing
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // Draw the title
@@ -92,5 +98,7 @@ public class Credits : IScene {
     }
 
     public void OnSceneEnd() { }
+
+    #endregion
 
 }

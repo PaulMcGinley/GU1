@@ -46,6 +46,7 @@ public class Texture {
     public static Texture2D mainMenuBackground;
     public static Texture2D[] PlayingBackground;
     public static Texture2D LobbyBackground;
+    public static Texture2D ControlsBackground;
 
     /***********************************************************************
      *** UI Elements *******************************************************
@@ -103,6 +104,7 @@ public class Texture {
         PlayingBackground[0] = content.Load<Texture2D>("Graphics/bg1");
         PlayingBackground[1] = content.Load<Texture2D>("Graphics/bg2");
         LobbyBackground = content.Load<Texture2D>("Graphics/LobbyScene-BG");
+        ControlsBackground = content.Load<Texture2D>("Graphics/controls-BG");
 
         // UI Elements
         Arrow = content.Load<Texture2D>("Graphics/UI/arrow");

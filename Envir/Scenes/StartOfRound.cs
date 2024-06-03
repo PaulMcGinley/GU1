@@ -10,19 +10,19 @@ public class StartOfRound : IScene {
 
     double sceneStartTime = 0;                                                                              // Time the scene started
     double currentTime = 0;                                                                                 // Current time in the scene
+    int screenWaitTime = 3000;                                                                              // Time to wait on each screen
 
-    int screenWaitTime = 3000;                                                                                // Time to wait on each screen
+    float nessieCount => GameState.Players.Count / 3.3f;                                                    // Number of nessies in the game
 
-    // int playerCount = GameState.Players.Count;                                                              // Number of players in the game
-    float nessieCount => GameState.Players.Count / 3.3f;                                                  // Number of nessies in the game
-    // float touristCount => GameState.Players.Count - nessieCount;                                                          // Number of tourists in the game
+    bool controllersRumbled = false;                                                                        // Whether the controllers have rumbled
 
-    bool controllersRumbled = false;                                                                         // Whether to rumble the controllers
-    public void Initialize(GraphicsDevice device) { }
+    #region IScene Implementation
 
-    public void LoadContent(ContentManager content) { }
+    public void Initialize(GraphicsDevice device) { }                                                       // Not implemented in this scene
 
-    public void UnloadContent() { }
+    public void LoadContent(ContentManager content) { }                                                     // Not implemented in this scene
+
+    public void UnloadContent() { }                                                                         // Not implemented in this scene
 
     public void Update(GameTime gameTime) {
 
@@ -30,37 +30,70 @@ public class StartOfRound : IScene {
             return;                                                                                         // Exit the method
 
         if (sceneStartTime < 0.1D)                                                                          // If the scene has just started
-            sceneStartTime = gameTime.TotalGameTime.TotalMilliseconds;                                           // Set the scene start time
+            sceneStartTime = gameTime.TotalGameTime.TotalMilliseconds;                                      // Set the scene start time
 
-        currentTime = gameTime.TotalGameTime.TotalMilliseconds;                                                  // Update the current time
+        currentTime = gameTime.TotalGameTime.TotalMilliseconds;                                             // Update the current time
 
-        if (!controllersRumbled) {                                                                              // If the controllers should rumble
+        // Rumple sequence added to queue OnSceneStart
+        if (!controllersRumbled) {                                                                          // If the controllers have not rumbled
             RumbleControllers();                                                                            // Rumble the controllers
-            controllersRumbled = true;                                                                      // Set rumbleControllers to false
+            controllersRumbled = true;                                                                      // Set flag to false to prevent rumbling again
         }
 
-        if (currentTime - sceneStartTime > (screenWaitTime*2)/*+3000*/)                                                             // If the scene has been running for more than 10 seconds
+        // Once enough time has passed, move to the next scene
+        if (currentTime - sceneStartTime > (screenWaitTime*2))                                              // Check if the users have had enough time to read the screen
             GameState.CurrentScene = GameScene.Playing;                                                     // Move to the Playing scene
     }
 
-    public void FixedUpdate(GameTime gameTime) { }
+    public void FixedUpdate(GameTime gameTime) { }                                                          // Not implemented in this scene
 
     public void Draw(SpriteBatch spriteBatch) {
 
         spriteBatch.Begin();
 
-        spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0, 0, 1920, 1080), Color.White);              // Draw the main menu background
+        // Background
+        spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0, 0, 1920, 1080), Color.White);            // Draw the main menu background
 
-        if (currentTime - sceneStartTime < screenWaitTime)                                                              // If the scene has been running for less than 10 seconds
+        // Draw the correct screen to show role information
+        if (currentTime - sceneStartTime < screenWaitTime)                                                  // Check if we are in Nessies time window
             DrawNessieScreen(spriteBatch);                                                                  // Draw the Nessie screen
-        else /*if (currentTime - sceneStartTime < screenWaitTime*2)*/                                                         // If the scene has been running for less than 20 seconds
-            DrawTouristScreen(spriteBatch);                                                                 // Otherwise, draw the Tourist screen
-        //else
-        //    DrawCountdownScreen(spriteBatch);                                                               // Otherwise, draw the countdown screen
+        else                                                                                                // Otherwise
+            DrawTouristScreen(spriteBatch);                                                                 // Draw the Tourist screen
 
         spriteBatch.End();
-
     }
+
+    public void OnSceneStart() {
+
+        bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
+
+        foreach (Player player in GameState.Players)                                                        // Loop through all players
+            if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
+                endGame = false;                                                                            // Set endGame to false
+                break;                                                                                      // Exit the loop
+            }
+
+        if (endGame) {                                                                                      // Check if the game should end
+
+            GameState.CurrentScene = GameScene.EndOfGame;                                                   // Move to the EndOfGame scene
+            return;                                                                                         // Exit the method
+
+        } else {                                                                                            // Otherwise
+
+            AssignRoles();                                                                                  // Assign the roles to the players
+            sceneStartTime = currentTime = 0;                                                               // Reset the scene start and current times
+        }
+    }
+
+    public void OnSceneEnd() {
+
+        controllersRumbled = false;                                                                         // Set rumbleControllers to true
+    }
+
+    #endregion
+
+
+    #region Draw Methods
 
     public void DrawNessieScreen(SpriteBatch spriteBatch) {
 
@@ -73,17 +106,15 @@ public class StartOfRound : IScene {
 
     public void DrawTouristScreen(SpriteBatch spriteBatch) {
 
-        // Title
+        // Avatar
         spriteBatch.Draw(TLib.TouristAvatar, new Vector2(1920 / 2, 1080 / 2), null, Color.White, 0, new Vector2(TLib.TouristAvatar.Width / 2, TLib.TouristAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
 
         // Title
         spriteBatch.Draw(TLib.TouristTitle, new Vector2(1920 / 2, 1080 / 2 - 200), null, Color.White, 0, new Vector2(TLib.TouristTitle.Width / 2, TLib.TouristTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
     }
 
-    // private void DrawCountdownScreen(SpriteBatch spriteBatch) {
+    #endregion
 
-    //    DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, (((sceneStartTime + (screenWaitTime*2) +3000)- currentTime)/1000).ToString("0.0"), (1080/2), new Vector2(1920, 1080), Color.White);
-    // }
 
     public void AssignRoles() {
 
@@ -131,39 +162,10 @@ public class StartOfRound : IScene {
 
     private void RumbleControllers() {
 
-        foreach (Player player in GameState.Players) {
-
+        foreach (Player player in GameState.Players)
             if (player.Role == ActorType.Nessie)
                 RumbleQueue.AddRumble(player.ControllerIndex, currentTime+200, 1700, 1f, 1f);
             else
                 RumbleQueue.AddRumble(player.ControllerIndex, currentTime+200 + screenWaitTime, 1700, 1f, 1f);
-        }
-    }
-
-    public void OnSceneStart() {
-
-        bool endGame = true;                                                                                // Default to true and set to false if any player has not played both roles
-
-        foreach (Player player in GameState.Players)                                                        // Loop through all players
-            if (player.playedBothRoles == false) {                                                          // If any player has not played both roles
-                endGame = false;                                                                            // Set endGame to false
-                break;                                                                                      // Exit the loop
-            }
-
-        if (endGame) {
-
-            GameState.CurrentScene = GameScene.EndOfGame;                                                    // Move to the EndOfGame scene
-            return;
-
-        } else {
-
-            AssignRoles();
-            sceneStartTime = currentTime = 0;                                                                    // Reset the scene start and current times
-        }
-    }
-
-    public void OnSceneEnd() {
-
-        controllersRumbled = false;                                                                           // Set rumbleControllers to true
     }
 }

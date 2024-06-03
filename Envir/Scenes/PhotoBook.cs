@@ -17,100 +17,92 @@ public class PhotoBook : IScene {
 
     Photo[] photos;                                                                                         // Array of photos
     Vector2[] photoLocations;                                                                               // Array of onscreen photo locations
-    Rectangle[] photoBounds;                                                                                // Array of photo bounds
+    Rectangle[] photoBounds;                                                                                // Array of photo bounds for selection
 
     const int mod = 5;                                                                                      // The modulo value (number of photos per row)
 
     Camera2D camera;                                                                                        // The camera to render the photos
     Cursor cursor;                                                                                          // The cursor to select the photos
+    Vector2 cursorWorldPos => Vector2.Transform(cursor.Position, Matrix.Invert(camera.TransformMatrix));    // Transform the cursor position to world position
+
+    #region IScene Implementation
 
     public void Initialize(GraphicsDevice device) {
 
-        camera = new Camera2D(new Viewport(0,0,1920,1080));                                                                      // Create a new camera
-        camera.LookAt(new Vector2((1920/2) - 150, 1080/2));                                                                              // Set the camera to look at the center of the screen
+        camera = new Camera2D(new Viewport(0, 0, 1920, 1080));                                              // Create a new camera
+        camera.LookAt(new Vector2((1920/2) - 150, 1080/2));                                                 // Set the camera to look at the center of the screen
 
         cursor = new Cursor();                                                                              // Create a new cursor
     }
 
-    public void LoadContent(ContentManager content) {
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
 
-    }
-
-    public void UnloadContent() {
-
-    }
+    public void UnloadContent() { }                                                                         // Not Implemented
 
     public void Update(GameTime gameTime) {
 
-        camera.Update(gameTime);
+        camera.Update(gameTime);                                                                            // Update the camera
 
-        // If the B button is pressed, return to the main menu
-        if (IsGamePadButtonPressed(0, Buttons.B))
+        // Check for input to go back to the main menu
+        if (IsAnyInputPressed(Buttons.B, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
 
+        // Guard clause to check if there are any photos
         if (photos == null)
             return;
 
-        if (IsGamePadButtonPressed(0, Buttons.A)) {
 
-            for (int i = 0; i < photos.Length; i++) {
+        // Check for input to view a photo
+        if (IsAnyInputPressed(Buttons.A))
+            for (int i = 0; i < photos.Length; i++)
+                if (photoBounds[i].Contains(cursorWorldPos)) {
 
-                if (photoBounds[i].Contains(cursor.Position)) {
-
-                    PhotoViewer.Photo = photos[i];
-                    GameState.CurrentScene = GameScene.PhotoViewer;
+                    PhotoViewer.Photo = photos[i];                                                          // Set the photo to view
+                    GameState.CurrentScene = GameScene.PhotoViewer;                                         // Change the scene to the photo viewer
                 }
-            }
-        }
 
-        if (IsGamePadButtonPressed(0, Buttons.Y))
-            cursor.Position = camera.Position;
+        // Check for input to reset the cursor position
+        if (IsAnyInputPressed(Buttons.Y))
+            cursor.Position = camera.Position;                                                              // Set the cursor position to the camera position
+
+        cursor.Position += GamePadRightStick(0);                                                       // Move the cursor with the left stick
+
+        // Lock the cursor to the screen
+        cursor.Position = new Vector2(
+            MathHelper.Clamp(cursor.Position.X, 0, 1920 - TLib.Cursor.Width),
+            MathHelper.Clamp(cursor.Position.Y, 0, 1080 - TLib.Cursor.Height));
     }
 
     public void FixedUpdate(GameTime gameTime) {
 
+        // Guard clause to check if there are any photos
         if (photos == null)
             return;
 
-        if (camera.Position.Y < 0 && GamePadLeftStick(0).Y < 0) return;
-        if (camera.Position.Y > 420 * (photos.Length/mod) && GamePadLeftStick(0).Y > 0) return;
+        if (camera.Position.Y < 0 && GamePadLeftStick(0).Y < 0) return;                                     // Limit the camera movement on the Y axis (Top)
+        if (camera.Position.Y > 420 * (photos.Length/mod) && GamePadLeftStick(0).Y > 0) return;             // Limit the camera movement on the Y axis (Bottom)
 
-        camera.LookAt(camera.Position + new Vector2(0, GamePadLeftStickY(0)*10f));
-
-        cursor.Position += GamePadRightStick(0)*10f;
-
-        
-        // // Loop through all the photos and dispose the Photo if it is not on screen and within a given distance and load the photo if it is on screen and within a given distance
-        // for (int i = 0; i < photos.Length; i++) {
-
-        //     if (photoLocations[i].Y < camera.Position.Y - 1080 && photoLocations[i].Y > camera.Position.Y + 1080) {
-
-        //         photos[i].Dispose();
-        //         photos[i] = null;
-        //     }
-
-        //     if (photoLocations[i].Y > camera.Position.Y - 1080 && photoLocations[i].Y < camera.Position.Y + 1080) {
-
-        //         if (photos[i] == null) {
-
-        //             photos[i] = new Photo();
-        //             photos[i].Render(spriteBatch);
-        //             //photos[i] = photos[i].Load(i.ToString());
-        //         }
-        //     }
-        // }
+        camera.LookAt(camera.Position + new Vector2(0, GamePadLeftStickY(0)*10f));                          // Move the camera on the Y axis
     }
 
     public void Draw(SpriteBatch spriteBatch) {
 
+        // Static drawing
         spriteBatch.Begin();
+
+        // Background
         spriteBatch.Draw(TLib.mainMenuBackground, new Rectangle(0,0,1920,1080), Color.White);
+
+        // Overlay
         spriteBatch.Draw(TLib.Pixel, new Rectangle(0,0,1920,1080), Color.Black * 0.5f);
+
         spriteBatch.End();
 
         if (photos == null)
             return;
 
+
+        // Dynamic drawing
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // We only want to draw the photos that will be on screen
@@ -119,11 +111,16 @@ public class PhotoBook : IScene {
             Vector2 worldPos = photoLocations[i];
             Vector2 screenPos = Vector2.Transform(worldPos, camera.TransformMatrix);                        // Transform the world position to screen position
 
-            bool selected = photoBounds[i].Contains(cursor.Position);                                        // Check if the cursor is over the photo
+            bool selected = photoBounds[i].Contains(cursorWorldPos);                                       // Check if the cursor is over the photo
 
-            if (screenPos.Y > -400 && screenPos.Y < 1080)                                                   // Only draw the photos that are on screen (Y axis as X axis is locked)
+            if (screenPos.Y > -400 && screenPos.Y < 1080)                                                   // Only draw the photos that are on screen
                 spriteBatch.Draw(photos[i].framedPicture, worldPos, null, selected ? Color.LightBlue : Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 0);
         }
+                                                                   // Draw the cursor
+
+        spriteBatch.End();
+
+        spriteBatch.Begin();
 
         cursor.Draw(spriteBatch);
 
@@ -138,6 +135,9 @@ public class PhotoBook : IScene {
     public void OnSceneEnd() {
 
     }
+
+    #endregion
+
 
     /// <summary>
     /// Set the sprite batch to allow the photos to be rendered prior to being drawn

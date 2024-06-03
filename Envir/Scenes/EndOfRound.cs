@@ -11,19 +11,18 @@ public class EndOfRound : IScene {
 
     float animationScale = 0;                                                                               // Scale animated text
 
-    #region IScene
+    #region IScene Implementation
 
-    public void Initialize(GraphicsDevice device) { }
+    public void Initialize(GraphicsDevice device) { }                                                       // Not Implemented
 
-    public void LoadContent(ContentManager content) { }
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
 
-    public void UnloadContent() { }
+    public void UnloadContent() { }                                                                         // Not Implemented
 
     public void Update(GameTime gameTime) {
 
-        if (IsGamePadButtonDown(0, Buttons.A)) {                                                            // If the A button is pressed
-            GameState.CurrentScene = GameScene.StartOfRound;                                                // Move to the MainMenu scene
-        }
+        if (IsAnyInputPressed(Keys.B, Buttons.A, Buttons.B))                                                   // Check for input to continue
+            GameState.CurrentScene = GameScene.StartOfRound;                                                // Move to the next scene
     }
 
     public void FixedUpdate(GameTime gameTime) {
@@ -98,11 +97,12 @@ public class EndOfRound : IScene {
                     SpriteEffects.None,                                                                     // Effects
                     0);                                                                                     // Layer
 
-            spriteBatch.DrawString(FLib.DebugFont, $"Player: {p.ControllerIndex+1} - {p.CameraView.playerName}", new Vector2((1920/2)-400+30+64, 200 + (i * 55)+14), Color.White);             // Draw the player's name
-            spriteBatch.DrawString(FLib.DebugFont, $"{p.Score:#,##0}", new Vector2((1920/2)+400-30-100, 200 + (i * 55)+14), Color.White);             // Draw the player's score
+            spriteBatch.DrawString(FLib.DebugFont, $"Player: {p.ControllerIndex+1} - {p.CameraView.playerName}", new Vector2((1920/2)-400+30+64, 200 + (i * 55)+14), Color.White);      // Draw the player's name
+            spriteBatch.DrawString(FLib.DebugFont, $"{p.Score:#,##0}", new Vector2((1920/2)+400-30-100, 200 + (i * 55)+14), Color.White);                                               // Draw the player's score
 
         }
 
+        // Draw the press A to continue text
         spriteBatch.Draw(TLib.Press_A_ToContinue, new Vector2(1920/2, 1080 - (TLib.Press_A_ToContinue.Height/2)), new Rectangle(0,0, TLib.Press_A_ToContinue.Width, TLib.Press_A_ToContinue.Height), Color.AliceBlue, 0, new Vector2(TLib.Press_A_ToContinue.Width/2, TLib.Press_A_ToContinue.Height/2), 0.5f * animationScale, SpriteEffects.None, 0);
 
         spriteBatch.End();

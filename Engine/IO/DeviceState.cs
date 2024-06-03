@@ -242,6 +242,24 @@ public static class DeviceState {
         return false;
     }
 
+    public static bool IsAnyInputPressed(params object[] keys) {
+
+        foreach (ButtonState button in keys.Select(v => (ButtonState)v))
+            if ((MouseState.LeftButton == button && PreviousMouseState.LeftButton == ButtonState.Released) || (MouseState.RightButton == button && PreviousMouseState.RightButton == ButtonState.Released))
+                return true;
+
+        foreach (Keys key in keys.Select(v => (Keys)v))
+            if (IsKeyPressed(key))
+                return true;
+
+        foreach (Buttons button in keys.Select(v => (Buttons)v))
+            for (int i = 0; i < GamePadsState.Length; i++)
+                if (IsGamePadConnected(i) && IsGamePadButtonPressed(i, button))
+                    return true;
+
+        return false;
+    }
+
     #endregion
 
 }

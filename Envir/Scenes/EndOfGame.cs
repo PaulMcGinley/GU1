@@ -10,59 +10,59 @@ public class EndOfGame : IScene {
 
     Random rand = new();
 
-    Player winner;
+    Player winner;                                                                                          // The player who won the game
 
-    float scale = 0.25f;
+    float scale = 0.25f;                                                                                    // The scale of the winner title
 
     #region IScene Implementation
 
-    public void Initialize(GraphicsDevice device) { }
+    public void Initialize(GraphicsDevice device) { }                                                       // Not Implemented
 
-    public void LoadContent(ContentManager content) { }
+    public void LoadContent(ContentManager content) { }                                                     // Not Implemented
 
-    public void UnloadContent() { }
+    public void UnloadContent() { }                                                                         // Not Implemented
 
     public void Update(GameTime gameTime) {
 
-        if (IsGamePadButtonDown(0, Buttons.Back)) {
+        if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back)) {
 
-            GameState.CurrentScene = GameScene.MainMenu;
+            GameState.CurrentScene = GameScene.MainMenu;                                                    // Change the scene to the main menu
 
             // This should be done in the OnSceneEnd method but it is not working
-            scale = 0.25f;
-            winner = null;
-            GameState.Players.Clear();
+            scale = 0.25f;                                                                                  // Reset the scale
+            winner = null;                                                                                  // Reset the winner
+            GameState.Players.Clear();                                                                      // Clear the players
         }
-
     }
 
     public void FixedUpdate(GameTime gameTime) {
 
         // This should be done in the OnSceneStart method but it is not working
-        if (winner == null) {
+        if (winner == null) {                                                                               // If the winner is not set
 
-            winner = GameState.Players[0];
+            winner = GameState.Players[0];                                                                  // Set the winner to the first player
 
-            for (int i = 1; i < GameState.Players.Count; i++)
-                if (GameState.Players[i].Score > winner.Score)
-                    winner = GameState.Players[i];
+            for (int i = 1; i < GameState.Players.Count; i++)                                               // Loop through the players
+                if (GameState.Players[i].Score > winner.Score)                                              // If the player's score is greater than the winner's score
+                    winner = GameState.Players[i];                                                          // Set the winner to that player
         }
 
-        if (scale < 1)
-            scale += 0.01f;
+        // Winner title zooms in
+        if (scale < 1)                                                                                      // If the scale is less than 1
+            scale += 0.01f;                                                                                 // Increase the scale
     }
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        if (GameState.CurrentScene != GameScene.EndOfGame)
-            return;
+        if (GameState.CurrentScene != GameScene.EndOfGame)                                                 // If the current scene is not the end of game scene
+            return;                                                                                        // Return
 
-        if (winner == null)
-            return;
-
+        if (winner == null)                                                                                // If the winner is not set
+            return;                                                                                         // Return
 
         spriteBatch.Begin();
 
+        // Draw the winner title
         spriteBatch.Draw(
             TLib.WinnerTitle,                                                                               // Texture
             new Vector2(1920/2, (1080/2) - 200),                                                            // Position
@@ -77,19 +77,8 @@ public class EndOfGame : IScene {
         // Draw the player's row background
         DrawFilledRectangle(new Rectangle((1920/2)-400, (1080/2)+200, 800, 50), spriteBatch, winner.CameraView.colour);
 
-        spriteBatch.DrawString(FLib.DebugFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White);             // Draw the player's name
-        spriteBatch.DrawString(FLib.DebugFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White);                                                            // Draw the player's score
-
-        // spriteBatch.DrawString(
-        //     FLib.DebugFont,                                                                                 // Font
-        //     $"{winner.CameraView.playerName} wins!",                                                        // Text
-        //     new Vector2(1920/2, (1080/2)+200),                                                              // Position
-        //     Color.White,                                                                                    // Colour
-        //     0,                                                                                              // Rotation
-        //     FLib.DebugFont.MeasureString($"{winner.CameraView.playerName} wins!")/2,                        // Origin
-        //     1,                                                                                              // Scale
-        //     SpriteEffects.None,                                                                             // Effects
-        //     0);                                                                                             // Layer
+        spriteBatch.DrawString(FLib.DebugFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White);  // Draw the player's name
+        spriteBatch.DrawString(FLib.DebugFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White);                                                // Draw the player's score
 
         spriteBatch.End();
     }

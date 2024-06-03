@@ -134,6 +134,18 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/boat2.png
 
+#begin Graphics/controls-BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/controls-BG.png
+
 #begin Graphics/cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor

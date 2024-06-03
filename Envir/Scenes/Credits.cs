@@ -42,9 +42,13 @@ public class Credits : IScene {
         // Check for input to go back to the main menu
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Start, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
+
     }
 
     public void FixedUpdate(GameTime gameTime) {
+
+        if (camera.Position.Y > credits.GetLength(0) * lineSpacing + 250)                                   // If the camera has scrolled past the credits
+            return;                                                                                         // Return
 
         // Move camera
         camera.LookAt(new Vector2(camera.Boundaries.Width/2, camera.Position.Y + 1f));                      // Move the camera to scroll the credits
@@ -53,36 +57,23 @@ public class Credits : IScene {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        // Static drawing
-        spriteBatch.Begin();
-
-        // TODO: Draw the background image
-
-        DrawTextBottomLeftScreen(spriteBatch, FLib.DebugFont, "To go back to menu Press B", yPosition: 100f, screenDimensions, Color.Red);
-
-        spriteBatch.End();
-
-
-        // Dynamic drawing
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // Draw the title
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
 
         // Draw the credits
         for (int i = 0; i < credits.GetLength(0); i++)
+
             DrawTextCredits(spriteBatch,                                                                    // SpriteBatch
-                            FLib.DebugFont,                                                                 // Font
+                            FLib.LeaderboardFont,                                                                 // Font
                             credits[i, 0],                                                                  // What text
                             credits[i, 1],                                                                  // Who text
                             yPosition: 200f + (i * lineSpacing),                                            // Y position
                             screenDimensions,                                                               // Screen dimensions
                             Color.White);                                                                   // Colour
 
-
-        // TODO: Draw random images around the scene to make it more interesting
-        // Was thinking of like a sticker bomb effect or maybe the pictures taken in the game?
-        // The images should be drawn at pseudo-random positions around the screen and because the camera is moving, we do not need to update the positions of the images =]
+        DrawTextCenteredScreen(spriteBatch, FLib.LeaderboardFont, "Press BACK to exit", yPosition: (credits.GetLength(0)*lineSpacing)+250, screenDimensions, Color.White);
 
         spriteBatch.End();
     }
@@ -90,7 +81,7 @@ public class Credits : IScene {
     public void OnSceneStart() {
 
         // Reset the view
-        camera.LookAt(new Vector2(viewport.Width/2, 0));
+        camera.LookAt(new Vector2(viewport.Width/2, -(1080/2) + 100));
 
         // TODO: Play the credits music
 

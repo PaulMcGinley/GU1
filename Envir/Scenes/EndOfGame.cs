@@ -26,7 +26,7 @@ public class EndOfGame : IScene {
 
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back)) {
 
-            GameState.CurrentScene = GameScene.MainMenu;                                                    // Change the scene to the main menu
+            GameState.CurrentScene = GameScene.Credits;                                                    // Change the scene to the credits scene
 
             // This should be done in the OnSceneEnd method but it is not working
             scale = 0.25f;                                                                                  // Reset the scale

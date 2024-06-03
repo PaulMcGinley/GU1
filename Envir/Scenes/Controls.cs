@@ -31,15 +31,9 @@ public class Controls : IScene {
         spriteBatch.End();
     }
 
-    public void OnSceneStart() {
+    public void OnSceneStart() { }
 
-        System.Diagnostics.Debug.WriteLine("Controls Scene Started");
-    }
-
-    public void OnSceneEnd() {
-
-        System.Diagnostics.Debug.WriteLine("Controls Scene Ended");
-    }
+    public void OnSceneEnd() { }
 
     #endregion
 }

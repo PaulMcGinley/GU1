@@ -74,6 +74,20 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Debug.spritefont
 
+#begin Fonts/LeaderBoardText.spritefont
+/importer:FontDescriptionImporter
+/processor:LocalizedFontProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/LeaderBoardText.spritefont
+
+#begin Fonts/MenuText.spritefont
+/importer:FontDescriptionImporter
+/processor:LocalizedFontProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/MenuText.spritefont
+
 #begin Graphics/Actor/CameraView.png
 /importer:TextureImporter
 /processor:TextureProcessor

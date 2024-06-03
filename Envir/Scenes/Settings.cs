@@ -69,16 +69,16 @@ public class Settings : IScene {
         spriteBatch.Begin();
 
         // Draw the background
-        spriteBatch.Draw(TLib.LobbyBackground, Vector2.Zero, Color.White);
+        spriteBatch.Draw(TLib.mainMenuBackground, Vector2.Zero, Color.White);
         spriteBatch.Draw(TLib.Pixel, new Rectangle(0, 0, 1920, 1080), Color.Black * 0.5f);
 
         // Name
-        spriteBatch.DrawString(FLib.DebugFont, "Music Volume", new Vector2((1920 / 2) - 50 - FLib.DebugFont.MeasureString("Music Volume").X, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
-        spriteBatch.DrawString(FLib.DebugFont, "SFX Volume", new Vector2((1920 / 2) - 50 - FLib.DebugFont.MeasureString("SFX Volume").X, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.MainMenuFont, "Music Volume", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Music Volume").X, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.MainMenuFont, "SFX Volume", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("SFX Volume").X, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
 
         // Values
-        spriteBatch.DrawString(FLib.DebugFont, $"{GameState.MusicVolume * 100:0}%", new Vector2((1920 / 2) + 50, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
-        spriteBatch.DrawString(FLib.DebugFont, $"{GameState.SFXVolume * 100:0}%", new Vector2((1920 / 2) + 50, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.MusicVolume * 100:0}%", new Vector2((1920 / 2) + 50, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.SFXVolume * 100:0}%", new Vector2((1920 / 2) + 50, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
 
         spriteBatch.End();
     }

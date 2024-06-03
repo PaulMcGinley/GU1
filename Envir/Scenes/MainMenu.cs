@@ -10,8 +10,11 @@ public class MainMenu : IScene {
 
     Graphic2D background;                                                                                   // Background image
 
-    Color menuHotColor = Color.AliceBlue;                                                                   // Selected menu item colour
+    Color menuHotColor = Color.AliceBlue *0.90f;                                                                   // Selected menu item colour
     Color menuColdColor = Color.White *0.5f;                                                                // Unselected menu item colour
+
+    Color textHotColor = Color.Black;                                                                       // Selected menu item text colour
+    Color textColdColor = Color.Black*0.7f;                                                                      // Unselected menu item text colour
 
     int selectedMenuIndex = 0;                                                                              // The index of the selected menu item (variable)
     int SelectedMenuIndex {                                                                                 // The index of the selected menu item (property)
@@ -100,12 +103,19 @@ public class MainMenu : IScene {
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 300, 400, 100), selectedMenuIndex == 5 ? menuHotColor : Color.Red*0.5f);
 
         // Menu text
-        spriteBatch.DrawString(FLib.DebugFont, "PLAY GAME", new Vector2((1920/2)-50, (1080/2)-260), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "PHOTOGRAPHS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "HOW TO PLAY", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)+220), Color.Black);
-        spriteBatch.DrawString(FLib.DebugFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+340), Color.Black);
+        // spriteBatch.DrawString(FLib.MainMenuFont, "PLAY GAME", new Vector2((1920/2)-50, (1080/2)-260), Color.Black);
+        // spriteBatch.DrawString(FLib.MainMenuFont, "PHOTOGRAPHS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
+        // spriteBatch.DrawString(FLib.MainMenuFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
+        // spriteBatch.DrawString(FLib.MainMenuFont, "HOW TO PLAY", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
+        // spriteBatch.DrawString(FLib.MainMenuFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)+220), Color.Black);
+        // spriteBatch.DrawString(FLib.MainMenuFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+340), Color.Black);
+
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Play", (1080/2)-265, new Vector2(1920, 1080), selectedMenuIndex == 0 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Gallery", (1080/2)-145, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Settings", (1080/2)-25, new Vector2(1920, 1080), selectedMenuIndex == 2 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Guide", (1080/2)+95, new Vector2(1920, 1080), selectedMenuIndex == 3 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Credits", (1080/2)+215, new Vector2(1920, 1080), selectedMenuIndex == 4 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Exit", (1080/2)+335, new Vector2(1920, 1080), selectedMenuIndex == 5 ? textHotColor : textColdColor);
 
         // Left Nessie
         spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)-350, (1080/2)-295 + (SelectedMenuIndex * 120)), menuHotColor);

@@ -6,12 +6,6 @@ namespace GU1;
 
 public class Actor : IMove, IGameObject {
 
-    #region Properties
-
-    //virtual public ActorType Type { get; set; } = ActorType.AI;
-
-    #endregion
-
     #region IMove Interface
 
     public Vector2 Velocity { get; set; }
@@ -23,6 +17,7 @@ public class Actor : IMove, IGameObject {
     public void Move(GameTime gameTime) { }
 
     #endregion
+
 
     #region IGameObject Interface
 

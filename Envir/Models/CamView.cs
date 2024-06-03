@@ -16,6 +16,7 @@ public class CamView : IMove {
     public int remainingPhotos;
     public Photo[] photos;
     public string playerName = string.Empty;
+    float camMaxDistance = 500;
 
     public CamView(Color colour, int maxPhotos) {
 
@@ -44,8 +45,8 @@ public class CamView : IMove {
 
     public void Update(GameTime gameTime) {
 
-        offset.X = Math.Clamp(offset.X, -500 - (boundaryBox.Width), 500);
-        offset.Y =  Math.Clamp(offset.Y, -500 - (boundaryBox.Height), 500);
+        offset.X = Math.Clamp(offset.X, -camMaxDistance - boundaryBox.Width, camMaxDistance);
+        offset.Y =  Math.Clamp(offset.Y, -camMaxDistance - boundaryBox.Height, camMaxDistance);
     }
 
     public bool TakePhoto(float bgOpacity) {
@@ -80,6 +81,7 @@ public class CamView : IMove {
         }
 
         photos[nextPhotoIndex].content.Add(new Photo.Content() {
+
             position = GameState.Boat.Position,
             rotation = GameState.Boat.rotation,
             spriteID = -1,
@@ -87,17 +89,11 @@ public class CamView : IMove {
             isBoat = true
         });
 
-        photos[nextPhotoIndex].Save();
+        photos[nextPhotoIndex].Save();                                                                      // Save the photo to the disk
 
-        remainingPhotos--;
+        remainingPhotos--;                                                                                  // Decrement the number of remaining photos
 
         return true;
-
-        // Play the camera sound
-
-        // Flash the screen white
-
-        // Save the photo to the photo book
     }
 
     public void Reset() {
@@ -109,7 +105,7 @@ public class CamView : IMove {
     public void Draw(SpriteBatch spriteBatch) {
 
         // draw the cam view boundary box
-        spriteBatch.Draw(TLib.Pixel, boundaryBox, Color.White * (remainingPhotos <= 0 ? 0.05f : 0.5f));
+        spriteBatch.Draw(TLib.Pixel, boundaryBox, Color.White * (remainingPhotos <= 0 ? 0.05f : 0.5f));         // Draw the camera view boundary box (rectangle)
         spriteBatch.Draw(TLib.CameraView, position + offset, Color.White * (remainingPhotos <= 0 ? 0.1f : 1f)); // Draw the camera view (texture
     }
 }

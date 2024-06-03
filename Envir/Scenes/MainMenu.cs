@@ -113,7 +113,7 @@ public class MainMenu : IScene {
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Play", (1080/2)-265, new Vector2(1920, 1080), selectedMenuIndex == 0 ? textHotColor : textColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Gallery", (1080/2)-145, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Settings", (1080/2)-25, new Vector2(1920, 1080), selectedMenuIndex == 2 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Guide", (1080/2)+95, new Vector2(1920, 1080), selectedMenuIndex == 3 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Controller", (1080/2)+95, new Vector2(1920, 1080), selectedMenuIndex == 3 ? textHotColor : textColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Credits", (1080/2)+215, new Vector2(1920, 1080), selectedMenuIndex == 4 ? textHotColor : textColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Exit", (1080/2)+335, new Vector2(1920, 1080), selectedMenuIndex == 5 ? textHotColor : textColdColor);
 

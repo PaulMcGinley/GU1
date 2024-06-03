@@ -36,6 +36,8 @@ public class Texture {
     public static Texture2D[] NessieGuide;
     public static Texture2D[] TouristGuide;
 
+    public static Texture2D ButtonGuide;
+
     /***********************************************************************
      *** Effects ***********************************************************
      ***********************************************************************/
@@ -110,6 +112,8 @@ public class Texture {
         TouristGuide[1] = content.Load<Texture2D>("Graphics/Guide/touristGuide2");
         TouristGuide[2] = content.Load<Texture2D>("Graphics/Guide/touristGuide3");
 
+        ButtonGuide = content.Load<Texture2D>("Graphics/Guide/buttons");
+
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
 
         mainMenuBackground = content.Load<Texture2D>("Graphics/MainMenuScene-BG");
@@ -135,7 +139,7 @@ public class Texture {
         Press_Start_ToBegin = content.Load<Texture2D>("Graphics/UI/Press-Start-to-begin");
         Press_Start_ToConfirm = content.Load<Texture2D>("Graphics/UI/Press-Start-to-confirm");
 
-        WinnerTitle = content.Load<Texture2D>("Graphics/WinnerTitle");
+        WinnerTitle = content.Load<Texture2D>("Graphics/WinnerTitle2");
         LeaderboardTitle = content.Load<Texture2D>("Graphics/LeaderboardTitle");
 
         Cursor = content.Load<Texture2D>("Graphics/cursor");

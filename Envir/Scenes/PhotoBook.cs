@@ -63,17 +63,17 @@ public class PhotoBook : IScene {
 
         // Check for input to reset the cursor position
         if (IsAnyInputPressed(Buttons.Y))
-            cursor.Position = camera.Position;                                                              // Set the cursor position to the camera position
+            cursor.Position = new Vector2(1920/2,1080/2);                                                              // Set the cursor position to the camera position
+    }
 
-        cursor.Position += GamePadRightStick(0);                                                       // Move the cursor with the left stick
+    public void FixedUpdate(GameTime gameTime) {
+
+        cursor.Position += GamePadRightStick(0)*10f;                                                        // Move the cursor with the right stick
 
         // Lock the cursor to the screen
         cursor.Position = new Vector2(
             MathHelper.Clamp(cursor.Position.X, 0, 1920 - TLib.Cursor.Width),
             MathHelper.Clamp(cursor.Position.Y, 0, 1080 - TLib.Cursor.Height));
-    }
-
-    public void FixedUpdate(GameTime gameTime) {
 
         // Guard clause to check if there are any photos
         if (photos == null)

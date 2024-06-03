@@ -12,7 +12,7 @@ public static class GameState {
     public static GameScene PreviousScene = GameScene.None;                                                 // The previous scene of the game
 
     [XmlIgnore]
-    static float musicVolume = 0.5f;                                                                        // The volume of the music
+    static float musicVolume = 1f;                                                                        // The volume of the music
     [XmlIgnore]
     public static float MusicVolume {                                                                       // The volume of the music
         get => musicVolume;                                                                                 // Get the volume of the music
@@ -29,7 +29,7 @@ public static class GameState {
     }
 
     [XmlIgnore]
-    static float sfxVolume = 0.5f;                                                                          // The volume of the sound effects
+    static float sfxVolume = 1f;                                                                          // The volume of the sound effects
     [XmlIgnore]
     public static float SFXVolume {                                                                         // The volume of the sound effects
         get => sfxVolume;                                                                                   // Get the volume of the sound effects

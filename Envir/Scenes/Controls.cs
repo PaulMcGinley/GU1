@@ -28,6 +28,7 @@ public class Controls : IScene {
 
         spriteBatch.Begin();
         spriteBatch.Draw(TLib.ControlsBackground, Vector2.Zero, Color.White);
+        spriteBatch.Draw(TLib.ButtonGuide, new Vector2(0,1080-TLib.ButtonGuide.Height), Color.White);
         spriteBatch.End();
     }
 

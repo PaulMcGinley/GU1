@@ -68,6 +68,13 @@ public class GameMain : FixedTimestampGame {
     protected override void Update(GameTime gameTime) {
 
         DeviceState.Update();                                                                               // Update the state of the input devices
+
+        if (IsKeyPressed(Keys.F2)) {                                                                       // Check if the F11 key is pressed
+
+            graphics.IsFullScreen = !graphics.IsFullScreen;                                                 // Toggle the full screen mode
+            graphics.ApplyChanges();                                                                        // Apply the changes
+        }
+
         RumbleQueue.Update(gameTime);                                                                       // Update the rumble queue
 
 #if DEBUG // Debug only controls

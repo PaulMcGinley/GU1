@@ -67,7 +67,7 @@ public class EndOfGame : IScene {
             TLib.WinnerTitle,                                                                               // Texture
             new Vector2(1920/2, (1080/2) - 200),                                                            // Position
             null,                                                                                           // Source Rectangle
-            new Color ((byte)rand.Next(64,250),(byte)rand.Next(64,250),(byte)rand.Next(64,250)),            // Colour
+            new Color (255,255,0),                                  // Colour
             0,                                                                                              // Rotation
             new Vector2(TLib.WinnerTitle.Width/2, TLib.WinnerTitle.Height/2),                               // Origin
             scale,                                                                                          // Scale
@@ -77,8 +77,11 @@ public class EndOfGame : IScene {
         // Draw the player's row background
         DrawFilledRectangle(new Rectangle((1920/2)-400, (1080/2)+200, 800, 50), spriteBatch, winner.CameraView.colour);
 
-        spriteBatch.DrawString(FLib.DebugFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White);  // Draw the player's name
-        spriteBatch.DrawString(FLib.DebugFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White);                                                // Draw the player's score
+        // spriteBatch.DrawString(FLib.LeaderboardFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White);  // Draw the player's name
+        // spriteBatch.DrawString(FLib.LeaderboardFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White);                                                // Draw the player's score
+
+        DrawShadowedText(spriteBatch, FLib.LeaderboardFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White, new Vector2(2,2), Color.Black*0.8f);  // Draw the player's name
+        DrawShadowedText(spriteBatch, FLib.LeaderboardFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White, new Vector2(2,2), Color.Black*0.8f);                                                // Draw the player's score
 
         spriteBatch.End();
     }

@@ -27,8 +27,8 @@ public class Credits : IScene {
         { "Lead Art Designer",          "Alexander Tuffy"   },
         { "Additional Art by",          "Corey Connolly"    },
         { "Tester 1",                   "Paul McGinley"     },
-        { "Tester 2",                   "Bash McGinley"     },
-        { "Tester 3",                   "Natalie Wood"      },
+        { "Tester 2",                   "Bash"              },
+        { "Tester 3",                   "Nat"               },
     };
 
     #region IScene Implementation
@@ -37,6 +37,7 @@ public class Credits : IScene {
 
         viewport = device.Viewport;
         camera = new Camera2D(viewport);
+        camera.LookAt(new Vector2(viewport.Width/2, -(1080/2) + 100));
     }
 
     public void LoadContent(ContentManager content) { }                                                     // Not Implemented
@@ -45,20 +46,20 @@ public class Credits : IScene {
 
     public void Update(GameTime gameTime) {
 
+        camera.Update(gameTime);                                                                            // Update the camera
+
         // Check for input to go back to the main menu
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Start, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
-
     }
 
     public void FixedUpdate(GameTime gameTime) {
 
-        if (camera.Position.Y > credits.GetLength(0) * lineSpacing + 250 + (1080/2))                                   // If the camera has scrolled past the credits
+        if (camera.Position.Y > credits.GetLength(0) * lineSpacing + 250 + (1080/2))                        // If the camera has scrolled past the credits
             return;                                                                                         // Return
 
         // Move camera
-        camera.LookAt(new Vector2(camera.Boundaries.Width/2, camera.Position.Y + 1f));                      // Move the camera to scroll the credits
-        camera.Update(gameTime);                                                                            // Update the camera
+        camera.LookAt(new Vector2(viewport.Width/2, camera.Position.Y + 1f));                               // Move the camera to scroll the credits
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -72,7 +73,7 @@ public class Credits : IScene {
         for (int i = 0; i < credits.GetLength(0); i++)
 
             DrawTextCredits(spriteBatch,                                                                    // SpriteBatch
-                            FLib.LeaderboardFont,                                                                 // Font
+                            FLib.LeaderboardFont,                                                           // Font
                             credits[i, 0],                                                                  // What text
                             credits[i, 1],                                                                  // Who text
                             yPosition: 200f + (i * lineSpacing),                                            // Y position
@@ -89,8 +90,6 @@ public class Credits : IScene {
 
         // Reset the view
         camera.LookAt(new Vector2(viewport.Width/2, -(1080/2) + 100));
-
-        // TODO: Play the credits music
 
         SLib.Whistle.Play(GameState.SFXVolume, 0, 0);
     }

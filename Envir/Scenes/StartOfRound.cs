@@ -98,19 +98,31 @@ public class StartOfRound : IScene {
     public void DrawNessieScreen(SpriteBatch spriteBatch) {
 
         // Avatar
-        spriteBatch.Draw(TLib.NessieAvatar, new Vector2(1920 / 2, 1080 / 2), null, Color.White, 0, new Vector2(TLib.NessieAvatar.Width / 2, TLib.NessieAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
+        spriteBatch.Draw(TLib.NessieAvatar, new Vector2(1920 / 2, (1080 / 4)+100), null, Color.White, 0, new Vector2(TLib.NessieAvatar.Width / 2, TLib.NessieAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
 
         // Title
-        spriteBatch.Draw(TLib.NessieTitle, new Vector2(1920 / 2, 1080 / 2 - 200), null, Color.White, 0, new Vector2(TLib.NessieTitle.Width / 2, TLib.NessieTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
+        spriteBatch.Draw(TLib.NessieTitle, new Vector2(1920 / 2, (1080 / 4) - 125), null, Color.White, 0, new Vector2(TLib.NessieTitle.Width / 2, TLib.NessieTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
+
+        int third = 1920/3;
+        int halfThird = third/2;
+
+        for (int i = 0; i < 3; i++)
+            spriteBatch.Draw(TLib.NessieGuide[i], new Vector2(halfThird + (i * third), 1080 - 300), null, Color.White, 0, new Vector2(TLib.NessieGuide[i].Width / 2, TLib.NessieGuide[i].Height / 2), 1f, SpriteEffects.None, 0);
     }
 
     public void DrawTouristScreen(SpriteBatch spriteBatch) {
 
         // Avatar
-        spriteBatch.Draw(TLib.TouristAvatar, new Vector2(1920 / 2, 1080 / 2), null, Color.White, 0, new Vector2(TLib.TouristAvatar.Width / 2, TLib.TouristAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
+        spriteBatch.Draw(TLib.TouristAvatar, new Vector2(1920 / 2, (1080 / 4) + 100), null, Color.White, 0, new Vector2(TLib.TouristAvatar.Width / 2, TLib.TouristAvatar.Height / 2), 0.5f, SpriteEffects.None, 0);
 
         // Title
-        spriteBatch.Draw(TLib.TouristTitle, new Vector2(1920 / 2, 1080 / 2 - 200), null, Color.White, 0, new Vector2(TLib.TouristTitle.Width / 2, TLib.TouristTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
+        spriteBatch.Draw(TLib.TouristTitle, new Vector2(1920 / 2, (1080 / 4) - 125), null, Color.White, 0, new Vector2(TLib.TouristTitle.Width / 2, TLib.TouristTitle.Height / 2), 0.5f, SpriteEffects.None, 0);
+
+        int third = 1920/3;
+        int halfThird = third/2;
+
+        for (int i = 0; i < 3; i++)
+            spriteBatch.Draw(TLib.TouristGuide[i], new Vector2(halfThird + (i * third), 1080 - 300), null, Color.White, 0, new Vector2(TLib.TouristGuide[i].Width / 2, TLib.TouristGuide[i].Height / 2), 1f, SpriteEffects.None, 0);
     }
 
     #endregion

@@ -33,6 +33,9 @@ public class Texture {
     public static Texture2D NessieTitle;
     public static Texture2D TouristTitle;
 
+    public static Texture2D[] NessieGuide;
+    public static Texture2D[] TouristGuide;
+
     /***********************************************************************
      *** Effects ***********************************************************
      ***********************************************************************/
@@ -96,6 +99,16 @@ public class Texture {
 
         NessieTitle = content.Load<Texture2D>("Graphics/nessieTitle");
         TouristTitle = content.Load<Texture2D>("Graphics/touristTitle");
+
+        NessieGuide = new Texture2D[3];
+        NessieGuide[0] = content.Load<Texture2D>("Graphics/Guide/nessieGuide1");
+        NessieGuide[1] = content.Load<Texture2D>("Graphics/Guide/nessieGuide2");
+        NessieGuide[2] = content.Load<Texture2D>("Graphics/Guide/nessieGuide3");
+
+        TouristGuide = new Texture2D[3];
+        TouristGuide[0] = content.Load<Texture2D>("Graphics/Guide/touristGuide1");
+        TouristGuide[1] = content.Load<Texture2D>("Graphics/Guide/touristGuide2");
+        TouristGuide[2] = content.Load<Texture2D>("Graphics/Guide/touristGuide3");
 
         //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
 

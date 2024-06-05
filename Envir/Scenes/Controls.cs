@@ -79,7 +79,10 @@ public class Controls : IScene {
         Reset_TouristSlide();
     }
 
-    public void OnSceneEnd() { }
+    public void OnSceneEnd() {
+
+        CurrentSlide = Slide.Buttons;
+    }
 
     #endregion
 

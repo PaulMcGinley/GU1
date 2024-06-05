@@ -3,6 +3,7 @@
 # Define the application name
 APP_NAME="Sightings"
 EXE_NAME="GU1"
+COPYRIGHT="Class of 2023-24 | Team4 © 2024"
 
 # Define paths
 PUBLISH_DIR="./publish"
@@ -61,7 +62,7 @@ cat > ${CONTENTS_DIR}/Info.plist <<EOL
     <key>CFBundleIconFile</key>
     <string>icon</string>
     <key>CFBundleIdentifier</key>
-    <string>mcginley.paul.${APP_NAME}</string>
+    <string>mono.${APP_NAME}</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -79,7 +80,7 @@ cat > ${CONTENTS_DIR}/Info.plist <<EOL
     <key>LSMinimumSystemVersion</key>
     <string>10.15</string>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright Paul F. McGinley© 2024</string>
+    <string>${COPYRIGHT}</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>LSRequiresNativeExecution</key>

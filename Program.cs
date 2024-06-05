@@ -17,12 +17,21 @@ global using SLib = GU1.Envir.Libraries.Sounds;
 
 using System.IO;
 using Microsoft.Xna.Framework;
+using System;
+using System.Runtime.InteropServices;
 
 namespace GU1;
 
 internal static class Program {
 
     private static void Main() {
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            Photo.SaveDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Sightings/Photos";
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            Photo.SaveDir = "~/.sightings/photos";
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            Photo.SaveDir = "/Users/Shared/Sightings/Photos";
 
         if (!Directory.Exists(Photo.SaveDir))
             Directory.CreateDirectory(Photo.SaveDir);

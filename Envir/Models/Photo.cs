@@ -9,7 +9,7 @@ namespace GU1.Envir.Models;
 
 public class Photo {
 
-    public static string SaveDir => $"{Directory.GetCurrentDirectory()}/Photos";
+    public static string SaveDir; //=> $"{Directory.GetCurrentDirectory()}/Photos";
 
     #region Data
 

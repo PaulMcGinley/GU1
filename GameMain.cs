@@ -81,7 +81,7 @@ public class GameMain : FixedTimestampGame {
         if (IsKeyPressed(Keys.F1))
             E.Config.ShowDebugInfo = !E.Config.ShowDebugInfo;                                               // Toggle the debug info
 
-        if(IsAnyInputDown(Keys.Escape))                                                       // Check if the escape key or any controller back button is pressed
+        if(IsAnyInputDown(Keys.Escape))                                                                     // Check if the escape key or any controller back button is pressed
             Exit();                                                                                         // Exit the game
 #endif
 

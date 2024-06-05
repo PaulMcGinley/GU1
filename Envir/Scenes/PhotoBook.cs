@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -25,6 +26,8 @@ public class PhotoBook : IScene {
     Cursor cursor;                                                                                          // The cursor to select the photos
     Vector2 cursorWorldPos => Vector2.Transform(cursor.Position, Matrix.Invert(camera.TransformMatrix));    // Transform the cursor position to world position
 
+    BackgroundWorker worker;                                                                                // Background worker to load the photos
+
     #region IScene Implementation
 
     public void Initialize(GraphicsDevice device) {
@@ -33,6 +36,48 @@ public class PhotoBook : IScene {
         camera.LookAt(new Vector2((1920/2) - 150, 1080/2));                                                 // Set the camera to look at the center of the screen
 
         cursor = new Cursor();                                                                              // Create a new cursor
+
+        // worker = new BackgroundWorker();                                                                    // Create a new background worker
+        // worker.DoWork += Worker_DoWork;                                                                    // Set the worker to do work
+        // worker.ProgressChanged += Worker_ProgressChanged;
+        // worker.WorkerReportsProgress = true;                                                                // Set the worker to report progress
+    }
+
+    private void Worker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+    {
+       // throw new NotImplementedException();
+    }
+
+    private void Worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e) {
+
+        string directoryPath = Photo.SaveDir;                                                               // The directory path to the photos
+        var regex = new Regex(@"^-\d+\.xml$");                                                              // Regex to match the file names ( -[number].xml)
+
+        // Get all the files in the directory that match the regex pattern
+        string[] files = Directory.EnumerateFiles(directoryPath, "*.xml")
+                                .Where(path => regex.IsMatch(Path.GetFileName(path)))                       // Filter the files
+                                .Select(path => Path.GetFileNameWithoutExtension(path))                     // Get the file names
+                                .ToArray();                                                                 // Convert to an array
+
+        photos = new Photo[files.Length];                                                                   // Create a new array of photos with the length of the file count
+        photoLocations = new Vector2[files.Length];                                                         // Create a new array of photo locations with the length of the file count
+        photoBounds = new Rectangle[files.Length];                                                          // Create a new array of photo bounds with the length of the file count
+
+        for (int i = 0; i < files.Length; i++) {
+
+            photos[i] = new Photo();
+            photos[i] = photos[i].Load(files[i]);
+            photos[i].Render(spriteBatch);
+            photoLocations[i] = new Vector2(320 * (i % mod), 420 * (i / mod));                              // Set the photo location based on the modulo value
+            photoBounds[i] = new Rectangle((int)photoLocations[i].X, (int)photoLocations[i].Y, 320, 420);   // Set the photo bounds based on the photo location
+
+            worker.ReportProgress((i/files.Length)*100);                                                    // Report the progress of the worker
+        }
+
+        // Sort the photos by the date they were taken
+        photos = photos.OrderByDescending(photo => photo.timeStamp).ToArray();
+
+        GC.Collect();
     }
 
     public void LoadContent(ContentManager content) { }                                                     // Not Implemented
@@ -108,6 +153,9 @@ public class PhotoBook : IScene {
         // We only want to draw the photos that will be on screen
         for (int i = 0; i < photos.Length; i++) {
 
+            if (photos[i] == null) continue;                                                                    // Guard clause to check if the photo is null
+            if (photos[i].framedPicture == null) continue;                                                                // Guard clause to check if the photo is null
+
             Vector2 worldPos = photoLocations[i];
             Vector2 screenPos = Vector2.Transform(worldPos, camera.TransformMatrix);                        // Transform the world position to screen position
 
@@ -129,6 +177,7 @@ public class PhotoBook : IScene {
 
     public void OnSceneStart() {
 
+        //worker.RunWorkerAsync();                                                                            // 
         LoadPhotos();
     }
 

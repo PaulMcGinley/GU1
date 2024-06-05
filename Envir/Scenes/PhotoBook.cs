@@ -21,6 +21,7 @@ public class PhotoBook : IScene {
     Rectangle[] photoBounds;                                                                                // Array of photo bounds for selection
 
     const int mod = 5;                                                                                      // The modulo value (number of photos per row)
+    const string noPhotosMessage = "Nothing here yet. Come back once you have played a game ot two.";                                                      // The message to display when there are no photos
 
     Camera2D camera;                                                                                        // The camera to render the photos
     Cursor cursor;                                                                                          // The cursor to select the photos
@@ -36,6 +37,7 @@ public class PhotoBook : IScene {
         camera.LookAt(new Vector2((1920/2) - 150, 1080/2));                                                 // Set the camera to look at the center of the screen
 
         cursor = new Cursor();                                                                              // Create a new cursor
+        cursor.Position = new Vector2(1920/2, (1080/2)+50);                                                       // Set the cursor position to the center of the screen
 
         // worker = new BackgroundWorker();                                                                    // Create a new background worker
         // worker.DoWork += Worker_DoWork;                                                                    // Set the worker to do work
@@ -113,7 +115,7 @@ public class PhotoBook : IScene {
 
     public void FixedUpdate(GameTime gameTime) {
 
-        cursor.Position += GamePadRightStick(0)*10f;                                                        // Move the cursor with the right stick
+        cursor.Position += FirstGamePadRightStickMoving()*10f;                                                        // Move the cursor with the right stick
 
         // Lock the cursor to the screen
         cursor.Position = new Vector2(
@@ -124,10 +126,10 @@ public class PhotoBook : IScene {
         if (photos == null)
             return;
 
-        if (camera.Position.Y < 0 && GamePadLeftStick(0).Y < 0) return;                                     // Limit the camera movement on the Y axis (Top)
-        if (camera.Position.Y > 420 * (photos.Length/mod) && GamePadLeftStick(0).Y > 0) return;             // Limit the camera movement on the Y axis (Bottom)
+        if (camera.Position.Y < 0 && FirstGamePadLeftStickMoving().Y < 0) return;                                     // Limit the camera movement on the Y axis (Top)
+        if (camera.Position.Y > 420 * (photos.Length/mod) && FirstGamePadLeftStickMoving().Y > 0) return;             // Limit the camera movement on the Y axis (Bottom)
 
-        camera.LookAt(camera.Position + new Vector2(0, GamePadLeftStickY(0)*10f));                          // Move the camera on the Y axis
+        camera.LookAt(camera.Position + new Vector2(0, FirstGamePadLeftStickMoving().Y*10f));                          // Move the camera on the Y axis
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -140,6 +142,10 @@ public class PhotoBook : IScene {
 
         // Overlay
         spriteBatch.Draw(TLib.Pixel, new Rectangle(0,0,1920,1080), Color.Black * 0.5f);
+
+        // No Photos Message
+        if (photos == null || photos.Length == 0)
+            spriteBatch.DrawString(FLib.LeaderboardFont, noPhotosMessage, new Vector2(1920/2, 1080/2), Color.White, 0f, FLib.LeaderboardFont.MeasureString(noPhotosMessage)/2, 1, SpriteEffects.None, 0);
 
         spriteBatch.End();
 
@@ -177,7 +183,7 @@ public class PhotoBook : IScene {
 
     public void OnSceneStart() {
 
-        //worker.RunWorkerAsync();                                                                            // 
+        //worker.RunWorkerAsync();                                                                            //
         LoadPhotos();
     }
 

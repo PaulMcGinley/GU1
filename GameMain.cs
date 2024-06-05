@@ -23,6 +23,7 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.PhotoViewer photoViewer = new();
     readonly Envir.Scenes.EndOfGame endOfGame = new();
     readonly Envir.Scenes.Controls controls = new();
+    readonly Envir.Scenes.PauseMenu pauseMenu = new();
 
     #endregion
 
@@ -212,6 +213,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.Controls:
                 controls.Update(gameTime);
                 break;
+            case GameScene.PauseMenu:
+                pauseMenu.Update(gameTime);
+                break;
         }
 
         base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
@@ -258,6 +262,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.Controls:
                 controls.FixedUpdate(gameTime);
                 break;
+            case GameScene.PauseMenu:
+                pauseMenu.FixedUpdate(gameTime);
+                break;
         }
 
         base.FixedUpdate(gameTime);                                                                         // ! IMPORTANT: Keep this here
@@ -279,9 +286,11 @@ public class GameMain : FixedTimestampGame {
                 namePlayer.Draw(spriteBatch);
                 break;
             case GameScene.Playing:
+            case GameScene.PauseMenu:
             case GameScene.EndOfRound:
             case GameScene.EndOfGame:
                 playing.Draw(spriteBatch);
+                pauseMenu.Draw(spriteBatch);
                 endOfRound.Draw(spriteBatch);
                 endOfGame.Draw(spriteBatch);
                 break;

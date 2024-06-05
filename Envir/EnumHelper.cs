@@ -21,5 +21,15 @@ public enum GameScene {
     NamePlayer,
     PhotoViewer,
     EndOfGame,
-    Controls
+    Controls,
+    PauseMenu
+}
+
+public enum Percent {
+
+    TwentyFive = 25,
+    ThirtyThree = 33,
+    Fifty = 50,
+    SixtySix = 66,
+    SeventyFive = 75,
 }

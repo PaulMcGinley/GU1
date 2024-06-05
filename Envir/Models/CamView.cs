@@ -25,7 +25,9 @@ public class CamView : IMove {
         this.maxPhotos = maxPhotos;                                                                         // The maximum number of photos the player can take
         this.remainingPhotos = maxPhotos;                                                                   // The number of photos the player has left (set this to the max number of photos at the start of the game)
         offset = new Vector2(rand.Next(-500,500), rand.Next(-500,500));                                                                    // Random offset for the camera view
-        photos = new Photo[maxPhotos];                                                                      // Create an array of photos
+
+        if (maxPhotos < 26)                                                                      // If the max photos is set to unlimited
+            photos = new Photo[maxPhotos];                                                                      // Create an array of photos
     }
 
     #region IMove Interface
@@ -54,6 +56,10 @@ public class CamView : IMove {
         // Ain't got no photos, ain't getting no picture bud!
         if (remainingPhotos <= 0)
             return false;
+
+        // Don't save in Unlimted mode but still allow the photo to be taken
+        if (maxPhotos > 26 )
+            return true;
 
         int nextPhotoIndex = Array.FindIndex(photos, p => p == null);
         // Create a new Photo object and fill in the details
@@ -99,7 +105,9 @@ public class CamView : IMove {
     public void Reset() {
 
         remainingPhotos = maxPhotos;
-        photos = new Photo[maxPhotos];
+
+        if (maxPhotos < 26)
+            photos = new Photo[maxPhotos];
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -107,5 +115,11 @@ public class CamView : IMove {
         // draw the cam view boundary box
         spriteBatch.Draw(TLib.Pixel, boundaryBox, Color.White * (remainingPhotos <= 0 ? 0.05f : 0.5f));         // Draw the camera view boundary box (rectangle)
         spriteBatch.Draw(TLib.CameraView, position + offset, Color.White * (remainingPhotos <= 0 ? 0.1f : 1f)); // Draw the camera view (texture
+
+        // Remaining photos
+        if (maxPhotos < 26) {
+            spriteBatch.DrawString(FLib.LeaderboardFont, $"{remainingPhotos}/{maxPhotos}", position + offset + new Vector2(TLib.CameraView.Width - FLib.LeaderboardFont.MeasureString($"{remainingPhotos}/{maxPhotos}").X+1, TLib.CameraView.Height + 5), Color.Black);
+            spriteBatch.DrawString(FLib.LeaderboardFont, $"{remainingPhotos}/{maxPhotos}", position + offset + new Vector2(TLib.CameraView.Width - FLib.LeaderboardFont.MeasureString($"{remainingPhotos}/{maxPhotos}").X, TLib.CameraView.Height + 4), Color.White);
+        }
     }
 }

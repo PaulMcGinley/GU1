@@ -45,6 +45,23 @@ public static class GameState {
         }
     }
 
+    //[XmlIgnore]
+    //public static float roleSplit = 0.33f;                                                                  // The split between the roles
+
+    [XmlIgnore]
+    static int maxPhotos = 5;
+    public static int MaxPhotos {
+        get => maxPhotos;
+        set {
+            if (value < 1)
+                maxPhotos = int.MaxValue;
+            else if (value > 25)
+                maxPhotos = int.MaxValue;
+            else
+                maxPhotos = value;
+        }
+    }
+
     [XmlElement(Order = 1)]
     public static List<Flotsam> Flotsam = new();                                                            // The flotsam in the game
 

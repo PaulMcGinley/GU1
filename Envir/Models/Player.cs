@@ -29,7 +29,7 @@ public class Player : Actor {
 
         // TODO: Create a list of colours
        Color c = new Color(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255));
-       CameraView = new CamView(c, MaxPhotos);
+       CameraView = new CamView(c, GameState.MaxPhotos);
     }
 
     public void SetName(string name) => CameraView.playerName = name;

@@ -18,6 +18,20 @@ public class Playing : IScene {
 
     Vector2 RandomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
+    int nessieScoreWidth = 250;                                                                                // The longest row of Nessie flotsam
+    int nessiesScoreHeight => GameState.Players.Where(p=>p.Role == ActorType.Nessie).Count()*25;                                                                             // The height of the Nessie score
+    Rectangle nessieScoreBounds => new(-(1920/2), 0, nessieScoreWidth, nessiesScoreHeight);                                                   // The bounds of the screen for the Nessie score
+    float nessieScoreOpacity = 1f;                                                                          // The opacity of the score bounds
+    float nessieMinScoreOpacity = 0.3f;                                                                    // The minimum opacity of the score bounds
+
+    int touristScoreWidth = 250;                                                                              // The longest row of Tourist flotsam
+    int touristsScoreHeight => GameState.Players.Where(p=>p.Role == ActorType.Tourist).Count()*25;                                                                           // The height of the Tourist score
+    Rectangle touristScoreBounds => new((int)(1920*1.5f) - touristScoreWidth, 0, touristScoreWidth, touristsScoreHeight);                        // The bounds of the screen for the Tourist score
+    float touristScoreOpacity = 1f;                                                                         // The opacity of the score bounds
+    float touristMinScoreOpacity = 0.3f;                                                                   // The minimum opacity of the score bounds
+
+    // float scoreOpacity = 1f;                                                                              // The opacity of the score bounds
+    // float minScoreOpacity = 0.3f;                                                                        // The minimum opacity of the score bounds
 
     #region IScene Implementation
 
@@ -39,6 +53,9 @@ public class Playing : IScene {
     public void UnloadContent() { }
 
     public void Update(GameTime gameTime) {
+
+        if (IsAnyInputPressed(Keys.P, Buttons.Start))
+            GameState.CurrentScene = GameScene.PauseMenu;
 
         camera.Update(gameTime);
 
@@ -65,6 +82,28 @@ public class Playing : IScene {
     }
 
     public void FixedUpdate(GameTime gameTime) {
+
+        bool nessieScoreFadeOut = false;
+        bool touristScoreFadeOut = false;                                                                   // Assume the flotsam is not fading out
+
+        // Check if flotsam intersects with the score bounds
+        foreach (Flotsam flotsam in GameState.Flotsam)
+            if (flotsam.boundaryBox.Intersects(nessieScoreBounds)) {
+                nessieScoreOpacity = MathHelper.Lerp(nessieScoreOpacity, nessieMinScoreOpacity, 0.1f);      // Set the score bounds opacity to the minimum score bounds opacity
+                nessieScoreFadeOut = true;                                                                  // The flotsam is fading out
+                break;                                                                                      // Exit the loop
+            }
+            else if (flotsam.boundaryBox.Intersects(touristScoreBounds)) {
+                touristScoreOpacity = MathHelper.Lerp(touristScoreOpacity, touristMinScoreOpacity, 0.1f);   // Set the score bounds opacity to the minimum score bounds opacity
+                touristScoreFadeOut = true;                                                                 // The flotsam is fading out
+                break;                                                                                      // Exit the loop
+            }
+
+        if (!nessieScoreFadeOut)                                                                            // If the flotsam is not fading out
+            nessieScoreOpacity = MathHelper.Lerp(nessieScoreOpacity, 1f, 0.1f);                             // Set the score bounds opacity to 1
+
+        if (!touristScoreFadeOut)                                                                           // If the flotsam is not fading out
+            touristScoreOpacity = MathHelper.Lerp(touristScoreOpacity, 1f, 0.1f);                           // Set the score bounds opacity to 1
 
         foreach (var flotsam in GameState.Flotsam)
             flotsam.Update(gameTime);
@@ -118,6 +157,28 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players)
             player.Draw(spriteBatch);
 
+        // Scores
+
+        // Draw the nessieScoreBounds
+        //spriteBatch.Draw(TLib.Pixel, nessieScoreBounds, Color.White * scoreOpacity);
+        int nessieCount = 0;
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie)) {
+
+            spriteBatch.DrawString(FLib.LeaderboardFont, player.CameraView.playerName + " : " + player.Score.ToString(), new Vector2(nessieScoreBounds.Left, 20*nessieCount) + Vector2.One, Color.Black * nessieScoreOpacity);
+            spriteBatch.DrawString(FLib.LeaderboardFont, player.CameraView.playerName + " : " + player.Score.ToString(), new Vector2(nessieScoreBounds.Left, 20*nessieCount), Color.White * nessieScoreOpacity);
+            nessieCount++;
+        }
+
+        // Draw the touristScoreBounds
+        //spriteBatch.Draw(TLib.Pixel, touristScoreBounds, Color.White * scoreOpacity);
+        int touristCount = 0;
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist)) {
+
+            spriteBatch.DrawString(FLib.LeaderboardFont, player.CameraView.playerName + " : " +  player.Score.ToString(), new Vector2(touristScoreBounds.Left, 20*touristCount) + Vector2.One, Color.Black * touristScoreOpacity);
+            spriteBatch.DrawString(FLib.LeaderboardFont, player.CameraView.playerName + " : " +  player.Score.ToString(), new Vector2(touristScoreBounds.Left, 20*touristCount), Color.White * touristScoreOpacity);
+            touristCount++;
+        }
+
         spriteBatch.End();
 
         #endregion
@@ -125,6 +186,9 @@ public class Playing : IScene {
     }
 
     public void OnSceneStart() {
+
+        if (GameState.PreviousScene == GameScene.PauseMenu)                                                // If the previous scene was the pause menu
+            return;                                                                                         // Exit the method
 
         StartNewRound();
     }

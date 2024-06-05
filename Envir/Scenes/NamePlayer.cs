@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -56,14 +55,14 @@ public class NamePlayer : IScene {
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadUp)) {
 
             playerName[Index] = (char)(playerName[Index] + 1);                                              // Increment the selected letter
-            playerName[Index] = (char)Math.Clamp(playerName[Index], firstLetter, lastLetter);               // Clamp the selected letter to the alphabet
+            playerName[Index] = (char)(playerName[Index] > lastLetter ? firstLetter : playerName[Index]);   // Wrap the selected letter to the alphabet
         }
 
         // Check for input (DOWN)
         if (IsGamePadButtonPressed(playerIndex, Buttons.DPadDown)) {
 
             playerName[Index] = (char)(playerName[Index] - 1);                                              // Decrement the selected letter
-            playerName[Index] = (char)Math.Clamp(playerName[Index], firstLetter, lastLetter);               // Clamp the selected letter to the alphabet
+            playerName[Index] = (char)(playerName[Index] < firstLetter ? lastLetter : playerName[Index]);   // Wrap the selected letter to the alphabet
         }
 
         // Check for input (LEFT)
@@ -75,7 +74,9 @@ public class NamePlayer : IScene {
             Index++;                                                                                        // Increment the selected index
 
         // Check for input (START) to confirm
-        if (IsGamePadButtonPressed(playerIndex, Buttons.Start))
+        if (IsGamePadButtonPressed(playerIndex, Buttons.Start) ||
+            IsGamePadButtonPressed(playerIndex, Buttons.A) ||
+            IsGamePadButtonPressed(playerIndex, Buttons.B))
             GameState.CurrentScene = GameScene.StartOfRound;                                                       // Move to the next scene
 
     }
@@ -110,7 +111,7 @@ public class NamePlayer : IScene {
             spriteBatch.DrawString(FLib.DebugFont, playerName[i].ToString(), new Vector2(1920 / 2 + (i * TLib.NamePlayerCursor.Width) - (2*TLib.NamePlayerCursor.Width), (1080 / 2 )), Color.White);
 
         // Instructions
-        DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press START to confirm", 1080/2 + 190, new Vector2(1920, 1080), Color.White);
+        //DrawTextCenteredScreen(spriteBatch, FLib.DebugFont, "Press START to confirm", 1080/2 + 190, new Vector2(1920, 1080), Color.White);
 
         spriteBatch.End();
 

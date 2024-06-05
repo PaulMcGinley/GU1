@@ -207,6 +207,24 @@ public static class DeviceState {
 
     public static Vector2 GamePadRightStick(int index) => new(GamePadsState[index].ThumbSticks.Right.X, -GamePadsState[index].ThumbSticks.Right.Y);
 
+    public static Vector2 FirstGamePadLeftStickMoving() {
+
+        for (int i = 0; i < GamePadsState.Length; i++)
+            if (IsGamePadConnected(i) && GamePadsState[i].ThumbSticks.Left != Vector2.Zero)
+                return new Vector2( GamePadsState[i].ThumbSticks.Left.X, -GamePadsState[i].ThumbSticks.Left.Y);
+
+        return Vector2.Zero;
+    }
+
+    public static Vector2 FirstGamePadRightStickMoving() {
+
+        for (int i = 0; i < GamePadsState.Length; i++)
+            if (IsGamePadConnected(i) && GamePadsState[i].ThumbSticks.Right != Vector2.Zero)
+                return new Vector2(GamePadsState[i].ThumbSticks.Right.X, -GamePadsState[i].ThumbSticks.Right.Y);
+
+        return Vector2.Zero;
+    }
+
     public static float GamePadRightTrigger(int index) => GamePadsState[index].Triggers.Right;
 
     public static float GamePadLeftTrigger(int index) => GamePadsState[index].Triggers.Left;

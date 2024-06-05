@@ -97,4 +97,6 @@ echo "Application bundle created at ${APP_BUNDLE_DIR}"
 
 echo "All tasks completed successfully."
 
-#create-dmg Sightings.app
+#https://github.com/sindresorhus/create-dmg
+#https://stackoverflow.com/questions/57367485/do-i-need-to-notarize-both-the-app-and-dmg-image/60800864#60800864
+create-dmg ${PUBLISH_DIR}/Sightings.app ${PUBLISH_DIR}

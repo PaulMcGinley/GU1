@@ -1,0 +1,98 @@
+name: Build and Publish
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            runtime: linux-x64
+          - os: windows-latest
+            runtime: win-x64
+          - os: macos-latest
+            runtime: osx-x64
+          - os: macos-latest
+            runtime: osx-arm64
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.x'
+
+      - name: Publish application
+        run: |
+          dotnet publish -c Release -r ${{ matrix.runtime }} -p:PublishSingleFile=true --self-contained -o publish/${{ matrix.runtime }}
+
+      - name: Prepare for macOS bundle (only for macos-latest)
+        if: matrix.os == 'macos-latest' && matrix.runtime == 'osx-arm64'
+        run: |
+          APP_NAME="Sightings"
+          EXE_NAME="GU1"
+          COPYRIGHT="Class of 2023-24 | Team4 © 2024"
+          PUBLISH_DIR="./publish"
+          APP_BUNDLE_DIR="${PUBLISH_DIR}/${APP_NAME}.app"
+          CONTENTS_DIR="${APP_BUNDLE_DIR}/Contents"
+          MACOS_DIR="${CONTENTS_DIR}/MacOS"
+          RESOURCES_DIR="${CONTENTS_DIR}/Resources"
+
+          mkdir -p $MACOS_DIR
+          mkdir -p $RESOURCES_DIR
+          cp ${PUBLISH_DIR}/osx-arm64/* $MACOS_DIR/
+          cp ./icon.icns $RESOURCES_DIR/
+          mv ${PUBLISH_DIR}/osx-arm64/Content $RESOURCES_DIR
+
+          cat > ${CONTENTS_DIR}/Info.plist <<EOL
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleDevelopmentRegion</key>
+              <string>en</string>
+              <key>CFBundleExecutable</key>
+              <string>${EXE_NAME}</string>
+              <key>CFBundleIconFile</key>
+              <string>icon</string>
+              <key>CFBundleIdentifier</key>
+              <string>mono.${APP_NAME}</string>
+              <key>CFBundleInfoDictionaryVersion</key>
+              <string>6.0</string>
+              <key>CFBundleName</key>
+              <string>${APP_NAME}</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+              <key>CFBundleShortVersionString</key>
+              <string>1.0</string>
+              <key>CFBundleSignature</key>
+              <string>FONV</string>
+              <key>CFBundleVersion</key>
+              <string>1</string>
+              <key>LSApplicationCategoryType</key>
+              <string>public.app-category.games</string>
+              <key>LSMinimumSystemVersion</key>
+              <string>10.15</string>
+              <key>NSHumanReadableCopyright</key>
+              <string>${COPYRIGHT}</string>
+              <key>NSPrincipalClass</key>
+              <string>NSApplication</string>
+              <key>LSRequiresNativeExecution</key>
+              <true/>
+              <key>LSArchitecturePriority</key>
+              <array>
+                  <string>arm64</string>
+              </array>
+          </dict>
+          </plist>
+          EOL
+
+      - name: Create DMG (only for macos-latest)
+        if: matrix.os == 'macos-latest' && matrix.runtime == 'osx-arm64'
+        run: |
+          brew install create-dmg
+          create-dmg publish/Sightings.app publish

@@ -88,7 +88,7 @@ public class Player : Actor {
         // Guardian clause: if the player is not a tourist then don't update the camera view
         if (Role != ActorType.Tourist) return;
 
-        CameraView.offset += GamePadRightStick(ControllerIndex) * 5;
+        CameraView.offset += GamePadRightStick(ControllerIndex) * GameState.ControllerSensitivity;
 
         CameraView.position = GameState.Boat.Position;
         CameraView.Update(gameTime);

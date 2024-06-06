@@ -39,6 +39,10 @@ public class Settings : IScene {
 
     public void Update(GameTime gameTime) {
 
+        // Check for Y button press, reset the settings to default
+        if (IsAnyInputPressed(Keys.Y, Buttons.Y))
+            SetDefaultValues();
+
         // Check for menu navigation
         if (IsAnyInputPressed(Keys.Down, Buttons.DPadDown))
             SelectedMenuIndex++;
@@ -69,6 +73,14 @@ public class Settings : IScene {
             else if (SelectedMenuIndex == 2 && GameState.MaxPhotos < 26)                                    // If the value is in the limited range then we can decrement it
                 GameState.MaxPhotos--;
 
+        if (IsAnyInputPressed(Keys.Right, Buttons.DPadRight))
+            if (SelectedMenuIndex == 3)
+                GameState.ControllerSensitivity++;
+
+        if (IsAnyInputPressed(Keys.Left, Buttons.DPadLeft))
+            if (SelectedMenuIndex == 3)
+                GameState.ControllerSensitivity--;
+
         // Check for return to main menu
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back))
             GameState.CurrentScene = GameScene.MainMenu;
@@ -88,11 +100,13 @@ public class Settings : IScene {
         spriteBatch.DrawString(FLib.MainMenuFont, "Music Volume", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Music Volume").X, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, "SFX Volume", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("SFX Volume").X, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, "Max Photos", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Max Photos").X, 300), SelectedMenuIndex == 2 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.MainMenuFont, "Controller Sensitivity", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Controller Sensitivity").X, 350), SelectedMenuIndex == 3 ? menuHotColor : menuColdColor);
 
         // Values
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.MusicVolume * 100:0}%", new Vector2((1920 / 2) + 50, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.SFXVolume * 100:0}%", new Vector2((1920 / 2) + 50, 250), SelectedMenuIndex == 1 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, $"{maxPhotosText}", new Vector2((1920 / 2) + 50, 300), SelectedMenuIndex == 2 ? menuHotColor : menuColdColor);
+        spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.ControllerSensitivity:0}", new Vector2((1920 / 2) + 50, 350), SelectedMenuIndex == 3 ? menuHotColor : menuColdColor);
 
         if (GameState.MaxPhotos == int.MaxValue)
             DrawTextCenteredScreen(spriteBatch,FLib.LeaderboardFont, "Please note: Game will not save photos in Unlimited mode.",350, new Vector2(1920, 1080), Color.DarkRed);
@@ -106,10 +120,19 @@ public class Settings : IScene {
 
     #endregion
 
+    void SetDefaultValues() {
+
+        GameState.MusicVolume = 1f;
+        GameState.SFXVolume = 1f;
+        GameState.MaxPhotos = 5;
+        GameState.ControllerSensitivity = 10;
+    }
+
     enum MenuItems {
 
         MusicVolume = 0,
         SFXVolume = 1,
-        MaxPhotos = 2
+        MaxPhotos = 2,
+        ControllerSensitivity = 3
     }
 }

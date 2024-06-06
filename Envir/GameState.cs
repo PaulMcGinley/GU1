@@ -62,6 +62,20 @@ public static class GameState {
         }
     }
 
+    [XmlIgnore]
+    static float controllerSensitivity = 10f;
+    public static float ControllerSensitivity {
+        get => controllerSensitivity;
+        set {
+            if (value < 1)
+                controllerSensitivity = 100;
+            else if (value > 100)
+                controllerSensitivity = 1;
+            else
+                controllerSensitivity = value;
+        }
+    }
+
     [XmlElement(Order = 1)]
     public static List<Flotsam> Flotsam = new();                                                            // The flotsam in the game
 

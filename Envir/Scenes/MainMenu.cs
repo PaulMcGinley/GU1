@@ -67,6 +67,7 @@ public class MainMenu : IScene {
                     break;
 
                 case MenuItems.Settings:
+                Settings.returnScene = GameScene.MainMenu;
                     GameState.CurrentScene = GameScene.Settings;
                     break;
 
@@ -126,7 +127,10 @@ public class MainMenu : IScene {
         spriteBatch.End( );
     }
 
-    public void OnSceneStart() { }                                                                          // Not Implemented
+    public void OnSceneStart() {
+
+        Settings.returnScene = GameScene.MainMenu;                                                           // Set the return scene to the main menu
+    }
 
     public void OnSceneEnd() { }                                                                            // Not Implemented
 

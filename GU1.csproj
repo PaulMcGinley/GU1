@@ -12,7 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
-    <None Remove="Icon.png" />
+    <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

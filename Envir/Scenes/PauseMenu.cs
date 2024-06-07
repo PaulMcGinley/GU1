@@ -47,6 +47,13 @@ public class PauseMenu : IScene {
         if (IsAnyInputPressed(Keys.Up, Buttons.DPadUp))
             SelectedMenuIndex--;
 
+        // Check for B button press, return to the game
+        if (IsAnyInputPressed(Keys.B, Buttons.B)) {
+
+            GameState.CurrentScene = GameScene.Playing;
+            OnSceneEnd(); // Call here as the jumping around scenes doesn't trigger the OnSceneEnd event
+        }
+
         // Check for menu selection
         if (IsAnyInputPressed(Keys.Enter, Buttons.A, Buttons.Start)) {
 
@@ -54,6 +61,11 @@ public class PauseMenu : IScene {
 
                 case MenuItems.Resume:
                     GameState.CurrentScene = GameScene.Playing;
+                    break;
+
+                case MenuItems.Settings:
+                    Settings.returnScene = GameScene.PauseMenu;
+                    GameState.CurrentScene = GameScene.Settings;
                     break;
 
                 case MenuItems.Exit:
@@ -76,8 +88,10 @@ public class PauseMenu : IScene {
         // Menu boxes
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), selectedMenuIndex == 0 ? menuHotColor : menuColdColor);
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), selectedMenuIndex == 1 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), selectedMenuIndex == 2 ? menuHotColor : menuColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Resume", (1080/2)-265, new Vector2(1920, 1080), selectedMenuIndex == 0 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Exit", (1080/2)-145, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Settings", (1080/2)-145, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Exit", (1080/2)-25, new Vector2(1920, 1080), selectedMenuIndex == 2 ? textHotColor : textColdColor);
 
         // Left Nessie
         spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)-350, (1080/2)-295 + (SelectedMenuIndex * 120)), menuHotColor);
@@ -88,16 +102,20 @@ public class PauseMenu : IScene {
         spriteBatch.End();
     }
 
-    public void OnSceneStart() {}
+    public void OnSceneStart() { }
 
-    public void OnSceneEnd() {}
+    public void OnSceneEnd() {
+
+        SelectedMenuIndex = 0;
+    }
 
     #endregion
 
     enum MenuItems {
 
         Resume = 0,
-        Exit = 1
+        Settings = 1,
+        Exit = 2,
     }
 
 }

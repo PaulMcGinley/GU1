@@ -22,7 +22,7 @@ public class Credits : IScene {
         { "Project Manager",            "Kieran Bett"       },
         { "Lead Programmer",            "Paul McGinely"     },
         { "Additional Programer" ,      "Alexander Tuffy"   },
-        { "Audio \"Created\" by",       "Albert Bugheanu"   },
+        { "Audio by",                   "Albert Bugheanu"   },
         { "Sourced Audio from",         "Pixabay.com"       },
         { "Lead Art Designer",          "Alexander Tuffy"   },
         { "Additional Art by",          "Corey Connolly"    },
@@ -30,6 +30,8 @@ public class Credits : IScene {
         { "Tester 1",                   "Paul McGinley"     },
         { "Tester 2",                   "Bash"              },
         { "Tester 3",                   "Nat"               },
+        { "Tester 4",                   "Alex Bolton"       },
+        { "Tester 5",                   "Amy Tyrrell"       },
     };
 
     #region IScene Implementation

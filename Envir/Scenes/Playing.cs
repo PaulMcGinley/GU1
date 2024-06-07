@@ -187,15 +187,17 @@ public class Playing : IScene {
 
     public void OnSceneStart() {
 
-        if (GameState.PreviousScene == GameScene.PauseMenu)                                                // If the previous scene was the pause menu
-            return;                                                                                         // Exit the method
+        if (GameState.PreviousScene == GameScene.PauseMenu)
+            return;
+
+        if (Settings.returnScene == GameScene.Settings)
+            return;
 
         StartNewRound();
     }
 
     public void OnSceneEnd() {
 
-        GC.Collect(5, GCCollectionMode.Forced, false, true);                                                // Run the garbage collector
     }
 
     #endregion
@@ -273,6 +275,9 @@ public class Playing : IScene {
     }
 
     private void CheckForCollection() {
+
+        if (GameState.Flotsam.Count == 0)                                                                    // If there are no flotsam objects, exit the method
+            return;
 
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
             foreach (Flotsam flotsam in GameState.Flotsam)                                                  // Loop through all flotsam objects

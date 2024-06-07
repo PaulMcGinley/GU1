@@ -29,12 +29,15 @@ public class PhotoBook : IScene {
 
     BackgroundWorker worker;                                                                                // Background worker to load the photos
 
+    bool confirmDeletePhotos = false;                                                                             // Flag to check if there are photos pending
+    bool deletePhotosConfirmed = false;                                                                     // Flag to check if the photos are being deleted
+
     #region IScene Implementation
 
     public void Initialize(GraphicsDevice device) {
 
         camera = new Camera2D(new Viewport(0, 0, 1920, 1080));                                              // Create a new camera
-        camera.LookAt(new Vector2((1920/2) - 150, 1080/2));                                                 // Set the camera to look at the center of the screen
+        camera.LookAt(new Vector2((1920/2) - 150, (1080/2) - 50));                                                 // Set the camera to look at the center of the screen
 
         cursor = new Cursor();                                                                              // Create a new cursor
         cursor.Position = new Vector2(1920/2, (1080/2)+50);                                                       // Set the cursor position to the center of the screen
@@ -45,12 +48,12 @@ public class PhotoBook : IScene {
         // worker.WorkerReportsProgress = true;                                                                // Set the worker to report progress
     }
 
-    private void Worker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+    private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
        // throw new NotImplementedException();
     }
 
-    private void Worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e) {
+    private void Worker_DoWork(object sender, DoWorkEventArgs e) {
 
         string directoryPath = Photo.SaveDir;                                                               // The directory path to the photos
         var regex = new Regex(@"^-\d+\.xml$");                                                              // Regex to match the file names ( -[number].xml)
@@ -90,9 +93,38 @@ public class PhotoBook : IScene {
 
         camera.Update(gameTime);                                                                            // Update the camera
 
+        if (IsAnyInputPressed(Buttons.X) && !confirmDeletePhotos && photos != null && photos.Length > 0)    // Check for input to delete the photos
+            confirmDeletePhotos = true;                                                                     // Set the confirm delete photos flag
+
+        if (IsAnyInputPressed(Buttons.Start) && confirmDeletePhotos)                                       // Check for input to confirm the delete photos
+            deletePhotosConfirmed = true;                                                                   // Set the delete photos confirmed flag
+
+        // check for down and x to delete the photos from the disk
+        if (IsAnyInputPressed(Buttons.Start) && deletePhotosConfirmed) {
+            string directoryPath = Photo.SaveDir;
+            var regex = new Regex(@"^-\d+\.xml$");
+
+            string[] files = Directory.EnumerateFiles(directoryPath, "*.xml")
+                                    .Where(path => regex.IsMatch(Path.GetFileName(path)))
+                                    .ToArray();
+
+            foreach (var file in files)
+                File.Delete(file);
+
+            confirmDeletePhotos = false;
+            deletePhotosConfirmed = false;
+
+            photos = null;
+            photoBounds = null;
+            photoLocations = null;
+        }
+
         // Check for input to go back to the main menu
-        if (IsAnyInputPressed(Buttons.B, Buttons.Back))
+        if (IsAnyInputPressed(Buttons.B, Buttons.Back) && !confirmDeletePhotos)
             GameState.CurrentScene = GameScene.MainMenu;
+
+        if (IsAnyInputPressed(Buttons.B, Buttons.Back) && confirmDeletePhotos)
+            confirmDeletePhotos = false;
 
         // Guard clause to check if there are any photos
         if (photos == null)
@@ -177,6 +209,16 @@ public class PhotoBook : IScene {
         spriteBatch.Begin();
 
         cursor.Draw(spriteBatch);
+
+        if (!confirmDeletePhotos && photos != null && photos.Length > 0)
+            spriteBatch.DrawString(FLib.LeaderboardFont, $"Press (X) to delete all photographs.", new Vector2(10, 10), Color.White*0.75f);
+
+        if (confirmDeletePhotos) {
+
+            spriteBatch.Draw(TLib.Pixel, new Rectangle(0, 0, 1920, 1080), Color.Black*0.5f);
+            DrawTextCenteredScreen(spriteBatch, FLib.LeaderboardFont, "Are you sure you want to delete all photographs?", 1080/2, new Vector2(1920, 1080), Color.White);
+            DrawTextCenteredScreen(spriteBatch, FLib.LeaderboardFont, "Press (START) to confirm or (B) to cancel.", 1080/2+50, new Vector2(1920, 1080), Color.White);
+        }
 
         spriteBatch.End();
     }

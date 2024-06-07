@@ -11,6 +11,9 @@ public class Settings : IScene {
     Color menuHotColor = Color.Lime;                                                                       // Selected menu item colour
     Color menuColdColor = Color.White;                                                                      // Unselected menu item colour
 
+    public static GameScene returnScene;                                                                                  // The scene to return to
+    public void SetReturnScene(GameScene scene) => returnScene = scene;                         // Set the return scene
+
     string maxPhotosText => GameState.MaxPhotos == int.MaxValue ? "Unlimited" : GameState.MaxPhotos.ToString(); // The text to display for the max photos
 
     int selectedMenuIndex = 0;                                                                              // The index of the selected menu item (variable)
@@ -64,8 +67,10 @@ public class Settings : IScene {
                 GameState.SFXVolume -= 0.05f;
 
         if (IsAnyInputPressed(Keys.Right, Buttons.DPadRight))
-            if (SelectedMenuIndex == 2)
+            if (SelectedMenuIndex == 2 && GameState.MaxPhotos < 26)                                         // If the value is in the limited range then we can increment it
                 GameState.MaxPhotos++;
+            else if (SelectedMenuIndex == 2 && GameState.MaxPhotos == int.MaxValue)                       // If the value is unlimited, then we can increment it
+                GameState.MaxPhotos = 1;
 
         if (IsAnyInputPressed(Keys.Left, Buttons.DPadLeft))
             if (SelectedMenuIndex == 2 && GameState.MaxPhotos > 26)                                         // After the 25th photo, the player can take unlimited photos, so we check for a value greater than 26, any value = unlimited, so when we press left, we want to set the value to the limited range
@@ -83,7 +88,7 @@ public class Settings : IScene {
 
         // Check for return to main menu
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back))
-            GameState.CurrentScene = GameScene.MainMenu;
+            GameState.CurrentScene = returnScene;
     }
 
     public void FixedUpdate(GameTime gameTime) { }                                                          // Not Implemented
@@ -109,7 +114,7 @@ public class Settings : IScene {
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.ControllerSensitivity:0}", new Vector2((1920 / 2) + 50, 350), SelectedMenuIndex == 3 ? menuHotColor : menuColdColor);
 
         if (GameState.MaxPhotos == int.MaxValue)
-            DrawTextCenteredScreen(spriteBatch,FLib.LeaderboardFont, "Please note: Game will not save photos in Unlimited mode.",350, new Vector2(1920, 1080), Color.DarkRed);
+            DrawTextCenteredScreen(spriteBatch,FLib.LeaderboardFont, "Please note: Game will not save photos in Unlimited mode.",400, new Vector2(1920, 1080), Color.Yellow);
 
         spriteBatch.End();
     }

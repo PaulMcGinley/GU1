@@ -24,8 +24,10 @@ public class Credits : IScene {
         { "Additional Programer" ,      "Alexander Tuffy"   },
         { "Audio by",                   "Albert Bugheanu"   },
         { "Sourced Audio from",         "Pixabay.com"       },
+        { "Game Play Music",            "Nesrality"         },
         { "Lead Art Designer",          "Alexander Tuffy"   },
         { "Additional Art by",          "Corey Connolly"    },
+        { "",                           "Paul McGinley"     },
         { "Sourced Art by",             "greatdocbrown (Itch.io)" },
         { "Tester 1",                   "Paul McGinley"     },
         { "Tester 2",                   "Bash"              },
@@ -60,6 +62,13 @@ public class Credits : IScene {
 
         if (camera.Position.Y > credits.GetLength(0) * lineSpacing + 250 + (1080/2))                        // If the camera has scrolled past the credits
             return;                                                                                         // Return
+
+        // // allow user to control the camera
+        // if (IsAnyInputDown(Keys.Down, Buttons.DPadDown, Buttons.LeftThumbstickDown))
+        //     camera.LookAt(camera.Position + new Vector2(0, 1f));
+
+        // if (IsAnyInputDown(Keys.Up, Buttons.DPadUp, Buttons.LeftThumbstickUp))
+        //     camera.LookAt(camera.Position - new Vector2(0, 1f));
 
         // Move camera
         camera.LookAt(new Vector2(viewport.Width/2, camera.Position.Y + 1f));                               // Move the camera to scroll the credits

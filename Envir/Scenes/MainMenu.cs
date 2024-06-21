@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GU1.Envir.Scenes;
 
@@ -47,10 +48,10 @@ public class MainMenu : IScene {
     public void Update(GameTime gameTime) {
 
         // Check for menu navigation
-        if (IsAnyInputPressed(Keys.Down, Buttons.DPadDown))
+        if (IsAnyInputPressed(Keys.Down, Buttons.DPadDown, Buttons.LeftThumbstickDown))
             SelectedMenuIndex++;
 
-        if (IsAnyInputPressed(Keys.Up, Buttons.DPadUp))
+        if (IsAnyInputPressed(Keys.Up, Buttons.DPadUp, Buttons.LeftThumbstickUp))
             SelectedMenuIndex--;
 
         // Check for menu selection
@@ -104,13 +105,6 @@ public class MainMenu : IScene {
         spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 300, 400, 100), selectedMenuIndex == 5 ? menuHotColor : Color.Red*0.5f);
 
         // Menu text
-        // spriteBatch.DrawString(FLib.MainMenuFont, "PLAY GAME", new Vector2((1920/2)-50, (1080/2)-260), Color.Black);
-        // spriteBatch.DrawString(FLib.MainMenuFont, "PHOTOGRAPHS", new Vector2((1920/2)-50, (1080/2)-140), Color.Black);
-        // spriteBatch.DrawString(FLib.MainMenuFont, "SETTINGS", new Vector2((1920/2)-50, (1080/2)-20), Color.Black);
-        // spriteBatch.DrawString(FLib.MainMenuFont, "HOW TO PLAY", new Vector2((1920/2)-50, (1080/2)+100), Color.Black);
-        // spriteBatch.DrawString(FLib.MainMenuFont, "CREDITS", new Vector2((1920/2)-50, (1080/2)+220), Color.Black);
-        // spriteBatch.DrawString(FLib.MainMenuFont, "EXIT GAME", new Vector2((1920/2)-50, (1080/2)+340), Color.Black);
-
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Play", (1080/2)-265, new Vector2(1920, 1080), selectedMenuIndex == 0 ? textHotColor : textColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Gallery", (1080/2)-145, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Settings", (1080/2)-25, new Vector2(1920, 1080), selectedMenuIndex == 2 ? textHotColor : textColdColor);
@@ -129,10 +123,18 @@ public class MainMenu : IScene {
 
     public void OnSceneStart() {
 
-        Settings.returnScene = GameScene.MainMenu;                                                           // Set the return scene to the main menu
+        if (Settings.returnScene == GameScene.MainMenu)                                                     // If the return scene is the main menu
+            return;
+
+        // Play the menu music
+        MediaPlayer.IsRepeating = true;                                                                     // Set the menu music to repeat
+        MediaPlayer.Play(SLib.MenuMusic);                                                                   // Play the menu music
     }
 
-    public void OnSceneEnd() { }                                                                            // Not Implemented
+    public void OnSceneEnd() {
+
+        Settings.returnScene = GameScene.MainMenu;                                                          // Set the return scene to the main menu
+    }
 
     #endregion
 

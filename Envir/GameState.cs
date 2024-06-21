@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using Microsoft.Xna.Framework.Media;
 
 namespace GU1.Envir;
 
@@ -12,7 +13,7 @@ public static class GameState {
     public static GameScene PreviousScene = GameScene.None;                                                 // The previous scene of the game
 
     [XmlIgnore]
-    static float musicVolume = 1f;                                                                        // The volume of the music
+    static float musicVolume = 1f;                                                                          // The volume of the music
     [XmlIgnore]
     public static float MusicVolume {                                                                       // The volume of the music
         get => musicVolume;                                                                                 // Get the volume of the music
@@ -24,12 +25,13 @@ public static class GameState {
             else
                 musicVolume = value;
 
-            SLib.Click.Play(musicVolume, 0,0);
+            MediaPlayer.Volume = musicVolume;                                                               // Set the volume of the music
+            SLib.Click.Play(musicVolume, 0, 0);                                                             // Play the click sound
         }
     }
 
     [XmlIgnore]
-    static float sfxVolume = 1f;                                                                          // The volume of the sound effects
+    static float sfxVolume = 1f;                                                                            // The volume of the sound effects
     [XmlIgnore]
     public static float SFXVolume {                                                                         // The volume of the sound effects
         get => sfxVolume;                                                                                   // Get the volume of the sound effects
@@ -41,7 +43,7 @@ public static class GameState {
             else
                 sfxVolume = value;
 
-            SLib.Click.Play(sfxVolume, 0,0);
+            SLib.Click.Play(sfxVolume, 0, 0);
         }
     }
 

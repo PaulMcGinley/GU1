@@ -55,6 +55,102 @@
 /processorParam:Quality=Best
 /build:Audio/ding.mp3
 
+#begin Audio/Music/amazing-grace.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/amazing-grace.mp3
+
+#begin Audio/Music/arewell-to-lochaber.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/arewell-to-lochaber.mp3
+
+#begin Audio/Music/auld-lang-syne.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/auld-lang-syne.mp3
+
+#begin Audio/Music/barbara-allen.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/barbara-allen.mp3
+
+#begin Audio/Music/glenogie.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/glenogie.mp3
+
+#begin Audio/Music/hush-ye-my-bairnie.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/hush-ye-my-bairnie.mp3
+
+#begin Audio/Music/johnnie-cope.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/johnnie-cope.mp3
+
+#begin Audio/Music/leezie-lindsay.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/leezie-lindsay.mp3
+
+#begin Audio/Music/mary-morison.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/mary-morison.mp3
+
+#begin Audio/Music/Menu-Music.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/Menu-Music.mp3
+
+#begin Audio/Music/oh-charlie-is-my-darling.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/oh-charlie-is-my-darling.mp3
+
+#begin Audio/Music/oh-rowan-tree.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/oh-rowan-tree.mp3
+
+#begin Audio/Music/skye-boat-song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/skye-boat-song.mp3
+
+#begin Audio/Music/the-campbells-are-comin.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/the-campbells-are-comin.mp3
+
+#begin Audio/Music/the-water-is-wide.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/the-water-is-wide.mp3
+
+#begin Audio/Music/yon-bonnie-banks-loch-lomond.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Music/yon-bonnie-banks-loch-lomond.mp3
+
 #begin Audio/victory.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor

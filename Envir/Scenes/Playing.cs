@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GU1.Envir.Scenes;
 
@@ -18,20 +19,17 @@ public class Playing : IScene {
 
     Vector2 RandomScreenPosition => new(random.Next(0-(1920/2), 1920+(1920/2)), random.Next(0-(1080/2), 1080+(1080/2)));
 
-    int nessieScoreWidth = 250;                                                                                // The longest row of Nessie flotsam
-    int nessiesScoreHeight => GameState.Players.Where(p=>p.Role == ActorType.Nessie).Count()*25;                                                                             // The height of the Nessie score
-    Rectangle nessieScoreBounds => new(-(1920/2), 0, nessieScoreWidth, nessiesScoreHeight);                                                   // The bounds of the screen for the Nessie score
+    int nessieScoreWidth = 250;                                                                             // The longest row of Nessie flotsam
+    int nessiesScoreHeight => GameState.Players.Where(p=>p.Role == ActorType.Nessie).Count()*25;            // The height of the Nessie score
+    Rectangle nessieScoreBounds => new(-(1920/2), 0, nessieScoreWidth, nessiesScoreHeight);                 // The bounds of the screen for the Nessie score
     float nessieScoreOpacity = 1f;                                                                          // The opacity of the score bounds
-    float nessieMinScoreOpacity = 0.3f;                                                                    // The minimum opacity of the score bounds
+    float nessieMinScoreOpacity = 0.3f;                                                                     // The minimum opacity of the score bounds
 
-    int touristScoreWidth = 250;                                                                              // The longest row of Tourist flotsam
-    int touristsScoreHeight => GameState.Players.Where(p=>p.Role == ActorType.Tourist).Count()*25;                                                                           // The height of the Tourist score
-    Rectangle touristScoreBounds => new((int)(1920*1.5f) - touristScoreWidth, 0, touristScoreWidth, touristsScoreHeight);                        // The bounds of the screen for the Tourist score
+    int touristScoreWidth = 250;                                                                            // The longest row of Tourists
+    int touristsScoreHeight => GameState.Players.Where(p=>p.Role == ActorType.Tourist).Count()*25;          // The height of the Tourist score
+    Rectangle touristScoreBounds => new((int)(1920*1.5f) - touristScoreWidth, 0, touristScoreWidth, touristsScoreHeight);   // The bounds of the screen for the Tourist score
     float touristScoreOpacity = 1f;                                                                         // The opacity of the score bounds
-    float touristMinScoreOpacity = 0.3f;                                                                   // The minimum opacity of the score bounds
-
-    // float scoreOpacity = 1f;                                                                              // The opacity of the score bounds
-    // float minScoreOpacity = 0.3f;                                                                        // The minimum opacity of the score bounds
+    float touristMinScoreOpacity = 0.3f;                                                                    // The minimum opacity of the score bounds
 
     #region IScene Implementation
 
@@ -194,6 +192,8 @@ public class Playing : IScene {
             return;
 
         StartNewRound();
+
+        SetupBackgroundMusic();
     }
 
     public void OnSceneEnd() {
@@ -327,5 +327,12 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players)                                                        // Loop through all players
             if (player.Role == ActorType.Nessie)                                                            // If the player is Nessie
                 GameState.Flotsam[player.ControllerIndex].PlayerIndex = player.ControllerIndex;             // Set the flotsam object's player index to the player's controller index
+    }
+
+    private void SetupBackgroundMusic() {
+
+        MediaPlayer.Volume = GameState.MusicVolume;                                                         // Set the volume of the music player
+        MediaPlayer.Play(SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)]);                             // Play a random game music track
+        MediaPlayer.ActiveSongChanged += (s, e) => MediaPlayer.Play(SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)]); // When the song ends, play another random game music track
     }
 }

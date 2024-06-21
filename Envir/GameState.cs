@@ -87,4 +87,7 @@ public static class GameState {
     [XmlElement(Order = 3)]
     public static Boat Boat = new(-1);                                                                      // The boat in the game
 
+    [XmlElement(Order = 4)]
+    public static List<Cloud> Clouds = new();                                                               // The clouds in the game
+
 }

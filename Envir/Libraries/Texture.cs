@@ -52,6 +52,7 @@ public class Texture {
     public static Texture2D[] PlayingBackground;
     public static Texture2D LobbyBackground;
     public static Texture2D ControlsBackground;
+    public static Texture2D[] Clouds;
 
     /***********************************************************************
      *** UI Elements *******************************************************
@@ -114,14 +115,15 @@ public class Texture {
 
         ButtonGuide = content.Load<Texture2D>("Graphics/Guide/buttons");
 
-        //CameraCutout = content.Load<Texture2D>("Textures/Effects/CameraCutout");
-
         mainMenuBackground = content.Load<Texture2D>("Graphics/MainMenuScene-BG");
         PlayingBackground = new Texture2D[2];
         PlayingBackground[0] = content.Load<Texture2D>("Graphics/bg1");
         PlayingBackground[1] = content.Load<Texture2D>("Graphics/bg2");
         LobbyBackground = content.Load<Texture2D>("Graphics/LobbyScene-BG");
         ControlsBackground = content.Load<Texture2D>("Graphics/controls-BG");
+        Clouds = new Texture2D[7];
+        for (int i = 0; i < Clouds.Length; i++)
+            Clouds[i] = content.Load<Texture2D>($"Graphics/Clouds/cloud-{i+1}");
 
         // UI Elements
         Arrow = content.Load<Texture2D>("Graphics/UI/arrow");

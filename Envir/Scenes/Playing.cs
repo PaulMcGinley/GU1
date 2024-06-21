@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -44,6 +45,8 @@ public class Playing : IScene {
         camera = new Camera2D(new Viewport(new Rectangle(0, 0, 1920, 1080)));                               // Create a new orthographic camera
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
         camera.SetZoomLevel(0.5f);                                                                          // Set the camera zoom level
+
+        MediaPlayer.ActiveSongChanged += (s, e) => MediaPlayer.Play(SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)]); // When the song ends, play another random game music track
     }
 
     public void LoadContent(ContentManager content) { }
@@ -77,6 +80,9 @@ public class Playing : IScene {
 
         // Check if the tourist has run out of photos
         CheckForTouristLose();
+
+        foreach (var cloud in GameState.Clouds)
+            cloud.Update(gameTime);
     }
 
     public void FixedUpdate(GameTime gameTime) {
@@ -133,6 +139,15 @@ public class Playing : IScene {
 
         #region Game
 
+        // Will need to create an origin point to get this working correctly as well as adjust the position of the sprites
+
+        // List<Actor> actors = new();                                                                         // Create a new list of actors
+        // actors.AddRange(GameState.Players);                                                                 // Add all players to the list of actors
+        // actors.AddRange(GameState.Flotsam);                                                                 // Add all flotsam objects to the list of actors
+        // actors.Add(GameState.Boat);                                                                         // Add the boat to the list of actors
+
+        // actors = actors.OrderByDescending(actor => actor.position.Y -64).ToList();                           // Sort the actors by their Y position
+
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix, samplerState: SamplerState.PointClamp);
 
         // Ripples
@@ -154,6 +169,20 @@ public class Playing : IScene {
         // Players
         foreach (Player player in GameState.Players)
             player.Draw(spriteBatch);
+
+        // Clouds
+        foreach (var cloud in GameState.Clouds)
+            cloud.Draw(spriteBatch);
+
+        // foreach (var actor in actors) {
+
+        //     if (actor is Flotsam flotsam)
+        //         flotsam.Draw(spriteBatch);
+        //     if (actor is Boat boat)
+        //         boat.Draw(spriteBatch);
+        //     if (actor is Player player)
+        //         player.Draw(spriteBatch);
+        // }
 
         // Scores
 
@@ -194,6 +223,8 @@ public class Playing : IScene {
         StartNewRound();
 
         SetupBackgroundMusic();
+
+        CreateNewClouds();
     }
 
     public void OnSceneEnd() {
@@ -327,12 +358,32 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players)                                                        // Loop through all players
             if (player.Role == ActorType.Nessie)                                                            // If the player is Nessie
                 GameState.Flotsam[player.ControllerIndex].PlayerIndex = player.ControllerIndex;             // Set the flotsam object's player index to the player's controller index
+
+        long groupID = DateTime.Now.ToBinary();                                                             // Create a new group ID based on the current time
+        foreach (Player player in GameState.Players)                                                        // Loop through all players
+            if (player.Role == ActorType.Tourist)                                                           // If the player is the tourist
+                player.GroupID = groupID;                                                                   // Set the player's group ID to the current time
+
+        GameState.Boat.position = new Vector2(1920/2, 1080/2);                                              // Reset the boat position to the center of the screen
     }
 
     private void SetupBackgroundMusic() {
 
         MediaPlayer.Volume = GameState.MusicVolume;                                                         // Set the volume of the music player
         MediaPlayer.Play(SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)]);                             // Play a random game music track
-        MediaPlayer.ActiveSongChanged += (s, e) => MediaPlayer.Play(SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)]); // When the song ends, play another random game music track
+    }
+
+    private void CreateNewClouds() {
+
+        GameState.Clouds.Clear();                                                                           // Clear the list of clouds
+
+        for (int i = 0; i < 10; i++) {
+
+            byte idx = (byte)random.Int(0, TLib.Clouds.Length);                                                    // Randomly select a cloud sprite
+
+                float _speed = 100 + ((float)random.NextDouble() * 100);                                       // Randomly select a speed for the cloud
+                Cloud cloud = new (new Vector2(random.Next(-1920*9, 1920*10), random.Next(-1080, 1080*2)), 1f, _speed, idx); // Create a new cloud object //-19 so that if one cloud starts at the end and one starts at the start, there wont be an overlap
+                GameState.Clouds.Add(cloud);                                                               // Add the cloud object to the list of clouds
+            }
     }
 }

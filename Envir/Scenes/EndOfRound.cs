@@ -21,7 +21,7 @@ public class EndOfRound : IScene {
 
     public void Update(GameTime gameTime) {
 
-        if (IsAnyInputPressed(Keys.B, Buttons.A, Buttons.B))                                                   // Check for input to continue
+        if (IsAnyInputPressed(Keys.B, Buttons.A, Buttons.B))                                                // Check for input to continue
             GameState.CurrentScene = GameScene.StartOfRound;                                                // Move to the next scene
     }
 
@@ -97,9 +97,6 @@ public class EndOfRound : IScene {
                     SpriteEffects.None,                                                                     // Effects
                     0);                                                                                     // Layer
 
-            // spriteBatch.DrawString(FLib.LeaderboardFont, $"Player: {p.ControllerIndex+1} - {p.CameraView.playerName}", new Vector2((1920/2)-400+30+64, 200 + (i * 55)+14), Color.White);      // Draw the player's name
-            // spriteBatch.DrawString(FLib.LeaderboardFont, $"{p.Score:#,##0}", new Vector2((1920/2)+400-30-100, 200 + (i * 55)+14), Color.White);                                               // Draw the player's score
-
             DrawShadowedText(spriteBatch, FLib.LeaderboardFont, $"Player: {p.ControllerIndex+1} - {p.CameraView.playerName}", new Vector2((1920/2)-400+30+64, 200 + (i * 55)+14), Color.White, new Vector2(2,2), Color.Black*0.8f);      // Draw the player's name
             DrawShadowedText(spriteBatch, FLib.LeaderboardFont, $"{p.Score:#,##0}", new Vector2((1920/2)+400-30-100, 200 + (i * 55)+14), Color.White, new Vector2(2,2), Color.Black*0.8f);                                               // Draw the player's score
 
@@ -113,7 +110,6 @@ public class EndOfRound : IScene {
 
     public void OnSceneStart() {
 
-        //SLib.Victory.Play();                                                                                // Play the victory sound
     }
 
     public void OnSceneEnd() {

@@ -6,6 +6,8 @@ namespace GU1;
 
 public class Actor : IMove, IGameObject {
 
+    public Vector2 position;
+
     #region IMove Interface
 
     public Vector2 Velocity { get; set; }

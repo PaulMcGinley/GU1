@@ -9,6 +9,7 @@ public class Player : Actor {
     readonly Random rand = new();
 
     public CamView CameraView { get; set; }
+    public long GroupID { get; set; }
 
     public ActorType Role { get; set; }
     /// <summary>

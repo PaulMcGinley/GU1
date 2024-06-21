@@ -8,6 +8,8 @@ public class CamView : IMove {
 
     Random rand = new();
 
+    public long GroupID;                                                                                     // The game the photo was taken in
+
     public Vector2 position = Vector2.Zero;
     public Vector2 offset = Vector2.Zero;
     public Rectangle boundaryBox => new Rectangle((int)position.X + (int)offset.X, (int)position.Y + (int) offset.Y, TLib.CameraView.Width, TLib.CameraView.Height);
@@ -20,14 +22,14 @@ public class CamView : IMove {
 
     public CamView(Color colour, int maxPhotos) {
 
-        //this.position = position;                                                                           // Position of the camera view within the game world
+        //this.position = position;                                                                         // Position of the camera view within the game world
         this.colour = colour;                                                                               // The players colour
         this.maxPhotos = maxPhotos;                                                                         // The maximum number of photos the player can take
         this.remainingPhotos = maxPhotos;                                                                   // The number of photos the player has left (set this to the max number of photos at the start of the game)
-        offset = new Vector2(rand.Next(-500,500), rand.Next(-500,500));                                                                    // Random offset for the camera view
+        offset = new Vector2(rand.Next(-500,500), rand.Next(-500,500));                                     // Random offset for the camera view
 
-        if (maxPhotos < 26)                                                                      // If the max photos is set to unlimited
-            photos = new Photo[maxPhotos];                                                                      // Create an array of photos
+        if (maxPhotos < 26)                                                                                 // If the max photos is set to unlimited
+            photos = new Photo[maxPhotos];                                                                  // Create an array of photos
     }
 
     #region IMove Interface
@@ -68,7 +70,8 @@ public class CamView : IMove {
             bgOpacity = bgOpacity,                                                                          // Set the background opacity
             location = position + offset,                                                                   // Set the location of the photo to the camera view position
             timeStamp = DateTime.Now,                                                                       // Set the time stamp to the current time
-            photographer = playerName                                                                       // Set the photographer to the player's name
+            photographer = playerName,                                                                      // Set the photographer to the player's name
+            GroupID = GroupID                                                                               // Set the group ID to the current game ID
         };
 
         // Loop through all the flotsam in the game and add them to the photo

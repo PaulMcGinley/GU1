@@ -26,7 +26,7 @@ public class EndOfGame : IScene {
 
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back)) {
 
-            GameState.CurrentScene = GameScene.Credits;                                                    // Change the scene to the credits scene
+            GameState.CurrentScene = GameScene.Credits;                                                     // Change the scene to the credits scene
 
             // This should be done in the OnSceneEnd method but it is not working
             scale = 0.25f;                                                                                  // Reset the scale
@@ -54,10 +54,10 @@ public class EndOfGame : IScene {
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        if (GameState.CurrentScene != GameScene.EndOfGame)                                                 // If the current scene is not the end of game scene
-            return;                                                                                        // Return
+        if (GameState.CurrentScene != GameScene.EndOfGame)                                                  // If the current scene is not the end of game scene
+            return;                                                                                         // Return
 
-        if (winner == null)                                                                                // If the winner is not set
+        if (winner == null)                                                                                 // If the winner is not set
             return;                                                                                         // Return
 
         spriteBatch.Begin();
@@ -67,7 +67,7 @@ public class EndOfGame : IScene {
             TLib.WinnerTitle,                                                                               // Texture
             new Vector2(1920/2, (1080/2) - 200),                                                            // Position
             null,                                                                                           // Source Rectangle
-            new Color (255,255,0),                                  // Colour
+            new Color (255,255,0),                                                                          // Colour
             0,                                                                                              // Rotation
             new Vector2(TLib.WinnerTitle.Width/2, TLib.WinnerTitle.Height/2),                               // Origin
             scale,                                                                                          // Scale
@@ -77,9 +77,6 @@ public class EndOfGame : IScene {
         // Draw the player's row background
         DrawFilledRectangle(new Rectangle((1920/2)-400, (1080/2)+200, 800, 50), spriteBatch, winner.CameraView.colour);
 
-        // spriteBatch.DrawString(FLib.LeaderboardFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White);  // Draw the player's name
-        // spriteBatch.DrawString(FLib.LeaderboardFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White);                                                // Draw the player's score
-
         DrawShadowedText(spriteBatch, FLib.LeaderboardFont, $"Player: {winner.ControllerIndex+1} - {winner.CameraView.playerName}", new Vector2((1920/2)-400+30+64, (1080/2)+200+14), Color.White, new Vector2(2,2), Color.Black*0.8f);  // Draw the player's name
         DrawShadowedText(spriteBatch, FLib.LeaderboardFont, $"{winner.Score:#,##0}", new Vector2((1920/2)+400-30-100, (1080/2)+200+14), Color.White, new Vector2(2,2), Color.Black*0.8f);                                                // Draw the player's score
 
@@ -88,23 +85,11 @@ public class EndOfGame : IScene {
 
     public void OnSceneStart() {
 
-        System.Diagnostics.Debug.WriteLine("EndOfGame.OnSceneStart");
         SLib.Victory.Play(GameState.SFXVolume, 0, 0);                                                       // Play the victory sound
-
-        // Should be able to use LINQ here
-        // winner = GameState.Players[0];
-        // for (int i = 1; i < GameState.Players.Count; i++)
-        //     if (GameState.Players[i].Score > winner.Score)
-        //         winner = GameState.Players[i];
     }
 
     public void OnSceneEnd() {
 
-        System.Diagnostics.Debug.WriteLine("EndOfGame.OnSceneEnd");
-
-        // scale = 0.25f;
-        // winner = null;
-        // GameState.Players.Clear();
     }
 
     #endregion

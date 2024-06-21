@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,8 @@ public class PhotoBook : IScene {
     Photo[] photos;                                                                                         // Array of photos
     Vector2[] photoLocations;                                                                               // Array of onscreen photo locations
     Rectangle[] photoBounds;                                                                                // Array of photo bounds for selection
+
+    public List<long> groupIDs = new();                                                                     // List of photo ids
 
     const int mod = 5;                                                                                      // The modulo value (number of photos per row)
     const string noPhotosMessage = "Nothing here yet. Come back once you have played a game ot two.";                                                      // The message to display when there are no photos
@@ -260,13 +263,36 @@ public class PhotoBook : IScene {
 
             photos[i] = new Photo();
             photos[i] = photos[i].Load(files[i]);
+            groupIDs.Add(photos[i].GroupID);
             photos[i].Render(spriteBatch);
         }
+        groupIDs = groupIDs.Distinct().ToList();                                                            // Get a list of unique group ids
 
         // Sort the photos by the date they were taken
         photos = photos.OrderByDescending(photo => photo.timeStamp).ToArray();
 
         photoLocations = new Vector2[files.Length];                                                         // Create a new array of photo locations with the length of the file count
+
+        // int group = 0;                                                                                      // The group TRACKER
+
+        // foreach (var entry in groupIDs) {
+
+        //     var groupPhotos = photos.Where(photo => photo.GroupID == entry).ToArray();                      // Get the photos in the group
+        //     var groupPhotosCount = groupPhotos.Length;                                                      // Get the count of the photos in the group
+
+        //     for (int i = 0; i < groupPhotosCount; i++) {
+
+        //         photoLocations[i] = new Vector2(320 * (i % mod), 420 * (i / mod) + (group * 1080));          // Set the photo location based on the modulo value
+        //         photoBounds[i] = new Rectangle((int)photoLocations[i].X, (int)photoLocations[i].Y, 320, 420);   // Set the photo bounds based on the photo location
+        //     }
+
+        //     group++;                                                                                        // Increment the group tracker
+        // }
+
+
+
+
+
 
         // Using modulo to create a grid of photos
         for (int i = 0; i < files.Length; i++)

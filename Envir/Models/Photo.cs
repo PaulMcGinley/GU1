@@ -13,6 +13,8 @@ public class Photo {
 
     #region Data
 
+    public long GroupID;                                                                                    // The game the photo was taken in
+
     public Vector2 location;                                                                                // On the map
     public string fileName = string.Empty;                                                                  // Save file name
     public string photographer;                                                                             // The name of the player who took the photo
@@ -29,13 +31,13 @@ public class Photo {
     #region Texture
 
     [XmlIgnore]
-    public RenderTarget2D fullPicture;                                                                            // The render target for the photo
+    public RenderTarget2D fullPicture;                                                                      // The render target for the photo
 
     [XmlIgnore]
-    public RenderTarget2D croppedPicture;                                                                        // The cropped picture
+    public RenderTarget2D croppedPicture;                                                                   // The cropped picture
 
     [XmlIgnore]
-    public RenderTarget2D framedPicture;
+    public RenderTarget2D framedPicture;                                                                    // The framed picture
 
     #endregion
 
@@ -74,8 +76,7 @@ public class Photo {
 
     public void RenderFullPicture(SpriteBatch spriteBatch) {
 
-        if (fullPicture != null)
-            fullPicture.Dispose();
+        fullPicture?.Dispose();                                                                             // Null check and dispose of the current render target ( ?. is the null propagation operator )
 
         // set render target
         fullPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, 1920*2, 1080*2);
@@ -93,16 +94,16 @@ public class Photo {
         content.Sort((a, b) => a.position.Y.CompareTo(b.position.Y));
 
         // Draw the content
-        foreach (var item in content) {
+        foreach (var entity in content) {
 
-            if (item.isBoat)
-                spriteBatch.Draw(TLib.Boat[item.isFlipped ? 1 : 0], item.position + new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, SpriteEffects.None, 0);
+            if (entity.isBoat)
+                spriteBatch.Draw(TLib.Boat[entity.isFlipped ? 1 : 0], entity.position + new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), 0.75f, SpriteEffects.None, 0);
 
-            else if (item.isNessie)
-                spriteBatch.Draw(TLib.TheNessie, item.position+ new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), 0.75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            else if (entity.isNessie)
+                spriteBatch.Draw(TLib.TheNessie, entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), 0.75f, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
             else
-                spriteBatch.Draw(TLib.Flotsam[item.spriteID], item.position+ new Vector2(1920/2,1080/2), null, Color.White, item.rotation, new Vector2(128, 128), .75f, item.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.Flotsam[entity.spriteID], entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), .75f, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
         }
 
         spriteBatch.End();

@@ -58,10 +58,17 @@ public class GameMain : FixedTimestampGame {
         endOfGame.Initialize(GraphicsDevice);
         controls.Initialize(GraphicsDevice);
 
-        if (!File.Exists(GameState.SettingsFile))
-            GameState.SaveSettings();
-        else
-            GameState.LoadSettings();
+        // Load the settings
+        if (!File.Exists(GameState.SettingsFile)) {                                                         // Check if the settings file exists
+
+            GameState.LoadSettings();                                                                       // Load the settings
+            GameState.SaveSettings();                                                                       // Save the settings
+        }
+        else                                                                                                // Otherwise
+            GameState.LoadSettings();                                                                       // Load the settings
+
+        // Subscribe to the full screen changed event
+        GameState.IsFullScreenChanged += GameState_IsFullScreenChanged;
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -71,6 +78,12 @@ public class GameMain : FixedTimestampGame {
 #endif
 
     } // End of Initialize method
+
+    private void GameState_IsFullScreenChanged(object sender, EventArgs e) {
+
+        graphics.IsFullScreen = GameState.IsFullScreen;                                                     // Set the full screen mode to the game state full screen mode
+        graphics.ApplyChanges();                                                                            // Apply the changes
+    }
 
     protected override void Update(GameTime gameTime) {
 

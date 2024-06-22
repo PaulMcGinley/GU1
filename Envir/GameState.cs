@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using GU1.Envir.Scenes;
 using Microsoft.Xna.Framework.Media;
 
 namespace GU1.Envir;
 
 public static class GameState {
+
+    // Create an event handler for the full screen change
+    public static event EventHandler IsFullScreenChanged;
 
     [XmlIgnore]
     public static string SettingsFile {
@@ -21,6 +25,20 @@ public static class GameState {
 
             return string.Empty;
         }
+    }
+
+    [XmlIgnore]
+    static bool isFullScreen = false;
+    public static bool IsFullScreen {
+        get => isFullScreen;
+        set {
+            isFullScreen = value;
+            OnIsFullScreenChanged();
+        }
+    }
+
+    static void OnIsFullScreenChanged() {
+        IsFullScreenChanged?.Invoke(null, EventArgs.Empty);
     }
 
     [XmlIgnore] // Ignore this property when serializing
@@ -109,25 +127,56 @@ public static class GameState {
 
     public static void SaveSettings() {
 
-        using BinaryWriter writer = new(File.Open(SettingsFile, FileMode.Create));
+        using BinaryWriter writer = new(File.Create(SettingsFile));                                         // Create the settings file
 
+        writer.Write("Sightings Settings File");                                                            // Header
+        writer.Write((byte)1);                                                                              // Version number (Used to upgrade user settings in the future without losing them)
+
+        // ----- Version 1 --------------------------------------------------
         writer.Write(MusicVolume);
         writer.Write(SFXVolume);
         writer.Write(MaxPhotos);
         writer.Write(ControllerSensitivity);
+        writer.Write(IsFullScreen);
+        // ----- Version 2 --------------------------------------------------
+        // Nessie / Tourist split
+        // Floatsam count to spawn
     }
 
     public static void LoadSettings() {
 
-        if (!File.Exists(SettingsFile))
-            return;
+        if (!File.Exists(SettingsFile)) {                                                                   // If the file does not exist
 
-        using BinaryReader reader = new(File.Open(SettingsFile, FileMode.Open));
+            Settings.SetDefaultValues();                                                                    // Set the default values
+            return;                                                                                         // Return
+        }
 
+        // Read the file
+
+        using BinaryReader reader = new(File.Open(SettingsFile, FileMode.Open));                            // Open the settings file
+
+        string header = reader.ReadString();                                                                // Make sure the file is a settings file by checking the header
+
+        if (header != "Sightings Settings File") {                                                          // If the header is not correct
+
+            Settings.SetDefaultValues();                                                                    // Set the default values
+            return;                                                                                         // Return
+        }
+
+        // Load the settings from the file
+
+        byte version = reader.ReadByte();                                                                   // Version number not used yet
+
+        // ----- Version 1 --------------------------------------------------
         MusicVolume = reader.ReadSingle();
         SFXVolume = reader.ReadSingle();
         MaxPhotos = reader.ReadInt32();
         ControllerSensitivity = reader.ReadSingle();
+        IsFullScreen = reader.ReadBoolean();
+
+        // ----- Version 2 --------------------------------------------------
+        // Nessie / Tourist split
+        // Floatsam count to spawn
     }
 
 }

@@ -15,11 +15,15 @@ public static class GameState {
 
     [XmlIgnore]
     public static string SettingsFile {
+
         get {
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Sightings/settings.dat";
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 return "~/.sightings/settings.dat";
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 return "/Users/Shared/Sightings/settings.dat";
 
@@ -29,6 +33,7 @@ public static class GameState {
 
     [XmlIgnore]
     static bool isFullScreen = false;
+    [XmlIgnore]
     public static bool IsFullScreen {
         get => isFullScreen;
         set {
@@ -37,9 +42,10 @@ public static class GameState {
         }
     }
 
-    static void OnIsFullScreenChanged() {
-        IsFullScreenChanged?.Invoke(null, EventArgs.Empty);
-    }
+    /// <summary>
+    /// Event handler for the full screen change
+    /// </summary>
+    static void OnIsFullScreenChanged() => IsFullScreenChanged?.Invoke(null, EventArgs.Empty);
 
     [XmlIgnore] // Ignore this property when serializing
     public static GameScene CurrentScene = GameScene.MainMenu;                                              // The current scene of the game

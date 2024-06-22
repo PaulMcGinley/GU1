@@ -143,7 +143,11 @@ public class Photo {
         if (framedPicture != null)
             framedPicture.Dispose();
 
-        framedPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, croppedPicture.Width + 50, croppedPicture.Height + 125);
+        int width = croppedPicture.Width + 50;
+        int height = croppedPicture.Height + 125;
+
+        framedPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, width, height);
+
         spriteBatch.GraphicsDevice.SetRenderTarget(framedPicture);
         spriteBatch.GraphicsDevice.Clear(Color.White);
 
@@ -151,7 +155,7 @@ public class Photo {
 
         // Outer Border
         DrawRectangle(new Rectangle(1, 1, framedPicture.Width-1, framedPicture.Height-1), spriteBatch, Color.DarkGray, 0);
-        DrawRectangle(new Rectangle(2, 2, framedPicture.Width-2, framedPicture.Height-2), spriteBatch, Color.DarkGray, 0);
+        DrawRectangle(new Rectangle(2, 2, framedPicture.Width-3, framedPicture.Height-3), spriteBatch, Color.DarkGray, 0);
 
 
         // Photograph
@@ -166,9 +170,15 @@ public class Photo {
         DrawRectangle(new Rectangle(25, 25, croppedPicture.Width, croppedPicture.Height), spriteBatch, Color.Black, 0);
 
         // Writing
-        spriteBatch.DrawString(FLib.DebugFont, $"Captured by {photographer}", new Vector2(25, 25 + croppedPicture.Height + 15), Color.DarkRed);
-        spriteBatch.DrawString(FLib.DebugFont, $"Date: {Date}", new Vector2(25, 25 + croppedPicture.Height + 35), Color.DarkRed);
-        spriteBatch.DrawString(FLib.DebugFont, $"Time: {Time}", new Vector2(25, 25 + croppedPicture.Height + 55), Color.DarkRed);
+        // spriteBatch.DrawString(FLib.DebugFont, $"Captured by {photographer}", new Vector2(25, 25 + croppedPicture.Height + 15), Color.DarkRed);
+        // spriteBatch.DrawString(FLib.DebugFont, $"Date: {Date}", new Vector2(25, 25 + croppedPicture.Height + 35), Color.DarkRed);
+        // spriteBatch.DrawString(FLib.DebugFont, $"Time: {Time}", new Vector2(25, 25 + croppedPicture.Height + 55), Color.DarkRed);
+
+        Vector2 nameSize = FLib.PhotoNameFont.MeasureString($"{photographer}");
+        Vector2 dateSize = FLib.PhotoDateFont.MeasureString($"{Date} / {Time}");
+
+        spriteBatch.DrawString(FLib.PhotoNameFont, $"{photographer}", new Vector2(25, 25 + croppedPicture.Height + 15), Color.Black);
+        spriteBatch.DrawString(FLib.PhotoDateFont, $"{Date} / {Time}", new Vector2(width - dateSize.X - 15, height -dateSize.Y - 15), Color.Black);
 
         spriteBatch.End();
 

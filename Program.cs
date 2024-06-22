@@ -41,6 +41,8 @@ internal static class Program {
     }
 }
 
-// Required font: https://www.1001freefonts.com/optien.font
+// Required font:
+//   - https://www.1001freefonts.com/optien.font
+//   - https://www.dafont.com/hello-samosa.font
 // https://www.fontspace.com/casanova-scotia-font-f29908
 // https://greatdocbrown.itch.io/gamepad-ui?download

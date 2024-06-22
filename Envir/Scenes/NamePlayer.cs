@@ -52,25 +52,25 @@ public class NamePlayer : IScene {
         }
 
         // Check for input (UP)
-        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadUp)) {
+        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadUp) || IsGamePadButtonPressed(playerIndex, Buttons.LeftThumbstickUp)) {
 
             playerName[Index] = (char)(playerName[Index] + 1);                                              // Increment the selected letter
             playerName[Index] = (char)(playerName[Index] > lastLetter ? firstLetter : playerName[Index]);   // Wrap the selected letter to the alphabet
         }
 
         // Check for input (DOWN)
-        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadDown)) {
+        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadDown) || IsGamePadButtonPressed(playerIndex, Buttons.LeftThumbstickDown)) {
 
             playerName[Index] = (char)(playerName[Index] - 1);                                              // Decrement the selected letter
             playerName[Index] = (char)(playerName[Index] < firstLetter ? lastLetter : playerName[Index]);   // Wrap the selected letter to the alphabet
         }
 
         // Check for input (LEFT)
-        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadLeft))
+        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadLeft) || IsGamePadButtonPressed(playerIndex, Buttons.LeftThumbstickLeft))
             Index--;                                                                                        // Decrement the selected index
 
         // Check for input (RIGHT)
-        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadRight))
+        if (IsGamePadButtonPressed(playerIndex, Buttons.DPadRight) || IsGamePadButtonPressed(playerIndex, Buttons.LeftThumbstickRight))
             Index++;                                                                                        // Increment the selected index
 
         // Check for input (START) to confirm

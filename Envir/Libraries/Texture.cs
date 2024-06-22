@@ -127,7 +127,7 @@ public class Texture {
         ControlsBackground = content.Load<Texture2D>("Graphics/controls-BG");
         Clouds = new Texture2D[7];
         for (int i = 0; i < Clouds.Length; i++)
-            Clouds[i] = content.Load<Texture2D>($"Graphics/Clouds/cloud-{i+1}");
+            Clouds[i] = content.Load<Texture2D>($"Graphics/Clouds/gauzcloud-{i+1}");
 
         // UI Elements
         Arrow = content.Load<Texture2D>("Graphics/UI/arrow");

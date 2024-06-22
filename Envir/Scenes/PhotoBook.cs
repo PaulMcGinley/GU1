@@ -189,7 +189,7 @@ public class PhotoBook : IScene {
 
         spriteBatch.End();
 
-        if (photos == null)
+        if (photos == null || photos.Length == 0)
             return;
 
 

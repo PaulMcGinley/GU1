@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -56,6 +57,11 @@ public class GameMain : FixedTimestampGame {
         photoViewer.Initialize(GraphicsDevice);
         endOfGame.Initialize(GraphicsDevice);
         controls.Initialize(GraphicsDevice);
+
+        if (!File.Exists(GameState.SettingsFile))
+            GameState.SaveSettings();
+        else
+            GameState.LoadSettings();
 
         // Set the window title based on the build configuration
 #if DEBUG

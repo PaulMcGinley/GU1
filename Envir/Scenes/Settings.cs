@@ -69,7 +69,7 @@ public class Settings : IScene {
         if (IsAnyInputPressed(Keys.Right, Buttons.DPadRight))
             if (SelectedMenuIndex == 2 && GameState.MaxPhotos < 26)                                         // If the value is in the limited range then we can increment it
                 GameState.MaxPhotos++;
-            else if (SelectedMenuIndex == 2 && GameState.MaxPhotos == int.MaxValue)                       // If the value is unlimited, then we can increment it
+            else if (SelectedMenuIndex == 2 && GameState.MaxPhotos == int.MaxValue)                         // If the value is unlimited, then we can increment it
                 GameState.MaxPhotos = 1;
 
         if (IsAnyInputPressed(Keys.Left, Buttons.DPadLeft))
@@ -119,9 +119,15 @@ public class Settings : IScene {
         spriteBatch.End();
     }
 
-    public void OnSceneStart() { }                                                                          // Not Implemented
+    public void OnSceneStart() {
 
-    public void OnSceneEnd() { }                                                                            // Not Implemented
+        GameState.LoadSettings();                                                                           // Load the settings
+    }
+
+    public void OnSceneEnd() {
+
+        GameState.SaveSettings();                                                                           // Save the settings
+    }
 
     #endregion
 
@@ -130,7 +136,7 @@ public class Settings : IScene {
         GameState.MusicVolume = 1f;
         GameState.SFXVolume = 1f;
         GameState.MaxPhotos = 5;
-        GameState.ControllerSensitivity = 10;
+        GameState.ControllerSensitivity = 5;
     }
 
     enum MenuItems {

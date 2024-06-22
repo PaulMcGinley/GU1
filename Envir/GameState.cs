@@ -1,10 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework.Media;
 
 namespace GU1.Envir;
 
 public static class GameState {
+
+    [XmlIgnore]
+    public static string SettingsFile {
+        get {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Sightings/settings.dat";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                return "~/.sightings/settings.dat";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                return "/Users/Shared/Sightings/settings.dat";
+
+            return string.Empty;
+        }
+    }
 
     [XmlIgnore] // Ignore this property when serializing
     public static GameScene CurrentScene = GameScene.MainMenu;                                              // The current scene of the game
@@ -89,5 +106,28 @@ public static class GameState {
 
     [XmlElement(Order = 4)]
     public static List<Cloud> Clouds = new();                                                               // The clouds in the game
+
+    public static void SaveSettings() {
+
+        using BinaryWriter writer = new(File.Open(SettingsFile, FileMode.Create));
+
+        writer.Write(MusicVolume);
+        writer.Write(SFXVolume);
+        writer.Write(MaxPhotos);
+        writer.Write(ControllerSensitivity);
+    }
+
+    public static void LoadSettings() {
+
+        if (!File.Exists(SettingsFile))
+            return;
+
+        using BinaryReader reader = new(File.Open(SettingsFile, FileMode.Open));
+
+        MusicVolume = reader.ReadSingle();
+        SFXVolume = reader.ReadSingle();
+        MaxPhotos = reader.ReadInt32();
+        ControllerSensitivity = reader.ReadSingle();
+    }
 
 }

@@ -38,6 +38,8 @@ public class Texture {
 
     public static Texture2D ButtonGuide;
 
+    public static Texture2D PhotobookIcon;
+
     /***********************************************************************
      *** Effects ***********************************************************
      ***********************************************************************/
@@ -114,6 +116,8 @@ public class Texture {
         TouristGuide[2] = content.Load<Texture2D>("Graphics/Guide/touristGuide3");
 
         ButtonGuide = content.Load<Texture2D>("Graphics/Guide/buttons");
+
+        PhotobookIcon = content.Load<Texture2D>("Graphics/photobookIcon");
 
         mainMenuBackground = content.Load<Texture2D>("Graphics/MainMenuScene-BG");
         PlayingBackground = new Texture2D[2];

@@ -23,6 +23,7 @@ public class Photo {
     public string Time => timeStamp.ToString("HH:mm");                                                      // The time the photo was taken (Extracted from the timeStamp)
 
     public List<Content> content = new();                                                                   // The content of the photo
+    public List<Cloud> clouds = new();                                                                      // The clouds in the photo
 
     public float bgOpacity = 0f;                                                                            // The opacity of the background
 
@@ -100,11 +101,19 @@ public class Photo {
                 spriteBatch.Draw(TLib.Boat[entity.isFlipped ? 1 : 0], entity.position + new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), 0.75f, SpriteEffects.None, 0);
 
             else if (entity.isNessie)
-                spriteBatch.Draw(TLib.TheNessie, entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), 0.75f, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.TheNessie, entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), entity.scale, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
             else
-                spriteBatch.Draw(TLib.Flotsam[entity.spriteID], entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), .75f, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.Flotsam[entity.spriteID], entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), entity.scale, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
         }
+
+        foreach (var cloud in clouds)
+            cloud.position += new Vector2(1920/2, 1080/2);
+
+
+        // Draw the clouds
+        foreach (var cloud in clouds)
+            cloud.Draw(spriteBatch);
 
         spriteBatch.End();
 
@@ -186,5 +195,6 @@ public class Photo {
         public bool isFlipped;
         public bool isNessie;
         public bool isBoat;
+        public float scale;
     }
 }

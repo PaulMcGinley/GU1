@@ -40,7 +40,7 @@ public class PhotoBook : IScene {
     public void Initialize(GraphicsDevice device) {
 
         camera = new Camera2D(new Viewport(0, 0, 1920, 1080));                                              // Create a new camera
-        camera.LookAt(new Vector2((1920/2) - 150, (1080/2) - 50));                                                 // Set the camera to look at the center of the screen
+        camera.LookAt(new Vector2((1920/2) - 150, 0));                                                 // Set the camera to look at the center of the screen
 
         cursor = new Cursor();                                                                              // Create a new cursor
         cursor.Position = new Vector2(1920/2, (1080/2)+50);                                                       // Set the cursor position to the center of the screen
@@ -120,6 +120,8 @@ public class PhotoBook : IScene {
             photos = null;
             photoBounds = null;
             photoLocations = null;
+
+            cursor.Position = new Vector2(1920/2,1080/2);                                                              // Set the cursor position to the camera position
         }
 
         // Check for input to go back to the main menu
@@ -135,7 +137,7 @@ public class PhotoBook : IScene {
 
 
         // Check for input to view a photo
-        if (IsAnyInputPressed(Buttons.A))
+        if (IsAnyInputPressed(Buttons.A) && !confirmDeletePhotos)
             for (int i = 0; i < photos.Length; i++)
                 if (photoBounds[i].Contains(cursorWorldPos)) {
 
@@ -144,11 +146,14 @@ public class PhotoBook : IScene {
                 }
 
         // Check for input to reset the cursor position
-        if (IsAnyInputPressed(Buttons.Y))
+        if (IsAnyInputPressed(Buttons.Y) && !confirmDeletePhotos)
             cursor.Position = new Vector2(1920/2,1080/2);                                                              // Set the cursor position to the camera position
     }
 
     public void FixedUpdate(GameTime gameTime) {
+
+        if (photos == null)
+            return;
 
         cursor.Position += FirstGamePadRightStickMoving()*10f;                                                        // Move the cursor with the right stick
 
@@ -191,6 +196,8 @@ public class PhotoBook : IScene {
         // Dynamic drawing
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
+        spriteBatch.Draw(TLib.PhotobookIcon, new Vector2((1920/2)-150, -250), null, Color.White, 0f, new Vector2(TLib.PhotobookIcon.Width/2, TLib.PhotobookIcon.Height/2), 0.25f, SpriteEffects.None, 0);
+
         // We only want to draw the photos that will be on screen
         for (int i = 0; i < photos.Length; i++) {
 
@@ -211,7 +218,8 @@ public class PhotoBook : IScene {
 
         spriteBatch.Begin();
 
-        cursor.Draw(spriteBatch);
+        if (photos != null && photos.Length > 0)
+            cursor.Draw(spriteBatch);
 
         if (!confirmDeletePhotos && photos != null && photos.Length > 0)
             spriteBatch.DrawString(FLib.LeaderboardFont, $"Press (X) to delete all photographs.", new Vector2(10, 10), Color.White*0.75f);

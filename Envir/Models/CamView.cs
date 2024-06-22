@@ -18,7 +18,7 @@ public class CamView : IMove {
     public int remainingPhotos;
     public Photo[] photos;
     public string playerName = string.Empty;
-    float camMaxDistance = 500;
+    float camMaxDistance = 650;
 
     public CamView(Color colour, int maxPhotos) {
 
@@ -81,12 +81,18 @@ public class CamView : IMove {
 
             photos[nextPhotoIndex].content.Add(new Photo.Content() {
 
+                scale = flotsam.scale,                                                                      // Set the scale of the flotsam
                 position = flotsam.Position,                                                                // Set the position of the flotsam
                 rotation = flotsam.sprite.GetRotation(),                                                    // Set the rotation of the flotsam
                 spriteID = flotsam.spriteIndex,                                                             // Set the sprite ID of the flotsam
                 isFlipped = flotsam.Velocity.X < 0,                                                         // Set the flip of the flotsam based on the velocity
                 isNessie = flotsam.PlayerControlled                                                         // Set the isNessie flag to true if the flotsam is Nessie
             });
+        }
+
+        foreach (Cloud cloud in GameState.Clouds) {
+
+            photos[nextPhotoIndex].clouds.Add(new Cloud(cloud.position, cloud.scale, cloud.speed, cloud.index, cloud.spriteEffect, false));
         }
 
         photos[nextPhotoIndex].content.Add(new Photo.Content() {
@@ -107,10 +113,10 @@ public class CamView : IMove {
 
     public void Reset() {
 
-        remainingPhotos = maxPhotos;
+        remainingPhotos = maxPhotos;                                                                        // Reset the number of remaining photos to the max number of photos
 
-        if (maxPhotos < 26)
-            photos = new Photo[maxPhotos];
+        if (maxPhotos < 26)                                                                                 // If the max photos is NOT set to unlimited
+            photos = new Photo[maxPhotos];                                                                  // Create an array of photos, ignore if unlimited as the photos are not saved
     }
 
     public void Draw(SpriteBatch spriteBatch) {

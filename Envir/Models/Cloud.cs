@@ -13,13 +13,17 @@ public class Cloud : IGameObject{
     public float scale;
     public float speed;
     public byte index;
-    SpriteEffects spriteEffect;
+    public SpriteEffects spriteEffect;
 
-    public Cloud(Vector2 position, float scale, float speed, byte index) {
+    public Cloud(Vector2 position, float scale, float speed, byte index, SpriteEffects spriteEffect = SpriteEffects.None, bool useSigEffect = true) {
         this.position = position;
         this.scale = scale;
         this.speed = speed;
         this.index = index;
+
+        this.spriteEffect = spriteEffect;
+
+        if (useSigEffect) return;
 
         switch (random.Next(4)) {
             case 0:
@@ -36,6 +40,8 @@ public class Cloud : IGameObject{
                 break;
         }
     }
+
+    public Cloud() { } // For serialization
 
     public void Initialize(GraphicsDevice device) { }
 

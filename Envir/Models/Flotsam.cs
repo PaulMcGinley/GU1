@@ -43,11 +43,14 @@ public class Flotsam : Actor {
 
     public int spriteIndex = 0;
 
+    public float scale = 1.0f;
+
     /// <summary>
     /// This property is used to determine if the flotsam is a phantom object that will disappear after the player inspects it
     /// </summary>
     //private bool isPhantom = false; // TODO: Implement this
     private float opacity = 1.0f;
+
 
     public Flotsam(int spriteID, Sprite2D sprite) {
 
@@ -70,6 +73,38 @@ public class Flotsam : Actor {
         colour = new Color(rand.Int(0, 255), rand.Int(0, 255), rand.Int(0, 255));
         MoveSpeed = rand.Float(0.5f, 2.0f);
         seed = rand.Next();
+
+
+        switch (spriteIndex) {
+
+            case 0:     // Tennent's Lager
+            case 1:     // Tennent's Lager -45o
+            case 2:     // Tennent's Lager back
+                scale = 1.0f;
+                break;
+
+            case 4:     // Irn Bru -45o
+            case 5:     // Irn Bru
+            case 6:     // Fish
+            case 9:     // Highland cow plushie
+            case 12:    // Plank 2x4
+            case 13:    // Branch (Gun)
+            case 14:    // Branch (Sword)
+            case 3:    // Barrel
+            case 7:    // Box
+                scale = 1.5f;
+                break;
+
+
+            case 8:     // Tunnux Tea Cake
+            case 10:    // Nessie plushie
+                scale = 2.0f;
+                break;
+
+            case 11:    // Seaweed
+                scale = 2.5f;
+                break;
+        }
     }
 
     public void Initialize(GraphicsDevice device) {
@@ -258,7 +293,7 @@ public class Flotsam : Actor {
             return;
 
         // ? Why is sprite not drawing itself?
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White /*(PlayerControlled ? Color.Black : (isCollected ? Color.Red : Color.White))*/ * opacity, sprite.GetRotation(), new(64,64), sprite.GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White /*(PlayerControlled ? Color.Black : (isCollected ? Color.Red : Color.White))*/ * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
 
         // #region Boundary Box
 

@@ -94,18 +94,25 @@ public class Photo {
         content.Sort((a, b) => a.position.X.CompareTo(b.position.X));
         content.Sort((a, b) => a.position.Y.CompareTo(b.position.Y));
 
+        Content boat = new();
         // Draw the content
         foreach (var entity in content) {
 
-            if (entity.isBoat)
-                spriteBatch.Draw(TLib.Boat[entity.isFlipped ? 1 : 0], entity.position + new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), 0.75f, SpriteEffects.None, 0);
+            if (entity.isBoat) {
+
+                boat = entity;
+                continue;
+            }
 
             else if (entity.isNessie)
-                spriteBatch.Draw(TLib.TheNessie, entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), entity.scale, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                spriteBatch.Draw(TLib.TheNessie, entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), 1f, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
             else
                 spriteBatch.Draw(TLib.Flotsam[entity.spriteID], entity.position+ new Vector2(1920/2,1080/2), null, Color.White, entity.rotation, new Vector2(128, 128), entity.scale, entity.isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
         }
+
+        spriteBatch.Draw(TLib.Boat[boat.isFlipped ? 1 : 0], boat.position + new Vector2(1920/2,1080/2), null, Color.White, boat.rotation, new Vector2(128, 128), 1f, SpriteEffects.None, 0);
+
 
         foreach (var cloud in clouds)
             cloud.position += new Vector2(1920/2, 1080/2);

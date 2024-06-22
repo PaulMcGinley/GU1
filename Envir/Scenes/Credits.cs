@@ -1,4 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,27 +11,42 @@ namespace GU1.Envir.Scenes;
 
 public class Credits : IScene {
 
+    Random random = new();                                                                                  // Random number generator
+
     Camera2D camera;                                                                                        // Orthographic camera for the scene
 
     Viewport viewport;                                                                                      // The viewport of the scene
     Vector2 screenDimensions => new(viewport.Width, viewport.Height);                                       // The dimensions of the screen from the viewport
 
-    const int lineSpacing = 50;                                                                             // The space between each line of text
+    bool photoLoaded = false;                                                                               // If the photo has been loaded
+    Photo[] photos;                                                                                         // The photos to display
+    string[] photoNames;                                                                                    // The names of the photos
+    Vector2[] photoPositions = new Vector2[6] {
+        new (150, 200),
+        new (150, 500),
+        new (150, 800),
+        new ((1920)-150, 250),
+        new ((1920)-150, 550),
+        new ((1920)-150, 850)
+    };
+    float[] photoRotations = new float[6] { 0.18f, -0.22f, 0.21f, -0.17f, 0.15f, -0.22f };
+
+    const int lineSpacing = 55;                                                                             // The space between each line of text
     readonly string[,] credits = new string[,] {                                                            // The list of credits, job and name
 
         //JOB                           NAME
-        { "Game Concept",               "Corey Connolly"    },
-        { "Game Design",                "Paul McGinley"     },
+        { "Concept",                    "Corey Connolly"    },
+        { "Design",                     "Paul McGinley"     },
         { "Inspiration",                "Hidden in plain sight" },
         { "Project Manager",            "Kieran Bett"       },
         { "Lead Programmer",            "Paul McGinely"     },
-        { "Additional Programer" ,      "Alexander Tuffy"   },
-        { "Audio by",                   "Albert Bugheanu"   },
+        { "Secondary Programer" ,       "Alexander Tuffy"   },
+        { "Sound Effects by",           "Albert Bugheanu"   },
         { "Sourced Audio from",         "Pixabay.com"       },
-        { "Game Play Music",            "Nesrality"         },
-        { "Lead Art Designer",          "Alexander Tuffy"   },
-        { "Additional Art",             "Corey Connolly"    },
-        { "Sprite Tweaks",              "Paul McGinley"     },
+        { "Game Play Music by",         "Nesrality"         },
+        { "Lead Artist",                "Alexander Tuffy"   },
+        { "Secondary Artist",           "Corey Connolly"    },
+        { "Graphic touchup",            "Paul McGinley"     },
         { "Sourced Art by",             "greatdocbrown (Itch.io)" },
         { "Tester 1",                   "Paul McGinley"     },
         { "Tester 2",                   "Bash"              },
@@ -76,7 +95,23 @@ public class Credits : IScene {
 
     public void Draw(SpriteBatch spriteBatch) {
 
+        if (!photoLoaded) {
+
+            LoadPhotos(spriteBatch);                                                                        // Load the photos
+            photoLoaded = true;                                                                             // Set the photo loaded flag
+        }
+
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
+
+        // if (photos.Length > 0)                                                                              // If there are photos
+        //     //spriteBatch.Draw(photos[0].framedPicture, new Vector2(leftX, startY ), Color.White);                // Draw the photo
+        //     spriteBatch.Draw(photos[0].framedPicture, new Vector2(leftX, startY), null, Color.White, rot, new Vector2(photos[0].framedPicture.Width/2, 15), 1f, SpriteEffects.None, 0f);
+
+        for (int i = 0; i < photos.Length; i++) {
+
+            int ran = random.Next(photos.Length-1);                                                            // Get a random photo
+            spriteBatch.Draw(photos[i].framedPicture, photoPositions[i], null, Color.White, photoRotations[i], new Vector2(photos[ran].framedPicture.Width/2, 15), 1f, SpriteEffects.None, 0f);
+        }
 
         // Draw the title
         DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Sightings", yPosition: 100f, screenDimensions, Color.White);
@@ -106,8 +141,34 @@ public class Credits : IScene {
         SLib.Whistle.Play(GameState.SFXVolume, 0, 0);
     }
 
-    public void OnSceneEnd() { }
+    public void OnSceneEnd() {
+
+        photoLoaded = false;                                                                                // Reset the photo loaded flag
+    }
 
     #endregion
 
+
+    public void LoadPhotos(SpriteBatch spriteBatch) {
+
+        string directoryPath = Photo.SaveDir;                                                               // The directory path to the photos
+        var regex = new Regex(@"^-\d+\.xml$");                                                              // Regex to match the file names ( -[number].xml)
+
+        // Get all the files in the directory that match the regex pattern
+        photoNames = Directory.EnumerateFiles(Photo.SaveDir, "*.xml")
+                              .Where(path => regex.IsMatch(Path.GetFileName(path)))                         // Filter the files
+                              .Select(path => Path.GetFileNameWithoutExtension(path))                       // Get the file names
+                              .ToArray();                                                                   // Convert to an array
+
+        int photosToLoad = photoNames.Length < 6 ? photoNames.Length : 6;                                   // The number of photos to load
+
+        photos = new Photo[photosToLoad];                                                                    // Create a new array of photos
+
+        for (int i = 0; i < photosToLoad; i++) {
+
+            photos[i] = new Photo();                                                                        // Create a new photo
+            photos[i] = photos[i].Load(photoNames[i]);                                                      // Load the photo
+            photos[i].Render(spriteBatch);                                                                  // Render the full picture
+        }
+    }
 }

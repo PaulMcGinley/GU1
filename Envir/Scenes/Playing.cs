@@ -51,12 +51,13 @@ public class Playing : IScene {
         camera.LookAt(new Vector2(1920/2, 1080/2));                                                         // Set the camera to look at the center of the screen
         camera.SetZoomLevel(0.5f);                                                                          // Set the camera zoom level
 
+        // When the song ends, play another random game music track
         MediaPlayer.ActiveSongChanged += (s, e) =>
         {
-            nowPlaying = SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)];
-            MediaPlayer.Play(nowPlaying);
-            showNowPlaying = true;
-            showNowPlayingTime = 0f;
+            nowPlaying = SLib.GameMusic[random.Int(0, SLib.GameMusic.Length)];                              // Set the now playing song to a random game music track
+            MediaPlayer.Play(nowPlaying);                                                                   // Play a random game music track
+            showNowPlaying = true;                                                                          // Show the now playing text
+            showNowPlayingTime = 0f;                                                                        // Reset the time to show the now playing text (Update will set this)
 
         }; // When the song ends, play another random game music track
     }
@@ -67,13 +68,20 @@ public class Playing : IScene {
 
     public void Update(GameTime gameTime) {
 
+        // Check for input to pause the game
         if (IsAnyInputPressed(Keys.P, Buttons.Start))
             GameState.CurrentScene = GameScene.PauseMenu;
 
+        // Update the camera
         camera.Update(gameTime);
 
+        // Update the players
         foreach (Player player in GameState.Players)
             player.Update(gameTime);
+
+        // Update the clouds
+        foreach (var cloud in GameState.Clouds)
+            cloud.Update(gameTime);
 
         // Check if Nessie has collected any flotsam
         CheckForCollection();
@@ -93,9 +101,7 @@ public class Playing : IScene {
         // Check if the tourist has run out of photos
         CheckForTouristLose();
 
-        foreach (var cloud in GameState.Clouds)
-            cloud.Update(gameTime);
-
+        // Update the Now Playing text
         if (showNowPlayingTime == 0f) {
             showNowPlayingTime = gameTime.TotalGameTime.TotalSeconds;
             hideNowPlaying = gameTime.TotalGameTime.TotalSeconds + 5f;
@@ -103,13 +109,12 @@ public class Playing : IScene {
 
         if (gameTime.TotalGameTime.TotalSeconds > hideNowPlaying)
             showNowPlaying = false;
-
     }
 
     public void FixedUpdate(GameTime gameTime) {
 
         bool nessieScoreFadeOut = false;
-        bool touristScoreFadeOut = false;                                                                   // Assume the flotsam is not fading out
+        bool touristScoreFadeOut = false;
 
         // Check if flotsam intersects with the score bounds
         foreach (Flotsam flotsam in GameState.Flotsam)

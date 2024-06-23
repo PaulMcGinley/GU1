@@ -131,6 +131,9 @@ public static class GameState {
     [XmlElement(Order = 4)]
     public static List<Cloud> Clouds = new();                                                               // The clouds in the game
 
+    [XmlIgnore]
+    public static bool EnableSubmersionEffect = false;                                                      // Enable the submersion effect
+
     public static void SaveSettings() {
 
         using BinaryWriter writer = new(File.Create(SettingsFile));                                         // Create the settings file
@@ -144,6 +147,7 @@ public static class GameState {
         writer.Write(MaxPhotos);
         writer.Write(ControllerSensitivity);
         writer.Write(IsFullScreen);
+        writer.Write(EnableSubmersionEffect);
         // ----- Version 2 --------------------------------------------------
         // Nessie / Tourist split
         // Floatsam count to spawn
@@ -179,7 +183,7 @@ public static class GameState {
         MaxPhotos = reader.ReadInt32();
         ControllerSensitivity = reader.ReadSingle();
         IsFullScreen = reader.ReadBoolean();
-
+        EnableSubmersionEffect = reader.ReadBoolean();
         // ----- Version 2 --------------------------------------------------
         // Nessie / Tourist split
         // Floatsam count to spawn

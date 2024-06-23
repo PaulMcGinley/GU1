@@ -292,7 +292,9 @@ public class Flotsam : Actor {
 
     public void renderFrame(SpriteBatch spriteBatch) {
 
-        int buffer = 0;
+        if (!isAlive)
+            return;
+
         int cellSize = 128;
         Vector2 imageSize = new(128, 128);
 
@@ -336,14 +338,10 @@ public class Flotsam : Actor {
         if (!isAlive)       // Don't draw if the flotsam is not alive
             return;
 
-        spriteBatch.Draw(targetFinal, sprite.Position, new Rectangle(0,0,128,128),  Color.White * opacity, 0f, new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
-
-        // targetBottom.Dispose();
-        // targetTop.Dispose();
-        // targetFinal.Dispose();
-
-
-        //spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+        if (GameState.EnableSubmersionEffect)
+            spriteBatch.Draw(targetFinal, sprite.Position, new Rectangle(0,0,128,128),  Color.White * opacity, 0f, new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+        else
+            spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
     }
 
     public void DrawRipples(SpriteBatch spriteBatch) {

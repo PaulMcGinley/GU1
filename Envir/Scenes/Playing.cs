@@ -110,8 +110,9 @@ public class Playing : IScene {
         if (gameTime.TotalGameTime.TotalSeconds > hideNowPlaying)
             showNowPlaying = false;
 
-        foreach (var flotsam in GameState.Flotsam)
-            flotsam.Dispose();
+        if (GameState.EnableSubmersionEffect)
+            foreach (var flotsam in GameState.Flotsam)
+                flotsam.Dispose();
     }
 
     public void FixedUpdate(GameTime gameTime) {
@@ -185,16 +186,18 @@ public class Playing : IScene {
 
         spriteBatch.End();
 
-        //spriteBatch.Begin();
-
+// --- Self batched
         // Render the flotsam frame
-        foreach (var flotsam in GameState.Flotsam)
-            flotsam.renderFrame(spriteBatch);
+        if (GameState.EnableSubmersionEffect) {
 
-        //spriteBatch.End();
-
+            foreach (var flotsam in GameState.Flotsam)
+                flotsam.renderFrame(spriteBatch);
 
         spriteBatch.GraphicsDevice.SetRenderTarget(null);
+        }
+// --- Self batched
+
+
         spriteBatch.Begin(transformMatrix: camera.TransformMatrix);
 
         // Flotsam

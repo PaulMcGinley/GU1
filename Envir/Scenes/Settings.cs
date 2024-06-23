@@ -150,6 +150,8 @@ public class Settings : IScene {
         GameState.SFXVolume = 1f;
         GameState.MaxPhotos = 5;
         GameState.ControllerSensitivity = 5;
+        GameState.IsFullScreen = false;
+        GameState.EnableSubmersionEffect = false;
     }
 
     enum MenuItems {

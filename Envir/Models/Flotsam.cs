@@ -327,6 +327,7 @@ public class Flotsam : Actor {
         spriteBatch.Begin();
         spriteBatch.Draw(targetTop, Vector2.Zero, null, Color.White*0.2f, 0f, new(0,0), 1f, SpriteEffects.None, 0);
         spriteBatch.Draw(targetTop,  Vector2.Zero, new Rectangle(0,0, cellSize,cellSize/8*4), Color.White, 0f, new(0,0), 1f, SpriteEffects.None, 0);
+        // spriteBatch.Draw(targetTop, Vector2.Zero, new Rectangle(0, 0, cellSize, cellSize / 8 * 4), Color.White, 0f, new Vector2(0, 0), new Vector2(1,0.5f), SpriteEffects.None, 0);
         spriteBatch.End();
 
     }

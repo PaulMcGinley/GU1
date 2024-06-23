@@ -3,7 +3,7 @@
 # Define the application name
 APP_NAME="Sightings"
 EXE_NAME="GU1"
-COPYRIGHT="Class of 2023-24 | Team4 © 2024"
+COPYRIGHT="Class of 2023-24 | Team4"
 
 # Define paths
 PUBLISH_DIR="./publish"
@@ -47,7 +47,7 @@ cp ${PUBLISH_DIR}/osx-arm64/* $MACOS_DIR/
 cp ./icon.icns $RESOURCES_DIR/
 
 # Copy the Content folder to the Resources directory
-mv ${PUBLISH_DIR}/osx-arm64/Content $RESOURCES_DIR
+cp ${PUBLISH_DIR}/osx-arm64/Content $RESOURCES_DIR
 
 # Create Info.plist
 cat > ${CONTENTS_DIR}/Info.plist <<EOL
@@ -97,6 +97,7 @@ echo "Application bundle created at ${APP_BUNDLE_DIR}"
 
 echo "All tasks completed successfully."
 
-#https://github.com/sindresorhus/create-dmg
-#https://stackoverflow.com/questions/57367485/do-i-need-to-notarize-both-the-app-and-dmg-image/60800864#60800864
+brew install graphicsmagick imagemagick npm node@18 # These are the dependencies for create-dmg
 create-dmg ${PUBLISH_DIR}/Sightings.app ${PUBLISH_DIR}
+#https://github.com/sindresorhus/create-dmg // This needs npm (brew install npm) (brew install node@18)
+#https://stackoverflow.com/questions/57367485/do-i-need-to-notarize-both-the-app-and-dmg-image/60800864#60800864

@@ -26,6 +26,7 @@ internal static class Program {
 
     private static void Main() {
 
+        // Set the save directory for photos (Operating System specific)
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             Photo.SaveDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Sightings/Photos";
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -33,9 +34,11 @@ internal static class Program {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             Photo.SaveDir = "/Users/Shared/Sightings/Photos";
 
+        // Create the save directory if it doesn't exist
         if (!Directory.Exists(Photo.SaveDir))
             Directory.CreateDirectory(Photo.SaveDir);
 
+        // Create the game and run it
         using Game game = new GameMain();
         game.Run();
     }
@@ -44,5 +47,4 @@ internal static class Program {
 // Required font:
 //   - https://www.1001freefonts.com/optien.font
 //   - https://www.dafont.com/hello-samosa.font
-// https://www.fontspace.com/casanova-scotia-font-f29908
 // https://greatdocbrown.itch.io/gamepad-ui?download

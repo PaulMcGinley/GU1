@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq.Expressions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GU1.Engine.Models;
@@ -30,6 +31,9 @@ public partial class FixedTimestampGame : Game
             PreferredBackBufferWidth = 1920,                                                                // Set the preferred back buffer width
             PreferredBackBufferHeight = 1080,                                                               // Set the preferred back buffer height
             IsFullScreen = false,                                                                           // Set the game to run in full screen mode
+            GraphicsProfile = GraphicsProfile.HiDef,                                                        // Set the graphics profile to HiDef
+            HardwareModeSwitch = true,                                                                      // Disable the hardware mode switch
+            PreferHalfPixelOffset = true,                                                                   // Enable the half pixel offset
         };
 
         IsFixedTimeStep = false;

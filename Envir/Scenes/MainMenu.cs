@@ -11,11 +11,11 @@ public class MainMenu : IScene {
 
     Graphic2D background;                                                                                   // Background image
 
-    Color menuHotColor = Color.AliceBlue *0.90f;                                                                   // Selected menu item colour
+    Color menuHotColor = Color.AliceBlue *0.90f;                                                            // Selected menu item colour
     Color menuColdColor = Color.White *0.5f;                                                                // Unselected menu item colour
 
     Color textHotColor = Color.Black;                                                                       // Selected menu item text colour
-    Color textColdColor = Color.Black*0.7f;                                                                      // Unselected menu item text colour
+    Color textColdColor = Color.Black*0.7f;                                                                 // Unselected menu item text colour
 
     int selectedMenuIndex = 0;                                                                              // The index of the selected menu item (variable)
     int SelectedMenuIndex {                                                                                 // The index of the selected menu item (property)

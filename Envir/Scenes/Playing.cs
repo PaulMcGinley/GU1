@@ -110,9 +110,9 @@ public class Playing : IScene {
         if (gameTime.TotalGameTime.TotalSeconds > hideNowPlaying)
             showNowPlaying = false;
 
-        if (GameState.EnableSubmersionEffect)
-            foreach (var flotsam in GameState.Flotsam)
-                flotsam.Dispose();
+        // if (GameState.EnableSubmersionEffect)
+        //     foreach (var flotsam in GameState.Flotsam)
+        //         flotsam.Dispose();
     }
 
     public void FixedUpdate(GameTime gameTime) {

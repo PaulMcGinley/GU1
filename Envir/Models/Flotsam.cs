@@ -288,19 +288,24 @@ public class Flotsam : Actor {
 
     RenderTarget2D targetFinal;
     RenderTarget2D targetTop;
-    RenderTarget2D targetBottom;
+    //RenderTarget2D targetBottom;
 
     public void renderFrame(SpriteBatch spriteBatch) {
 
         if (!isAlive)
             return;
 
+        if (spriteIndex == 4 || spriteIndex == 6 || spriteIndex == 8 || spriteIndex == 9 || spriteIndex == 10 || spriteIndex == 11 || spriteIndex == 12 || spriteIndex == 13 || spriteIndex == 14)
+            return;
+
         int cellSize = 128;
         Vector2 imageSize = new(128, 128);
 
         // set render target
+        targetTop?.Dispose();
         targetTop = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
-        targetBottom = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
+        //targetBottom = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
+        targetFinal?.Dispose();
         targetFinal = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
 
         spriteBatch.GraphicsDevice.SetRenderTarget(targetTop);
@@ -310,33 +315,40 @@ public class Flotsam : Actor {
         spriteBatch.End();
 
 
-        spriteBatch.GraphicsDevice.SetRenderTarget(targetBottom);
-        spriteBatch.GraphicsDevice.Clear(Color.Transparent);
-        spriteBatch.Begin();
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], cycloidYOffset+ new Vector2(cellSize/2,cellSize/2), null, Color.White*0.25f,  sprite.GetRotation(), imageSize/2, 1f, sprite.GetEffects(), 0);
-        spriteBatch.End();
+        // spriteBatch.GraphicsDevice.SetRenderTarget(targetBottom);
+        // spriteBatch.GraphicsDevice.Clear(Color.Transparent);
+        // spriteBatch.Begin();
+        // spriteBatch.Draw(TLib.Flotsam[spriteIndex], cycloidYOffset+ new Vector2(cellSize/2,cellSize/2), null, Color.White*0.25f,  sprite.GetRotation(), imageSize/2, 1f, sprite.GetEffects(), 0);
+        // spriteBatch.End();
 
 
         spriteBatch.GraphicsDevice.SetRenderTarget(targetFinal);
         spriteBatch.GraphicsDevice.Clear(Color.Transparent);
         spriteBatch.Begin();
-        spriteBatch.Draw(targetBottom, Vector2.Zero, null, Color.White, 0f, new(0,0), 1f, SpriteEffects.None, 0);
-        spriteBatch.Draw(targetTop,  Vector2.Zero, new Rectangle(0,0, cellSize,cellSize/8*5), Color.White, 0f, new(0,0), 1f, SpriteEffects.None, 0);
+        spriteBatch.Draw(targetTop, Vector2.Zero, null, Color.White*0.2f, 0f, new(0,0), 1f, SpriteEffects.None, 0);
+        spriteBatch.Draw(targetTop,  Vector2.Zero, new Rectangle(0,0, cellSize,cellSize/8*4), Color.White, 0f, new(0,0), 1f, SpriteEffects.None, 0);
         spriteBatch.End();
 
     }
 
     public void Dispose() {
 
-        targetBottom?.Dispose();
-        targetTop?.Dispose();
-        targetFinal?.Dispose();
+        //targetBottom?.Dispose();
+        //targetTop?.Dispose();
+        //targetFinal?.Dispose();
     }
 
     public void Draw(SpriteBatch spriteBatch) {
 
         if (!isAlive)       // Don't draw if the flotsam is not alive
             return;
+
+        if (spriteIndex == 4 || spriteIndex == 6 || spriteIndex == 8 || spriteIndex == 9 || spriteIndex == 10 || spriteIndex == 11 || spriteIndex == 12 || spriteIndex == 13 || spriteIndex == 14) {
+
+            spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+            return;
+        }
+
 
         if (GameState.EnableSubmersionEffect)
             spriteBatch.Draw(targetFinal, sprite.Position, new Rectangle(0,0,128,128),  Color.White * opacity, 0f, new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());

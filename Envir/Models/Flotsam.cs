@@ -39,7 +39,7 @@ public class Flotsam : Actor {
     double nextRippleTime = 0;
 
     RenderTarget2D renderTarget;
-    BlendState blendState = BlendState.AlphaBlend;
+    //BlendState blendState = BlendState.AlphaBlend;
 
     public int spriteIndex = 0;
 
@@ -286,34 +286,64 @@ public class Flotsam : Actor {
             return;
     }
 
+    RenderTarget2D targetFinal;
+    RenderTarget2D targetTop;
+    RenderTarget2D targetBottom;
+
+    public void renderFrame(SpriteBatch spriteBatch) {
+
+        int buffer = 0;
+        int cellSize = 128;
+        Vector2 imageSize = new(128, 128);
+
+        // set render target
+        targetTop = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
+        targetBottom = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
+        targetFinal = new RenderTarget2D(spriteBatch.GraphicsDevice, cellSize, cellSize);
+
+        spriteBatch.GraphicsDevice.SetRenderTarget(targetTop);
+        spriteBatch.GraphicsDevice.Clear(Color.Transparent);
+        spriteBatch.Begin();
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], cycloidYOffset + new Vector2(cellSize/2,cellSize/2), null, Color.White,  sprite.GetRotation(), imageSize/2, 1f, sprite.GetEffects(), 0);
+        spriteBatch.End();
+
+
+        spriteBatch.GraphicsDevice.SetRenderTarget(targetBottom);
+        spriteBatch.GraphicsDevice.Clear(Color.Transparent);
+        spriteBatch.Begin();
+        spriteBatch.Draw(TLib.Flotsam[spriteIndex], cycloidYOffset+ new Vector2(cellSize/2,cellSize/2), null, Color.White*0.25f,  sprite.GetRotation(), imageSize/2, 1f, sprite.GetEffects(), 0);
+        spriteBatch.End();
+
+
+        spriteBatch.GraphicsDevice.SetRenderTarget(targetFinal);
+        spriteBatch.GraphicsDevice.Clear(Color.Transparent);
+        spriteBatch.Begin();
+        spriteBatch.Draw(targetBottom, Vector2.Zero, null, Color.White, 0f, new(0,0), 1f, SpriteEffects.None, 0);
+        spriteBatch.Draw(targetTop,  Vector2.Zero, new Rectangle(0,0, cellSize,cellSize/8*5), Color.White, 0f, new(0,0), 1f, SpriteEffects.None, 0);
+        spriteBatch.End();
+
+    }
+
+    public void Dispose() {
+
+        targetBottom?.Dispose();
+        targetTop?.Dispose();
+        targetFinal?.Dispose();
+    }
+
     public void Draw(SpriteBatch spriteBatch) {
 
-        // Guardian clause: if the flotsam is not alive, has been collected and is not fading out then don't draw it
-        if (!isAlive)
+        if (!isAlive)       // Don't draw if the flotsam is not alive
             return;
 
-        // ? Why is sprite not drawing itself?
-        spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White /*(PlayerControlled ? Color.Black : (isCollected ? Color.Red : Color.White))*/ * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+        spriteBatch.Draw(targetFinal, sprite.Position, new Rectangle(0,0,128,128),  Color.White * opacity, 0f, new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
 
-        // #region Boundary Box
+        // targetBottom.Dispose();
+        // targetTop.Dispose();
+        // targetFinal.Dispose();
 
-        // Draw a box around the flotsam if it is player controlled
-        // if (PlayerControlled)
-        //     DrawRectangle(new Rectangle((int)Position.X - (sprite.Width/4), (int)Position.Y - (sprite.Height/4), 64, 64), spriteBatch, colour);
 
-        // #endregion
-
-        // #region Travel Path
-
-        // // Draw lines from the flotsam to the target position
-        // //DrawLine(Position, TargetPosition, spriteBatch, colour);
-        // DrawLine(Position + new Vector2(32,32), TargetPosition, spriteBatch, colour);
-        // DrawLine(Position - new Vector2(32,32), TargetPosition, spriteBatch, colour);
-        // DrawLine(Position + new Vector2(32,-32), TargetPosition, spriteBatch, colour);
-        // DrawLine(Position - new Vector2(32,-32), TargetPosition, spriteBatch, colour);
-
-        // #endregion
-
+        //spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
     }
 
     public void DrawRipples(SpriteBatch spriteBatch) {

@@ -36,6 +36,11 @@ public partial class FixedTimestampGame : Game
             PreferHalfPixelOffset = true,                                                                   // Enable the half pixel offset
         };
 
+        // Preserve the contents of the render target, this will stop gaem from blacking out when using the render targets
+        graphics.PreparingDeviceSettings += 
+            (object s, PreparingDeviceSettingsEventArgs args) => 
+            args.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
+
         IsFixedTimeStep = false;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;

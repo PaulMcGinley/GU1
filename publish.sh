@@ -4,6 +4,7 @@
 APP_NAME="Sightings"
 EXE_NAME="GU1"
 COPYRIGHT="Class of 2023-24 | Team4"
+VERSION="1.0"
 
 # Define paths
 PUBLISH_DIR="./publish"
@@ -47,7 +48,8 @@ cp ${PUBLISH_DIR}/osx-arm64/* $MACOS_DIR/
 cp ./icon.icns $RESOURCES_DIR/
 
 # Copy the Content folder to the Resources directory
-cp ${PUBLISH_DIR}/osx-arm64/Content $RESOURCES_DIR
+# Copy not working, using move, which builds the app bundle correctly but leaves the osx-arm64 folder empty
+mv ${PUBLISH_DIR}/osx-arm64/Content $RESOURCES_DIR
 
 # Create Info.plist
 cat > ${CONTENTS_DIR}/Info.plist <<EOL
@@ -70,7 +72,7 @@ cat > ${CONTENTS_DIR}/Info.plist <<EOL
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>${VERSION}</string>
     <key>CFBundleSignature</key>
     <string>FONV</string>
     <key>CFBundleVersion</key>
@@ -97,7 +99,16 @@ echo "Application bundle created at ${APP_BUNDLE_DIR}"
 
 echo "All tasks completed successfully."
 
+echo "Installing create-dmg dependencies..."
+
 brew install graphicsmagick imagemagick npm node@18 # These are the dependencies for create-dmg
+
+echo "Installing create-dmg..."
+npm install --global create-dmg
+
+echo "Creating DMG..."
 create-dmg ${PUBLISH_DIR}/Sightings.app ${PUBLISH_DIR}
+
+echo "DMG created at ${PUBLISH_DIR}/Sightings.dmg"
 #https://github.com/sindresorhus/create-dmg // This needs npm (brew install npm) (brew install node@18)
 #https://stackoverflow.com/questions/57367485/do-i-need-to-notarize-both-the-app-and-dmg-image/60800864#60800864

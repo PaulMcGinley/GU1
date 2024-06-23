@@ -42,7 +42,7 @@ public class CamView : IMove {
 
     public void Move(GameTime gameTime) {
 
-        position += Velocity;
+        position += (Velocity * 1000) * (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     #endregion

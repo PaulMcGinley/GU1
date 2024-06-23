@@ -50,7 +50,6 @@ public class Player : Actor {
         if (!playedAsTourist)
             return ActorType.Tourist;
 
-        //return rand.Bool() ? ActorType.Nessie : ActorType.Tourist;
         return ActorType.Tourist;
     }
 
@@ -89,7 +88,7 @@ public class Player : Actor {
         // Guardian clause: if the player is not a tourist then don't update the camera view
         if (Role != ActorType.Tourist) return;
 
-        CameraView.offset += GamePadRightStick(ControllerIndex) * GameState.ControllerSensitivity;
+        CameraView.offset += (GamePadRightStick(ControllerIndex) * (float)gameTime.ElapsedGameTime.TotalSeconds) * (GameState.ControllerSensitivity*500);
 
         CameraView.position = GameState.Boat.Position;
         CameraView.Update(gameTime);

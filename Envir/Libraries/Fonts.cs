@@ -13,6 +13,9 @@ public static class Fonts {
     public static SpriteFont PhotoNameFont;
     public static SpriteFont PhotoDateFont;
 
+    public static SpriteFont AchievementTitleFont;
+    public static SpriteFont AchievementDescriptionFont;
+
     public static void Initialize(ContentManager content) {
 
         DebugFont = content.Load<SpriteFont>("Fonts/Debug");
@@ -21,5 +24,8 @@ public static class Fonts {
 
         PhotoNameFont = content.Load<SpriteFont>("Fonts/PhotoName");
         PhotoDateFont = content.Load<SpriteFont>("Fonts/PhotoTimeStampFont");
+
+        AchievementTitleFont = content.Load<SpriteFont>("Fonts/AchievementTitle");
+        AchievementDescriptionFont = content.Load<SpriteFont>("Fonts/AchievementBody");
     }
 }

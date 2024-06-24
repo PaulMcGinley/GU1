@@ -40,6 +40,8 @@ public class Texture {
 
     public static Texture2D PhotobookIcon;
 
+    public static Texture2D Circle_80px;
+
     /***********************************************************************
      *** Effects ***********************************************************
      ***********************************************************************/
@@ -78,6 +80,8 @@ public class Texture {
      public static Texture2D LeaderboardTitle;
 
      public static Texture2D Cursor;
+
+     public static Texture2D[] AchievementIcons;
 
     /// <summary>
     /// Load all the textures
@@ -119,6 +123,8 @@ public class Texture {
 
         PhotobookIcon = content.Load<Texture2D>("Graphics/photobookIcon");
 
+        Circle_80px = content.Load<Texture2D>("Graphics/circle_80");
+
         mainMenuBackground = content.Load<Texture2D>("Graphics/MainMenuScene-BG");
         PlayingBackground = new Texture2D[2];
         PlayingBackground[0] = content.Load<Texture2D>("Graphics/bg1");
@@ -139,6 +145,10 @@ public class Texture {
         NamePlayerBackground = content.Load<Texture2D>("Graphics/UI/npBox");
         NamePlayerTitle = content.Load<Texture2D>("Graphics/UI/npTitle");
         NamePlayerCursor = content.Load<Texture2D>("Graphics/UI/npSelector");
+
+        AchievementIcons = new Texture2D[5];
+        for (int i = 0; i < AchievementIcons.Length; i++)
+            AchievementIcons[i] = content.Load<Texture2D>($"Graphics/AchievementIcons/{i}");
 
         Press_A_ToJoin = content.Load<Texture2D>("Graphics/UI/Press-A-to-join");
         Press_A_ToContinue = content.Load<Texture2D>("Graphics/UI/Press-A-to-continue");

@@ -84,15 +84,15 @@ public class Achievements {
 
     private void UpdatePhotoAchievements() {
 
-        UpdateAchievement(ref Achievement_1_PhotoTaken, 1);
-        UpdateAchievement(ref Achievement_5_PhotosTaken, 5);
-        UpdateAchievement(ref Achievement_10_PhotosTaken, 10);
-        UpdateAchievement(ref Achievement_25_PhotosTaken, 25);
-        UpdateAchievement(ref Achievement_50_PhotosTaken, 50);
-        UpdateAchievement(ref Achievement_100_PhotosTaken, 100);
-        UpdateAchievement(ref Achievement_250_PhotosTaken, 250);
-        UpdateAchievement(ref Achievement_500_PhotosTaken, 500);
-        UpdateAchievement(ref Achievement_1000_PhotosTaken, 1000);
+        UpdateAchievement(ref Achievement_1_PhotoTaken, totalPhotosTaken, 1);
+        UpdateAchievement(ref Achievement_5_PhotosTaken, totalPhotosTaken, 5);
+        UpdateAchievement(ref Achievement_10_PhotosTaken, totalPhotosTaken, 10);
+        UpdateAchievement(ref Achievement_25_PhotosTaken, totalPhotosTaken, 25);
+        UpdateAchievement(ref Achievement_50_PhotosTaken, totalPhotosTaken, 50);
+        UpdateAchievement(ref Achievement_100_PhotosTaken, totalPhotosTaken, 100);
+        UpdateAchievement(ref Achievement_250_PhotosTaken, totalPhotosTaken, 250);
+        UpdateAchievement(ref Achievement_500_PhotosTaken, totalPhotosTaken, 500);
+        UpdateAchievement(ref Achievement_1000_PhotosTaken, totalPhotosTaken, 1000);
     }
 
     #endregion
@@ -187,25 +187,129 @@ public class Achievements {
 
     private void UpdateFlotsamAchievements() {
 
-        System.Diagnostics.Debug.WriteLine(TotalFlotsamCollected);
-        UpdateAchievement(ref Achievement_1_FlotsamCollected, 1);
-        UpdateAchievement(ref Achievement_5_FlotsamCollected, 5);
-        UpdateAchievement(ref Achievement_10_FlotsamCollected, 10);
-        UpdateAchievement(ref Achievement_25_FlotsamCollected, 25);
-        UpdateAchievement(ref Achievement_50_FlotsamCollected, 50);
-        UpdateAchievement(ref Achievement_100_FlotsamCollected, 100);
-        UpdateAchievement(ref Achievement_250_FlotsamCollected, 250);
-        UpdateAchievement(ref Achievement_500_FlotsamCollected, 500);
-        UpdateAchievement(ref Achievement_1000_FlotsamCollected, 1000);
-        UpdateAchievement(ref Achievement_5000_FlotsamCollected, 5000);
-        UpdateAchievement(ref Achievement_10000_FlotsamCollected, 10000);
+        UpdateAchievement(ref Achievement_1_FlotsamCollected, totalFlotsamCollected, 1);
+        UpdateAchievement(ref Achievement_5_FlotsamCollected, totalFlotsamCollected, 5);
+        UpdateAchievement(ref Achievement_10_FlotsamCollected, totalFlotsamCollected, 10);
+        UpdateAchievement(ref Achievement_25_FlotsamCollected, totalFlotsamCollected, 25);
+        UpdateAchievement(ref Achievement_50_FlotsamCollected, totalFlotsamCollected, 50);
+        UpdateAchievement(ref Achievement_100_FlotsamCollected, totalFlotsamCollected, 100);
+        UpdateAchievement(ref Achievement_250_FlotsamCollected, totalFlotsamCollected, 250);
+        UpdateAchievement(ref Achievement_500_FlotsamCollected, totalFlotsamCollected, 500);
+        UpdateAchievement(ref Achievement_1000_FlotsamCollected, totalFlotsamCollected, 1000);
+        UpdateAchievement(ref Achievement_5000_FlotsamCollected, totalFlotsamCollected, 5000);
+        UpdateAchievement(ref Achievement_10000_FlotsamCollected, totalFlotsamCollected, 10000);
+    }
+
+    #endregion
+
+    #region Flotsam Revealed Achievements
+
+    public AchievementToast Achievement_1_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "First Flotsam Revealed",
+        description = "Reveal your first flotsam."
+    };
+
+    public AchievementToast Achievement_5_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "5 Flotsam Revealed",
+        description = "Reveal 5 flotsam."
+    };
+
+    public AchievementToast Achievement_10_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "10 Flotsam Revealed",
+        description = "Reveal 10 flotsam."
+    };
+
+    public AchievementToast Achievement_25_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "25 Flotsam Revealed",
+        description = "Reveal 25 flotsam."
+    };
+
+    public AchievementToast Achievement_50_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "50 Flotsam Revealed",
+        description = "Reveal 50 flotsam."
+    };
+
+    public AchievementToast Achievement_100_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "100 Flotsam Revealed",
+        description = "Reveal 100 flotsam."
+    };
+
+    public AchievementToast Achievement_250_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "250 Flotsam Revealed",
+        description = "Reveal 250 flotsam."
+    };
+
+    public AchievementToast Achievement_500_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "500 Flotsam Revealed",
+        description = "Reveal 500 flotsam."
+    };
+
+    public AchievementToast Achievement_1000_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "1000 Flotsam Revealed",
+        description = "Reveal 1000 flotsam."
+    };
+
+    public AchievementToast Achievement_5000_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "5000 Flotsam Revealed",
+        description = "Reveal 5000 flotsam."
+    };
+
+    public AchievementToast Achievement_10000_FlotsamRevealed = new() {
+
+        iconIndex = -1,
+        name = "10000 Flotsam Revealed",
+        description = "Reveal 10000 flotsam."
+    };
+
+    int totalFlotsamRevealed = 0;
+    public int TotalFlotsamRevealed {
+        get => totalFlotsamRevealed;
+        set {
+            totalFlotsamRevealed = value;
+            UpdateFlotsamRevealedAchievements();
+        }
+    }
+
+    private void UpdateFlotsamRevealedAchievements() {
+
+        UpdateAchievement(ref Achievement_1_FlotsamRevealed, totalFlotsamRevealed, 1);
+        UpdateAchievement(ref Achievement_5_FlotsamRevealed, totalFlotsamRevealed, 5);
+        UpdateAchievement(ref Achievement_10_FlotsamRevealed, totalFlotsamRevealed, 10);
+        UpdateAchievement(ref Achievement_25_FlotsamRevealed, totalFlotsamRevealed, 25);
+        UpdateAchievement(ref Achievement_50_FlotsamRevealed, totalFlotsamRevealed, 50);
+        UpdateAchievement(ref Achievement_100_FlotsamRevealed, totalFlotsamRevealed, 100);
+        UpdateAchievement(ref Achievement_250_FlotsamRevealed, totalFlotsamRevealed, 250);
+        UpdateAchievement(ref Achievement_500_FlotsamRevealed, totalFlotsamRevealed, 500);
+        UpdateAchievement(ref Achievement_1000_FlotsamRevealed, totalFlotsamRevealed, 1000);
+        UpdateAchievement(ref Achievement_5000_FlotsamRevealed, totalFlotsamRevealed, 5000);
+        UpdateAchievement(ref Achievement_10000_FlotsamRevealed, totalFlotsamRevealed, 10000);
     }
 
     #endregion
 
     #region Games Played Achievements
 
-    public AchievementToast Achievement_1_GamePlayed = new() {
+    public AchievementToast Achievement_1_RoundsPlayed = new() {
 
         iconIndex = -1,
         name = "First Game",
@@ -247,18 +351,18 @@ public class Achievements {
         description = "Play 100 games."
     };
 
-    int gamesPlayed = 0;
-    public int GamesPlayed {
-        get => gamesPlayed;
+    int roundsPlayed = 0;
+    public int RoundsPlayed {
+        get => roundsPlayed;
         set {
-            gamesPlayed = value;
+            roundsPlayed = value;
 
-            UpdateAchievement(ref Achievement_1_GamePlayed, 1);
-            UpdateAchievement(ref Achievement_5_GamesPlayed, 5);
-            UpdateAchievement(ref Achievement_10_GamesPlayed, 10);
-            UpdateAchievement(ref Achievement_25_GamesPlayed, 25);
-            UpdateAchievement(ref Achievement_50_GamesPlayed, 50);
-            UpdateAchievement(ref Achievement_100_GamesPlayed, 100);
+            UpdateAchievement(ref Achievement_1_RoundsPlayed, roundsPlayed, 1);
+            UpdateAchievement(ref Achievement_5_GamesPlayed, roundsPlayed, 5);
+            UpdateAchievement(ref Achievement_10_GamesPlayed, roundsPlayed, 10);
+            UpdateAchievement(ref Achievement_25_GamesPlayed, roundsPlayed, 25);
+            UpdateAchievement(ref Achievement_50_GamesPlayed, roundsPlayed, 50);
+            UpdateAchievement(ref Achievement_100_GamesPlayed, roundsPlayed, 100);
         }
     }
 
@@ -314,12 +418,12 @@ public class Achievements {
         set {
             gamesFinished = value;
 
-            UpdateAchievement(ref Achievement_1_GameFinished, 1);
-            UpdateAchievement(ref Achievement_5_GamesFinished, 5);
-            UpdateAchievement(ref Achievement_10_GamesFinished, 10);
-            UpdateAchievement(ref Achievement_25_GamesFinished, 25);
-            UpdateAchievement(ref Achievement_50_GamesFinished, 50);
-            UpdateAchievement(ref Achievement_100_GamesFinished, 100);
+            UpdateAchievement(ref Achievement_1_GameFinished, gamesFinished, 1);
+            UpdateAchievement(ref Achievement_5_GamesFinished, gamesFinished, 15);
+            UpdateAchievement(ref Achievement_10_GamesFinished, gamesFinished, 110);
+            UpdateAchievement(ref Achievement_25_GamesFinished, gamesFinished, 125);
+            UpdateAchievement(ref Achievement_50_GamesFinished, gamesFinished, 150);
+            UpdateAchievement(ref Achievement_100_GamesFinished, gamesFinished, 1100);
         }
     }
 
@@ -424,19 +528,19 @@ public class Achievements {
         set {
             largestParty = value;
 
-            UpdateAchievement(ref Achievement_4_LargestParty, 4);
-            UpdateAchievement(ref Achievement_5_LargestParty, 5);
-            UpdateAchievement(ref Achievement_6_LargestParty, 6);
-            UpdateAchievement(ref Achievement_7_LargestParty, 7);
-            UpdateAchievement(ref Achievement_8_LargestParty, 8);
-            UpdateAchievement(ref Achievement_9_LargestParty, 9);
-            UpdateAchievement(ref Achievement_10_LargestParty, 10);
-            UpdateAchievement(ref Achievement_11_LargestParty, 11);
-            UpdateAchievement(ref Achievement_12_LargestParty, 12);
-            UpdateAchievement(ref Achievement_13_LargestParty, 13);
-            UpdateAchievement(ref Achievement_14_LargestParty, 14);
-            UpdateAchievement(ref Achievement_15_LargestParty, 15);
-            UpdateAchievement(ref Achievement_16_LargestParty, 16);
+            UpdateAchievement(ref Achievement_4_LargestParty, largestParty, 4);
+            UpdateAchievement(ref Achievement_5_LargestParty, largestParty, 5);
+            UpdateAchievement(ref Achievement_6_LargestParty, largestParty, 6);
+            UpdateAchievement(ref Achievement_7_LargestParty, largestParty, 7);
+            UpdateAchievement(ref Achievement_8_LargestParty, largestParty, 8);
+            UpdateAchievement(ref Achievement_9_LargestParty, largestParty, 9);
+            UpdateAchievement(ref Achievement_10_LargestParty, largestParty, 10);
+            UpdateAchievement(ref Achievement_11_LargestParty, largestParty, 11);
+            UpdateAchievement(ref Achievement_12_LargestParty, largestParty, 12);
+            UpdateAchievement(ref Achievement_13_LargestParty, largestParty, 13);
+            UpdateAchievement(ref Achievement_14_LargestParty, largestParty, 14);
+            UpdateAchievement(ref Achievement_15_LargestParty, largestParty, 15);
+            UpdateAchievement(ref Achievement_16_LargestParty, largestParty, 16);
         }
     }
 
@@ -445,18 +549,21 @@ public class Achievements {
     /// <summary>
     /// The date and time of the first game played.
     /// </summary>
-    public DateTime firstGame = DateTime.MinValue;
+    //public DateTime firstGame = DateTime.MinValue;
 
     /// <summary>
     /// The date and time of the last game played.
     /// </summary>
-    public DateTime lastGame = DateTime.MinValue;
+    //public DateTime lastGame = DateTime.MinValue;
 
-    private void UpdateAchievement(ref AchievementToast achievement, int threshold) {
-        if (totalFlotsamCollected >= threshold && !achievement.isAchieved) {
+    private void UpdateAchievement(ref AchievementToast achievement, int value, int threshold) {
+
+        if (value >= threshold && !achievement.isAchieved) {
+
             achievement.isAchieved = true;
             achievement.awarded = DateTime.Now;
             toastQueue.Enqueue(achievement);
+            GameState.SaveAchievements();
         }
     }
 
@@ -482,7 +589,6 @@ public class Achievements {
             currentToast = toastQueue.Dequeue();
             ToastEndTimer = gameTime.TotalGameTime.TotalSeconds + 5;
         }
-
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -491,6 +597,6 @@ public class Achievements {
 
         DrawFilledRectangle(new Rectangle((1920/2-200), 1080 - 60 - 15, 400, 60), spriteBatch, Color.Black * 0.5f);
         spriteBatch.DrawString(FLib.DebugFont, currentToast.name, new Vector2(1920/2 - FLib.DebugFont.MeasureString(currentToast.name).X/2, 1080 - 60), Color.White);
-        spriteBatch.DrawString(FLib.DebugFont, currentToast.description, new Vector2(1920/2 - FLib.DebugFont.MeasureString(currentToast.description).X/2, 1080 - 30), Color.White);
+        spriteBatch.DrawString(FLib.DebugFont, currentToast.description, new Vector2(1920/2 - (int)(FLib.DebugFont.MeasureString(currentToast.description).X/2), 1080 - 45), Color.White);
     }
 }

@@ -90,6 +90,8 @@ public class EndOfGame : IScene {
 
     public void OnSceneEnd() {
 
+        GameState.Achievements.GamesFinished++;                                                             // Increment the games finished achievement
+        GameState.SaveAchievements();                                                                       // Save the achievements
     }
 
     #endregion

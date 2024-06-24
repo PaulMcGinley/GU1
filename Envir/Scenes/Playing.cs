@@ -308,6 +308,8 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
             if (GamePadRightTriggerPressed(player.ControllerIndex) && player.CameraView.TakePhoto(background2.GetOpacity())) {
 
+                GameState.Achievements.TotalPhotosTaken++;                                                  // Increment the total number of photos taken
+
                 // check if nessie is in the photo
                 foreach (Player nessie in GameState.Players.Where(player => player.Role == ActorType.Nessie))       // Loop through all players that are playing as Nessie
                     if (GameState.Flotsam.Where(f=>f.PlayerIndex == nessie.ControllerIndex).First().isAlive) {      // Check if the flotsam is still alive
@@ -374,7 +376,7 @@ public class Playing : IScene {
                         // We ask the flotsam to collect the object, if it returns true, the player has collected the flotsam, if false, the player has not collected the flotsam
                     if (flotsam.Collect()) {
 
-                        GameState.Achievements.TotalFlotsamCollected++;                                        // Increment the total number of flotsam collected
+                        GameState.Achievements.TotalFlotsamCollected++;                                     // Increment the total number of flotsam collected
                         player.Score += 100;                                                                // Add 100 to the player's score
                         return;                                                                             // Exit the method to prevent the player from collecting multiple flotsam in one frame
                     }
@@ -385,8 +387,11 @@ public class Playing : IScene {
         foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Tourist))
             foreach (Flotsam flotsam in GameState.Flotsam)
                 if (flotsam.boundaryBox.Intersects(player.CameraView.boundaryBox))                          // Check if the flotsam is colliding with the player
-                        if (flotsam.Inspect())
+                        if (flotsam.Inspect()) {
+
+                            GameState.Achievements.TotalFlotsamRevealed++;                                  // Increment the total number of flotsam revealed
                             player.Score += 100;                                                            // Add 100 to the player's score
+                        }
     }
 
     #endregion

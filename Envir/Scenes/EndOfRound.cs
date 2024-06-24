@@ -110,6 +110,8 @@ public class EndOfRound : IScene {
 
     public void OnSceneStart() {
 
+        GameState.Achievements.RoundsPlayed++;                                                               // Increment the rounds played achievement
+        GameState.SaveAchievements();                                                                       // Save the achievements
     }
 
     public void OnSceneEnd() {

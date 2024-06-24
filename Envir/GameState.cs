@@ -32,6 +32,24 @@ public static class GameState {
     }
 
     [XmlIgnore]
+    public static string AchievementsFile {
+
+        get {
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Sightings/achievements.xml";
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                return "~/.sightings/achievements.xml";
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                return "/Users/Shared/Sightings/achievements.xml";
+
+            return string.Empty;
+        }
+    }
+
+    [XmlIgnore]
     static bool isFullScreen = false;
     [XmlIgnore]
     public static bool IsFullScreen {
@@ -189,16 +207,28 @@ public static class GameState {
         // Floatsam count to spawn
     }
 
+    /// <summary>
+    /// The achievements in the game
+    /// </summary>
     public static Achievements Achievements = new();                                                        // The achievements in the game
 
+    /// <summary>
+    /// Load the achievements from the file
+    /// </summary>
     public static void LoadAchievements() {
 
-        // TODO: Load the achievements from the file
+        if (!File.Exists(AchievementsFile))                                                                 // If the file does not exist
+            SaveAchievements();                                                                             // Save the achievements to the file
+        else                                                                                                // Otherwise
+            Achievements = XMLSerializer.Deserialize<Achievements>(AchievementsFile);                       // Load the achievements from the file
     }
 
+    /// <summary>
+    /// Save the achievements to the file
+    /// </summary>
     public static void SaveAchievements() {
 
-        // TODO: Save the achievements to the file
+        XMLSerializer.Serialize(AchievementsFile, Achievements);                                            // Save the achievements to the file
     }
 
 }

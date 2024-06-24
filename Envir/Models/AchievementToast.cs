@@ -10,4 +10,6 @@ public class AchievementToast {
     public int iconIndex;
     public string name;
     public string description;
+
+    public AchievementToast() { }
 }

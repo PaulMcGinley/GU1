@@ -41,8 +41,7 @@ public class CamView : IMove {
     public float MinSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public void Move(GameTime gameTime) {
-
-        position += (Velocity * 1000) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        //position += (Velocity * 1000) * (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     #endregion

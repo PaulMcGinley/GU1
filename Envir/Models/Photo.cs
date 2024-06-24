@@ -113,10 +113,9 @@ public class Photo {
 
         spriteBatch.Draw(TLib.Boat[boat.isFlipped ? 1 : 0], boat.position + new Vector2(1920/2,1080/2), null, Color.White, boat.rotation, new Vector2(128, 128), 1f, SpriteEffects.None, 0);
 
-
+        // Add the offset to correct the position
         foreach (var cloud in clouds)
             cloud.position += new Vector2(1920/2, 1080/2);
-
 
         // Draw the clouds
         foreach (var cloud in clouds)
@@ -129,8 +128,7 @@ public class Photo {
 
     public void RenderCroppedPicture(SpriteBatch spriteBatch) {
 
-        if (croppedPicture != null)
-            croppedPicture.Dispose();
+        croppedPicture?.Dispose();
 
         croppedPicture = new RenderTarget2D(spriteBatch.GraphicsDevice, 256, 256);
         spriteBatch.GraphicsDevice.SetRenderTarget(croppedPicture);
@@ -147,8 +145,7 @@ public class Photo {
 
     public void RenderFramedPicture(SpriteBatch spriteBatch) {
 
-        if (framedPicture != null)
-            framedPicture.Dispose();
+        framedPicture?.Dispose();
 
         int width = croppedPicture.Width + 50;
         int height = croppedPicture.Height + 125;
@@ -176,12 +173,6 @@ public class Photo {
         DrawRectangle(new Rectangle(24, 24, croppedPicture.Width+2, croppedPicture.Height+2), spriteBatch, Color.Black, 0);
         DrawRectangle(new Rectangle(25, 25, croppedPicture.Width, croppedPicture.Height), spriteBatch, Color.Black, 0);
 
-        // Writing
-        // spriteBatch.DrawString(FLib.DebugFont, $"Captured by {photographer}", new Vector2(25, 25 + croppedPicture.Height + 15), Color.DarkRed);
-        // spriteBatch.DrawString(FLib.DebugFont, $"Date: {Date}", new Vector2(25, 25 + croppedPicture.Height + 35), Color.DarkRed);
-        // spriteBatch.DrawString(FLib.DebugFont, $"Time: {Time}", new Vector2(25, 25 + croppedPicture.Height + 55), Color.DarkRed);
-
-        Vector2 nameSize = FLib.PhotoNameFont.MeasureString($"{photographer}");
         Vector2 dateSize = FLib.PhotoDateFont.MeasureString($"{Date} / {Time}");
 
         spriteBatch.DrawString(FLib.PhotoNameFont, $"{photographer}", new Vector2(25, 25 + croppedPicture.Height + 15), Color.Black);
@@ -202,6 +193,9 @@ public class Photo {
 
         if (framedPicture == null)
             RenderFramedPicture(spriteBatch);
+
+        fullPicture?.Dispose();
+        croppedPicture?.Dispose();
     }
 
     public struct Content {

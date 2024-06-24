@@ -38,12 +38,12 @@ public class PhotoViewer : IScene {
     public void Draw(SpriteBatch spriteBatch) {
 
         // Guard clause to check if there is a photo
-        if (Photo == null)
-            return;
+        // if (Photo == null)
+        //     return;
 
         // Render the full picture if it is not rendered yet
-        if (Photo.fullPicture == null)
-            Photo.RenderFullPicture(spriteBatch);
+        // if (Photo.fullPicture == null)
+             Photo.RenderFullPicture(spriteBatch);
 
 
         spriteBatch.Begin();

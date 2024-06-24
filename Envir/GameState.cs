@@ -189,4 +189,16 @@ public static class GameState {
         // Floatsam count to spawn
     }
 
+    public static Achievements Achievements = new();                                                        // The achievements in the game
+
+    public static void LoadAchievements() {
+
+        // TODO: Load the achievements from the file
+    }
+
+    public static void SaveAchievements() {
+
+        // TODO: Save the achievements to the file
+    }
+
 }

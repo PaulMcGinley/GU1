@@ -61,6 +61,8 @@ public class GameMain : FixedTimestampGame {
         // Hide cursor
         IsMouseVisible = false;
 
+        GameState.LoadAchievements();                                                                       // Load the achievements
+
         // Load the settings
         if (!File.Exists(GameState.SettingsFile)) {                                                         // Check if the settings file exists
 
@@ -71,6 +73,7 @@ public class GameMain : FixedTimestampGame {
             GameState.LoadSettings();                                                                       // Load the settings
 
         GameState.IsFullScreenChanged += GameState_IsFullScreenChanged;                                     // Subscribe to the full screen changed event
+
 
         // Set the window title based on the build configuration
 #if DEBUG
@@ -244,6 +247,8 @@ public class GameMain : FixedTimestampGame {
                 break;
         }
 
+        GameState.Achievements.Update(gameTime);                                                            // Update the achievements
+
         base.Update(gameTime);                                                                              // ! IMPORTANT: Keep this here
     } // End of Update method
 
@@ -339,6 +344,10 @@ public class GameMain : FixedTimestampGame {
                 controls.Draw(spriteBatch);
                 break;
         }
+
+        spriteBatch.Begin();                                                                                 // Begin the sprite batch
+        GameState.Achievements.Draw(spriteBatch);                                                           // Draw the achievements
+        spriteBatch.End();                                                                                   // End the sprite batch
 
         base.Draw(gameTime);                                                                                // ! IMPORTANT: Keep this here
 

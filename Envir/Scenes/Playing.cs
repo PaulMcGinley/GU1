@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -110,10 +111,8 @@ public class Playing : IScene {
         if (gameTime.TotalGameTime.TotalSeconds > hideNowPlaying)
             showNowPlaying = false;
 
-        // if (GameState.EnableSubmersionEffect)
-        //     foreach (var flotsam in GameState.Flotsam)
-        //         flotsam.Dispose();
     }
+
 
     public void FixedUpdate(GameTime gameTime) {
 
@@ -375,6 +374,7 @@ public class Playing : IScene {
                         // We ask the flotsam to collect the object, if it returns true, the player has collected the flotsam, if false, the player has not collected the flotsam
                     if (flotsam.Collect()) {
 
+                        GameState.Achievements.TotalFlotsamCollected++;                                        // Increment the total number of flotsam collected
                         player.Score += 100;                                                                // Add 100 to the player's score
                         return;                                                                             // Exit the method to prevent the player from collecting multiple flotsam in one frame
                     }

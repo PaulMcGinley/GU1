@@ -24,7 +24,7 @@ public class PhotoBook : IScene {
     public List<long> groupIDs = new();                                                                     // List of photo ids
 
     const int mod = 5;                                                                                      // The modulo value (number of photos per row)
-    const string noPhotosMessage = "Nothing here yet. Come back once you have played a game ot two.";                                                      // The message to display when there are no photos
+    const string noPhotosMessage = "Nothing here yet. Come back once you have played a game ot two.";       // The message to display when there are no photos
 
     Camera2D camera;                                                                                        // The camera to render the photos
     Cursor cursor;                                                                                          // The cursor to select the photos
@@ -32,7 +32,7 @@ public class PhotoBook : IScene {
 
     BackgroundWorker worker;                                                                                // Background worker to load the photos
 
-    bool confirmDeletePhotos = false;                                                                             // Flag to check if there are photos pending
+    bool confirmDeletePhotos = false;                                                                       // Flag to check if there are photos pending
     bool deletePhotosConfirmed = false;                                                                     // Flag to check if the photos are being deleted
 
     #region IScene Implementation
@@ -40,15 +40,15 @@ public class PhotoBook : IScene {
     public void Initialize(GraphicsDevice device) {
 
         camera = new Camera2D(new Viewport(0, 0, 1920, 1080));                                              // Create a new camera
-        camera.LookAt(new Vector2((1920/2) - 150, 0));                                                 // Set the camera to look at the center of the screen
+        camera.LookAt(new Vector2((1920/2) - 150, 0));                                                      // Set the camera to look at the center of the screen
 
         cursor = new Cursor();                                                                              // Create a new cursor
-        cursor.Position = new Vector2(1920/2, (1080/2)+50);                                                       // Set the cursor position to the center of the screen
+        cursor.Position = new Vector2(1920/2, (1080/2)+50);                                                 // Set the cursor position to the center of the screen
 
-        // worker = new BackgroundWorker();                                                                    // Create a new background worker
-        // worker.DoWork += Worker_DoWork;                                                                    // Set the worker to do work
+        // worker = new BackgroundWorker();                                                                 // Create a new background worker
+        // worker.DoWork += Worker_DoWork;                                                                  // Set the worker to do work
         // worker.ProgressChanged += Worker_ProgressChanged;
-        // worker.WorkerReportsProgress = true;                                                                // Set the worker to report progress
+        // worker.WorkerReportsProgress = true;                                                             // Set the worker to report progress
     }
 
     private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

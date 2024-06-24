@@ -21,7 +21,7 @@ public class Player : Actor {
 
     bool playedAsNessie = false;         // Track if the player has played as Nessie before
     bool playedAsTourist = false;        // Track if the player has played as Tourist before
-    public bool playedBothRoles => playedAsNessie & playedAsTourist;
+    public bool playedBothRoles => playedAsNessie && playedAsTourist;
 
     const int MaxPhotos = 5;
     public Player(int controllerIndex) {

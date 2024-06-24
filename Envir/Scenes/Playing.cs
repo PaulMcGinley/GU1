@@ -84,6 +84,9 @@ public class Playing : IScene {
         foreach (var cloud in GameState.Clouds)
             cloud.Update(gameTime);
 
+        if (GameState.Achievements.Achievement_16_LargestParty.isAchieved && GameState.AllowShapeShift)
+            CheckForShapeShift();
+
         // Check if Nessie has collected any flotsam
         CheckForCollection();
 
@@ -112,7 +115,6 @@ public class Playing : IScene {
             showNowPlaying = false;
 
     }
-
 
     public void FixedUpdate(GameTime gameTime) {
 
@@ -359,6 +361,29 @@ public class Playing : IScene {
 
         if (roundOver)                                                                                      // If the round is over
             GameState.CurrentScene = GameScene.EndOfRound;                                                  // Move to the end of round scene
+    }
+
+    private void CheckForShapeShift() {
+
+        if (GameState.Flotsam.Count == 0)                                                                    // If there are no flotsam objects, exit the method
+            return;
+
+        foreach (Player player in GameState.Players.Where(player => player.Role == ActorType.Nessie)) {
+
+            int index = player.ControllerIndex;
+
+                foreach (Flotsam flotsam in GameState.Flotsam) {                                                  // Loop through all flotsam objects
+                    if(GameState.Flotsam                                                                        // If, from the list of flotsam
+                        .Where(p=>p.PlayerIndex == player.ControllerIndex)                                      // Get a list of flotsam that have the same player index as the player
+                        .First()                                                                                // Get the first flotsam object from the list, because we only need one and only have one xD
+                        .PlayerIndex == index) {                                                                // Check if the player is colliding with the flotsam
+
+                        if (IsGamePadButtonPressed(player.ControllerIndex, Buttons.Y)) {                        // Check if the player is pressing the B button
+                            flotsam.spriteIndex = random.Int(0, TLib.Flotsam.Length);                          // Randomly select a flotsam sprite
+                    }
+                }
+            }
+        }
     }
 
     private void CheckForCollection() {

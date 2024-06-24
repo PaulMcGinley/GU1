@@ -152,6 +152,9 @@ public static class GameState {
     [XmlIgnore]
     public static bool EnableSubmersionEffect = false;                                                      // Enable the submersion effect
 
+    [XmlIgnore]
+    public static bool AllowShapeShift = false;                                                             // Allow shape shifting
+
     public static void SaveSettings() {
 
         using BinaryWriter writer = new(File.Create(SettingsFile));                                         // Create the settings file
@@ -166,6 +169,7 @@ public static class GameState {
         writer.Write(ControllerSensitivity);
         writer.Write(IsFullScreen);
         writer.Write(EnableSubmersionEffect);
+        writer.Write(AllowShapeShift);
         // ----- Version 2 --------------------------------------------------
         // Nessie / Tourist split
         // Floatsam count to spawn
@@ -202,6 +206,7 @@ public static class GameState {
         ControllerSensitivity = reader.ReadSingle();
         IsFullScreen = reader.ReadBoolean();
         EnableSubmersionEffect = reader.ReadBoolean();
+        AllowShapeShift = reader.ReadBoolean();
         // ----- Version 2 --------------------------------------------------
         // Nessie / Tourist split
         // Floatsam count to spawn

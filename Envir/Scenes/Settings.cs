@@ -94,6 +94,10 @@ public class Settings : IScene {
             if (SelectedMenuIndex == 5)
                 GameState.EnableSubmersionEffect = !GameState.EnableSubmersionEffect;
 
+        if (IsAnyInputPressed(Keys.Right, Buttons.DPadRight, Buttons.LeftThumbstickRight, Buttons.RightThumbstickRight) || IsAnyInputPressed(Keys.Left, Buttons.DPadLeft, Buttons.LeftThumbstickLeft, Buttons.RightThumbstickLeft))
+            if (SelectedMenuIndex == 6)
+                GameState.AllowShapeShift = !GameState.AllowShapeShift;
+
 
         // Check for return to main menu
         if (IsAnyInputPressed(Keys.B, Buttons.B, Buttons.Back))
@@ -117,6 +121,8 @@ public class Settings : IScene {
         spriteBatch.DrawString(FLib.MainMenuFont, "Controller Sensitivity", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Controller Sensitivity").X, 350), SelectedMenuIndex == 3 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, "Full Screen", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Full Screen").X, 400), SelectedMenuIndex == 4 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, "Enable Submersion Effect", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Enable Submersion Effect").X, 450), SelectedMenuIndex == 5 ? menuHotColor : menuColdColor);
+        if (GameState.Achievements.Achievement_16_LargestParty.isAchieved)
+            spriteBatch.DrawString(FLib.MainMenuFont, "Allow Shape Shift", new Vector2((1920 / 2) - 50 - FLib.MainMenuFont.MeasureString("Allow Shape Shift").X, 500), SelectedMenuIndex == 6 ? menuHotColor : menuColdColor);
 
         // Values
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.MusicVolume * 100:0}%", new Vector2((1920 / 2) + 50, 200), SelectedMenuIndex == 0 ? menuHotColor : menuColdColor);
@@ -125,6 +131,8 @@ public class Settings : IScene {
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.ControllerSensitivity:0}", new Vector2((1920 / 2) + 50, 350), SelectedMenuIndex == 3 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.IsFullScreen}", new Vector2((1920 / 2) + 50, 400), SelectedMenuIndex == 4 ? menuHotColor : menuColdColor);
         spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.EnableSubmersionEffect}", new Vector2((1920 / 2) + 50, 450), SelectedMenuIndex == 5 ? menuHotColor : menuColdColor);
+        if (GameState.Achievements.Achievement_16_LargestParty.isAchieved)
+            spriteBatch.DrawString(FLib.MainMenuFont, $"{GameState.AllowShapeShift}", new Vector2((1920 / 2) + 50, 500), SelectedMenuIndex == 6 ? menuHotColor : menuColdColor);
 
         if (GameState.MaxPhotos == int.MaxValue)
             DrawTextCenteredScreen(spriteBatch,FLib.LeaderboardFont, "Please note: Game will not save photos in Unlimited mode.",1080-50, new Vector2(1920, 1080), Color.Yellow);
@@ -161,6 +169,7 @@ public class Settings : IScene {
         MaxPhotos = 2,
         ControllerSensitivity = 3,
         FullScreen = 4,
-        EnableSubmersionEffect = 5
+        EnableSubmersionEffect = 5,
+        AllowShapeShift = 6
     }
 }

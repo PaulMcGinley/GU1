@@ -108,6 +108,42 @@ public class Flotsam : Actor {
         }
     }
 
+    float GetScale() {
+
+        switch (spriteIndex) {
+
+            case 0:     // Tennent's Lager
+            case 1:     // Tennent's Lager -45o
+            case 2:     // Tennent's Lager back
+                return 1.0f;
+                break;
+
+            case 4:     // Irn Bru -45o
+            case 5:     // Irn Bru
+            case 6:     // Fish
+            case 9:     // Highland cow plushie
+            case 12:    // Plank 2x4
+            case 13:    // Branch (Gun)
+            case 14:    // Branch (Sword)
+            case 3:    // Barrel
+            case 7:    // Box
+                return 1.5f;
+                break;
+
+
+            case 8:     // Tunnux Tea Cake
+            case 10:    // Nessie plushie
+                return  2.0f;
+                break;
+
+            case 11:    // Seaweed
+                return  2.5f;
+                break;
+                default:
+                    return 1.0f;
+        }
+    }
+
     public void Initialize(GraphicsDevice device) {
 
         renderTarget = new RenderTarget2D(device, 64, 64);
@@ -332,7 +368,7 @@ public class Flotsam : Actor {
 
         if (indexDoesntSubmerge.Contains(spriteIndex)) {
 
-            spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), Color.White * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+            spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128), Color.White * opacity, sprite.GetRotation(), new(64,64), GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
             return;
         }
 
@@ -344,9 +380,9 @@ public class Flotsam : Actor {
         // }
 
         if (GameState.EnableSubmersionEffect)
-            spriteBatch.Draw(targetFinal, sprite.Position, new Rectangle(0,0,128,128),  Color.White * opacity, 0f, new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+            spriteBatch.Draw(targetFinal, sprite.Position, new Rectangle(0,0,128,128),  Color.White * opacity, 0f, new(64,64), GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
         else
-            spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White * opacity, sprite.GetRotation(), new(64,64), scale, sprite.GetEffects(), sprite.GetLayerDepth());
+            spriteBatch.Draw(TLib.Flotsam[spriteIndex], sprite.Position + cycloidYOffset, new Rectangle(0,0,128,128),  Color.White * opacity, sprite.GetRotation(), new(64,64), GetScale(), sprite.GetEffects(), sprite.GetLayerDepth());
     }
 
     public void DrawRipples(SpriteBatch spriteBatch) {

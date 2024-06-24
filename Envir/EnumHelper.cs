@@ -22,7 +22,8 @@ public enum GameScene {
     PhotoViewer,
     EndOfGame,
     Controls,
-    PauseMenu
+    PauseMenu,
+    Achievements
 }
 
 public enum Percent {

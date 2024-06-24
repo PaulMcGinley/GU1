@@ -85,6 +85,7 @@ public class MainMenu : IScene {
                     break;
 
                 case MenuItems.Exit:
+                    GameState.SaveAchievements();
                     Environment.Exit(0); // Exit code 0 = success, no errors
                     break;
             }
@@ -97,32 +98,34 @@ public class MainMenu : IScene {
 
         spriteBatch.Begin( );
 
+        int yOffset = 110;
+
         //Background
         background.Draw(spriteBatch);
 
         // Menu boxes
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300, 400, 100), selectedMenuIndex == 0 ? menuHotColor : menuColdColor);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180, 400, 100), selectedMenuIndex == 1 ? menuHotColor : menuColdColor);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60, 400, 100), selectedMenuIndex == 2 ? menuHotColor : menuColdColor);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60, 400, 100), selectedMenuIndex == 3 ? menuHotColor : menuColdColor);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 180, 400, 100), selectedMenuIndex == 4 ? menuHotColor : menuColdColor);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 300, 400, 100), selectedMenuIndex == 5 ? menuHotColor : menuColdColor);
-        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 420, 400, 100), selectedMenuIndex == 6 ? menuHotColor : Color.Red*0.5f);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 300 -yOffset, 400, 100), selectedMenuIndex == 0 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 180 -yOffset, 400, 100), selectedMenuIndex == 1 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) - 60 -yOffset, 400, 100), selectedMenuIndex == 2 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 60 -yOffset, 400, 100), selectedMenuIndex == 3 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 180 -yOffset, 400, 100), selectedMenuIndex == 4 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 300 -yOffset, 400, 100), selectedMenuIndex == 5 ? menuHotColor : menuColdColor);
+        spriteBatch.Draw(TLib.Pixel, new Rectangle((1920 / 2) - 200, (1080 / 2) + 420 -yOffset, 400, 100), selectedMenuIndex == 6 ? menuHotColor : Color.Red*0.5f);
 
         // Menu text
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Play", (1080/2)-265, new Vector2(1920, 1080), selectedMenuIndex == 0 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Gallery", (1080/2)-145, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Achievements", (1080/2)-25, new Vector2(1920, 1080), selectedMenuIndex == 2 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Settings", (1080/2)+95, new Vector2(1920, 1080), selectedMenuIndex == 3 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Instructions", (1080/2)+215, new Vector2(1920, 1080), selectedMenuIndex == 4 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Credits", (1080/2)+335, new Vector2(1920, 1080), selectedMenuIndex == 5 ? textHotColor : textColdColor);
-        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Exit", (1080/2)+455, new Vector2(1920, 1080), selectedMenuIndex == 6 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Play", (1080/2)-265 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 0 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Gallery", (1080/2)-145 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 1 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Achievements", (1080/2)-25 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 2 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Settings", (1080/2)+95 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 3 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Instructions", (1080/2)+215 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 4 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Credits", (1080/2)+335 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 5 ? textHotColor : textColdColor);
+        DrawTextCenteredScreen(spriteBatch, FLib.MainMenuFont, "Exit", (1080/2)+455 -yOffset, new Vector2(1920, 1080), selectedMenuIndex == 6 ? textHotColor : textColdColor);
 
         // Left Nessie
-        spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)-350, (1080/2)-295 + (SelectedMenuIndex * 120)), menuHotColor);
+        spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)-350, (1080/2)-295 -yOffset + (SelectedMenuIndex * 120)), menuHotColor);
 
         // Right Nessie
-        spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)+225, (1080/2)-295 + (SelectedMenuIndex * 120)), null, menuHotColor, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
+        spriteBatch.Draw(TLib.TheNessie, new Vector2((1920/2)+225, (1080/2)-295 -yOffset + (SelectedMenuIndex * 120)), null, menuHotColor, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
 
         spriteBatch.End( );
     }

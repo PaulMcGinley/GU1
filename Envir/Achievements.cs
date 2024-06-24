@@ -13,63 +13,63 @@ public class Achievements {
     public AchievementToast Achievement_1_PhotoTaken = new() {
 
         iconIndex = 4,
-        name = "First Photo",
+        name = "Amateur Photographer",
         description = "Take your first photo."
     };
 
     public AchievementToast Achievement_5_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "5 Photos Taken",
+        name = "Snap Happy",
         description = "Take 5 photos."
     };
 
     public AchievementToast Achievement_10_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "10 Photos Taken",
+        name = "Shutterbug",
         description = "Take 10 photos."
     };
 
     public AchievementToast Achievement_25_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "25 Photos Taken",
+        name = "Click Enthusiast",
         description = "Take 25 photos."
     };
 
     public AchievementToast Achievement_50_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "50 Photos Taken",
+        name = "Picture Perfect",
         description = "Take 50 photos."
     };
 
     public AchievementToast Achievement_100_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "100 Photos Taken",
+        name = "Frame Fanatic",
         description = "Take 100 photos."
     };
 
     public AchievementToast Achievement_250_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "250 Photos Taken",
+        name = "Phenom Photo",
         description = "Take 250 photos."
     };
 
     public AchievementToast Achievement_500_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "500 Photos Taken",
+        name = "Master of the Lens",
         description = "Take 500 photos."
     };
 
     public AchievementToast Achievement_1000_PhotosTaken = new() {
 
         iconIndex = 4,
-        name = "1000 Photos Taken",
+        name = "Photography Virtuoso",
         description = "Take 1000 photos."
     };
 
@@ -101,78 +101,78 @@ public class Achievements {
 
     public AchievementToast Achievement_1_FlotsamCollected = new() {
 
-        iconIndex = 2,
-        name = "First Flotsam",
+        iconIndex = 9,
+        name = "Beachcomber Beginner",
         description = "Collect your first flotsam."
     };
 
     public AchievementToast Achievement_5_FlotsamCollected = new() {
 
-        iconIndex = 2,
-        name = "5 Flotsam Collected",
+        iconIndex = 9,
+        name = "Seashore Scavenger",
         description = "Collect 5 flotsam."
     };
 
     public AchievementToast Achievement_10_FlotsamCollected = new() {
 
-        iconIndex = 2,
-        name = "10 Flotsam Collected",
+        iconIndex = 9,
+        name = "Tidal Treasure Hunter",
         description = "Collect 10 flotsam."
     };
 
     public AchievementToast Achievement_25_FlotsamCollected = new() {
 
-        iconIndex = 2,
-        name = "25 Flotsam Collected",
+        iconIndex = 9,
+        name = "Driftwood Devotee",
         description = "Collect 25 flotsam."
     };
 
     public AchievementToast Achievement_50_FlotsamCollected = new() {
 
-        iconIndex = 2,
-        name = "50 Flotsam Collected",
+        iconIndex = 9,
+        name = "Flotsam Finder",
         description = "Collect 50 flotsam."
     };
 
     public AchievementToast Achievement_100_FlotsamCollected = new() {
 
         iconIndex = 2,
-        name = "100 Flotsam Collected",
+        name = "Coastal Collector",
         description = "Collect 100 flotsam."
     };
 
     public AchievementToast Achievement_250_FlotsamCollected = new() {
 
         iconIndex = 2,
-        name = "250 Flotsam Collected",
+        name = "Oceanic Hoarder",
         description = "Collect 250 flotsam."
     };
 
     public AchievementToast Achievement_500_FlotsamCollected = new() {
 
         iconIndex = 2,
-        name = "500 Flotsam Collected",
+        name = "Marine Magpie",
         description = "Collect 500 flotsam."
     };
 
     public AchievementToast Achievement_1000_FlotsamCollected = new() {
 
         iconIndex = 2,
-        name = "1000 Flotsam Collected",
+        name = "Legendary Beachcomber",
         description = "Collect 1000 flotsam."
     };
 
     public AchievementToast Achievement_5000_FlotsamCollected = new() {
 
         iconIndex = 2,
-        name = "5000 Flotsam Collected",
+        name = "Seaside Sage",
         description = "Collect 5000 flotsam."
     };
 
     public AchievementToast Achievement_10000_FlotsamCollected = new() {
 
         iconIndex = 2,
-        name = "10000 Flotsam Collected",
+        name = "Tidepool Titans",
         description = "Collect 10000 flotsam."
     };
 
@@ -206,78 +206,78 @@ public class Achievements {
 
     public AchievementToast Achievement_1_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "First Flotsam Revealed",
+        iconIndex = 7,
+        name = "Hidden Treasure Spotter",
         description = "Reveal your first flotsam."
     };
 
     public AchievementToast Achievement_5_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "5 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Secret Seeker",
         description = "Reveal 5 flotsam."
     };
 
     public AchievementToast Achievement_10_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "10 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Beach Detective",
         description = "Reveal 10 flotsam."
     };
 
     public AchievementToast Achievement_25_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "25 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Mystery Unveiler",
         description = "Reveal 25 flotsam."
     };
 
     public AchievementToast Achievement_50_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "50 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Flotsam Extraordinaire",
         description = "Reveal 50 flotsam."
     };
 
     public AchievementToast Achievement_100_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "100 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Coastal Sleuth",
         description = "Reveal 100 flotsam."
     };
 
     public AchievementToast Achievement_250_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "250 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Oceanic Revelator",
         description = "Reveal 250 flotsam."
     };
 
     public AchievementToast Achievement_500_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "500 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Marine Mystery Master",
         description = "Reveal 500 flotsam."
     };
 
     public AchievementToast Achievement_1000_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "1000 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Legendary Revealer",
         description = "Reveal 1000 flotsam."
     };
 
     public AchievementToast Achievement_5000_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "5000 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Seaside Seer",
         description = "Reveal 5000 flotsam."
     };
 
     public AchievementToast Achievement_10000_FlotsamRevealed = new() {
 
-        iconIndex = 0,
-        name = "10000 Flotsam Revealed",
+        iconIndex = 7,
+        name = "Tidal Truth Teller",
         description = "Reveal 10000 flotsam."
     };
 
@@ -307,48 +307,48 @@ public class Achievements {
 
     #endregion
 
-    #region Games Played Achievements
+    #region Rounds Played Achievements
 
     public AchievementToast Achievement_1_RoundsPlayed = new() {
 
-        iconIndex = 0,
-        name = "First Game",
-        description = "Play your first game."
+        iconIndex = 3,
+        name = "First Timer",
+        description = "Play your first round."
     };
 
     public AchievementToast Achievement_5_GamesPlayed = new() {
 
-        iconIndex = 0,
-        name = "5 Games Played",
-        description = "Play 5 games."
+        iconIndex = 3,
+        name = "Enthusiast",
+        description = "Play 5 rounds."
     };
 
     public AchievementToast Achievement_10_GamesPlayed = new() {
 
-        iconIndex = 0,
-        name = "10 Games Played",
-        description = "Play 10 games."
+        iconIndex = 3,
+        name = "Casual Competitor",
+        description = "Play 10 rounds."
     };
 
     public AchievementToast Achievement_25_GamesPlayed = new() {
 
-        iconIndex = 0,
-        name = "25 Games Played",
-        description = "Play 25 games."
+        iconIndex = 3,
+        name = "Playtime Pro",
+        description = "Play 25 rounds."
     };
 
     public AchievementToast Achievement_50_GamesPlayed = new() {
 
-        iconIndex = 0,
-        name = "50 Games Played",
-        description = "Play 50 games."
+        iconIndex = 3,
+        name = "Match Maverick",
+        description = "Play 50 rounds."
     };
 
     public AchievementToast Achievement_100_GamesPlayed = new() {
 
-        iconIndex = 0,
-        name = "100 Games Played",
-        description = "Play 100 games."
+        iconIndex = 3,
+        name = "Roundabout Regular",
+        description = "Play 100 rounds."
     };
 
     int roundsPlayed = 0;
@@ -373,42 +373,42 @@ public class Achievements {
     public AchievementToast Achievement_1_GameFinished = new() {
 
         iconIndex = 0,
-        name = "First Game Finished",
+        name = "Challenger",
         description = "Finish your first game."
     };
 
     public AchievementToast Achievement_5_GamesFinished = new() {
 
         iconIndex = 0,
-        name = "5 Games Finished",
+        name = "Challenger",
         description = "Finish 5 games."
     };
 
     public AchievementToast Achievement_10_GamesFinished = new() {
 
         iconIndex = 0,
-        name = "10 Games Finished",
+        name = "Competitor",
         description = "Finish 10 games."
     };
 
     public AchievementToast Achievement_25_GamesFinished = new() {
 
         iconIndex = 0,
-        name = "25 Games Finished",
+        name = "Endgame Expert",
         description = "Finish 25 games."
     };
 
     public AchievementToast Achievement_50_GamesFinished = new() {
 
         iconIndex = 0,
-        name = "50 Games Finished",
+        name = "Fanatic",
         description = "Finish 50 games."
     };
 
     public AchievementToast Achievement_100_GamesFinished = new() {
 
         iconIndex = 0,
-        name = "100 Games Finished",
+        name = "Connoisseur",
         description = "Finish 100 games."
     };
 
@@ -434,91 +434,91 @@ public class Achievements {
     public AchievementToast Achievement_4_LargestParty = new() {
 
         iconIndex = 0,
-        name = "Largest Party of 4",
+        name = "Quartet Conductor",
         description = "Play a game with a party of 4."
     };
 
     public AchievementToast Achievement_5_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 5",
+        iconIndex = 1,
+        name = "Fivesome Leader",
         description = "Play a game with a party of 5."
     };
 
     public AchievementToast Achievement_6_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 6",
+        iconIndex = 1,
+        name = "Sextet Supervisor",
         description = "Play a game with a party of 6."
     };
 
     public AchievementToast Achievement_7_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 7",
+        iconIndex = 1,
+        name = "Sevenfold Chief",
         description = "Play a game with a party of 7."
     };
 
     public AchievementToast Achievement_8_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 8",
+        iconIndex = 1,
+        name = "Octet Organizer",
         description = "Play a game with a party of 8."
     };
 
     public AchievementToast Achievement_9_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 9",
+        iconIndex = 1,
+        name = "Nonet Navigator",
         description = "Play a game with a party of 9."
     };
 
     public AchievementToast Achievement_10_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 10",
+        iconIndex = 1,
+        name = "Decade Director",
         description = "Play a game with a party of 10."
     };
 
     public AchievementToast Achievement_11_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 11",
+        iconIndex = 1,
+        name = "Elven Commander",
         description = "Play a game with a party of 11."
     };
 
     public AchievementToast Achievement_12_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 12",
+        iconIndex = 1,
+        name = "Dozen Dictator",
         description = "Play a game with a party of 12."
     };
 
     public AchievementToast Achievement_13_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 13",
+        iconIndex = 1,
+        name = "Baker's Dozen Boss",
         description = "Play a game with a party of 13."
     };
 
     public AchievementToast Achievement_14_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 14",
+        iconIndex = 1,
+        name = "Fourteenfold Foreman",
         description = "Play a game with a party of 14."
     };
 
     public AchievementToast Achievement_15_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 15",
+        iconIndex = 1,
+        name = "Quindecim Captain",
         description = "Play a game with a party of 15."
     };
 
     public AchievementToast Achievement_16_LargestParty = new() {
 
-        iconIndex = 0,
-        name = "Largest Party of 16",
+        iconIndex = 8,
+        name = "Sweet Sixteen Sovereign",
         description = "Play a game with a party of 16."
     };
 
@@ -588,6 +588,8 @@ public class Achievements {
 
         if (toastQueue.Count > 0)
             if (ToastEndTimer <= 0) {
+
+                SLib.Achievement.Play(GameState.SFXVolume, 0, 0);
                 currentToast = toastQueue.Dequeue();
                 ToastEndTimer = gameTime.TotalGameTime.TotalSeconds + 3;
             }

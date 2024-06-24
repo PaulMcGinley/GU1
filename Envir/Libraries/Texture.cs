@@ -146,7 +146,7 @@ public class Texture {
         NamePlayerTitle = content.Load<Texture2D>("Graphics/UI/npTitle");
         NamePlayerCursor = content.Load<Texture2D>("Graphics/UI/npSelector");
 
-        AchievementIcons = new Texture2D[5];
+        AchievementIcons = new Texture2D[10];
         for (int i = 0; i < AchievementIcons.Length; i++)
             AchievementIcons[i] = content.Load<Texture2D>($"Graphics/AchievementIcons/{i}");
 

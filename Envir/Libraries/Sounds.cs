@@ -17,6 +17,7 @@ public static class Sounds {
     public static SoundEffect Ding;
     public static SoundEffect Victory;
     public static SoundEffect Whistle;
+    public static SoundEffect Achievement;
 
     // Music
 
@@ -59,6 +60,8 @@ public static class Sounds {
         Ding = content.Load<SoundEffect>("Audio/ding");
         Victory = content.Load<SoundEffect>("Audio/victory");
         Whistle = content.Load<SoundEffect>("Audio/whistle");
+
+        Achievement = content.Load<SoundEffect>("Audio/achievement");
     }
 
 }

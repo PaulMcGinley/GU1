@@ -169,7 +169,7 @@ public static class GameState {
         writer.Write(ControllerSensitivity);
         writer.Write(IsFullScreen);
         writer.Write(EnableSubmersionEffect);
-        writer.Write(AllowShapeShift);
+        //writer.Write(AllowShapeShift);
         // ----- Version 2 --------------------------------------------------
         // Nessie / Tourist split
         // Floatsam count to spawn
@@ -206,7 +206,7 @@ public static class GameState {
         ControllerSensitivity = reader.ReadSingle();
         IsFullScreen = reader.ReadBoolean();
         EnableSubmersionEffect = reader.ReadBoolean();
-        AllowShapeShift = reader.ReadBoolean();
+        //AllowShapeShift = reader.ReadBoolean();
         // ----- Version 2 --------------------------------------------------
         // Nessie / Tourist split
         // Floatsam count to spawn

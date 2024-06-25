@@ -423,6 +423,9 @@ public class Playing : IScene {
 
     public void StartNewRound() {
 
+        if (GameState.Players.Count > GameState.Achievements.LargestParty)
+            GameState.Achievements.LargestParty = GameState.Players.Count;                                  // Set the largest party achievement to the number of players
+
         GameState.Flotsam.Clear();                                                                          // Clear the list of flotsam objects
 
         for (int i = 0; i <= 100; i++) {

@@ -83,6 +83,8 @@ public class Texture {
 
      public static Texture2D[] AchievementIcons;
 
+     public static Texture2D AchievementBackground;
+
     /// <summary>
     /// Load all the textures
     /// </summary>
@@ -146,7 +148,7 @@ public class Texture {
         NamePlayerTitle = content.Load<Texture2D>("Graphics/UI/npTitle");
         NamePlayerCursor = content.Load<Texture2D>("Graphics/UI/npSelector");
 
-        AchievementIcons = new Texture2D[10];
+        AchievementIcons = new Texture2D[12];
         for (int i = 0; i < AchievementIcons.Length; i++)
             AchievementIcons[i] = content.Load<Texture2D>($"Graphics/AchievementIcons/{i}");
 
@@ -159,5 +161,7 @@ public class Texture {
         LeaderboardTitle = content.Load<Texture2D>("Graphics/LeaderboardTitle");
 
         Cursor = content.Load<Texture2D>("Graphics/cursor");
+
+        AchievementBackground = content.Load<Texture2D>("Graphics/achievementBG");
     }
 }

@@ -4,9 +4,9 @@ namespace GU1.Envir.Models;
 
 public class AchievementToast {
 
-    public string group;//  {get;set;}// = "Misc";
+    public string group;
 
-    public bool isAchieved;//  {get;set;} = false;
+    public bool isAchieved;
     public DateTime awarded = DateTime.MinValue;
 
     public int iconIndex;

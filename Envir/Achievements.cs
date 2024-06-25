@@ -465,11 +465,11 @@ public class Achievements {
             gamesFinished = value;
 
             UpdateAchievement(ref Achievement_1_GameFinished, gamesFinished, 1);
-            UpdateAchievement(ref Achievement_5_GamesFinished, gamesFinished, 15);
-            UpdateAchievement(ref Achievement_10_GamesFinished, gamesFinished, 110);
-            UpdateAchievement(ref Achievement_25_GamesFinished, gamesFinished, 125);
-            UpdateAchievement(ref Achievement_50_GamesFinished, gamesFinished, 150);
-            UpdateAchievement(ref Achievement_100_GamesFinished, gamesFinished, 1100);
+            UpdateAchievement(ref Achievement_5_GamesFinished, gamesFinished, 5);
+            UpdateAchievement(ref Achievement_10_GamesFinished, gamesFinished, 10);
+            UpdateAchievement(ref Achievement_25_GamesFinished, gamesFinished, 25);
+            UpdateAchievement(ref Achievement_50_GamesFinished, gamesFinished, 50);
+            UpdateAchievement(ref Achievement_100_GamesFinished, gamesFinished, 100);
         }
     }
 
@@ -578,7 +578,7 @@ public class Achievements {
         group = "Game",
         iconIndex = 8,
         name = "Sweet Sixteen Sovereign",
-        description = "Play a game with a party of 16."
+        description = "Play a game with a party of 16.",
     };
 
     int largestParty = 0;

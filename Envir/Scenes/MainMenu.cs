@@ -67,9 +67,9 @@ public class MainMenu : IScene {
                     GameState.CurrentScene = GameScene.PhotoBook;
                     break;
 
-                // case MenuItems.Achievements:
-                //     GameState.CurrentScene = GameScene.Achievements;
-                //     break;
+                case MenuItems.Achievements:
+                    GameState.CurrentScene = GameScene.Achievements;
+                    break;
 
                 case MenuItems.Settings:
                     Settings.returnScene = GameScene.MainMenu;

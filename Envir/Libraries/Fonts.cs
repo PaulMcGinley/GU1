@@ -15,6 +15,7 @@ public static class Fonts {
 
     public static SpriteFont AchievementTitleFont;
     public static SpriteFont AchievementDescriptionFont;
+    public static SpriteFont AchievementCaptionFont;
 
     public static void Initialize(ContentManager content) {
 
@@ -27,5 +28,6 @@ public static class Fonts {
 
         AchievementTitleFont = content.Load<SpriteFont>("Fonts/AchievementTitle");
         AchievementDescriptionFont = content.Load<SpriteFont>("Fonts/AchievementBody");
+        AchievementCaptionFont = content.Load<SpriteFont>("Fonts/AchievementCaption");
     }
 }

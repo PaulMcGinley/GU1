@@ -25,6 +25,7 @@ public class GameMain : FixedTimestampGame {
     readonly Envir.Scenes.EndOfGame endOfGame = new();
     readonly Envir.Scenes.Controls controls = new();
     readonly Envir.Scenes.PauseMenu pauseMenu = new();
+    readonly Envir.Scenes.Achievements achievements = new();
 
     #endregion
 
@@ -57,6 +58,7 @@ public class GameMain : FixedTimestampGame {
         photoViewer.Initialize(GraphicsDevice);
         endOfGame.Initialize(GraphicsDevice);
         controls.Initialize(GraphicsDevice);
+        achievements.Initialize(GraphicsDevice);
 
         // Hide cursor
         IsMouseVisible = false;
@@ -157,6 +159,9 @@ public class GameMain : FixedTimestampGame {
                 case GameScene.Controls:
                     controls.OnSceneEnd();
                     break;
+                case GameScene.Achievements:
+                    achievements.OnSceneEnd();
+                    break;
             }
 
             // Call the start methods of the scenes
@@ -197,6 +202,9 @@ public class GameMain : FixedTimestampGame {
                     break;
                 case GameScene.Controls:
                     controls.OnSceneStart();
+                    break;
+                case GameScene.Achievements:
+                    achievements.OnSceneStart();
                     break;
             }
         }
@@ -244,6 +252,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.PauseMenu:
                 pauseMenu.Update(gameTime);
+                break;
+            case GameScene.Achievements:
+                achievements.Update(gameTime);
                 break;
         }
 
@@ -296,6 +307,9 @@ public class GameMain : FixedTimestampGame {
             case GameScene.PauseMenu:
                 pauseMenu.FixedUpdate(gameTime);
                 break;
+            case GameScene.Achievements:
+                achievements.FixedUpdate(gameTime);
+                break;
         }
 
         base.FixedUpdate(gameTime);                                                                         // ! IMPORTANT: Keep this here
@@ -342,6 +356,9 @@ public class GameMain : FixedTimestampGame {
                 break;
             case GameScene.Controls:
                 controls.Draw(spriteBatch);
+                break;
+            case GameScene.Achievements:
+                achievements.Draw(spriteBatch);
                 break;
         }
 

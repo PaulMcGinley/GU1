@@ -176,6 +176,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/AchievementBody.spritefont
 
+#begin Fonts/AchievementCaption.spritefont
+/importer:FontDescriptionImporter
+/processor:LocalizedFontProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/AchievementCaption.spritefont
+
 #begin Fonts/AchievementTitle.spritefont
 /importer:FontDescriptionImporter
 /processor:LocalizedFontProcessor

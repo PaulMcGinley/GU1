@@ -10,7 +10,7 @@ public class Boat : Player {
     Vector2 position;
     public Vector2 Position => position;                                                                    // Property to get position of boat (Readonly)
 
-    public float rotation = 0;                                                                                     // Rotation of boat
+    public float rotation = 0;                                                                              // Rotation of boat
 
     Vector2 cycloidYOffset = Vector2.Zero;                                                                  // Offset for bobbing effect
 

@@ -322,6 +322,9 @@ public class Achievements : IScene {
 
     public void OnSceneStart() {
 
+        // Using reflection to get all the achievements from the GameState Achievements object
+        // Load them into the appropriate lists for drawing
+
         // ---------------------------------------------------------------------------------
         // ----- Photos Achievements -------------------------------------------------------
         // ---------------------------------------------------------------------------------
@@ -407,7 +410,7 @@ public class Achievements : IScene {
 
     }
 
-    public void OnSceneEnd() { }
+    public void OnSceneEnd() { }                                                                            // Not implemented
 
     enum MenuItems {
 
@@ -423,17 +426,17 @@ public class Achievements : IScene {
         ShapeShifting = 0,
     }
 
-    int selectedCheatIndex = 0;                                                                              // The index of the selected menu item (variable)
-    int SelectedCheataIndex {                                                                                 // The index of the selected menu item (property)
+    int selectedCheatIndex = 0;                                                                             // The index of the selected menu item (variable)
+    int SelectedCheataIndex {                                                                               // The index of the selected menu item (property)
 
-        get => selectedCheatIndex;                                                                           // Get the selected menu index
+        get => selectedCheatIndex;                                                                          // Get the selected menu index
         set {
             if (value < 0)                                                                                  // If the value is less than 0 (less than the first menu item)
-                selectedCheatIndex = Enum.GetValues(typeof(Cheats)).Length - 1;                           // Set the selected menu index to the last menu item
-            else if (value > Enum.GetValues(typeof(Cheats)).Length - 1)                                  // If the value is greater than the last menu item
-                selectedCheatIndex = 0;                                                                      // Set the selected menu index to the first menu item
+                selectedCheatIndex = Enum.GetValues(typeof(Cheats)).Length - 1;                             // Set the selected menu index to the last menu item
+            else if (value > Enum.GetValues(typeof(Cheats)).Length - 1)                                     // If the value is greater than the last menu item
+                selectedCheatIndex = 0;                                                                     // Set the selected menu index to the first menu item
             else                                                                                            // Otherwise
-                selectedCheatIndex = value;                                                                  // Set the selected menu index to the value
+                selectedCheatIndex = value;                                                                 // Set the selected menu index to the value
 
             SLib.Click.Play(GameState.SFXVolume, 0, 0);                                                     // Play the click sound
         }
@@ -443,27 +446,28 @@ public class Achievements : IScene {
 
     public List<AchievementToast> GetAllToastObjects(string group, bool achieved) {
 
-        List<AchievementToast> toasts = new ();
+        List<AchievementToast> toasts = new ();                                                             // List of toasts to return
+
+        // Get all fields in the GameState.Achievements object (Because it's quicker to do it this way than to rewrite the class)
         FieldInfo[] fields = GameState.Achievements.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-        foreach (var field in fields) {
+        foreach (var field in fields) {                                                                     // For each field in the fields array
 
+            if (field.FieldType != typeof(AchievementToast))                                                // If the field is not of type AchievementToast
+                continue;                                                                                   // Skip to the next field
 
-            if (field.FieldType != typeof(AchievementToast))
-                continue;
+            AchievementToast toastInstance = field.GetValue(GameState.Achievements) as AchievementToast;    // Get the value of the field as an AchievementToast
 
-            AchievementToast toastInstance = field.GetValue(GameState.Achievements) as AchievementToast;
+            if (toastInstance == null)                                                                      // If the toastInstance is null
+                continue;                                                                                   // Skip to the next field
 
-            if (toastInstance == null)
-                continue;
+            string instanceGroup = toastInstance.group;                                                     // Get the group of the toastInstance
+            bool instanceAchieved = toastInstance.isAchieved;                                               // Get the isAchieved of the toastInstance
 
-            string instanceGroup = toastInstance.group;
-            bool instanceAchieved = toastInstance.isAchieved;
-
-            if (instanceGroup == group && instanceAchieved == achieved)
-                toasts.Add(toastInstance);
+            if (instanceGroup == group && instanceAchieved == achieved)                                     // If the instanceGroup is equal to the group and the instanceAchieved is equal to the achieved
+                toasts.Add(toastInstance);                                                                  // Add the toastInstance to the toasts list
         }
 
-        return toasts;
+        return toasts;                                                                                      // Return the toasts list
     }
 }
